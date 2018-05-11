@@ -1,0 +1,7 @@
+**/xcuserdata
+.DS_Store
+Pods
+tests_results
+output
+fastlane/report.xml
+vendor
