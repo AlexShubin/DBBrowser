@@ -24,6 +24,11 @@
 		B8F437D020A8354900977CE3 /* BahnQLServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437CF20A8354900977CE3 /* BahnQLServiceMock.swift */; };
 		B8F437D320A836A300977CE3 /* BahnQLStationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D220A836A300977CE3 /* BahnQLStationBuilder.swift */; };
 		B8F437D520A8392100977CE3 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D420A8392100977CE3 /* TestData.swift */; };
+		B8F437D820A848FF00977CE3 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D720A848FF00977CE3 /* SceneCoordinator.swift */; };
+		B8F437DA20A8491D00977CE3 /* AlertActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D920A8491D00977CE3 /* AlertActionSheet.swift */; };
+		B8F437DC20A8492F00977CE3 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437DB20A8492F00977CE3 /* SceneTransitionType.swift */; };
+		B8F437DE20A84A7D00977CE3 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437DD20A84A7D00977CE3 /* Scene.swift */; };
+		B8F437E120A84E4400977CE3 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +67,11 @@
 		B8F437CF20A8354900977CE3 /* BahnQLServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BahnQLServiceMock.swift; sourceTree = "<group>"; };
 		B8F437D220A836A300977CE3 /* BahnQLStationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BahnQLStationBuilder.swift; sourceTree = "<group>"; };
 		B8F437D420A8392100977CE3 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		B8F437D720A848FF00977CE3 /* SceneCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
+		B8F437D920A8491D00977CE3 /* AlertActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertActionSheet.swift; sourceTree = "<group>"; };
+		B8F437DB20A8492F00977CE3 /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
+		B8F437DD20A84A7D00977CE3 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +137,8 @@
 		B8B401BD20A5DEF400D25B2C /* DBBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				B8F437DF20A84E2E00977CE3 /* Scenes */,
+				B8F437D620A848E400977CE3 /* SceneCoordinator */,
 				B8F437CB20A8305F00977CE3 /* APIConverters */,
 				B8F437C820A8301F00977CE3 /* Services */,
 				B8F437C220A8288C00977CE3 /* Models */,
@@ -198,6 +210,25 @@
 				B8F437D220A836A300977CE3 /* BahnQLStationBuilder.swift */,
 			);
 			path = Builders;
+			sourceTree = "<group>";
+		};
+		B8F437D620A848E400977CE3 /* SceneCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				B8F437D920A8491D00977CE3 /* AlertActionSheet.swift */,
+				B8F437D720A848FF00977CE3 /* SceneCoordinator.swift */,
+				B8F437DB20A8492F00977CE3 /* SceneTransitionType.swift */,
+				B8F437DD20A84A7D00977CE3 /* Scene.swift */,
+			);
+			path = SceneCoordinator;
+			sourceTree = "<group>";
+		};
+		B8F437DF20A84E2E00977CE3 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		CE33F6913EC3F43670A4B8E5 /* Pods */ = {
@@ -427,12 +458,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F437DA20A8491D00977CE3 /* AlertActionSheet.swift in Sources */,
 				B85EE94520A6E1E800F52C54 /* API.swift in Sources */,
+				B8F437DE20A84A7D00977CE3 /* Scene.swift in Sources */,
 				B8F437C620A82A9500977CE3 /* BahnQLService.swift in Sources */,
 				B8F437C420A8298E00977CE3 /* Station.swift in Sources */,
 				B8B401BF20A5DEF400D25B2C /* AppDelegate.swift in Sources */,
 				B8F437CD20A8335C00977CE3 /* StationSearchService.swift in Sources */,
+				B8F437D820A848FF00977CE3 /* SceneCoordinator.swift in Sources */,
+				B8F437E120A84E4400977CE3 /* MainScreenViewController.swift in Sources */,
 				B8F437CA20A8305600977CE3 /* StationConverter.swift in Sources */,
+				B8F437DC20A8492F00977CE3 /* SceneTransitionType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

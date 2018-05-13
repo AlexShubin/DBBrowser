@@ -22,14 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = URL(string: "https://api.deutschebahn.com/free1bahnql/v1/graphql")!
         let apollo = ApolloClient(networkTransport: HTTPNetworkTransport(url: url, configuration: configuration))
         
-        apollo.fetch(query: SearchStationQuery(namePart: "mun"),
-                     cachePolicy: .returnCacheDataElseFetch,
-                     queue: DispatchQueue.main) { (result, error) in
-                        result?.data?.search.stations.forEach({
-                            print($0.name)
-                            print($0.primaryEvaId)
-                        })
-        }
+        let bahnQLService = ApiBahnQLService(apollo: apollo)
+        
+        let stationSearchService = BahnQLStationSearchService(bahnQLService: bahnQLService,
+                                                              stationConverter: ApiStationConverter())
         
         return true
     }
