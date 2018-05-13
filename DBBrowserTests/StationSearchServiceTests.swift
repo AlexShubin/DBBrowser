@@ -41,15 +41,15 @@ class StationSearchServiceTests: XCTestCase {
         }
         
         // Test
-        XCTAssertEqual(testObserver.events.first?.value.element?.count, expectedStations.count)
-        XCTAssertEqual(testObserver.events.first?.value.element?.first?.evaId,
-                       TestData.stationId1)
-        XCTAssertEqual(testObserver.events.first?.value.element?.last?.evaId,
-                       TestData.stationId2)
-        XCTAssertEqual(testObserver.events.first?.value.element?.first?.name,
-                       TestData.stationName1)
-        XCTAssertEqual(testObserver.events.first?.value.element?.last?.name,
-                       TestData.stationName2)
+        XCTAssertEqual(testObserver.events.count, 2)
+        
+        let result = testObserver.events.first?.value.element
+        XCTAssertEqual(result?.count, expectedStations.count)
+        
+        XCTAssertEqual(result?.first?.evaId, TestData.stationId1)
+        XCTAssertEqual(result?.last?.evaId, TestData.stationId2)
+        XCTAssertEqual(result?.first?.name,TestData.stationName1)
+        XCTAssertEqual(result?.last?.name, TestData.stationName2)
     }
     
 }
