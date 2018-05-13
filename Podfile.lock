@@ -1,4 +1,7 @@
 PODS:
+  - Apollo (0.8.0):
+    - Apollo/Core (= 0.8.0)
+  - Apollo/Core (0.8.0)
   - Differentiator (3.0.2)
   - RxCocoa (4.1.2):
     - RxSwift (~> 4.0)
@@ -14,6 +17,7 @@ PODS:
     - RxSwift (~> 4.0)
 
 DEPENDENCIES:
+  - Apollo
   - RxCocoa
   - RxDataSources
   - RxFeedback
@@ -21,7 +25,8 @@ DEPENDENCIES:
   - RxTest
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
+    - Apollo
     - Differentiator
     - RxCocoa
     - RxDataSources
@@ -30,6 +35,7 @@ SPEC REPOS:
     - RxTest
 
 SPEC CHECKSUMS:
+  Apollo: 66e0f52289551545adb7ecdd994e713fdbae26eb
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
@@ -37,6 +43,6 @@ SPEC CHECKSUMS:
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   RxTest: e634f15fd2c2cd0e0120132ef7a4f7be69ad0393
 
-PODFILE CHECKSUM: 9b9e8fbb71c05e3e6374a23b9db78b420addacd0
+PODFILE CHECKSUM: a740a9ec0a39b36673eb275b29231ccacb6b5da3
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2

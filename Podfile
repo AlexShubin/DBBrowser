@@ -10,6 +10,7 @@ end
 
 target 'DBBrowser' do
   shared_pods
+  pod 'Apollo'
   pod 'RxCocoa'
   pod 'RxFeedback'
 end
