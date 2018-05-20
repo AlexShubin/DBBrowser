@@ -5,8 +5,8 @@
 @testable import DBBrowser
 
 final class BahnQLStationBuilder {
-    private var _name = "stationName"
-    private var _primaryEvaId: Int? = 123
+    private var _name = TestData.stationName1
+    private var _primaryEvaId: Int? = TestData.stationId1
     
     func with(name: String) -> BahnQLStationBuilder {
         _name = name

@@ -13,7 +13,7 @@ enum Scene {
         //let appStateStore = (UIApplication.shared.delegate as! AppDelegate).appStateStore!
         switch self {
         case .mainScreen:
-            let vc = UIViewController()
+            let vc = MainScreenViewController()
             //vc.bind(with: appStateStore)
             return vc
         }

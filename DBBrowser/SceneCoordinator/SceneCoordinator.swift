@@ -6,7 +6,7 @@
 import RxSwift
 import RxCocoa
 
-protocol SceneCoordinator {
+protocol Coordinator {
     init(window: UIWindow)
 
     /// Transition to another scene.
@@ -22,7 +22,7 @@ protocol SceneCoordinator {
     func show(alert: AlertActionSheet, animated: Bool) -> Observable<String?>
 }
 
-extension SceneCoordinator {
+extension Coordinator {
     @discardableResult
     func popToRoot() -> Observable<Void> {
         return pop(animated: true, toRoot: true)
@@ -34,7 +34,7 @@ extension SceneCoordinator {
     }
 }
 
-class SceneCoordinatorImpl: SceneCoordinator {
+class SceneCoordinator: Coordinator {
 
     private var window: UIWindow
     private var currentViewController: UIViewController
@@ -42,10 +42,6 @@ class SceneCoordinatorImpl: SceneCoordinator {
     required init(window: UIWindow) {
         self.window = window
         currentViewController = window.rootViewController!
-    }
-
-    func setCurrentViewController(to viewController: UIViewController) {
-        currentViewController = SceneCoordinatorImpl.actualViewController(for: viewController)
     }
 
     static func actualViewController(for viewController: UIViewController) -> UIViewController {
@@ -68,7 +64,7 @@ class SceneCoordinatorImpl: SceneCoordinator {
         switch type {
         case .root:
             let viewController = scene.viewController
-            currentViewController = SceneCoordinatorImpl.actualViewController(for: viewController)
+            currentViewController = SceneCoordinator.actualViewController(for: viewController)
             window.rootViewController = viewController
             subject.onNext(())
         case .push:
@@ -83,13 +79,13 @@ class SceneCoordinatorImpl: SceneCoordinator {
                 .map { _ in }
                 .bind(to: subject)
             navigationController.pushViewController(viewController, animated: true)
-            currentViewController = SceneCoordinatorImpl.actualViewController(for: viewController)
+            currentViewController = SceneCoordinator.actualViewController(for: viewController)
         case .modal:
             let viewController = scene.viewController
             currentViewController.present(viewController, animated: true) {
                 subject.onNext(())
             }
-            currentViewController = SceneCoordinatorImpl.actualViewController(for: viewController)
+            currentViewController = SceneCoordinator.actualViewController(for: viewController)
         }
         return subject
     }
@@ -100,7 +96,7 @@ class SceneCoordinatorImpl: SceneCoordinator {
             let subject = PublishSubject<Void>()
             // dismiss a modal controller
             currentViewController.dismiss(animated: animated) {
-                self.currentViewController = SceneCoordinatorImpl.actualViewController(for: presenter)
+                self.currentViewController = SceneCoordinator.actualViewController(for: presenter)
                 subject.onNext(())
             }
             return subject
@@ -126,7 +122,7 @@ class SceneCoordinatorImpl: SceneCoordinator {
                 }
             }
             currentViewController =
-                SceneCoordinatorImpl.actualViewController(for: navigationController.viewControllers.last!)
+                SceneCoordinator.actualViewController(for: navigationController.viewControllers.last!)
             return subject
         } else {
             fatalError("Not a modal, no navigation controller: can't navigate back from \(currentViewController)")

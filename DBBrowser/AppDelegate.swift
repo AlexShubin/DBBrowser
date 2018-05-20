@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        let coordinator = SceneCoordinator(window: window!)
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = ["Authorization": "Bearer 276098a8e6050448131e70eab83cae6a"]
         let url = URL(string: "https://api.deutschebahn.com/free1bahnql/v1/graphql")!
@@ -24,9 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let bahnQLService = ApiBahnQLService(apollo: apollo)
         
-        let stationSearchService = BahnQLStationSearchService(bahnQLService: bahnQLService,
+        let stationFinder = BahnQLStationFinder(bahnQLService: bahnQLService,
                                                               stationConverter: ApiStationConverter())
         
+        
+        coordinator.transition(to: .mainScreen, type: .root)
         return true
     }
 }

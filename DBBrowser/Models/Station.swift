@@ -6,7 +6,7 @@
 //  Copyright © 2018 AlexShubin. All rights reserved.
 //
 
-struct Station {
+struct Station: Equatable {
     var name: String
     var evaId: Int
 }

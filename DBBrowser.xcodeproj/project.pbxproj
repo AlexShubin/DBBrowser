@@ -9,10 +9,20 @@
 /* Begin PBXBuildFile section */
 		26A4F469D5529E6670DD46C1 /* Pods_DBBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 284D8F3E04F1CBE35EBD72C4 /* Pods_DBBrowser.framework */; };
 		781B32239C5B3BA8DF63FA36 /* Pods_DBBrowserTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CD79AA42B547EF5C29238C /* Pods_DBBrowserTests.framework */; };
-		B856025120A62FEE00B25893 /* StationSearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856025020A62FEE00B25893 /* StationSearchServiceTests.swift */; };
+		B831E83620AC1EEC00B951DB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831E83220AC1EEC00B951DB /* AppState.swift */; };
+		B831E83720AC1EEC00B951DB /* SideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831E83320AC1EEC00B951DB /* SideEffects.swift */; };
+		B831E83820AC1EEC00B951DB /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831E83420AC1EEC00B951DB /* State.swift */; };
+		B831E83920AC1EEC00B951DB /* AppStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831E83520AC1EEC00B951DB /* AppStateStore.swift */; };
+		B831E83B20AC20B400B951DB /* StationSearchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831E83A20AC20B400B951DB /* StationSearchState.swift */; };
+		B853867120B174BE003FB667 /* StationSearchSideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867020B174BE003FB667 /* StationSearchSideEffects.swift */; };
+		B853867320B1792D003FB667 /* StationSearchEffectsInvocationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867220B1792D003FB667 /* StationSearchEffectsInvocationsTests.swift */; };
+		B853867520B179D8003FB667 /* StationSearchSideEffectsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867420B179D8003FB667 /* StationSearchSideEffectsMock.swift */; };
+		B853867720B17B5A003FB667 /* SideEffectsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867620B17B5A003FB667 /* SideEffectsMock.swift */; };
+		B856025120A62FEE00B25893 /* StationFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856025020A62FEE00B25893 /* StationFinderTests.swift */; };
 		B85EE93B20A6C92700F52C54 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = B85EE93A20A6C92700F52C54 /* schema.json */; };
 		B85EE93D20A6D04D00F52C54 /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = B85EE93C20A6D04D00F52C54 /* Queries.graphql */; };
 		B85EE94520A6E1E800F52C54 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85EE94420A6E1E800F52C54 /* API.swift */; };
+		B8602DF820A99E44001BEDC2 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8602DF720A99E44001BEDC2 /* Assets.swift */; };
 		B8B401BF20A5DEF400D25B2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B401BE20A5DEF400D25B2C /* AppDelegate.swift */; };
 		B8B401C420A5DEF400D25B2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B401C220A5DEF400D25B2C /* Main.storyboard */; };
 		B8B401C620A5DEF500D25B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B401C520A5DEF500D25B2C /* Assets.xcassets */; };
@@ -20,7 +30,7 @@
 		B8F437C420A8298E00977CE3 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C320A8298E00977CE3 /* Station.swift */; };
 		B8F437C620A82A9500977CE3 /* BahnQLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C520A82A9500977CE3 /* BahnQLService.swift */; };
 		B8F437CA20A8305600977CE3 /* StationConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C920A8305600977CE3 /* StationConverter.swift */; };
-		B8F437CD20A8335C00977CE3 /* StationSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437CC20A8335C00977CE3 /* StationSearchService.swift */; };
+		B8F437CD20A8335C00977CE3 /* StationFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437CC20A8335C00977CE3 /* StationFinder.swift */; };
 		B8F437D020A8354900977CE3 /* BahnQLServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437CF20A8354900977CE3 /* BahnQLServiceMock.swift */; };
 		B8F437D320A836A300977CE3 /* BahnQLStationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D220A836A300977CE3 /* BahnQLStationBuilder.swift */; };
 		B8F437D520A8392100977CE3 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D420A8392100977CE3 /* TestData.swift */; };
@@ -29,6 +39,10 @@
 		B8F437DC20A8492F00977CE3 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437DB20A8492F00977CE3 /* SceneTransitionType.swift */; };
 		B8F437DE20A84A7D00977CE3 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437DD20A84A7D00977CE3 /* Scene.swift */; };
 		B8F437E120A84E4400977CE3 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */; };
+		B8F4C6C320B005C300E62DAE /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4C6C220B005C300E62DAE /* Result.swift */; };
+		B8F4C6C720B00D2400E62DAE /* StationSearchReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4C6C620B00D2400E62DAE /* StationSearchReducerTests.swift */; };
+		B8F4C6C920B00E7A00E62DAE /* StationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4C6C820B00E7A00E62DAE /* StationBuilder.swift */; };
+		B8F4C6CB20B0119F00E62DAE /* StationSearchQueriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4C6CA20B0119F00E62DAE /* StationSearchQueriesTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,10 +62,20 @@
 		743F4F135F95FD863073017E /* Pods-DBBrowser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBBrowser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DBBrowser/Pods-DBBrowser.debug.xcconfig"; sourceTree = "<group>"; };
 		97BE5DEBE833B39A2AFFC9DF /* Pods-DBBrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBBrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-DBBrowser/Pods-DBBrowser.release.xcconfig"; sourceTree = "<group>"; };
 		A3C4C3F158909093F7EA27B4 /* Pods-DBBrowserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBBrowserTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DBBrowserTests/Pods-DBBrowserTests.debug.xcconfig"; sourceTree = "<group>"; };
-		B856025020A62FEE00B25893 /* StationSearchServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationSearchServiceTests.swift; sourceTree = "<group>"; };
+		B831E83220AC1EEC00B951DB /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		B831E83320AC1EEC00B951DB /* SideEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideEffects.swift; sourceTree = "<group>"; };
+		B831E83420AC1EEC00B951DB /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		B831E83520AC1EEC00B951DB /* AppStateStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStateStore.swift; sourceTree = "<group>"; };
+		B831E83A20AC20B400B951DB /* StationSearchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchState.swift; sourceTree = "<group>"; };
+		B853867020B174BE003FB667 /* StationSearchSideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchSideEffects.swift; sourceTree = "<group>"; };
+		B853867220B1792D003FB667 /* StationSearchEffectsInvocationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchEffectsInvocationsTests.swift; sourceTree = "<group>"; };
+		B853867420B179D8003FB667 /* StationSearchSideEffectsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchSideEffectsMock.swift; sourceTree = "<group>"; };
+		B853867620B17B5A003FB667 /* SideEffectsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectsMock.swift; sourceTree = "<group>"; };
+		B856025020A62FEE00B25893 /* StationFinderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationFinderTests.swift; sourceTree = "<group>"; };
 		B85EE93A20A6C92700F52C54 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		B85EE93C20A6D04D00F52C54 /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		B85EE94420A6E1E800F52C54 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		B8602DF720A99E44001BEDC2 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		B8B401BB20A5DEF400D25B2C /* DBBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DBBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B401BE20A5DEF400D25B2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8B401C320A5DEF400D25B2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,7 +87,7 @@
 		B8F437C320A8298E00977CE3 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		B8F437C520A82A9500977CE3 /* BahnQLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BahnQLService.swift; sourceTree = "<group>"; };
 		B8F437C920A8305600977CE3 /* StationConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationConverter.swift; sourceTree = "<group>"; };
-		B8F437CC20A8335C00977CE3 /* StationSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchService.swift; sourceTree = "<group>"; };
+		B8F437CC20A8335C00977CE3 /* StationFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationFinder.swift; sourceTree = "<group>"; };
 		B8F437CF20A8354900977CE3 /* BahnQLServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BahnQLServiceMock.swift; sourceTree = "<group>"; };
 		B8F437D220A836A300977CE3 /* BahnQLStationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BahnQLStationBuilder.swift; sourceTree = "<group>"; };
 		B8F437D420A8392100977CE3 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
@@ -72,6 +96,10 @@
 		B8F437DB20A8492F00977CE3 /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
 		B8F437DD20A84A7D00977CE3 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		B8F4C6C220B005C300E62DAE /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		B8F4C6C620B00D2400E62DAE /* StationSearchReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchReducerTests.swift; sourceTree = "<group>"; };
+		B8F4C6C820B00E7A00E62DAE /* StationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationBuilder.swift; sourceTree = "<group>"; };
+		B8F4C6CA20B0119F00E62DAE /* StationSearchQueriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchQueriesTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +131,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B831E83120AC1EEC00B951DB /* AppState */ = {
+			isa = PBXGroup;
+			children = (
+				B831E83220AC1EEC00B951DB /* AppState.swift */,
+				B831E83320AC1EEC00B951DB /* SideEffects.swift */,
+				B831E83420AC1EEC00B951DB /* State.swift */,
+				B831E83520AC1EEC00B951DB /* AppStateStore.swift */,
+			);
+			path = AppState;
+			sourceTree = "<group>";
+		};
 		B85EE93E20A6D2F500F52C54 /* BahnQL */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +151,23 @@
 				B85EE93A20A6C92700F52C54 /* schema.json */,
 			);
 			path = BahnQL;
+			sourceTree = "<group>";
+		};
+		B8602DF920A9A922001BEDC2 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		B8602DFA20A9A92C001BEDC2 /* StationSearch */ = {
+			isa = PBXGroup;
+			children = (
+				B831E83A20AC20B400B951DB /* StationSearchState.swift */,
+				B853867020B174BE003FB667 /* StationSearchSideEffects.swift */,
+			);
+			path = StationSearch;
 			sourceTree = "<group>";
 		};
 		B8B401B220A5DEF400D25B2C = {
@@ -137,6 +193,7 @@
 		B8B401BD20A5DEF400D25B2C /* DBBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				B831E83120AC1EEC00B951DB /* AppState */,
 				B8F437DF20A84E2E00977CE3 /* Scenes */,
 				B8F437D620A848E400977CE3 /* SceneCoordinator */,
 				B8F437CB20A8305F00977CE3 /* APIConverters */,
@@ -146,6 +203,7 @@
 				B8B401BE20A5DEF400D25B2C /* AppDelegate.swift */,
 				B8B401C220A5DEF400D25B2C /* Main.storyboard */,
 				B8B401C520A5DEF500D25B2C /* Assets.xcassets */,
+				B8602DF720A99E44001BEDC2 /* Assets.swift */,
 				B8B401C720A5DEF500D25B2C /* LaunchScreen.storyboard */,
 				B8B401CA20A5DEF500D25B2C /* Info.plist */,
 			);
@@ -155,11 +213,12 @@
 		B8B401D220A5DEF500D25B2C /* DBBrowserTests */ = {
 			isa = PBXGroup;
 			children = (
+				B8F4C6C420B00CF300E62DAE /* ScenesTests */,
 				B8F437D120A8365700977CE3 /* Builders */,
 				B8F437CE20A8349600977CE3 /* Mocks */,
-				B856025020A62FEE00B25893 /* StationSearchServiceTests.swift */,
-				B8B401D520A5DEF500D25B2C /* Info.plist */,
+				B856025020A62FEE00B25893 /* StationFinderTests.swift */,
 				B8F437D420A8392100977CE3 /* TestData.swift */,
+				B8B401D520A5DEF500D25B2C /* Info.plist */,
 			);
 			path = DBBrowserTests;
 			sourceTree = "<group>";
@@ -176,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				B8F437C320A8298E00977CE3 /* Station.swift */,
+				B8F4C6C220B005C300E62DAE /* Result.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -183,7 +243,7 @@
 		B8F437C820A8301F00977CE3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B8F437CC20A8335C00977CE3 /* StationSearchService.swift */,
+				B8F437CC20A8335C00977CE3 /* StationFinder.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -200,6 +260,8 @@
 			isa = PBXGroup;
 			children = (
 				B8F437CF20A8354900977CE3 /* BahnQLServiceMock.swift */,
+				B853867420B179D8003FB667 /* StationSearchSideEffectsMock.swift */,
+				B853867620B17B5A003FB667 /* SideEffectsMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -208,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				B8F437D220A836A300977CE3 /* BahnQLStationBuilder.swift */,
+				B8F4C6C820B00E7A00E62DAE /* StationBuilder.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
@@ -226,9 +289,28 @@
 		B8F437DF20A84E2E00977CE3 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */,
+				B8602DFA20A9A92C001BEDC2 /* StationSearch */,
+				B8602DF920A9A922001BEDC2 /* MainScreen */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		B8F4C6C420B00CF300E62DAE /* ScenesTests */ = {
+			isa = PBXGroup;
+			children = (
+				B8F4C6C520B00CFC00E62DAE /* StationSearch */,
+			);
+			path = ScenesTests;
+			sourceTree = "<group>";
+		};
+		B8F4C6C520B00CFC00E62DAE /* StationSearch */ = {
+			isa = PBXGroup;
+			children = (
+				B8F4C6C620B00D2400E62DAE /* StationSearchReducerTests.swift */,
+				B8F4C6CA20B0119F00E62DAE /* StationSearchQueriesTests.swift */,
+				B853867220B1792D003FB667 /* StationSearchEffectsInvocationsTests.swift */,
+			);
+			path = StationSearch;
 			sourceTree = "<group>";
 		};
 		CE33F6913EC3F43670A4B8E5 /* Pods */ = {
@@ -249,8 +331,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B8B401D820A5DEF500D25B2C /* Build configuration list for PBXNativeTarget "DBBrowser" */;
 			buildPhases = (
-				B85EE94120A6D9C500F52C54 /* ApolloCodegen */,
 				E0B82DA9F5C324E8F0AF207C /* [CP] Check Pods Manifest.lock */,
+				B8602DF620A99DB0001BEDC2 /* SwiftGen */,
+				B85EE94120A6D9C500F52C54 /* ApolloCodegen */,
 				B8B401B720A5DEF400D25B2C /* Sources */,
 				B8B401B820A5DEF400D25B2C /* Frameworks */,
 				B8B401B920A5DEF400D25B2C /* Resources */,
@@ -433,6 +516,20 @@
 			shellPath = /bin/sh;
 			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-codegen.sh generate $(find . -name '*.graphql') --schema API/BahnQL/schema.json --output API/BahnQL/API.swift";
 		};
+		B8602DF620A99DB0001BEDC2 /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen xcassets -o $TARGET_NAME/Assets.swift -t swift4 $TARGET_NAME/Assets.xcassets";
+		};
 		E0B82DA9F5C324E8F0AF207C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -458,15 +555,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F4C6C320B005C300E62DAE /* Result.swift in Sources */,
 				B8F437DA20A8491D00977CE3 /* AlertActionSheet.swift in Sources */,
 				B85EE94520A6E1E800F52C54 /* API.swift in Sources */,
+				B8602DF820A99E44001BEDC2 /* Assets.swift in Sources */,
 				B8F437DE20A84A7D00977CE3 /* Scene.swift in Sources */,
 				B8F437C620A82A9500977CE3 /* BahnQLService.swift in Sources */,
+				B831E83B20AC20B400B951DB /* StationSearchState.swift in Sources */,
 				B8F437C420A8298E00977CE3 /* Station.swift in Sources */,
 				B8B401BF20A5DEF400D25B2C /* AppDelegate.swift in Sources */,
-				B8F437CD20A8335C00977CE3 /* StationSearchService.swift in Sources */,
+				B8F437CD20A8335C00977CE3 /* StationFinder.swift in Sources */,
+				B831E83820AC1EEC00B951DB /* State.swift in Sources */,
+				B853867120B174BE003FB667 /* StationSearchSideEffects.swift in Sources */,
 				B8F437D820A848FF00977CE3 /* SceneCoordinator.swift in Sources */,
+				B831E83720AC1EEC00B951DB /* SideEffects.swift in Sources */,
 				B8F437E120A84E4400977CE3 /* MainScreenViewController.swift in Sources */,
+				B831E83620AC1EEC00B951DB /* AppState.swift in Sources */,
+				B831E83920AC1EEC00B951DB /* AppStateStore.swift in Sources */,
 				B8F437CA20A8305600977CE3 /* StationConverter.swift in Sources */,
 				B8F437DC20A8492F00977CE3 /* SceneTransitionType.swift in Sources */,
 			);
@@ -476,8 +581,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F4C6C920B00E7A00E62DAE /* StationBuilder.swift in Sources */,
+				B8F4C6C720B00D2400E62DAE /* StationSearchReducerTests.swift in Sources */,
+				B8F4C6CB20B0119F00E62DAE /* StationSearchQueriesTests.swift in Sources */,
 				B8F437D320A836A300977CE3 /* BahnQLStationBuilder.swift in Sources */,
-				B856025120A62FEE00B25893 /* StationSearchServiceTests.swift in Sources */,
+				B856025120A62FEE00B25893 /* StationFinderTests.swift in Sources */,
+				B853867520B179D8003FB667 /* StationSearchSideEffectsMock.swift in Sources */,
+				B853867320B1792D003FB667 /* StationSearchEffectsInvocationsTests.swift in Sources */,
+				B853867720B17B5A003FB667 /* SideEffectsMock.swift in Sources */,
 				B8F437D020A8354900977CE3 /* BahnQLServiceMock.swift in Sources */,
 				B8F437D520A8392100977CE3 /* TestData.swift in Sources */,
 			);
