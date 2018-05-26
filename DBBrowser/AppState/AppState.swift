@@ -4,9 +4,7 @@
 
 // MARK: - State
 struct AppState {
-    //Scenes
     var stationSearch = StationSearchState.initial
-    
     static var initial: AppState {
         return AppState()
     }

@@ -5,13 +5,12 @@
 import RxSwift
 import RxFeedback
 
-
-protocol StationSearchSideEffectsType: BaseSideEffects {
+protocol StationSearchSideEffectsType: FeedbackLoopsHolder {
     func search(by namePart: String) -> Observable<AppEvent>
 }
 
 extension StationSearchSideEffectsType {
-    var effects: [ScheduledSideEffect] {
+    var feedbackLoops: [FeedbackLoop] {
         return [
             react(query: { $0.stationSearch.querySearch }, effects: search)
         ]

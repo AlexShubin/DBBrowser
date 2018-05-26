@@ -18,11 +18,14 @@
 		B853867320B1792D003FB667 /* StationSearchEffectsInvocationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867220B1792D003FB667 /* StationSearchEffectsInvocationsTests.swift */; };
 		B853867520B179D8003FB667 /* StationSearchSideEffectsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867420B179D8003FB667 /* StationSearchSideEffectsMock.swift */; };
 		B853867720B17B5A003FB667 /* SideEffectsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867620B17B5A003FB667 /* SideEffectsMock.swift */; };
+		B853867920B17E04003FB667 /* StationSearchViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867820B17E04003FB667 /* StationSearchViewState.swift */; };
 		B856025120A62FEE00B25893 /* StationFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856025020A62FEE00B25893 /* StationFinderTests.swift */; };
 		B85EE93B20A6C92700F52C54 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = B85EE93A20A6C92700F52C54 /* schema.json */; };
 		B85EE93D20A6D04D00F52C54 /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = B85EE93C20A6D04D00F52C54 /* Queries.graphql */; };
 		B85EE94520A6E1E800F52C54 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85EE94420A6E1E800F52C54 /* API.swift */; };
 		B8602DF820A99E44001BEDC2 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8602DF720A99E44001BEDC2 /* Assets.swift */; };
+		B8AAF48D20B96CB5000C9ADE /* StationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAF48C20B96CB5000C9ADE /* StationSearchViewController.swift */; };
+		B8AAF48F20B96D2E000C9ADE /* DataDriven.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAF48E20B96D2E000C9ADE /* DataDriven.swift */; };
 		B8B401BF20A5DEF400D25B2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B401BE20A5DEF400D25B2C /* AppDelegate.swift */; };
 		B8B401C420A5DEF400D25B2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B401C220A5DEF400D25B2C /* Main.storyboard */; };
 		B8B401C620A5DEF500D25B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B401C520A5DEF500D25B2C /* Assets.xcassets */; };
@@ -71,11 +74,14 @@
 		B853867220B1792D003FB667 /* StationSearchEffectsInvocationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchEffectsInvocationsTests.swift; sourceTree = "<group>"; };
 		B853867420B179D8003FB667 /* StationSearchSideEffectsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchSideEffectsMock.swift; sourceTree = "<group>"; };
 		B853867620B17B5A003FB667 /* SideEffectsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectsMock.swift; sourceTree = "<group>"; };
+		B853867820B17E04003FB667 /* StationSearchViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewState.swift; sourceTree = "<group>"; };
 		B856025020A62FEE00B25893 /* StationFinderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationFinderTests.swift; sourceTree = "<group>"; };
 		B85EE93A20A6C92700F52C54 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		B85EE93C20A6D04D00F52C54 /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		B85EE94420A6E1E800F52C54 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		B8602DF720A99E44001BEDC2 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		B8AAF48C20B96CB5000C9ADE /* StationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewController.swift; sourceTree = "<group>"; };
+		B8AAF48E20B96D2E000C9ADE /* DataDriven.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDriven.swift; sourceTree = "<group>"; };
 		B8B401BB20A5DEF400D25B2C /* DBBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DBBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B401BE20A5DEF400D25B2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8B401C320A5DEF400D25B2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -142,6 +148,13 @@
 			path = AppState;
 			sourceTree = "<group>";
 		};
+		B853867A20B18029003FB667 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		B85EE93E20A6D2F500F52C54 /* BahnQL */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,8 +177,11 @@
 		B8602DFA20A9A92C001BEDC2 /* StationSearch */ = {
 			isa = PBXGroup;
 			children = (
+				B853867A20B18029003FB667 /* Cells */,
 				B831E83A20AC20B400B951DB /* StationSearchState.swift */,
 				B853867020B174BE003FB667 /* StationSearchSideEffects.swift */,
+				B853867820B17E04003FB667 /* StationSearchViewState.swift */,
+				B8AAF48C20B96CB5000C9ADE /* StationSearchViewController.swift */,
 			);
 			path = StationSearch;
 			sourceTree = "<group>";
@@ -201,6 +217,7 @@
 				B8F437C220A8288C00977CE3 /* Models */,
 				B8F437C120A827F800977CE3 /* API */,
 				B8B401BE20A5DEF400D25B2C /* AppDelegate.swift */,
+				B8AAF48E20B96D2E000C9ADE /* DataDriven.swift */,
 				B8B401C220A5DEF400D25B2C /* Main.storyboard */,
 				B8B401C520A5DEF500D25B2C /* Assets.xcassets */,
 				B8602DF720A99E44001BEDC2 /* Assets.swift */,
@@ -566,12 +583,15 @@
 				B8B401BF20A5DEF400D25B2C /* AppDelegate.swift in Sources */,
 				B8F437CD20A8335C00977CE3 /* StationFinder.swift in Sources */,
 				B831E83820AC1EEC00B951DB /* State.swift in Sources */,
+				B853867920B17E04003FB667 /* StationSearchViewState.swift in Sources */,
 				B853867120B174BE003FB667 /* StationSearchSideEffects.swift in Sources */,
 				B8F437D820A848FF00977CE3 /* SceneCoordinator.swift in Sources */,
 				B831E83720AC1EEC00B951DB /* SideEffects.swift in Sources */,
 				B8F437E120A84E4400977CE3 /* MainScreenViewController.swift in Sources */,
 				B831E83620AC1EEC00B951DB /* AppState.swift in Sources */,
+				B8AAF48D20B96CB5000C9ADE /* StationSearchViewController.swift in Sources */,
 				B831E83920AC1EEC00B951DB /* AppStateStore.swift in Sources */,
+				B8AAF48F20B96D2E000C9ADE /* DataDriven.swift in Sources */,
 				B8F437CA20A8305600977CE3 /* StationConverter.swift in Sources */,
 				B8F437DC20A8492F00977CE3 /* SceneTransitionType.swift in Sources */,
 			);

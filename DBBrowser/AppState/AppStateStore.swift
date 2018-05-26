@@ -21,11 +21,11 @@ struct AppStateStore: StateStore {
         
         let _eventBus = PublishRelay<AppEvent>()
         eventBus = _eventBus
-        let eventBusFeedback: ScheduledSideEffect = { _ -> Observable<AppEvent> in
+        let eventBusFeedback: FeedbackLoop = { _ -> Observable<AppEvent> in
             _eventBus.asObservable()
         }
         
-        var feedBacks = sideEffects.effects
+        var feedBacks = sideEffects.feedbackLoops
         feedBacks.append(eventBusFeedback)
         
         stateBus = Observable.system(initialState: AppState.initial,

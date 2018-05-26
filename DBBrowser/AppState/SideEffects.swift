@@ -5,19 +5,19 @@
 import RxSwift
 import RxFeedback
 
-typealias ScheduledSideEffect = (ObservableSchedulerContext<AppState>) -> Observable<AppEvent>
+typealias FeedbackLoop = (ObservableSchedulerContext<AppState>) -> Observable<AppEvent>
 
-protocol BaseSideEffects {
-    var effects: [ScheduledSideEffect] { get }
+protocol FeedbackLoopsHolder {
+    var feedbackLoops: [FeedbackLoop] { get }
 }
 
-protocol SideEffects: BaseSideEffects {
+protocol SideEffects: FeedbackLoopsHolder {
     var stationSearch: StationSearchSideEffectsType { get }
 }
 
 extension SideEffects {
-    var effects: [ScheduledSideEffect] {
-        return stationSearch.effects
+    var feedbackLoops: [FeedbackLoop] {
+        return stationSearch.feedbackLoops
     }
 }
 
