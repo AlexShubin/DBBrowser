@@ -4,26 +4,30 @@
 
 import RxDataSources
 
-struct StationSearchViewState {
+enum StationSearchViewState: Equatable {
     
-    struct Section: SectionModelType {
-        typealias Item = SectionItem
-        var items: [Item]
-        init(original: Section, items: [Item]) {
+    struct Section: SectionModelType, Equatable {
+        var items: [StationCell.State]
+        init(original: Section, items: [StationCell.State]) {
             self = original
             self.items = items
         }
-        init (items: [Item]) {
+        init (items: [StationCell.State]) {
             self.items = items
         }
     }
     
-    enum SectionItem: Equatable {
-        case station
-        case loading
-        case error
+    case stations([Section])
+    case loading
+    case error
+}
+
+extension StationSearchViewState {
+    var sections: [Section] {
+        if case .stations(let sections) = self {
+            return sections
+        }
+        return []
     }
-    
-    var sections: [Section]
 }
 

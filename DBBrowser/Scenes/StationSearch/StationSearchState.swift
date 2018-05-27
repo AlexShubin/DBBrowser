@@ -16,7 +16,7 @@ struct StationSearchState: State, Equatable {
         case search(String)
     }
 
-    var stationSearch = StationSearch.loading
+    var stationSearch = StationSearch.loaded(.success([]))
     var actionToPerform: Action?
 }
 
@@ -42,8 +42,10 @@ extension StationSearchState {
         var result = state
         switch event {
         case .search(let namePart):
-            result.stationSearch = .loading
-            result.actionToPerform = .search(namePart)
+            if state.stationSearch != .loading {
+                result.stationSearch = .loading
+                result.actionToPerform = .search(namePart)
+            }
         case .found(let searchResult):
             result.stationSearch = .loaded(searchResult)
             result.actionToPerform = nil

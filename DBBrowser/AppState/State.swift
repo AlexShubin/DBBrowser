@@ -7,8 +7,3 @@ protocol State {
     static var initial: Self { get }
     static func reduce(state: Self, event: Event) -> Self
 }
-
-protocol ViewState: Equatable {
-    associatedtype State
-    init(_ state: State)
-}

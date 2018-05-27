@@ -7,8 +7,6 @@ import RxSwift
 import RxCocoa
 
 protocol Coordinator {
-    init(window: UIWindow)
-
     /// Transition to another scene.
     @discardableResult
     func transition(to scene: Scene, type: SceneTransitionType) -> Observable<Void>
@@ -36,12 +34,14 @@ extension Coordinator {
 
 class SceneCoordinator: Coordinator {
 
-    private var window: UIWindow
-    private var currentViewController: UIViewController
+    private let _window: UIWindow
+    private let _viewControllerFactory: ViewControllerFactory
+    private var _currentViewController: UIViewController
 
-    required init(window: UIWindow) {
-        self.window = window
-        currentViewController = window.rootViewController!
+    required init(window: UIWindow, viewControllerFactory: ViewControllerFactory) {
+        _window = window
+        _currentViewController = window.rootViewController!
+        _viewControllerFactory = viewControllerFactory
     }
 
     static func actualViewController(for viewController: UIViewController) -> UIViewController {
@@ -63,45 +63,45 @@ class SceneCoordinator: Coordinator {
         let subject = PublishSubject<Void>()
         switch type {
         case .root:
-            let viewController = scene.viewController
-            currentViewController = SceneCoordinator.actualViewController(for: viewController)
-            window.rootViewController = viewController
+            let viewController = _viewControllerFactory.make(scene)
+            _currentViewController = SceneCoordinator.actualViewController(for: viewController)
+            _window.rootViewController = viewController
             subject.onNext(())
         case .push:
-            guard let navigationController = (currentViewController as? UINavigationController)
-                ?? currentViewController.navigationController else {
+            guard let navigationController = (_currentViewController as? UINavigationController)
+                ?? _currentViewController.navigationController else {
                 fatalError("Can't push a view controller without a current navigation controller")
             }
-            let viewController = scene.viewController
+            let viewController = _viewControllerFactory.make(scene)
             // one-off subscription to be notified when push complete
             _ = navigationController.rx.delegate
                 .sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
                 .map { _ in }
                 .bind(to: subject)
             navigationController.pushViewController(viewController, animated: true)
-            currentViewController = SceneCoordinator.actualViewController(for: viewController)
+            _currentViewController = SceneCoordinator.actualViewController(for: viewController)
         case .modal:
-            let viewController = scene.viewController
-            currentViewController.present(viewController, animated: true) {
+            let viewController = _viewControllerFactory.make(scene)
+            _currentViewController.present(viewController, animated: true) {
                 subject.onNext(())
             }
-            currentViewController = SceneCoordinator.actualViewController(for: viewController)
+            _currentViewController = SceneCoordinator.actualViewController(for: viewController)
         }
         return subject
     }
 
     @discardableResult
     func pop(animated: Bool, toRoot: Bool) -> Observable<Void> {
-        if let presenter = currentViewController.presentingViewController {
+        if let presenter = _currentViewController.presentingViewController {
             let subject = PublishSubject<Void>()
             // dismiss a modal controller
-            currentViewController.dismiss(animated: animated) {
-                self.currentViewController = SceneCoordinator.actualViewController(for: presenter)
+            _currentViewController.dismiss(animated: animated) {
+                self._currentViewController = SceneCoordinator.actualViewController(for: presenter)
                 subject.onNext(())
             }
             return subject
-        } else if currentViewController.navigationController != nil {
-            guard let navigationController = currentViewController.navigationController else {
+        } else if _currentViewController.navigationController != nil {
+            guard let navigationController = _currentViewController.navigationController else {
                 return .just(())
             }
             let subject = PublishSubject<Void>()
@@ -114,18 +114,18 @@ class SceneCoordinator: Coordinator {
                 .bind(to: subject)
             if toRoot {
                 guard navigationController.popToRootViewController(animated: false) != nil else {
-                    fatalError("can't navigate back from \(currentViewController)")
+                    fatalError("can't navigate back from \(_currentViewController)")
                 }
             } else {
                 guard navigationController.popViewController(animated: false) != nil else {
-                    fatalError("can't navigate back from \(currentViewController)")
+                    fatalError("can't navigate back from \(_currentViewController)")
                 }
             }
-            currentViewController =
+            _currentViewController =
                 SceneCoordinator.actualViewController(for: navigationController.viewControllers.last!)
             return subject
         } else {
-            fatalError("Not a modal, no navigation controller: can't navigate back from \(currentViewController)")
+            fatalError("Not a modal, no navigation controller: can't navigate back from \(_currentViewController)")
         }
     }
 
@@ -151,7 +151,7 @@ class SceneCoordinator: Coordinator {
                         }.forEach {
                             alertController.addAction($0)
                         }
-                    self.currentViewController.present(alertController, animated: animated)
+                    self._currentViewController.present(alertController, animated: animated)
                     return Disposables.create()
                 }
                 .asObservable()
@@ -174,7 +174,7 @@ class SceneCoordinator: Coordinator {
                         }
                     actionSheet.popoverPresentationController?.sourceView = sender
                     actionSheet.popoverPresentationController?.sourceRect = sender.bounds
-                    self.currentViewController.present(actionSheet, animated: animated)
+                    self._currentViewController.present(actionSheet, animated: animated)
                     return Disposables.create()
                 }
                 .asObservable()

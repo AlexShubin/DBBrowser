@@ -32,7 +32,8 @@ struct AppStateStore: StateStore {
                                      reduce: AppState.reduce,
                                      scheduler: scheduler,
                                      scheduledFeedback: feedBacks)
-            .do(onError: { assertionFailure("Impossible happened: \($0.localizedDescription)") })
+            .do(onError: { fatalError("Impossible happened: \($0.localizedDescription)")
+            }, onCompleted: { fatalError("Impossible happened: System observable completed") })
             .asSignal(onErrorSignalWith: .never())
     }
     

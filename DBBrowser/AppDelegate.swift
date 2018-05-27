@@ -13,14 +13,15 @@ import Apollo
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var appStateStore: StateStore!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let coordinator = SceneCoordinator(window: window!)
+        let vcFactory = ViewControllerFactory(stationSearchViewStateConverter: StationSearchViewStateConverter())
+        let coordinator = SceneCoordinator(window: window!, viewControllerFactory: vcFactory)
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = ["Authorization": "Bearer 276098a8e6050448131e70eab83cae6a"]
-        let url = URL(string: "https://api.deutschebahn.com/free1bahnql/v1/graphql")!
+        let url = URL(string: "https://api.deutschebahn.com/1bahnql/v1/graphql")!
         let apollo = ApolloClient(networkTransport: HTTPNetworkTransport(url: url, configuration: configuration))
         
         let bahnQLService = ApiBahnQLService(apollo: apollo)
@@ -28,8 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let stationFinder = BahnQLStationFinder(bahnQLService: bahnQLService,
                                                               stationConverter: ApiStationConverter())
         
+        let sideEffects = AppSideEffects(coordinator: coordinator,
+                                         stationFinder: stationFinder)
+        appStateStore = AppStateStore(sideEffects: sideEffects)
+        vcFactory.setUp(appStateStore: appStateStore)
         
-        coordinator.transition(to: .mainScreen, type: .root)
+        coordinator.transition(to: .stationSearch, type: .root)
         return true
     }
 }

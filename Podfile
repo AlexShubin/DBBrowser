@@ -14,6 +14,7 @@ target 'DBBrowser' do
   pod 'Apollo'
   pod 'RxCocoa'
   pod 'RxFeedback'
+  pod 'RxOptional'
 end
 
 target 'DBBrowserTests' do
