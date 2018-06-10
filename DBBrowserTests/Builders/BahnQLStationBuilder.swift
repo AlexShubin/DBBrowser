@@ -4,23 +4,21 @@
 
 @testable import DBBrowser
 
-final class BahnQLStationBuilder {
+final class FahrplanStationBuilder {
     private var _name = TestData.stationName1
-    private var _primaryEvaId: Int? = TestData.stationId1
+    private var _id = TestData.stationId1
     
-    func with(name: String) -> BahnQLStationBuilder {
+    func with(name: String) -> FahrplanStationBuilder {
         _name = name
         return self
     }
     
-    func with(primaryEvaId: Int?) -> BahnQLStationBuilder {
-        _primaryEvaId = primaryEvaId
+    func with(id: Int) -> FahrplanStationBuilder {
+        _id = id
         return self
     }
     
-    func build() -> SearchStationQuery.Data.Search.Station {
-        return SearchStationQuery.Data.Search
-            .Station(name: _name,
-                     primaryEvaId: _primaryEvaId)
+    func build() -> FahrplanStation {
+        return FahrplanStation(name: _name, id: _id)
     }
 }

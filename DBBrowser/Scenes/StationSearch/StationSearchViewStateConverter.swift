@@ -4,25 +4,18 @@
 
 struct StationSearchViewStateConverter: StateConverter {
     func convert(state: StationSearchState) -> StationSearchViewState {
-        switch state.stationSearch {
-        case .loading:
-            return .loading
-        case .loaded(let result):
-            switch result {
+        var items: [StationSearchViewState.SectionItem]
+        switch state.shouldSearch {
+        case .some:
+            items = [.loading]
+        case .none:
+            switch state.searchResult {
             case .success(let stations):
-                return .stations(_sections(from: stations))
+                items = stations.map { .station(StationCell.State(stationName: $0.name)) }
             case .error:
-                return .error
+                items = [.error]
             }
         }
-    }
-    
-    private func _sections(from staions: [Station]) -> [StationSearchViewState.Section] {
-        let items = staions.map {
-            StationCell.State(stationName: $0.name)
-        }
-        return [
-            StationSearchViewState.Section(items: items)
-        ]
+        return StationSearchViewState(sections: [StationSearchViewState.Section(items: items)])
     }
 }

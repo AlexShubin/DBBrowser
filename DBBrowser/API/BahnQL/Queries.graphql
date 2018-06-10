@@ -1,8 +1,0 @@
-query searchStation($namePart: String!) {
-    search(searchTerm: $namePart) {
-        stations {
-            name
-            primaryEvaId
-        }
-    }
-}

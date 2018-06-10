@@ -3,15 +3,12 @@
 //
 
 protocol StationConverter {
-    func convert(from apiStation: SearchStationQuery.Data.Search.Station) -> Station
+    func convert(from apiStation: FahrplanStation) -> Station
 }
 
 struct ApiStationConverter: StationConverter {
-    func convert(from apiStation: SearchStationQuery.Data.Search.Station) -> Station {
-        guard let evaId = apiStation.primaryEvaId else {
-            fatalError("No evaId on station: \(apiStation)")
-        }
+    func convert(from apiStation: FahrplanStation) -> Station {
         return Station(name: apiStation.name,
-                       evaId: evaId)
+                       evaId: apiStation.id)
     }
 }

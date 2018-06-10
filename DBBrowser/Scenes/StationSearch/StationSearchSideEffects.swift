@@ -4,6 +4,7 @@
 
 import RxSwift
 import RxFeedback
+import Foundation
 
 protocol StationSearchSideEffectsType: FeedbackLoopsHolder {
     func search(by namePart: String) -> Observable<AppEvent>
@@ -29,6 +30,7 @@ struct StationSearchSideEffects: StationSearchSideEffectsType {
     }
     
     func search(by namePart: String) -> Observable<AppEvent> {
+        print("Thread is main \(Thread.isMainThread)")
         return _stationFinder.searchStation(namePart: namePart)
             .map { .stationSearch(.found($0)) }
     }

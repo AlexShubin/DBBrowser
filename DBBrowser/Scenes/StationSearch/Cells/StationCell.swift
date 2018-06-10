@@ -30,6 +30,7 @@ class StationCell: UITableViewCell {
             _stationNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             _stationNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
             ])
+        addBottomSeparator()
     }
 }
 

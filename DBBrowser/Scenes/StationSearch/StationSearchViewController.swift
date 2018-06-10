@@ -10,13 +10,15 @@ import RxOptional
 
 class StationSearchViewController: UIViewController {
     
+    private typealias DataSource = RxTableViewSectionedReloadDataSource<StationSearchViewState.Section>
+    
     let bag = DisposeBag()
     
     private let _converter: StationSearchViewStateConverter
     
-    private let _containerView = UILabel()
-    private let _inputField = UITextField()
-    private let _tableView = UITableView(frame: .zero, style: .grouped)
+    private let _containerView = RoundedView()
+    private let _inputField = UISearchBar()
+    private let _tableView = UITableView()
     
     init(converter: StationSearchViewStateConverter) {
         _converter = converter
@@ -29,22 +31,60 @@ class StationSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        _setupViewHierarchy()
-        _setupUI()
-        _tableView.registerCell(ofType: StationCell.self)
-    }
-    
-    private func _setupUI() {
+        _setupLayout()
+        
+        view.backgroundColor = .clear
+        
         _containerView.backgroundColor = .white
-        _inputField.borderStyle = .roundedRect
-        _inputField.placeholder = "enter text"
-        _inputField.isUserInteractionEnabled = true
+        _containerView.roundedCorners = [.topLeft, .topRight]
+        _containerView.cornerRadius = 16
+        _containerView.addBottomSeparator()
+        _inputField.searchBarStyle = .minimal
+        _inputField.showsCancelButton = true
+        _inputField.placeholder = L10n.StationSearch.placeholder
         _containerView.isUserInteractionEnabled = true
-        _tableView.rowHeight = UITableViewAutomaticDimension
-        _tableView.estimatedRowHeight = 40
+        _tableView.separatorStyle = .none
+        
+        _tableView.registerCell(ofType: StationCell.self)
+        _tableView.registerCell(ofType: StationSearchLoadingCell.self)
+        let gestureRecognizer = UIPanGestureRecognizer(target: self,
+                                                       action: #selector(panGestureRecognizerHandler(_:)))
+        view.addGestureRecognizer(gestureRecognizer)
     }
     
-    private func _setupViewHierarchy() {
+    var initialTouchPointY: CGFloat = 0
+    
+    @IBAction func panGestureRecognizerHandler(_ sender: UIPanGestureRecognizer) {
+        let touchPointY = sender.location(in: view?.window).y
+        switch sender.state {
+        case .began:
+            initialTouchPointY = touchPointY
+        case .changed:
+            if touchPointY > initialTouchPointY {
+                view.frame.origin.y = touchPointY - initialTouchPointY
+            }
+        case .ended, .cancelled:
+            if touchPointY - initialTouchPointY > 200 {
+                dismiss(animated: true, completion: nil)
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.view.frame = CGRect(x: 0,
+                                             y: 0,
+                                             width: self.view.frame.size.width,
+                                             height: self.view.frame.size.height)
+                })
+            }
+        case .failed, .possible:
+            break
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        _inputField.becomeFirstResponder()
+    }
+    
+    private func _setupLayout() {
         let topAnchor: NSLayoutYAxisAnchor
         if #available(iOS 11.0, *) {
             topAnchor = view.safeAreaLayoutGuide.topAnchor
@@ -54,26 +94,25 @@ class StationSearchViewController: UIViewController {
         view.addSubview(_containerView)
         _containerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _containerView.topAnchor.constraint(equalTo: topAnchor),
+            _containerView.topAnchor.constraint(equalTo: topAnchor, constant: 32),
             _containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            _containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            _containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            _containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
         _containerView.addSubview(_inputField)
         _inputField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             _inputField.topAnchor.constraint(equalTo: _containerView.topAnchor, constant: 16),
-            _inputField.leadingAnchor.constraint(equalTo: _containerView.leadingAnchor, constant: 16),
-            _inputField.trailingAnchor.constraint(equalTo: _containerView.trailingAnchor, constant: -16),
-            _inputField.heightAnchor.constraint(equalToConstant: 32)
+            _inputField.leadingAnchor.constraint(equalTo: _containerView.leadingAnchor, constant: 8),
+            _inputField.trailingAnchor.constraint(equalTo: _containerView.trailingAnchor, constant: -8),
+            _inputField.bottomAnchor.constraint(equalTo: _containerView.bottomAnchor, constant: -16)
             ])
-        _containerView.addSubview(_tableView)
+        view.addSubview(_tableView)
         _tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _tableView.topAnchor.constraint(equalTo: _inputField.bottomAnchor, constant: 10),
-            _tableView.leadingAnchor.constraint(equalTo: _containerView.leadingAnchor),
-            _tableView.trailingAnchor.constraint(equalTo: _containerView.trailingAnchor),
-            _tableView.bottomAnchor.constraint(equalTo: _containerView.bottomAnchor)
+            _tableView.topAnchor.constraint(equalTo: _containerView.bottomAnchor),
+            _tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            _tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            _tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
     }
 }
@@ -91,20 +130,24 @@ extension StationSearchViewController: StateStoreBindable {
                 return .empty()
         }
         
-        let dataSource = RxTableViewSectionedReloadDataSource<StationSearchViewState.Section>(
-            configureCell: { dataSource, tableView, indexPath, item in
+        let dataSource = DataSource(configureCell: { _, tableView, indexPath, item in
+            switch item {
+            case .station(let cellState):
                 let cell: StationCell = tableView.dequeueReusableCell(for: indexPath)
-                cell.render(state: item)
+                cell.render(state: cellState)
                 return cell
-        }
-        )
-        
+            case .loading:
+                let cell: StationSearchLoadingCell = tableView.dequeueReusableCell(for: indexPath)
+                return cell
+            case .error:
+                return UITableViewCell()
+            }
+        })
         viewState
             .map { $0.sections }
             .asObservable()
             .bind(to: _tableView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
-        
         _inputField.rx
             .text
             .filterNil()

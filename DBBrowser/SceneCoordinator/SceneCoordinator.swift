@@ -14,10 +14,6 @@ protocol Coordinator {
     /// Pop scene from navigation stack or dismiss current modal.
     @discardableResult
     func pop(animated: Bool, toRoot: Bool) -> Observable<Void>
-
-    /// Show an alert or actionSheet.
-    @discardableResult
-    func show(alert: AlertActionSheet, animated: Bool) -> Observable<String?>
 }
 
 extension Coordinator {
@@ -82,6 +78,7 @@ class SceneCoordinator: Coordinator {
             _currentViewController = SceneCoordinator.actualViewController(for: viewController)
         case .modal:
             let viewController = _viewControllerFactory.make(scene)
+            viewController.modalPresentationStyle = .overFullScreen
             _currentViewController.present(viewController, animated: true) {
                 subject.onNext(())
             }
@@ -126,58 +123,6 @@ class SceneCoordinator: Coordinator {
             return subject
         } else {
             fatalError("Not a modal, no navigation controller: can't navigate back from \(_currentViewController)")
-        }
-    }
-
-    /// Show an alert or actionSheet.
-    @discardableResult
-    func show(alert: AlertActionSheet, animated: Bool) -> Observable<String?> {
-        switch alert {
-        case let .alert(data: data, textField: textField):
-            return Single
-                .create { [unowned self] single in
-                    let alertController = UIAlertController(title: data.title,
-                                                            message: data.message,
-                                                            preferredStyle: .alert)
-                    if textField != nil {
-                        alertController.addTextField(configurationHandler: textField)
-                    }
-                    data.actions
-                        .map { action in
-                            return UIAlertAction(title: action.title, style: action.style) {
-                                action.handler?($0)
-                                single(.success(alertController.textFields?.first?.text))
-                            }
-                        }.forEach {
-                            alertController.addAction($0)
-                        }
-                    self._currentViewController.present(alertController, animated: animated)
-                    return Disposables.create()
-                }
-                .asObservable()
-        case let .actionSheet(data: data, sender: sender):
-            return Single
-                .create { [unowned self] single in
-
-                    let actionSheet = UIAlertController(title: data.title,
-                                                        message: data.message,
-                                                        preferredStyle: .actionSheet)
-                    data.actions
-                        .map { action in
-                            return UIAlertAction(title: action.title, style: action.style) {
-                                action.handler?($0)
-                                single(.success(nil))
-                            }
-                        }
-                        .forEach {
-                            actionSheet.addAction($0)
-                        }
-                    actionSheet.popoverPresentationController?.sourceView = sender
-                    actionSheet.popoverPresentationController?.sourceRect = sender.bounds
-                    self._currentViewController.present(actionSheet, animated: animated)
-                    return Disposables.create()
-                }
-                .asObservable()
         }
     }
 }

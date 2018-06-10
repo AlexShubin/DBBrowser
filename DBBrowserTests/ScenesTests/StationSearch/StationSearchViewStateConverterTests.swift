@@ -10,21 +10,25 @@ class StationSearchViewStateConverterTests: XCTestCase {
     func testLoadingConverted() {
         // Prepare
         var state = StationSearchState.initial
-        state.stationSearch = .loading
+        state.shouldSearch = "123"
         // Run
         let converted = StationSearchViewStateConverter().convert(state: state)
         // Test
-        XCTAssertEqual(converted, .loading)
+        XCTAssertEqual(converted.sections.count, 1)
+        XCTAssertEqual(converted.sections.first?.items.count, 1)
+        XCTAssertEqual(converted.sections.first?.items.first, .loading)
     }
-    
+
     func testErrorConverted() {
         // Prepare
         var state = StationSearchState.initial
-        state.stationSearch = .loaded(.error(.unknown))
+        state.searchResult = .error(.unknown)
         // Run
         let converted = StationSearchViewStateConverter().convert(state: state)
         // Test
-        XCTAssertEqual(converted, .error)
+        XCTAssertEqual(converted.sections.count, 1)
+        XCTAssertEqual(converted.sections.first?.items.count, 1)
+        XCTAssertEqual(converted.sections.first?.items.first, .error)
     }
     
     func testLoadedConverted() {
@@ -34,17 +38,15 @@ class StationSearchViewStateConverterTests: XCTestCase {
             StationBuilder().with(name: TestData.stationName2)
             ].map { $0.build() }
         var state = StationSearchState.initial
-        state.stationSearch = .loaded(.success(stations))
+        state.searchResult = .success(stations)
         // Run
         let converted = StationSearchViewStateConverter().convert(state: state)
         // Test
-        guard case .stations(let sections) = converted else {
-            XCTFail("Unexpected state")
-            return
-        }
-        XCTAssertEqual(sections.count, 1)
-        XCTAssertEqual(sections.first?.items.count, 2)
-        XCTAssertEqual(sections.first?.items.first?.stationName, TestData.stationName1)
-        XCTAssertEqual(sections.first?.items.last?.stationName, TestData.stationName2)
+        XCTAssertEqual(converted.sections.count, 1)
+        XCTAssertEqual(converted.sections.first?.items.count, 2)
+        XCTAssertEqual(converted.sections.first?.items.first,
+                       .station(StationCell.State(stationName: TestData.stationName1)))
+        XCTAssertEqual(converted.sections.first?.items.last,
+                       .station(StationCell.State(stationName: TestData.stationName2)))
     }
 }

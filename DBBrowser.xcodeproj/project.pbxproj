@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		26A4F469D5529E6670DD46C1 /* Pods_DBBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 284D8F3E04F1CBE35EBD72C4 /* Pods_DBBrowser.framework */; };
 		781B32239C5B3BA8DF63FA36 /* Pods_DBBrowserTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47CD79AA42B547EF5C29238C /* Pods_DBBrowserTests.framework */; };
+		B8224EF520BAF07100F9132A /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8224EF420BAF07100F9132A /* RoundedView.swift */; };
+		B8224EF720BAF4A900F9132A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B8224EF620BAF4A900F9132A /* Localizable.strings */; };
+		B8224EF920BAF58E00F9132A /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8224EF820BAF58E00F9132A /* Strings.swift */; };
 		B831E83620AC1EEC00B951DB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831E83220AC1EEC00B951DB /* AppState.swift */; };
 		B831E83720AC1EEC00B951DB /* SideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831E83320AC1EEC00B951DB /* SideEffects.swift */; };
 		B831E83820AC1EEC00B951DB /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831E83420AC1EEC00B951DB /* State.swift */; };
@@ -20,10 +23,10 @@
 		B853867720B17B5A003FB667 /* SideEffectsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867620B17B5A003FB667 /* SideEffectsMock.swift */; };
 		B853867920B17E04003FB667 /* StationSearchViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867820B17E04003FB667 /* StationSearchViewState.swift */; };
 		B856025120A62FEE00B25893 /* StationFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856025020A62FEE00B25893 /* StationFinderTests.swift */; };
-		B85EE93B20A6C92700F52C54 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = B85EE93A20A6C92700F52C54 /* schema.json */; };
-		B85EE93D20A6D04D00F52C54 /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = B85EE93C20A6D04D00F52C54 /* Queries.graphql */; };
-		B85EE94520A6E1E800F52C54 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85EE94420A6E1E800F52C54 /* API.swift */; };
 		B8602DF820A99E44001BEDC2 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8602DF720A99E44001BEDC2 /* Assets.swift */; };
+		B892CFBB20BAB12000176A15 /* FahrplanStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B892CFBA20BAB12000176A15 /* FahrplanStation.swift */; };
+		B892CFBD20BABD8600176A15 /* StationSearchLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B892CFBC20BABD8600176A15 /* StationSearchLoadingCell.swift */; };
+		B892CFBF20BAC39000176A15 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B892CFBE20BAC39000176A15 /* UIView+.swift */; };
 		B8A59AED20BA98A10083FC36 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A59AEC20BA98A10083FC36 /* ViewControllerFactory.swift */; };
 		B8AAF48D20B96CB5000C9ADE /* StationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAF48C20B96CB5000C9ADE /* StationSearchViewController.swift */; };
 		B8AAF48F20B96D2E000C9ADE /* DataDriven.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAF48E20B96D2E000C9ADE /* DataDriven.swift */; };
@@ -37,14 +40,13 @@
 		B8B401C620A5DEF500D25B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B401C520A5DEF500D25B2C /* Assets.xcassets */; };
 		B8B401C920A5DEF500D25B2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B401C720A5DEF500D25B2C /* LaunchScreen.storyboard */; };
 		B8F437C420A8298E00977CE3 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C320A8298E00977CE3 /* Station.swift */; };
-		B8F437C620A82A9500977CE3 /* BahnQLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C520A82A9500977CE3 /* BahnQLService.swift */; };
+		B8F437C620A82A9500977CE3 /* FahrplanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C520A82A9500977CE3 /* FahrplanService.swift */; };
 		B8F437CA20A8305600977CE3 /* StationConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C920A8305600977CE3 /* StationConverter.swift */; };
 		B8F437CD20A8335C00977CE3 /* StationFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437CC20A8335C00977CE3 /* StationFinder.swift */; };
 		B8F437D020A8354900977CE3 /* BahnQLServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437CF20A8354900977CE3 /* BahnQLServiceMock.swift */; };
 		B8F437D320A836A300977CE3 /* BahnQLStationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D220A836A300977CE3 /* BahnQLStationBuilder.swift */; };
 		B8F437D520A8392100977CE3 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D420A8392100977CE3 /* TestData.swift */; };
 		B8F437D820A848FF00977CE3 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D720A848FF00977CE3 /* SceneCoordinator.swift */; };
-		B8F437DA20A8491D00977CE3 /* AlertActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D920A8491D00977CE3 /* AlertActionSheet.swift */; };
 		B8F437DC20A8492F00977CE3 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437DB20A8492F00977CE3 /* SceneTransitionType.swift */; };
 		B8F437DE20A84A7D00977CE3 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437DD20A84A7D00977CE3 /* Scene.swift */; };
 		B8F437E120A84E4400977CE3 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */; };
@@ -71,6 +73,9 @@
 		743F4F135F95FD863073017E /* Pods-DBBrowser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBBrowser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DBBrowser/Pods-DBBrowser.debug.xcconfig"; sourceTree = "<group>"; };
 		97BE5DEBE833B39A2AFFC9DF /* Pods-DBBrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBBrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-DBBrowser/Pods-DBBrowser.release.xcconfig"; sourceTree = "<group>"; };
 		A3C4C3F158909093F7EA27B4 /* Pods-DBBrowserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBBrowserTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DBBrowserTests/Pods-DBBrowserTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B8224EF420BAF07100F9132A /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
+		B8224EF620BAF4A900F9132A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		B8224EF820BAF58E00F9132A /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		B831E83220AC1EEC00B951DB /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		B831E83320AC1EEC00B951DB /* SideEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideEffects.swift; sourceTree = "<group>"; };
 		B831E83420AC1EEC00B951DB /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -82,10 +87,10 @@
 		B853867620B17B5A003FB667 /* SideEffectsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectsMock.swift; sourceTree = "<group>"; };
 		B853867820B17E04003FB667 /* StationSearchViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewState.swift; sourceTree = "<group>"; };
 		B856025020A62FEE00B25893 /* StationFinderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationFinderTests.swift; sourceTree = "<group>"; };
-		B85EE93A20A6C92700F52C54 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
-		B85EE93C20A6D04D00F52C54 /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
-		B85EE94420A6E1E800F52C54 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		B8602DF720A99E44001BEDC2 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		B892CFBA20BAB12000176A15 /* FahrplanStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrplanStation.swift; sourceTree = "<group>"; };
+		B892CFBC20BABD8600176A15 /* StationSearchLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchLoadingCell.swift; sourceTree = "<group>"; };
+		B892CFBE20BAC39000176A15 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		B8A59AEC20BA98A10083FC36 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		B8AAF48C20B96CB5000C9ADE /* StationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewController.swift; sourceTree = "<group>"; };
 		B8AAF48E20B96D2E000C9ADE /* DataDriven.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDriven.swift; sourceTree = "<group>"; };
@@ -103,14 +108,13 @@
 		B8B401CF20A5DEF500D25B2C /* DBBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DBBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B401D520A5DEF500D25B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8F437C320A8298E00977CE3 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
-		B8F437C520A82A9500977CE3 /* BahnQLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BahnQLService.swift; sourceTree = "<group>"; };
+		B8F437C520A82A9500977CE3 /* FahrplanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrplanService.swift; sourceTree = "<group>"; };
 		B8F437C920A8305600977CE3 /* StationConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationConverter.swift; sourceTree = "<group>"; };
 		B8F437CC20A8335C00977CE3 /* StationFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationFinder.swift; sourceTree = "<group>"; };
 		B8F437CF20A8354900977CE3 /* BahnQLServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BahnQLServiceMock.swift; sourceTree = "<group>"; };
 		B8F437D220A836A300977CE3 /* BahnQLStationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BahnQLStationBuilder.swift; sourceTree = "<group>"; };
 		B8F437D420A8392100977CE3 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		B8F437D720A848FF00977CE3 /* SceneCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
-		B8F437D920A8491D00977CE3 /* AlertActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertActionSheet.swift; sourceTree = "<group>"; };
 		B8F437DB20A8492F00977CE3 /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
 		B8F437DD20A84A7D00977CE3 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +153,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B8224EF320BAF05700F9132A /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				B8224EF420BAF07100F9132A /* RoundedView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		B831E83120AC1EEC00B951DB /* AppState */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,19 +176,18 @@
 			isa = PBXGroup;
 			children = (
 				B8AAF49020B9764C000C9ADE /* StationCell.swift */,
+				B892CFBC20BABD8600176A15 /* StationSearchLoadingCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		B85EE93E20A6D2F500F52C54 /* BahnQL */ = {
+		B85EE93E20A6D2F500F52C54 /* Fahrplan */ = {
 			isa = PBXGroup;
 			children = (
-				B8F437C520A82A9500977CE3 /* BahnQLService.swift */,
-				B85EE94420A6E1E800F52C54 /* API.swift */,
-				B85EE93C20A6D04D00F52C54 /* Queries.graphql */,
-				B85EE93A20A6C92700F52C54 /* schema.json */,
+				B8F437C520A82A9500977CE3 /* FahrplanService.swift */,
+				B892CFBA20BAB12000176A15 /* FahrplanStation.swift */,
 			);
-			path = BahnQL;
+			path = Fahrplan;
 			sourceTree = "<group>";
 		};
 		B8602DF920A9A922001BEDC2 /* MainScreen */ = {
@@ -204,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				B8AAF49320B976AF000C9ADE /* UITableView+.swift */,
+				B892CFBE20BAC39000176A15 /* UIView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -240,6 +252,7 @@
 		B8B401BD20A5DEF400D25B2C /* DBBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				B8224EF320BAF05700F9132A /* CustomViews */,
 				B8AAF49220B976A2000C9ADE /* Extensions */,
 				B831E83120AC1EEC00B951DB /* AppState */,
 				B8AAF49B20B98097000C9ADE /* Utils */,
@@ -252,6 +265,8 @@
 				B8B401BE20A5DEF400D25B2C /* AppDelegate.swift */,
 				B8B401C220A5DEF400D25B2C /* Main.storyboard */,
 				B8B401C520A5DEF500D25B2C /* Assets.xcassets */,
+				B8224EF620BAF4A900F9132A /* Localizable.strings */,
+				B8224EF820BAF58E00F9132A /* Strings.swift */,
 				B8602DF720A99E44001BEDC2 /* Assets.swift */,
 				B8B401C720A5DEF500D25B2C /* LaunchScreen.storyboard */,
 				B8B401CA20A5DEF500D25B2C /* Info.plist */,
@@ -275,7 +290,7 @@
 		B8F437C120A827F800977CE3 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				B85EE93E20A6D2F500F52C54 /* BahnQL */,
+				B85EE93E20A6D2F500F52C54 /* Fahrplan */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -327,7 +342,6 @@
 		B8F437D620A848E400977CE3 /* SceneCoordinator */ = {
 			isa = PBXGroup;
 			children = (
-				B8F437D920A8491D00977CE3 /* AlertActionSheet.swift */,
 				B8F437D720A848FF00977CE3 /* SceneCoordinator.swift */,
 				B8F437DB20A8492F00977CE3 /* SceneTransitionType.swift */,
 				B8F437DD20A84A7D00977CE3 /* Scene.swift */,
@@ -384,7 +398,6 @@
 			buildPhases = (
 				E0B82DA9F5C324E8F0AF207C /* [CP] Check Pods Manifest.lock */,
 				B8602DF620A99DB0001BEDC2 /* SwiftGen */,
-				B85EE94120A6D9C500F52C54 /* ApolloCodegen */,
 				B8B401B720A5DEF400D25B2C /* Sources */,
 				B8B401B820A5DEF400D25B2C /* Frameworks */,
 				B8B401B920A5DEF400D25B2C /* Resources */,
@@ -463,10 +476,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B85EE93B20A6C92700F52C54 /* schema.json in Resources */,
 				B8B401C920A5DEF500D25B2C /* LaunchScreen.storyboard in Resources */,
+				B8224EF720BAF4A900F9132A /* Localizable.strings in Resources */,
 				B8B401C620A5DEF500D25B2C /* Assets.xcassets in Resources */,
-				B85EE93D20A6D04D00F52C54 /* Queries.graphql in Resources */,
 				B8B401C420A5DEF400D25B2C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,7 +500,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DBBrowser/Pods-DBBrowser-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
@@ -498,7 +509,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
@@ -555,20 +565,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B85EE94120A6D9C500F52C54 /* ApolloCodegen */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = ApolloCodegen;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-codegen.sh generate $(find . -name '*.graphql') --schema API/BahnQL/schema.json --output API/BahnQL/API.swift";
-		};
 		B8602DF620A99DB0001BEDC2 /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -581,7 +577,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen xcassets -o $TARGET_NAME/Assets.swift -t swift4 $TARGET_NAME/Assets.xcassets";
+			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen xcassets -o $TARGET_NAME/Assets.swift -t swift4 $TARGET_NAME/Assets.xcassets\n$PODS_ROOT/SwiftGen/bin/swiftgen strings -t structured-swift4 $TARGET_NAME/Localizable.strings -o $TARGET_NAME/Strings.swift";
 		};
 		E0B82DA9F5C324E8F0AF207C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -609,16 +605,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8F4C6C320B005C300E62DAE /* Result.swift in Sources */,
-				B8F437DA20A8491D00977CE3 /* AlertActionSheet.swift in Sources */,
-				B85EE94520A6E1E800F52C54 /* API.swift in Sources */,
 				B8602DF820A99E44001BEDC2 /* Assets.swift in Sources */,
+				B892CFBB20BAB12000176A15 /* FahrplanStation.swift in Sources */,
 				B8F437DE20A84A7D00977CE3 /* Scene.swift in Sources */,
-				B8F437C620A82A9500977CE3 /* BahnQLService.swift in Sources */,
+				B8F437C620A82A9500977CE3 /* FahrplanService.swift in Sources */,
 				B831E83B20AC20B400B951DB /* StationSearchState.swift in Sources */,
 				B8F437C420A8298E00977CE3 /* Station.swift in Sources */,
+				B8224EF520BAF07100F9132A /* RoundedView.swift in Sources */,
 				B8AAF49620B97A9E000C9ADE /* StationSearchViewStateConverter.swift in Sources */,
 				B8B401BF20A5DEF400D25B2C /* AppDelegate.swift in Sources */,
+				B8224EF920BAF58E00F9132A /* Strings.swift in Sources */,
 				B8AAF49420B9787F000C9ADE /* UITableView+.swift in Sources */,
+				B892CFBD20BABD8600176A15 /* StationSearchLoadingCell.swift in Sources */,
 				B8F437CD20A8335C00977CE3 /* StationFinder.swift in Sources */,
 				B831E83820AC1EEC00B951DB /* State.swift in Sources */,
 				B853867920B17E04003FB667 /* StationSearchViewState.swift in Sources */,
@@ -631,6 +629,7 @@
 				B8AAF49120B9764C000C9ADE /* StationCell.swift in Sources */,
 				B8A59AED20BA98A10083FC36 /* ViewControllerFactory.swift in Sources */,
 				B831E83920AC1EEC00B951DB /* AppStateStore.swift in Sources */,
+				B892CFBF20BAC39000176A15 /* UIView+.swift in Sources */,
 				B8AAF48F20B96D2E000C9ADE /* DataDriven.swift in Sources */,
 				B8F437CA20A8305600977CE3 /* StationConverter.swift in Sources */,
 				B8AAF49A20B9808A000C9ADE /* StateStoreBindable.swift in Sources */,

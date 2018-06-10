@@ -14,20 +14,20 @@ enum StationFinderError: String, Error, Equatable {
     case unknown
 }
 
-struct BahnQLStationFinder: StationFinder {
+struct ApiStationFinder: StationFinder {
     
-    private let _bahnQLService: BahnQLService
+    private let _fahrplanService: FahrplanService
     private let _stationConverter: StationConverter
     
-    init(bahnQLService: BahnQLService, stationConverter: StationConverter) {
-        _bahnQLService = bahnQLService
+    init(fahrplanService: FahrplanService, stationConverter: StationConverter) {
+        _fahrplanService = fahrplanService
         _stationConverter = stationConverter
     }
     
     func searchStation(namePart: String) -> Observable<StationFinderResult> {
-        return _bahnQLService.searchStation(namePart: namePart)
+        return _fahrplanService.searchStation(namePart: namePart)
             .map {
-                .success($0.filter { $0.primaryEvaId != nil }.map {
+                .success($0.map {
                     self._stationConverter.convert(from: $0)
                 })
             }

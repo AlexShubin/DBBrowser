@@ -9,7 +9,7 @@ import RxTest
 
 class StationFinderTests: XCTestCase {
     
-    let bahnQLServiceMock = BahnQLServiceMock()
+    let fahrplanServiceMock = FahrplanServiceMock()
     var stationFinder: StationFinder!
     
     let testScheduler = TestScheduler(initialClock: 0)
@@ -17,13 +17,13 @@ class StationFinderTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        stationFinder = BahnQLStationFinder(bahnQLService: bahnQLServiceMock,
+        stationFinder = ApiStationFinder(fahrplanService: fahrplanServiceMock,
                                                           stationConverter: ApiStationConverter())
     }
     
     func testStationSearchSucceededOnApiSuccess() {
         // Prepare
-        bahnQLServiceMock.expected = .just([BahnQLStationBuilder().build()])
+        fahrplanServiceMock.expected = .just([FahrplanStationBuilder().build()])
         // Run
         let testObserver = testScheduler.start {
             self.stationFinder.searchStation(namePart: "")
@@ -35,28 +35,9 @@ class StationFinderTests: XCTestCase {
         }
     }
     
-    func testStationSearchFiltersStationsWithNilEvaId() {
-        // Prepare
-        bahnQLServiceMock.expected = .just([
-            BahnQLStationBuilder()
-                .with(primaryEvaId: nil)
-                .build()
-            ])
-        // Run
-        let testObserver = testScheduler.start {
-            self.stationFinder.searchStation(namePart: "")
-        }
-        // Test
-        guard case .success(let stations)? = testObserver.events.first?.value.element else {
-            XCTFail("Unexpected result")
-            return
-        }
-        XCTAssertTrue(stations.isEmpty)
-    }
-    
     func testStationSearchFailsOnApiError() {
         // Prepare
-        bahnQLServiceMock.expected = .error(RxError.unknown)
+        fahrplanServiceMock.expected = .error(RxError.unknown)
         // Run
         let testObserver = testScheduler.start {
             self.stationFinder.searchStation(namePart: "")

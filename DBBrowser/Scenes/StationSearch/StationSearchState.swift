@@ -6,18 +6,9 @@
 struct StationSearchState: State, Equatable {
     typealias Event = StationSearchEvent
     static let initial = StationSearchState()
-    
-    enum StationSearch: Equatable {
-        case loading
-        case loaded(StationFinderResult)
-    }
 
-    enum Action: Equatable {
-        case search(String)
-    }
-
-    var stationSearch = StationSearch.loaded(.success([]))
-    var actionToPerform: Action?
+    var searchResult = StationFinderResult.success([])
+    var shouldSearch: String?
 }
 
 // MARK: - Events
@@ -29,10 +20,7 @@ enum StationSearchEvent {
 // MARK: - Queries
 extension StationSearchState {
     var querySearch: String? {
-        guard case .search(let namePart)? = actionToPerform else {
-            return nil
-        }
-        return namePart
+        return shouldSearch
     }
 }
 
@@ -42,13 +30,10 @@ extension StationSearchState {
         var result = state
         switch event {
         case .search(let namePart):
-            if state.stationSearch != .loading {
-                result.stationSearch = .loading
-                result.actionToPerform = .search(namePart)
-            }
+            result.shouldSearch = namePart
         case .found(let searchResult):
-            result.stationSearch = .loaded(searchResult)
-            result.actionToPerform = nil
+            result.searchResult = searchResult
+            result.shouldSearch = nil
         }
         return result
     }

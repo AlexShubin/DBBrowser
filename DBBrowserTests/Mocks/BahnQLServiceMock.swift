@@ -5,11 +5,11 @@
 @testable import DBBrowser
 import RxSwift
 
-final class BahnQLServiceMock: BahnQLService {
+final class FahrplanServiceMock: FahrplanService {
     let invocations = PublishSubject<String>()
-    var expected = Observable.just([SearchStationQuery.Data.Search.Station]())
+    var expected = Observable.just([FahrplanStation]())
     
-    func searchStation(namePart: String) -> Observable<[SearchStationQuery.Data.Search.Station]> {
+    func searchStation(namePart: String) -> Observable<[FahrplanStation]> {
         invocations.onNext(#function)
         return expected
     }
