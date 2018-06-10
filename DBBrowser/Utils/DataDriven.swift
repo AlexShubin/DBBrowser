@@ -22,7 +22,6 @@ public protocol StateConverter {
 
 public protocol Emitable {
     associatedtype Event
-    /// События, генерируемые View
     var events: ControlEvent<Event> { get }
 }
 
