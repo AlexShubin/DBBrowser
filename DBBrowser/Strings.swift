@@ -7,6 +7,10 @@ import Foundation
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 internal enum L10n {
+  /// Something went wrong...
+  internal static let loadingError = L10n.tr("Localizable", "loading_error")
+  /// Try again
+  internal static let retryButtonText = L10n.tr("Localizable", "retry_button_text")
 
   internal enum StationSearch {
     /// Type station name...

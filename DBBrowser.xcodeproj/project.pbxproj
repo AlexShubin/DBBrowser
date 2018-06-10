@@ -54,6 +54,7 @@
 		B8F4C6C720B00D2400E62DAE /* StationSearchReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4C6C620B00D2400E62DAE /* StationSearchReducerTests.swift */; };
 		B8F4C6C920B00E7A00E62DAE /* StationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4C6C820B00E7A00E62DAE /* StationBuilder.swift */; };
 		B8F4C6CB20B0119F00E62DAE /* StationSearchQueriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4C6CA20B0119F00E62DAE /* StationSearchQueriesTests.swift */; };
+		B8FCC48D20CD7DAC007314ED /* StationSearchErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FCC48C20CD7DAB007314ED /* StationSearchErrorCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 		B8F4C6C620B00D2400E62DAE /* StationSearchReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchReducerTests.swift; sourceTree = "<group>"; };
 		B8F4C6C820B00E7A00E62DAE /* StationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationBuilder.swift; sourceTree = "<group>"; };
 		B8F4C6CA20B0119F00E62DAE /* StationSearchQueriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchQueriesTests.swift; sourceTree = "<group>"; };
+		B8FCC48C20CD7DAB007314ED /* StationSearchErrorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchErrorCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				B8AAF49020B9764C000C9ADE /* StationCell.swift */,
+				B8FCC48C20CD7DAB007314ED /* StationSearchErrorCell.swift */,
 				B892CFBC20BABD8600176A15 /* StationSearchLoadingCell.swift */,
 			);
 			path = Cells;
@@ -622,6 +625,7 @@
 				B853867920B17E04003FB667 /* StationSearchViewState.swift in Sources */,
 				B853867120B174BE003FB667 /* StationSearchSideEffects.swift in Sources */,
 				B8F437D820A848FF00977CE3 /* SceneCoordinator.swift in Sources */,
+				B8FCC48D20CD7DAC007314ED /* StationSearchErrorCell.swift in Sources */,
 				B831E83720AC1EEC00B951DB /* SideEffects.swift in Sources */,
 				B8F437E120A84E4400977CE3 /* MainScreenViewController.swift in Sources */,
 				B831E83620AC1EEC00B951DB /* AppState.swift in Sources */,

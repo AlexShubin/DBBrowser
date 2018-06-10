@@ -9,13 +9,14 @@ class StationSearchQueriesTests: XCTestCase {
     
     func testWhenActionSearch() {
         var state = StationSearchState.initial
-        state.shouldSearch = "123"
+        state.searchString = "123"
+        state.shouldSearch = true
         XCTAssertEqual(state.querySearch, "123")
     }
     
     func testWhenActionNil() {
         var state = StationSearchState.initial
-        state.shouldSearch = nil
+        state.shouldSearch = false
         XCTAssertNil(state.querySearch)
     }
 }

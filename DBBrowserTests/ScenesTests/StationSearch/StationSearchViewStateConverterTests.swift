@@ -10,7 +10,8 @@ class StationSearchViewStateConverterTests: XCTestCase {
     func testLoadingConverted() {
         // Prepare
         var state = StationSearchState.initial
-        state.shouldSearch = "123"
+        state.searchString = "123"
+        state.shouldSearch = true
         // Run
         let converted = StationSearchViewStateConverter().convert(state: state)
         // Test

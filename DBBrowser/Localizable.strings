@@ -1,3 +1,6 @@
 
 "station_search.placeholder" = "Type station name...";
 
+"loading_error" = "Something went wrong...";
+"retry_button_text" = "Try again";
+

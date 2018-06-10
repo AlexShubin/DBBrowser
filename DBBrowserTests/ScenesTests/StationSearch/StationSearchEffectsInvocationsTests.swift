@@ -26,7 +26,8 @@ class StationSearchEffectsInvocationsTests: XCTestCase {
         let effectsObserver = testScheduler.createObserver(String.self)
 
         testScheduler.createColdObservable([
-            Recorded.next(210, .stationSearch(.search("123")))
+            Recorded.next(210, .stationSearch(.searchString("123"))),
+            Recorded.next(220, .stationSearch(.startSearch))
             ])
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
@@ -42,7 +43,7 @@ class StationSearchEffectsInvocationsTests: XCTestCase {
         }
 
         XCTAssertEqual(effectsObserver.events, [
-            Recorded.next(210, "search(by:)")
+            Recorded.next(220, "search(by:)")
             ])
     }
 }

@@ -5,10 +5,9 @@
 struct StationSearchViewStateConverter: StateConverter {
     func convert(state: StationSearchState) -> StationSearchViewState {
         var items: [StationSearchViewState.SectionItem]
-        switch state.shouldSearch {
-        case .some:
+        if state.shouldSearch {
             items = [.loading]
-        case .none:
+        } else {
             switch state.searchResult {
             case .success(let stations):
                 items = stations.map { .station(StationCell.State(stationName: $0.name)) }

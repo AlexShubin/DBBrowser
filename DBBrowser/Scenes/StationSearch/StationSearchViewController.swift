@@ -17,7 +17,7 @@ class StationSearchViewController: UIViewController {
     private let _converter: StationSearchViewStateConverter
     
     private let _containerView = RoundedView()
-    private let _inputField = UISearchBar()
+    private let _searchBar = UISearchBar()
     private let _tableView = UITableView()
     
     init(converter: StationSearchViewStateConverter) {
@@ -39,49 +39,20 @@ class StationSearchViewController: UIViewController {
         _containerView.roundedCorners = [.topLeft, .topRight]
         _containerView.cornerRadius = 16
         _containerView.addBottomSeparator()
-        _inputField.searchBarStyle = .minimal
-        _inputField.showsCancelButton = true
-        _inputField.placeholder = L10n.StationSearch.placeholder
+        _searchBar.searchBarStyle = .minimal
+        _searchBar.showsCancelButton = true
+        _searchBar.placeholder = L10n.StationSearch.placeholder
         _containerView.isUserInteractionEnabled = true
         _tableView.separatorStyle = .none
         
         _tableView.registerCell(ofType: StationCell.self)
         _tableView.registerCell(ofType: StationSearchLoadingCell.self)
-        let gestureRecognizer = UIPanGestureRecognizer(target: self,
-                                                       action: #selector(panGestureRecognizerHandler(_:)))
-        view.addGestureRecognizer(gestureRecognizer)
-    }
-    
-    var initialTouchPointY: CGFloat = 0
-    
-    @IBAction func panGestureRecognizerHandler(_ sender: UIPanGestureRecognizer) {
-        let touchPointY = sender.location(in: view?.window).y
-        switch sender.state {
-        case .began:
-            initialTouchPointY = touchPointY
-        case .changed:
-            if touchPointY > initialTouchPointY {
-                view.frame.origin.y = touchPointY - initialTouchPointY
-            }
-        case .ended, .cancelled:
-            if touchPointY - initialTouchPointY > 200 {
-                dismiss(animated: true, completion: nil)
-            } else {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.view.frame = CGRect(x: 0,
-                                             y: 0,
-                                             width: self.view.frame.size.width,
-                                             height: self.view.frame.size.height)
-                })
-            }
-        case .failed, .possible:
-            break
-        }
+        _tableView.registerCell(ofType: StationSearchErrorCell.self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        _inputField.becomeFirstResponder()
+        _searchBar.becomeFirstResponder()
     }
     
     private func _setupLayout() {
@@ -98,13 +69,13 @@ class StationSearchViewController: UIViewController {
             _containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             _containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
-        _containerView.addSubview(_inputField)
-        _inputField.translatesAutoresizingMaskIntoConstraints = false
+        _containerView.addSubview(_searchBar)
+        _searchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _inputField.topAnchor.constraint(equalTo: _containerView.topAnchor, constant: 16),
-            _inputField.leadingAnchor.constraint(equalTo: _containerView.leadingAnchor, constant: 8),
-            _inputField.trailingAnchor.constraint(equalTo: _containerView.trailingAnchor, constant: -8),
-            _inputField.bottomAnchor.constraint(equalTo: _containerView.bottomAnchor, constant: -16)
+            _searchBar.topAnchor.constraint(equalTo: _containerView.topAnchor, constant: 16),
+            _searchBar.leadingAnchor.constraint(equalTo: _containerView.leadingAnchor, constant: 8),
+            _searchBar.trailingAnchor.constraint(equalTo: _containerView.trailingAnchor, constant: -8),
+            _searchBar.bottomAnchor.constraint(equalTo: _containerView.bottomAnchor, constant: -16)
             ])
         view.addSubview(_tableView)
         _tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -117,8 +88,10 @@ class StationSearchViewController: UIViewController {
     }
 }
 
+// MARK: - StateStoreBindable
 extension StationSearchViewController: StateStoreBindable {
     func subscribe(to stateStore: StateStore) {
+        // State to view state conversion
         let viewState: Signal<StationSearchViewState> = stateStore
             .stateBus
             .map { $0.stationSearch }
@@ -130,7 +103,36 @@ extension StationSearchViewController: StateStoreBindable {
                 return .empty()
         }
         
-        let dataSource = DataSource(configureCell: { _, tableView, indexPath, item in
+        // State render
+        viewState
+            .map { $0.sections }
+            .asObservable()
+            .bind(to: _tableView.rx.items(dataSource: _dataSource(with: stateStore.eventBus)))
+            .disposed(by: bag)
+        
+        // UI Events
+        _searchBar.rx
+            .text
+            .filterNil()
+            .filterEmpty()
+            .throttle(1, scheduler: MainScheduler.instance)
+            .flatMap {
+                Observable.of(.stationSearch(.searchString($0)),
+                              .stationSearch(.startSearch))
+            }
+            .bind(to: stateStore.eventBus)
+            .disposed(by: bag)
+//        _searchBar.rx
+//            .cancelButtonClicked
+//            .map {
+//                //closevc
+//            }
+//            .bind(to: stateStore.eventBus)
+//            .disposed(by: bag)
+    }
+    
+    private func _dataSource(with eventBus: PublishRelay<AppEvent>) -> DataSource {
+        return DataSource(configureCell: { _, tableView, indexPath, item in
             switch item {
             case .station(let cellState):
                 let cell: StationCell = tableView.dequeueReusableCell(for: indexPath)
@@ -140,22 +142,19 @@ extension StationSearchViewController: StateStoreBindable {
                 let cell: StationSearchLoadingCell = tableView.dequeueReusableCell(for: indexPath)
                 return cell
             case .error:
-                return UITableViewCell()
+                let cell: StationSearchErrorCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.events
+                    .map {
+                        switch $0 {
+                        case .retryTap:
+                            return .stationSearch(.startSearch)
+                        }
+                    }
+                    .bind(to: eventBus)
+                    .disposed(by: cell.bag)
+                return cell
             }
         })
-        viewState
-            .map { $0.sections }
-            .asObservable()
-            .bind(to: _tableView.rx.items(dataSource: dataSource))
-            .disposed(by: bag)
-        _inputField.rx
-            .text
-            .filterNil()
-            .filterEmpty()
-            .throttle(1, scheduler: MainScheduler.instance)
-            .map { AppEvent.stationSearch(.search($0)) }
-            .bind(to: stateStore.eventBus)
-            .disposed(by: bag)
-        
     }
 }
+

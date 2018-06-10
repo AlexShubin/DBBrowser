@@ -8,19 +8,21 @@ struct StationSearchState: State, Equatable {
     static let initial = StationSearchState()
 
     var searchResult = StationFinderResult.success([])
-    var shouldSearch: String?
+    var shouldSearch = false
+    var searchString = ""
 }
 
 // MARK: - Events
 enum StationSearchEvent {
-    case search(String)
+    case searchString(String)
+    case startSearch
     case found(StationFinderResult)
 }
 
 // MARK: - Queries
 extension StationSearchState {
     var querySearch: String? {
-        return shouldSearch
+        return shouldSearch ? searchString : nil
     }
 }
 
@@ -29,11 +31,13 @@ extension StationSearchState {
     static func reduce(state: StationSearchState, event: StationSearchEvent) -> StationSearchState {
         var result = state
         switch event {
-        case .search(let namePart):
-            result.shouldSearch = namePart
+        case .startSearch:
+            result.shouldSearch = true
         case .found(let searchResult):
             result.searchResult = searchResult
-            result.shouldSearch = nil
+            result.shouldSearch = false
+        case .searchString(let str):
+            result.searchString = str
         }
         return result
     }
