@@ -42,7 +42,30 @@ class StationSearchEffectsInvocationsTests: XCTestCase {
         }
 
         XCTAssertEqual(effectsObserver.events, [
-            Recorded.next(220, "search(by:)")
+            Recorded.next(220, "search")
+            ])
+    }
+    
+    func testSelectedStation() {
+        let effectsObserver = testScheduler.createObserver(String.self)
+        
+        testScheduler.createColdObservable([
+            Recorded.next(210, .stationSearch(.found(.success([StationBuilder().build()])))),
+            Recorded.next(220, .stationSearch(.selected(0)))
+            ])
+            .bind(to: stateStore.eventBus)
+            .disposed(by: bag)
+        
+        stationSearchSideEffects.effects
+            .subscribe(effectsObserver)
+            .disposed(by: bag)
+        
+        _ = testScheduler.start { [unowned self] in
+            self.stateStore.stateBus.asObservable()
+        }
+        
+        XCTAssertEqual(effectsObserver.events, [
+            Recorded.next(220, "selectStation")
             ])
     }
 }

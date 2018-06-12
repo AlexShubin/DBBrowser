@@ -104,10 +104,11 @@ extension StationSearchViewController: StateStoreBindable {
         }
         
         // State render
+        let dataSource = _dataSource(with: stateStore.eventBus)
         viewState
             .map { $0.sections }
             .asObservable()
-            .bind(to: _tableView.rx.items(dataSource: _dataSource(with: stateStore.eventBus)))
+            .bind(to: _tableView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
         
         // UI Events
@@ -122,13 +123,20 @@ extension StationSearchViewController: StateStoreBindable {
             }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
-//        _searchBar.rx
-//            .cancelButtonClicked
-//            .map {
-//                //closevc
-//            }
-//            .bind(to: stateStore.eventBus)
-//            .disposed(by: bag)
+        _tableView.rx
+            .itemSelected
+            .map {
+                .stationSearch(.selected($0.row))
+            }
+            .bind(to: stateStore.eventBus)
+            .disposed(by: bag)
+        _searchBar.rx
+            .cancelButtonClicked
+            .map {
+                .stationSearch(.close)
+            }
+            .bind(to: stateStore.eventBus)
+            .disposed(by: bag)
     }
     
     private func _dataSource(with eventBus: PublishRelay<AppEvent>) -> DataSource {

@@ -93,6 +93,7 @@ class SceneCoordinator: Coordinator {
         if let presenter = _currentViewController.presentingViewController {
             let subject = PublishSubject<Void>()
             // dismiss a modal controller
+            _currentViewController.view.endEditing(true)
             _currentViewController.dismiss(animated: animated) {
                 self._currentViewController = SceneCoordinator.actualViewController(for: presenter)
                 subject.onNext(())

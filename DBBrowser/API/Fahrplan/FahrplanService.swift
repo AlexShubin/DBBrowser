@@ -3,6 +3,7 @@
 //
 
 import RxSwift
+import os.log
 
 protocol FahrplanService {
     func searchStation(namePart: String) -> Observable<[FahrplanStation]>
@@ -24,8 +25,7 @@ struct ApiFahrplanService: FahrplanService {
         let request = URLRequest(url: _baseUrl.appendingPathComponent("/location/\(namePart)"))
         return _urlSession.rx.data(request: request)
             .map {
-                print("Response: \(String(data: $0, encoding: .utf8) ?? "")")
-                
+                os_log("Response: %@", String(data: $0, encoding: .utf8) ?? "")
                 return try self._decoder.decode([FahrplanStation].self, from: $0)
         }
     }

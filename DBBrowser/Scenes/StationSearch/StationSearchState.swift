@@ -10,6 +10,8 @@ struct StationSearchState: State, Equatable {
     var searchResult = StationFinderResult.success([])
     var shouldSearch = false
     var searchString = ""
+    var selectedStation: Station?
+    var shouldClose = false
 }
 
 // MARK: - Events
@@ -17,12 +19,21 @@ enum StationSearchEvent {
     case searchString(String)
     case startSearch
     case found(StationFinderResult)
+    case selected(Int)
+    case close
+    case closed
 }
 
 // MARK: - Queries
 extension StationSearchState {
     var querySearch: String? {
         return shouldSearch ? searchString : nil
+    }
+    var querySelectedStation: Station? {
+        return selectedStation
+    }
+    var queryClose: Void? {
+        return shouldClose ? () : nil
     }
 }
 
@@ -38,7 +49,25 @@ extension StationSearchState {
             result.shouldSearch = false
         case .searchString(let str):
             result.searchString = str
+        case .selected(let index):
+            result.selectedStation = state._station(with: index)
+        case .close:
+            result.shouldClose = true
+        case .closed:
+            result = .initial
         }
         return result
+    }
+}
+
+// MARK: - Helpers
+extension StationSearchState {
+    private func _station(with index: Int) -> Station? {
+        switch searchResult {
+        case .success(let stations):
+            return stations[index]
+        case .error:
+            return nil
+        }
     }
 }

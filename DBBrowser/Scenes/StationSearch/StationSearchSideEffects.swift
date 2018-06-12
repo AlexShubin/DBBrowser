@@ -7,13 +7,17 @@ import RxFeedback
 import Foundation
 
 protocol StationSearchSideEffectsType: FeedbackLoopsHolder {
-    func search(by namePart: String) -> Observable<AppEvent>
+    var search: (String) -> Observable<AppEvent> { get }
+    var selectStation: (Station) -> Observable<AppEvent> { get }
+    var close: () -> Observable<AppEvent> { get }
 }
 
 extension StationSearchSideEffectsType {
     var feedbackLoops: [FeedbackLoop] {
         return [
-            react(query: { $0.stationSearch.querySearch }, effects: search)
+            react(query: { $0.stationSearch.querySearch }, effects: search),
+            react(query: { $0.stationSearch.querySelectedStation }, effects: selectStation),
+            react(query: { $0.stationSearch.queryClose }, effects: close)
         ]
     }
 }
@@ -29,8 +33,24 @@ struct StationSearchSideEffects: StationSearchSideEffectsType {
         _stationFinder = stationFinder
     }
     
-    func search(by namePart: String) -> Observable<AppEvent> {
-        return _stationFinder.searchStation(namePart: namePart)
-            .map { .stationSearch(.found($0)) }
+    var search: (String) -> Observable<AppEvent> {
+        return {
+            self._stationFinder.searchStation(namePart: $0)
+                .map { .stationSearch(.found($0)) }
+        }
+    }
+    
+    var selectStation: (Station) -> Observable<AppEvent> {
+        return {
+            .of(.mainScreen(.departure($0)),
+                .stationSearch(.close))
+        }
+    }
+    
+    var close: () -> Observable<AppEvent> {
+        return {
+            self._coordinator.pop()
+                .map { .stationSearch(.closed) }
+        }
     }
 }
