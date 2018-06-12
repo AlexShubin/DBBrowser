@@ -28,6 +28,13 @@
 		B892CFBD20BABD8600176A15 /* StationSearchLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B892CFBC20BABD8600176A15 /* StationSearchLoadingCell.swift */; };
 		B892CFBF20BAC39000176A15 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B892CFBE20BAC39000176A15 /* UIView+.swift */; };
 		B8A59AED20BA98A10083FC36 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A59AEC20BA98A10083FC36 /* ViewControllerFactory.swift */; };
+		B8A9387220CFC9E9007460C6 /* MainScreenViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A9387120CFC9E9007460C6 /* MainScreenViewState.swift */; };
+		B8A9387420CFCA9C007460C6 /* MainScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A9387320CFCA9C007460C6 /* MainScreenState.swift */; };
+		B8A9387720CFCC61007460C6 /* MainScreenReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A9387620CFCBD1007460C6 /* MainScreenReducerTests.swift */; };
+		B8A9387920CFCECC007460C6 /* MainScreenViewStateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A9387820CFCECC007460C6 /* MainScreenViewStateConverter.swift */; };
+		B8A9387B20CFCF64007460C6 /* MainScreenViewStateConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A9387A20CFCF64007460C6 /* MainScreenViewStateConverterTests.swift */; };
+		B8A9387D20CFD57B007460C6 /* MainScreenQueriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A9387C20CFD57B007460C6 /* MainScreenQueriesTests.swift */; };
+		B8A9387F20CFD774007460C6 /* MainScreenSideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A9387E20CFD774007460C6 /* MainScreenSideEffects.swift */; };
 		B8AAF48D20B96CB5000C9ADE /* StationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAF48C20B96CB5000C9ADE /* StationSearchViewController.swift */; };
 		B8AAF48F20B96D2E000C9ADE /* DataDriven.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAF48E20B96D2E000C9ADE /* DataDriven.swift */; };
 		B8AAF49120B9764C000C9ADE /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAF49020B9764C000C9ADE /* StationCell.swift */; };
@@ -39,6 +46,9 @@
 		B8B401C420A5DEF400D25B2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B401C220A5DEF400D25B2C /* Main.storyboard */; };
 		B8B401C620A5DEF500D25B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B401C520A5DEF500D25B2C /* Assets.xcassets */; };
 		B8B401C920A5DEF500D25B2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B401C720A5DEF500D25B2C /* LaunchScreen.storyboard */; };
+		B8F1E51320CFE3ED000F1606 /* MainScreenSideEffectsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1E51220CFE3ED000F1606 /* MainScreenSideEffectsMock.swift */; };
+		B8F1E51520CFE475000F1606 /* MainScreenEffectsInvocationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1E51420CFE475000F1606 /* MainScreenEffectsInvocationsTests.swift */; };
+		B8F1E51720CFE600000F1606 /* State+ApplyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1E51620CFE600000F1606 /* State+ApplyEvents.swift */; };
 		B8F437C420A8298E00977CE3 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C320A8298E00977CE3 /* Station.swift */; };
 		B8F437C620A82A9500977CE3 /* FahrplanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C520A82A9500977CE3 /* FahrplanService.swift */; };
 		B8F437CA20A8305600977CE3 /* StationConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C920A8305600977CE3 /* StationConverter.swift */; };
@@ -93,6 +103,13 @@
 		B892CFBC20BABD8600176A15 /* StationSearchLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchLoadingCell.swift; sourceTree = "<group>"; };
 		B892CFBE20BAC39000176A15 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		B8A59AEC20BA98A10083FC36 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
+		B8A9387120CFC9E9007460C6 /* MainScreenViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewState.swift; sourceTree = "<group>"; };
+		B8A9387320CFCA9C007460C6 /* MainScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenState.swift; sourceTree = "<group>"; };
+		B8A9387620CFCBD1007460C6 /* MainScreenReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenReducerTests.swift; sourceTree = "<group>"; };
+		B8A9387820CFCECC007460C6 /* MainScreenViewStateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewStateConverter.swift; sourceTree = "<group>"; };
+		B8A9387A20CFCF64007460C6 /* MainScreenViewStateConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewStateConverterTests.swift; sourceTree = "<group>"; };
+		B8A9387C20CFD57B007460C6 /* MainScreenQueriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenQueriesTests.swift; sourceTree = "<group>"; };
+		B8A9387E20CFD774007460C6 /* MainScreenSideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenSideEffects.swift; sourceTree = "<group>"; };
 		B8AAF48C20B96CB5000C9ADE /* StationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewController.swift; sourceTree = "<group>"; };
 		B8AAF48E20B96D2E000C9ADE /* DataDriven.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDriven.swift; sourceTree = "<group>"; };
 		B8AAF49020B9764C000C9ADE /* StationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCell.swift; sourceTree = "<group>"; };
@@ -108,6 +125,9 @@
 		B8B401CA20A5DEF500D25B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8B401CF20A5DEF500D25B2C /* DBBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DBBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B401D520A5DEF500D25B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B8F1E51220CFE3ED000F1606 /* MainScreenSideEffectsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenSideEffectsMock.swift; sourceTree = "<group>"; };
+		B8F1E51420CFE475000F1606 /* MainScreenEffectsInvocationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenEffectsInvocationsTests.swift; sourceTree = "<group>"; };
+		B8F1E51620CFE600000F1606 /* State+ApplyEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "State+ApplyEvents.swift"; sourceTree = "<group>"; };
 		B8F437C320A8298E00977CE3 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		B8F437C520A82A9500977CE3 /* FahrplanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrplanService.swift; sourceTree = "<group>"; };
 		B8F437C920A8305600977CE3 /* StationConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationConverter.swift; sourceTree = "<group>"; };
@@ -197,6 +217,10 @@
 			isa = PBXGroup;
 			children = (
 				B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */,
+				B8A9387820CFCECC007460C6 /* MainScreenViewStateConverter.swift */,
+				B8A9387120CFC9E9007460C6 /* MainScreenViewState.swift */,
+				B8A9387320CFCA9C007460C6 /* MainScreenState.swift */,
+				B8A9387E20CFD774007460C6 /* MainScreenSideEffects.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -212,6 +236,17 @@
 				B8AAF48C20B96CB5000C9ADE /* StationSearchViewController.swift */,
 			);
 			path = StationSearch;
+			sourceTree = "<group>";
+		};
+		B8A9387520CFCBC8007460C6 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				B8A9387620CFCBD1007460C6 /* MainScreenReducerTests.swift */,
+				B8A9387A20CFCF64007460C6 /* MainScreenViewStateConverterTests.swift */,
+				B8A9387C20CFD57B007460C6 /* MainScreenQueriesTests.swift */,
+				B8F1E51420CFE475000F1606 /* MainScreenEffectsInvocationsTests.swift */,
+			);
+			path = MainScreen;
 			sourceTree = "<group>";
 		};
 		B8AAF49220B976A2000C9ADE /* Extensions */ = {
@@ -280,14 +315,23 @@
 		B8B401D220A5DEF500D25B2C /* DBBrowserTests */ = {
 			isa = PBXGroup;
 			children = (
+				B8F1E51820CFE633000F1606 /* ServicesTests */,
 				B8F4C6C420B00CF300E62DAE /* ScenesTests */,
 				B8F437D120A8365700977CE3 /* Builders */,
 				B8F437CE20A8349600977CE3 /* Mocks */,
-				B856025020A62FEE00B25893 /* StationFinderTests.swift */,
 				B8F437D420A8392100977CE3 /* TestData.swift */,
+				B8F1E51620CFE600000F1606 /* State+ApplyEvents.swift */,
 				B8B401D520A5DEF500D25B2C /* Info.plist */,
 			);
 			path = DBBrowserTests;
+			sourceTree = "<group>";
+		};
+		B8F1E51820CFE633000F1606 /* ServicesTests */ = {
+			isa = PBXGroup;
+			children = (
+				B856025020A62FEE00B25893 /* StationFinderTests.swift */,
+			);
+			path = ServicesTests;
 			sourceTree = "<group>";
 		};
 		B8F437C120A827F800977CE3 /* API */ = {
@@ -328,6 +372,7 @@
 			children = (
 				B8F437CF20A8354900977CE3 /* BahnQLServiceMock.swift */,
 				B853867420B179D8003FB667 /* StationSearchSideEffectsMock.swift */,
+				B8F1E51220CFE3ED000F1606 /* MainScreenSideEffectsMock.swift */,
 				B853867620B17B5A003FB667 /* SideEffectsMock.swift */,
 			);
 			path = Mocks;
@@ -365,6 +410,7 @@
 		B8F4C6C420B00CF300E62DAE /* ScenesTests */ = {
 			isa = PBXGroup;
 			children = (
+				B8A9387520CFCBC8007460C6 /* MainScreen */,
 				B8F4C6C520B00CFC00E62DAE /* StationSearch */,
 			);
 			path = ScenesTests;
@@ -609,8 +655,10 @@
 			files = (
 				B8F4C6C320B005C300E62DAE /* Result.swift in Sources */,
 				B8602DF820A99E44001BEDC2 /* Assets.swift in Sources */,
+				B8A9387F20CFD774007460C6 /* MainScreenSideEffects.swift in Sources */,
 				B892CFBB20BAB12000176A15 /* FahrplanStation.swift in Sources */,
 				B8F437DE20A84A7D00977CE3 /* Scene.swift in Sources */,
+				B8A9387220CFC9E9007460C6 /* MainScreenViewState.swift in Sources */,
 				B8F437C620A82A9500977CE3 /* FahrplanService.swift in Sources */,
 				B831E83B20AC20B400B951DB /* StationSearchState.swift in Sources */,
 				B8F437C420A8298E00977CE3 /* Station.swift in Sources */,
@@ -619,6 +667,7 @@
 				B8B401BF20A5DEF400D25B2C /* AppDelegate.swift in Sources */,
 				B8224EF920BAF58E00F9132A /* Strings.swift in Sources */,
 				B8AAF49420B9787F000C9ADE /* UITableView+.swift in Sources */,
+				B8A9387420CFCA9C007460C6 /* MainScreenState.swift in Sources */,
 				B892CFBD20BABD8600176A15 /* StationSearchLoadingCell.swift in Sources */,
 				B8F437CD20A8335C00977CE3 /* StationFinder.swift in Sources */,
 				B831E83820AC1EEC00B951DB /* State.swift in Sources */,
@@ -635,6 +684,7 @@
 				B831E83920AC1EEC00B951DB /* AppStateStore.swift in Sources */,
 				B892CFBF20BAC39000176A15 /* UIView+.swift in Sources */,
 				B8AAF48F20B96D2E000C9ADE /* DataDriven.swift in Sources */,
+				B8A9387920CFCECC007460C6 /* MainScreenViewStateConverter.swift in Sources */,
 				B8F437CA20A8305600977CE3 /* StationConverter.swift in Sources */,
 				B8AAF49A20B9808A000C9ADE /* StateStoreBindable.swift in Sources */,
 				B8F437DC20A8492F00977CE3 /* SceneTransitionType.swift in Sources */,
@@ -646,6 +696,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8F4C6C920B00E7A00E62DAE /* StationBuilder.swift in Sources */,
+				B8A9387720CFCC61007460C6 /* MainScreenReducerTests.swift in Sources */,
 				B8F4C6C720B00D2400E62DAE /* StationSearchReducerTests.swift in Sources */,
 				B8F4C6CB20B0119F00E62DAE /* StationSearchQueriesTests.swift in Sources */,
 				B8F437D320A836A300977CE3 /* BahnQLStationBuilder.swift in Sources */,
@@ -653,8 +704,13 @@
 				B853867520B179D8003FB667 /* StationSearchSideEffectsMock.swift in Sources */,
 				B853867320B1792D003FB667 /* StationSearchEffectsInvocationsTests.swift in Sources */,
 				B853867720B17B5A003FB667 /* SideEffectsMock.swift in Sources */,
+				B8A9387D20CFD57B007460C6 /* MainScreenQueriesTests.swift in Sources */,
 				B8F437D020A8354900977CE3 /* BahnQLServiceMock.swift in Sources */,
+				B8A9387B20CFCF64007460C6 /* MainScreenViewStateConverterTests.swift in Sources */,
+				B8F1E51320CFE3ED000F1606 /* MainScreenSideEffectsMock.swift in Sources */,
+				B8F1E51520CFE475000F1606 /* MainScreenEffectsInvocationsTests.swift in Sources */,
 				B8AAF49820B97C16000C9ADE /* StationSearchViewStateConverterTests.swift in Sources */,
+				B8F1E51720CFE600000F1606 /* State+ApplyEvents.swift in Sources */,
 				B8F437D520A8392100977CE3 /* TestData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -740,7 +796,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -794,7 +850,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -811,7 +867,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RBNKHS73S3;
 				INFOPLIST_FILE = DBBrowser/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -831,7 +887,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RBNKHS73S3;
 				INFOPLIST_FILE = DBBrowser/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -852,6 +908,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RBNKHS73S3;
 				INFOPLIST_FILE = DBBrowserTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -875,6 +932,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RBNKHS73S3;
 				INFOPLIST_FILE = DBBrowserTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

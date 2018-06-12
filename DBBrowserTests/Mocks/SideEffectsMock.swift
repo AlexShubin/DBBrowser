@@ -5,5 +5,6 @@
 @testable import DBBrowser
 
 struct SideEffectsMock: SideEffects {
-    let stationSearch: StationSearchSideEffectsType
+    var mainScreen: MainScreenSideEffectsType
+    var stationSearch: StationSearchSideEffectsType
 }

@@ -61,7 +61,8 @@ class SceneCoordinator: Coordinator {
         case .root:
             let viewController = _viewControllerFactory.make(scene)
             _currentViewController = SceneCoordinator.actualViewController(for: viewController)
-            _window.rootViewController = viewController
+            let nc = UINavigationController(rootViewController: viewController)
+            _window.rootViewController = nc
             subject.onNext(())
         case .push:
             guard let navigationController = (_currentViewController as? UINavigationController)

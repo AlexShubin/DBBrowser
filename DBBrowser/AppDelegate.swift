@@ -12,7 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let vcFactory = ViewControllerFactory(stationSearchViewStateConverter: StationSearchViewStateConverter())
+        let vcFactory = ViewControllerFactory(stationSearchViewStateConverter: StationSearchViewStateConverter(),
+                                              mainScreenViewStateConverter: MainScreenViewStateConverter())
         let coordinator = SceneCoordinator(window: window!, viewControllerFactory: vcFactory)
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = ["Authorization": "Bearer 276098a8e6050448131e70eab83cae6a"]
@@ -27,11 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                          stationFinder: stationFinder)
         appStateStore = AppStateStore(sideEffects: sideEffects)
         vcFactory.setUp(appStateStore: appStateStore)
-        
         coordinator.transition(to: .mainScreen, type: .root)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            coordinator.transition(to: .stationSearch, type: .modal)
-        }
         return true
     }
 }

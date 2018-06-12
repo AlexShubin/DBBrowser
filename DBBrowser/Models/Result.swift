@@ -20,39 +20,3 @@ extension Result: Equatable where T: Equatable, E: Equatable {
     }
 }
 
-// Result - Functor
-public extension Result {
-    public func map<U>(_ transform: (T) throws -> U) rethrows -> Result<U, E> {
-        switch self {
-        case .success(let value):
-            return .success(try transform(value))
-        case .error(let error):
-            return .error(error)
-        }
-    }
-}
-
-// Result - Monad
-public extension Result {
-    public func flatMap<U>(_ transform: (T) throws -> Result<U, E>) rethrows -> Result<U, E> {
-        switch self {
-        case .success(let value):
-            return try transform(value)
-        case .error(let error):
-            return .error(error)
-        }
-    }
-}
-
-// Result - Error mapping
-public extension Result {
-    public func mapError<U>(_ transform: (E) throws -> U) rethrows -> Result<T, U> {
-        switch self {
-        case .success(let value):
-            return .success(value)
-        case .error(let error):
-            return .error(try transform(error))
-        }
-    }
-}
-

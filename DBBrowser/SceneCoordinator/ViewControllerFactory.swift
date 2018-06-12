@@ -7,10 +7,13 @@ import UIKit
 class ViewControllerFactory {
     
     private let _stationSearchViewStateConverter: StationSearchViewStateConverter
+    private let _mainScreenViewStateConverter: MainScreenViewStateConverter
     private var _appStateStore: StateStore!
     
-    init(stationSearchViewStateConverter: StationSearchViewStateConverter) {
+    init(stationSearchViewStateConverter: StationSearchViewStateConverter,
+         mainScreenViewStateConverter: MainScreenViewStateConverter) {
         _stationSearchViewStateConverter = stationSearchViewStateConverter
+        _mainScreenViewStateConverter = mainScreenViewStateConverter
     }
     
     func setUp(appStateStore: StateStore) {
@@ -20,8 +23,8 @@ class ViewControllerFactory {
     func make(_ scene: Scene) -> UIViewController {
         switch scene {
         case .mainScreen:
-            let vc = MainScreenViewController()
-            //vc.subscribe
+            let vc = MainScreenViewController(converter: _mainScreenViewStateConverter)
+            vc.subscribe(to: _appStateStore)
             return vc
         case .stationSearch:
             let vc = StationSearchViewController(converter: _stationSearchViewStateConverter)

@@ -13,21 +13,25 @@ protocol FeedbackLoopsHolder {
 
 protocol SideEffects: FeedbackLoopsHolder {
     var stationSearch: StationSearchSideEffectsType { get }
+    var mainScreen: MainScreenSideEffectsType { get }
 }
 
 extension SideEffects {
     var feedbackLoops: [FeedbackLoop] {
         return stationSearch.feedbackLoops
+            + mainScreen.feedbackLoops
     }
 }
 
 struct AppSideEffects: SideEffects {
     
     let stationSearch: StationSearchSideEffectsType
+    let mainScreen: MainScreenSideEffectsType
     
     init(coordinator: Coordinator,
          stationFinder: StationFinder) {
         stationSearch = StationSearchSideEffects(coordinator: coordinator,
                                                  stationFinder: stationFinder)
+        mainScreen = MainScreenSideEffects(coordinator: coordinator)
     }
 }

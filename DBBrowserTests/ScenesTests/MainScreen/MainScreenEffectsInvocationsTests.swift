@@ -7,9 +7,9 @@ import XCTest
 import RxTest
 import RxSwift
 
-class StationSearchEffectsInvocationsTests: XCTestCase {
+class MainScreenEffectsInvocationsTests: XCTestCase {
     
-    let stationSearchSideEffects = StationSearchSideEffectsMock()
+    let mainScreenSideEffects = MainScreenSideEffectsMock()
     let testScheduler = TestScheduler(initialClock: 0)
     let bag = DisposeBag()
     
@@ -18,22 +18,21 @@ class StationSearchEffectsInvocationsTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        sideEffects = SideEffectsMock(mainScreen: MainScreenSideEffectsMock(),
-                                      stationSearch: stationSearchSideEffects)
+        sideEffects = SideEffectsMock(mainScreen: mainScreenSideEffects,
+                                      stationSearch: StationSearchSideEffectsMock())
         stateStore = AppStateStore(sideEffects: sideEffects, scheduler: testScheduler)
     }
     
-    func testLoadOrder() {
+    func testOpenStationSearch() {
         let effectsObserver = testScheduler.createObserver(String.self)
 
         testScheduler.createColdObservable([
-            Recorded.next(210, .stationSearch(.searchString("123"))),
-            Recorded.next(220, .stationSearch(.startSearch))
+            Recorded.next(210, .mainScreen(.openStationSearch))
             ])
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
 
-        stationSearchSideEffects.effects
+        mainScreenSideEffects.effects
             .subscribe(effectsObserver)
             .disposed(by: bag)
 
@@ -42,7 +41,7 @@ class StationSearchEffectsInvocationsTests: XCTestCase {
         }
 
         XCTAssertEqual(effectsObserver.events, [
-            Recorded.next(220, "search(by:)")
+            Recorded.next(210, "openStationSearch")
             ])
     }
 }

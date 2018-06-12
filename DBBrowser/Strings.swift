@@ -12,8 +12,17 @@ internal enum L10n {
   /// Try again
   internal static let retryButtonText = L10n.tr("Localizable", "retry_button_text")
 
+  internal enum MainScreen {
+    /// Departure station
+    internal static let departureCaption = L10n.tr("Localizable", "main_screen.departure_caption")
+    /// Departure station
+    internal static let departurePlaceholder = L10n.tr("Localizable", "main_screen.departure_placeholder")
+    /// Show timetable
+    internal static let searchButton = L10n.tr("Localizable", "main_screen.search_button")
+  }
+
   internal enum StationSearch {
-    /// Type station name...
+    /// Start typing station name
     internal static let placeholder = L10n.tr("Localizable", "station_search.placeholder")
   }
 }
