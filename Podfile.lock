@@ -6,7 +6,7 @@ PODS:
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxFeedback (1.0.2):
+  - RxFeedback (1.0.3):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - RxOptional (3.4.0):
@@ -16,6 +16,7 @@ PODS:
   - RxTest (4.2.0):
     - RxSwift (~> 4.0)
   - SwiftGen (5.3.0)
+  - SWXMLHash (4.0.0)
 
 DEPENDENCIES:
   - RxCocoa
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - RxSwift
   - RxTest
   - SwiftGen
+  - SWXMLHash (~> 4.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -36,17 +38,19 @@ SPEC REPOS:
     - RxSwift
     - RxTest
     - SwiftGen
+    - SWXMLHash
 
 SPEC CHECKSUMS:
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
-  RxFeedback: 10a567c755e59a1897daf760578c6bae8c546bd4
+  RxFeedback: 0b032eb82a4cf858b3b97fb8eb30a895f837fbda
   RxOptional: fabc37fc8e3cf4c336ebaeb5c92b576c64b2e6c5
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   RxTest: 8da864c0ee47534f586ff18fb0c7e5b2f1fe5023
   SwiftGen: 4379bd3640b0a212a0f6ea3c494adba385513d10
+  SWXMLHash: 6bbc0bf72975a18ceda469fb7d6a886a26d81694
 
-PODFILE CHECKSUM: 837253f2c4004cdec8fc33265d905e26ed4dd782
+PODFILE CHECKSUM: 6c8d10f42b1ed1dc167708d493cd56f18da0562f
 
 COCOAPODS: 1.5.3
