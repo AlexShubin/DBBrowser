@@ -6,14 +6,14 @@
 import XCTest
 
 class StationSearchViewStateConverterTests: XCTestCase {
-    
+
     func testLoadingConverted() {
         // Prepare
         var state = StationSearchState.initial
         state.searchString = "123"
         state.shouldSearch = true
         // Run
-        let converted = StationSearchViewStateConverter().convert(state: state)
+        let converted = StationSearchViewStateConverter().convert(from: state)
         // Test
         XCTAssertEqual(converted.sections.count, 1)
         XCTAssertEqual(converted.sections.first?.items.count, 1)
@@ -25,13 +25,13 @@ class StationSearchViewStateConverterTests: XCTestCase {
         var state = StationSearchState.initial
         state.searchResult = .error(.unknown)
         // Run
-        let converted = StationSearchViewStateConverter().convert(state: state)
+        let converted = StationSearchViewStateConverter().convert(from: state)
         // Test
         XCTAssertEqual(converted.sections.count, 1)
         XCTAssertEqual(converted.sections.first?.items.count, 1)
         XCTAssertEqual(converted.sections.first?.items.first, .error)
     }
-    
+
     func testLoadedConverted() {
         // Prepare
         let stations = [
@@ -41,7 +41,7 @@ class StationSearchViewStateConverterTests: XCTestCase {
         var state = StationSearchState.initial
         state.searchResult = .success(stations)
         // Run
-        let converted = StationSearchViewStateConverter().convert(state: state)
+        let converted = StationSearchViewStateConverter().convert(from: state)
         // Test
         XCTAssertEqual(converted.sections.count, 1)
         XCTAssertEqual(converted.sections.first?.items.count, 2)

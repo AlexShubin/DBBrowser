@@ -23,30 +23,30 @@ extension StationSearchSideEffectsType {
 }
 
 struct StationSearchSideEffects: StationSearchSideEffectsType {
-    
+
     private let _stationFinder: StationFinder
     private let _coordinator: Coordinator
-    
+
     init(coordinator: Coordinator,
          stationFinder: StationFinder) {
         _coordinator = coordinator
         _stationFinder = stationFinder
     }
-    
+
     var search: (String) -> Observable<AppEvent> {
         return {
             self._stationFinder.searchStation(namePart: $0)
                 .map { .stationSearch(.found($0)) }
         }
     }
-    
+
     var selectStation: (Station) -> Observable<AppEvent> {
         return {
             .of(.mainScreen(.departure($0)),
                 .stationSearch(.close))
         }
     }
-    
+
     var close: () -> Observable<AppEvent> {
         return {
             self._coordinator.pop()

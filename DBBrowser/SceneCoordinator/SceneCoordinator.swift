@@ -21,7 +21,7 @@ extension Coordinator {
     func popToRoot() -> Observable<Void> {
         return pop(animated: true, toRoot: true)
     }
-    
+
     @discardableResult
     func pop() -> Observable<Void> {
         return pop(animated: true, toRoot: false)

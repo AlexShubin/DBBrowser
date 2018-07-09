@@ -15,15 +15,15 @@ enum StationFinderError: String, Error, Equatable {
 }
 
 struct ApiStationFinder: StationFinder {
-    
+
     private let _fahrplanService: FahrplanService
     private let _stationConverter: StationConverter
-    
+
     init(fahrplanService: FahrplanService, stationConverter: StationConverter) {
         _fahrplanService = fahrplanService
         _stationConverter = stationConverter
     }
-    
+
     func searchStation(namePart: String) -> Observable<StationFinderResult> {
         return _fahrplanService.searchStation(namePart: namePart)
             .map {

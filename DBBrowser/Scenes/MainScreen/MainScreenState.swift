@@ -6,9 +6,9 @@
 struct MainScreenState: State, Equatable {
     typealias Event = MainScreenEvent
     static let initial = MainScreenState()
-    
+
     var departure: Station?
-    
+
     var shouldOpenStationSearch = false
 }
 

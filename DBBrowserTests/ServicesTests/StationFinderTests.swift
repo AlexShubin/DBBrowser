@@ -8,19 +8,19 @@ import RxSwift
 import RxTest
 
 class StationFinderTests: XCTestCase {
-    
+
     let fahrplanServiceMock = FahrplanServiceMock()
     var stationFinder: StationFinder!
-    
+
     let testScheduler = TestScheduler(initialClock: 0)
     let bag = DisposeBag()
-    
+
     override func setUp() {
         super.setUp()
         stationFinder = ApiStationFinder(fahrplanService: fahrplanServiceMock,
-                                                          stationConverter: ApiStationConverter())
+                                                          stationConverter: StationConverter())
     }
-    
+
     func testStationSearchSucceededOnApiSuccess() {
         // Prepare
         fahrplanServiceMock.expected = .just([FahrplanStationBuilder().build()])
@@ -34,7 +34,7 @@ class StationFinderTests: XCTestCase {
             return
         }
     }
-    
+
     func testStationSearchFailsOnApiError() {
         // Prepare
         fahrplanServiceMock.expected = .error(RxError.unknown)
@@ -49,4 +49,3 @@ class StationFinderTests: XCTestCase {
         }
     }
 }
-

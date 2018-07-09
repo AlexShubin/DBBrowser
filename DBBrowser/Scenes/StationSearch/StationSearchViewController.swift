@@ -9,32 +9,32 @@ import RxDataSources
 import RxOptional
 
 class StationSearchViewController: UIViewController {
-    
+
     private typealias DataSource = RxTableViewSectionedReloadDataSource<StationSearchViewState.Section>
-    
+
     let bag = DisposeBag()
-    
+
     private let _converter: StationSearchViewStateConverter
-    
+
     private let _containerView = RoundedView()
     private let _searchBar = UISearchBar()
     private let _tableView = UITableView()
-    
+
     init(converter: StationSearchViewStateConverter) {
         _converter = converter
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         _setupLayout()
-        
+
         view.backgroundColor = .clear
-        
+
         _containerView.backgroundColor = .white
         _containerView.roundedCorners = [.topLeft, .topRight]
         _containerView.cornerRadius = 16
@@ -44,17 +44,17 @@ class StationSearchViewController: UIViewController {
         _searchBar.placeholder = L10n.StationSearch.placeholder
         _containerView.isUserInteractionEnabled = true
         _tableView.separatorStyle = .none
-        
+
         _tableView.registerCell(ofType: StationCell.self)
         _tableView.registerCell(ofType: StationSearchLoadingCell.self)
         _tableView.registerCell(ofType: StationSearchErrorCell.self)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         _searchBar.becomeFirstResponder()
     }
-    
+
     private func _setupLayout() {
         let topAnchor: NSLayoutYAxisAnchor
         if #available(iOS 11.0, *) {
@@ -97,12 +97,12 @@ extension StationSearchViewController: StateStoreBindable {
             .map { $0.stationSearch }
             .distinctUntilChanged()
             .flatMap { [weak self] in
-                if let viewState = self?._converter.convert(state: $0) {
+                if let viewState = self?._converter.convert(from: $0) {
                     return .just(viewState)
                 }
                 return .empty()
         }
-        
+
         // State render
         let dataSource = _dataSource(with: stateStore.eventBus)
         viewState
@@ -110,7 +110,7 @@ extension StationSearchViewController: StateStoreBindable {
             .asObservable()
             .bind(to: _tableView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
-        
+
         // UI Events
         _searchBar.rx
             .text
@@ -138,7 +138,7 @@ extension StationSearchViewController: StateStoreBindable {
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
     }
-    
+
     private func _dataSource(with eventBus: PublishRelay<AppEvent>) -> DataSource {
         return DataSource(configureCell: { _, tableView, indexPath, item in
             switch item {
@@ -165,4 +165,3 @@ extension StationSearchViewController: StateStoreBindable {
         })
     }
 }
-

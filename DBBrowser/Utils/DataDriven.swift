@@ -14,14 +14,7 @@ public protocol DataDrivenAnimatable: DataDriven {
     func render(state: State, animate: Bool)
 }
 
-public protocol StateConverter {
-    associatedtype State
-    associatedtype DataDrivenState
-    func convert(state: State) -> DataDrivenState
-}
-
 public protocol Emitable {
     associatedtype Event
     var events: ControlEvent<Event> { get }
 }
-

@@ -5,21 +5,21 @@
 import UIKit
 
 class ViewControllerFactory {
-    
+
     private let _stationSearchViewStateConverter: StationSearchViewStateConverter
     private let _mainScreenViewStateConverter: MainScreenViewStateConverter
     private var _appStateStore: StateStore!
-    
+
     init(stationSearchViewStateConverter: StationSearchViewStateConverter,
          mainScreenViewStateConverter: MainScreenViewStateConverter) {
         _stationSearchViewStateConverter = stationSearchViewStateConverter
         _mainScreenViewStateConverter = mainScreenViewStateConverter
     }
-    
+
     func setUp(appStateStore: StateStore) {
         _appStateStore = appStateStore
     }
-    
+
     func make(_ scene: Scene) -> UIViewController {
         switch scene {
         case .mainScreen:
@@ -32,5 +32,5 @@ class ViewControllerFactory {
             return vc
         }
     }
-    
+
 }

@@ -10,17 +10,17 @@ protocol FahrplanService {
 }
 
 struct ApiFahrplanService: FahrplanService {
-    
+
     private let _baseUrl: URL
     private let _urlSession: URLSession
-    
+
     private let _decoder = JSONDecoder()
-    
+
     init(baseUrl: URL, configuration: URLSessionConfiguration) {
         _urlSession = URLSession(configuration: configuration)
         _baseUrl = baseUrl
     }
-    
+
     func searchStation(namePart: String) -> Observable<[FahrplanStation]> {
         let request = URLRequest(url: _baseUrl.appendingPathComponent("/location/\(namePart)"))
         return _urlSession.rx.data(request: request)
@@ -30,4 +30,3 @@ struct ApiFahrplanService: FahrplanService {
         }
     }
 }
-

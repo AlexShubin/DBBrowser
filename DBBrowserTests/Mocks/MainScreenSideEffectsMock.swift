@@ -12,6 +12,6 @@ struct MainScreenSideEffectsMock: MainScreenSideEffectsType {
             return .empty()
         }
     }
-    
+
     let effects = PublishSubject<String>()
 }

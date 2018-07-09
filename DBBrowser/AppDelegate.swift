@@ -6,12 +6,13 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+
     var window: UIWindow?
     var appStateStore: StateStore!
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
         let vcFactory = ViewControllerFactory(stationSearchViewStateConverter: StationSearchViewStateConverter(),
                                               mainScreenViewStateConverter: MainScreenViewStateConverter())
         let coordinator = SceneCoordinator(window: window!, viewControllerFactory: vcFactory)
@@ -20,10 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = URL(string: "https://api.deutschebahn.com/fahrplan-plus/v1")!
         let fahrplanService = ApiFahrplanService(baseUrl: url,
                                                  configuration: configuration)
-        
+
         let stationFinder = ApiStationFinder(fahrplanService: fahrplanService,
-                                             stationConverter: ApiStationConverter())
-        
+                                             stationConverter: StationConverter())
+
         let sideEffects = AppSideEffects(coordinator: coordinator,
                                          stationFinder: stationFinder)
         appStateStore = AppStateStore(sideEffects: sideEffects)
@@ -32,4 +33,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 }
-

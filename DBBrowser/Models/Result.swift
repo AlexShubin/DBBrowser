@@ -19,4 +19,3 @@ extension Result: Equatable where T: Equatable, E: Equatable {
         }
     }
 }
-

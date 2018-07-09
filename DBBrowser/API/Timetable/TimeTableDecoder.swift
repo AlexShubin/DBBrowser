@@ -5,29 +5,39 @@
 import SWXMLHash
 
 protocol TimeTableDecoder {
-    func decode(_ data: Data) -> [TimetableStop]?
+    func decode(_ data: Data) throws -> ApiTimetable
+}
+
+enum TimeTableDecoderError: Error {
+    case decodingError
 }
 
 struct XMLTimeTableDecoder {
-    func decode(_ data: Data) -> [TimetableStop]? {
+    func decode(_ data: Data) throws -> ApiTimetable {
         let xml = SWXMLHash.parse(data)
-        return xml["timetable"]["s"].all.compactMap {
-            let xmlTl = $0["tl"].element
-            let tl = TimetableStop.TripLabel(o: xmlTl?.attribute(by: "o")?.text,
-                                             c: xmlTl?.attribute(by: "c")?.text,
-                                             n: xmlTl?.attribute(by: "n")?.text)
-            return TimetableStop(tl: tl,
-                                 ar: _decode($0["ar"].element),
-                                 dp: _decode($0["dp"].element))
+        let stops: [ApiStop] = try xml["timetable"]["s"].all.map {
+            guard let xmlTl = $0["tl"].element,
+                let category = xmlTl.attribute(by: "c")?.text,
+                let number = xmlTl.attribute(by: "n")?.text else {
+                    throw TimeTableDecoderError.decodingError
+            }
+            let tripLabel = ApiTripLabel(category: category, number: number)
+            return ApiStop(tripLabel: tripLabel,
+                           arrival: try _decode($0["ar"].element),
+                           departure: try _decode($0["dp"].element))
         }
+        return ApiTimetable(stops: stops)
     }
-    
-    private func _decode(_ event: XMLElement?) -> TimetableStop.Event? {
+
+    private func _decode(_ event: XMLElement?) throws -> ApiEvent? {
         guard let xmlEvent = event else {
             return nil
         }
-        return TimetableStop.Event(pp: xmlEvent.attribute(by: "pp")?.text,
-                                   pt: xmlEvent.attribute(by: "pt")?.text,
-                                   ppth: xmlEvent.attribute(by: "ppth")?.text)
+        guard let platform = xmlEvent.attribute(by: "pp")?.text,
+            let time = xmlEvent.attribute(by: "pt")?.text,
+            let path = xmlEvent.attribute(by: "ppth")?.text else {
+                throw TimeTableDecoderError.decodingError
+        }
+        return ApiEvent(platform: platform, time: time, path: path)
     }
 }

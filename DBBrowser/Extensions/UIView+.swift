@@ -6,7 +6,7 @@ import UIKit
 
 extension UIView {
     func addBottomSeparator() {
-        
+
         let separator = UIView()
         separator.backgroundColor = UIColor(white: 0, alpha: 0.1)
         separator.translatesAutoresizingMaskIntoConstraints = false

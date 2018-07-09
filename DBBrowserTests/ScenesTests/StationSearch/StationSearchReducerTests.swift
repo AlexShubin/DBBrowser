@@ -6,19 +6,19 @@
 import XCTest
 
 class StationSearchReducerTests: XCTestCase {
-    
+
     func testSearchString() {
         var state = StationSearchState.initial
         state = StationSearchState.reduce(state: state, event: .searchString("123"))
         XCTAssertEqual(state.searchString, "123")
     }
-    
+
     func testStartSearch() {
         var state = StationSearchState.initial
         state = StationSearchState.reduce(state: state, event: .startSearch)
         XCTAssertTrue(state.shouldSearch)
     }
-    
+
     func testFound() {
         let expectedResult = StationFinderResult.success([StationBuilder().build()])
         var state = StationSearchState.initial
@@ -26,7 +26,7 @@ class StationSearchReducerTests: XCTestCase {
         XCTAssertFalse(state.shouldSearch)
         XCTAssertEqual(state.searchResult, expectedResult)
     }
-    
+
     func testStationSelected() {
         // Prepare
         let expectedResult = [
@@ -41,13 +41,13 @@ class StationSearchReducerTests: XCTestCase {
         // Test
         XCTAssertEqual(state.selectedStation, expectedResult[1])
     }
-    
+
     func testClose() {
         var state = StationSearchState.initial
         state = StationSearchState.reduce(state: state, event: .close)
         XCTAssertTrue(state.shouldClose)
     }
-    
+
     func testCloseMakesStateInitial() {
         let state = StationSearchState.applyEvents(initial: .initial, events: [
             .close,

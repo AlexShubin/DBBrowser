@@ -24,10 +24,10 @@ extension SideEffects {
 }
 
 struct AppSideEffects: SideEffects {
-    
+
     let stationSearch: StationSearchSideEffectsType
     let mainScreen: MainScreenSideEffectsType
-    
+
     init(coordinator: Coordinator,
          stationFinder: StationFinder) {
         stationSearch = StationSearchSideEffects(coordinator: coordinator,

@@ -5,7 +5,7 @@
 import RxDataSources
 
 struct StationSearchViewState: Equatable {
-    
+
     struct Section: SectionModelType, Equatable {
         var items: [SectionItem]
         init(original: Section, items: [SectionItem]) {
@@ -16,13 +16,12 @@ struct StationSearchViewState: Equatable {
             self.items = items
         }
     }
-    
+
     enum SectionItem: Equatable {
         case station(StationCell.State)
         case loading
         case error
     }
-    
+
     var sections: [Section]
 }
-

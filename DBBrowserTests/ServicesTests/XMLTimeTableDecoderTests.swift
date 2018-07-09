@@ -6,52 +6,48 @@
 import XCTest
 
 class XMLTimeTableDecoderTests: XCTestCase {
-    
+
     let decoder = XMLTimeTableDecoder()
-    
+
     func testXMLParsedCorrectly() {
-        guard let result = decoder.decode(testXMLData) else {
+        guard let result = try? decoder.decode(testXMLData) else {
             XCTFail("String should be parsed")
             return
         }
-        guard result.count == 4 else {
+        guard result.stops.count == 4 else {
             XCTFail("Timetable stops count should be 6")
             return
         }
-        
-        XCTAssertEqual(result[0].tl?.o, "80")
-        XCTAssertEqual(result[0].tl?.c, "ICE")
-        XCTAssertEqual(result[0].tl?.n, "691")
-        XCTAssertEqual(result[0].ar?.pp, "18")
-        XCTAssertEqual(result[0].ar?.pt, "1807072130")
-        XCTAssertEqual(result[0].ar?.ppth, "Berlin Hbf (tief)|Berlin Südkreuz|Lutherstadt Wittenberg Hbf|Leipzig Hbf|Erfurt Hbf|Eisenach|Fulda|Frankfurt(Main)Hbf|Mannheim Hbf|Stuttgart Hbf|Ulm Hbf|Augsburg Hbf|München-Pasing")
-        XCTAssertNil(result[0].dp)
-        
-        XCTAssertEqual(result[1].tl?.o, "80")
-        XCTAssertEqual(result[1].tl?.c, "ICE")
-        XCTAssertEqual(result[1].tl?.n, "1718")
-        XCTAssertEqual(result[1].dp?.pp, "15")
-        XCTAssertEqual(result[1].dp?.pt, "1807072151")
-        XCTAssertEqual(result[1].dp?.ppth, "Augsburg Hbf|Günzburg|Ulm Hbf|Stuttgart Hbf|Mannheim Hbf|Frankfurt(M) Flughafen Fernbf|Frankfurt(Main)Hbf|Eisenach|Gotha|Erfurt Hbf|Halle(Saale)Hbf|Bitterfeld|Berlin Südkreuz|Berlin Hbf (tief)")
-        XCTAssertNil(result[1].ar)
-        
-        XCTAssertEqual(result[2].tl?.o, "800746")
-        XCTAssertEqual(result[2].tl?.c, "RE")
-        XCTAssertEqual(result[2].tl?.n, "4868")
-        XCTAssertEqual(result[2].dp?.pp, "25")
-        XCTAssertEqual(result[2].dp?.pt, "1807072144")
-        XCTAssertEqual(result[2].dp?.ppth, "Freising|Moosburg|Landshut(Bay)Hbf|Ergoldsbach|Neufahrn(Niederbay)|Eggmühl|Hagelstadt|Köfering|Obertraubling|Regensburg-Burgweinting|Regensburg Hbf")
-        XCTAssertNil(result[2].ar)
-        
-        XCTAssertEqual(result[3].tl?.o, "8013D")
-        XCTAssertEqual(result[3].tl?.c, "RB")
-        XCTAssertEqual(result[3].tl?.n, "27071")
-        XCTAssertEqual(result[3].dp?.pp, "14")
-        XCTAssertEqual(result[3].dp?.pt, "1807072128")
-        XCTAssertEqual(result[3].dp?.ppth, "München Ost|Markt Schwaben|Hörlkofen|Walpertskirchen|Dorfen Bahnhof|Schwindegg|Ampfing|Mühldorf(Oberbay)")
-        XCTAssertNil(result[3].ar)
+
+        XCTAssertEqual(result.stops[0].tripLabel.category, "ICE")
+        XCTAssertEqual(result.stops[0].tripLabel.number, "691")
+        XCTAssertEqual(result.stops[0].arrival?.platform, "18")
+        XCTAssertEqual(result.stops[0].arrival?.time, "1807072130")
+        XCTAssertEqual(result.stops[0].arrival?.path, "Berlin Hbf (tief)|Berlin Südkreuz|Lutherstadt Wittenberg Hbf|Leipzig Hbf|Erfurt Hbf|Eisenach|Fulda|Frankfurt(Main)Hbf|Mannheim Hbf|Stuttgart Hbf|Ulm Hbf|Augsburg Hbf|München-Pasing")
+        XCTAssertNil(result.stops[0].departure)
+
+        XCTAssertEqual(result.stops[1].tripLabel.category, "ICE")
+        XCTAssertEqual(result.stops[1].tripLabel.number, "1718")
+        XCTAssertEqual(result.stops[1].departure?.platform, "15")
+        XCTAssertEqual(result.stops[1].departure?.time, "1807072151")
+        XCTAssertEqual(result.stops[1].departure?.path, "Augsburg Hbf|Günzburg|Ulm Hbf|Stuttgart Hbf|Mannheim Hbf|Frankfurt(M) Flughafen Fernbf|Frankfurt(Main)Hbf|Eisenach|Gotha|Erfurt Hbf|Halle(Saale)Hbf|Bitterfeld|Berlin Südkreuz|Berlin Hbf (tief)")
+        XCTAssertNil(result.stops[1].arrival)
+
+        XCTAssertEqual(result.stops[2].tripLabel.category, "RE")
+        XCTAssertEqual(result.stops[2].tripLabel.number, "4868")
+        XCTAssertEqual(result.stops[2].departure?.platform, "25")
+        XCTAssertEqual(result.stops[2].departure?.time, "1807072144")
+        XCTAssertEqual(result.stops[2].departure?.path, "Freising|Moosburg|Landshut(Bay)Hbf|Ergoldsbach|Neufahrn(Niederbay)|Eggmühl|Hagelstadt|Köfering|Obertraubling|Regensburg-Burgweinting|Regensburg Hbf")
+        XCTAssertNil(result.stops[2].arrival)
+
+        XCTAssertEqual(result.stops[3].tripLabel.category, "RB")
+        XCTAssertEqual(result.stops[3].tripLabel.number, "27071")
+        XCTAssertEqual(result.stops[3].departure?.platform, "14")
+        XCTAssertEqual(result.stops[3].departure?.time, "1807072128")
+        XCTAssertEqual(result.stops[3].departure?.path, "München Ost|Markt Schwaben|Hörlkofen|Walpertskirchen|Dorfen Bahnhof|Schwindegg|Ampfing|Mühldorf(Oberbay)")
+        XCTAssertNil(result.stops[3].arrival)
     }
-    
+
 }
 
 extension XMLTimeTableDecoderTests {
@@ -78,6 +74,3 @@ extension XMLTimeTableDecoderTests {
         """.data(using: .utf8)!
     }
 }
-
-
-

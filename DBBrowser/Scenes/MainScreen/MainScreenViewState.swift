@@ -9,4 +9,3 @@ struct MainScreenViewState: Equatable {
     }
     var departure: Departure
 }
-

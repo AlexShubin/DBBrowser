@@ -5,22 +5,22 @@
 import UIKit
 
 class StationCell: UITableViewCell {
-    
+
     struct State: Equatable {
         var stationName: String
     }
-    
+
     private let _stationNameLabel = UILabel()
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         _setupUI()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func _setupUI() {
         addSubview(_stationNameLabel)
         _stationNameLabel.translatesAutoresizingMaskIntoConstraints = false

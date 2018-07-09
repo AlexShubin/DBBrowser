@@ -21,11 +21,11 @@ extension MainScreenSideEffectsType {
 struct MainScreenSideEffects: MainScreenSideEffectsType {
 
     private let _coordinator: Coordinator
-    
+
     init(coordinator: Coordinator) {
         _coordinator = coordinator
     }
-    
+
     var openStationSearch:() -> Observable<AppEvent> {
         return {
             self._coordinator.transition(to: .stationSearch, type: .modal)

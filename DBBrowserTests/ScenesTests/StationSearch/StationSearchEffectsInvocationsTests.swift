@@ -8,21 +8,21 @@ import RxTest
 import RxSwift
 
 class StationSearchEffectsInvocationsTests: XCTestCase {
-    
+
     let stationSearchSideEffects = StationSearchSideEffectsMock()
     let testScheduler = TestScheduler(initialClock: 0)
     let bag = DisposeBag()
-    
+
     var stateStore: AppStateStore!
     var sideEffects: SideEffectsMock!
-    
+
     override func setUp() {
         super.setUp()
         sideEffects = SideEffectsMock(mainScreen: MainScreenSideEffectsMock(),
                                       stationSearch: stationSearchSideEffects)
         stateStore = AppStateStore(sideEffects: sideEffects, scheduler: testScheduler)
     }
-    
+
     func testLoadOrder() {
         let effectsObserver = testScheduler.createObserver(String.self)
 
@@ -45,25 +45,25 @@ class StationSearchEffectsInvocationsTests: XCTestCase {
             Recorded.next(220, "search")
             ])
     }
-    
+
     func testSelectedStation() {
         let effectsObserver = testScheduler.createObserver(String.self)
-        
+
         testScheduler.createColdObservable([
             Recorded.next(210, .stationSearch(.found(.success([StationBuilder().build()])))),
             Recorded.next(220, .stationSearch(.selected(0)))
             ])
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
-        
+
         stationSearchSideEffects.effects
             .subscribe(effectsObserver)
             .disposed(by: bag)
-        
+
         _ = testScheduler.start { [unowned self] in
             self.stateStore.stateBus.asObservable()
         }
-        
+
         XCTAssertEqual(effectsObserver.events, [
             Recorded.next(220, "selectStation")
             ])

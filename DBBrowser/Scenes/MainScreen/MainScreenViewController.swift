@@ -7,41 +7,41 @@ import RxSwift
 import RxCocoa
 
 class MainScreenViewController: UIViewController {
-    
+
     let bag = DisposeBag()
-    
+
     private let _converter: MainScreenViewStateConverter
-    
+
     private let _fromLabelCaption = UILabel()
     private let _fromLabel = UILabel()
     private let _searchButton = UIButton(type: .system)
-    
+
     init(converter: MainScreenViewStateConverter) {
         _converter = converter
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         _setupLayout()
-        
+
         view.backgroundColor = .white
-        
+
         _fromLabelCaption.text = L10n.MainScreen.departureCaption
-        
+
         _fromLabel.font = UIFont.systemFont(ofSize: 36, weight: .medium)
         _fromLabel.isUserInteractionEnabled = true
-        
+
         _searchButton.backgroundColor = UIColor(asset: Asset.Colors.dbRed)
         _searchButton.layer.cornerRadius = 8
         _searchButton.setTitle(L10n.MainScreen.searchButton, for: .normal)
         _searchButton.tintColor = .white
     }
-    
+
     private func _setupLayout() {
         // Image view
         let imageView = UIImageView(image: UIImage(asset: Asset.mainScreenImage))
@@ -85,12 +85,12 @@ class MainScreenViewController: UIViewController {
             stack.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor, constant: -24)
             ])
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -106,7 +106,7 @@ extension MainScreenViewController: StateStoreBindable {
             .map { $0.mainScreen }
             .distinctUntilChanged()
             .flatMap { [weak self] in
-                if let viewState = self?._converter.convert(state: $0) {
+                if let viewState = self?._converter.convert(from: $0) {
                     return .just(viewState)
                 }
                 return .empty()
@@ -127,7 +127,7 @@ extension MainScreenViewController: StateStoreBindable {
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
     }
-    
+
     private func _render(_ state: MainScreenViewState) {
         switch state.departure {
         case .placeholder(let str):

@@ -6,13 +6,13 @@
 import XCTest
 
 class MainScreenReducerTests: XCTestCase {
-    
+
     func testInitial() {
         let state = MainScreenState.initial
         XCTAssertNil(state.departure)
         XCTAssertFalse(state.shouldOpenStationSearch)
     }
-    
+
     func testSearchString() {
         // Prepare
         let expectedStation = StationBuilder().build()
@@ -22,7 +22,7 @@ class MainScreenReducerTests: XCTestCase {
         // Test
         XCTAssertEqual(state.departure, expectedStation)
     }
-    
+
     func testShouldOpenStationSearch() {
         // Prepare
         var state = MainScreenState.initial
@@ -31,7 +31,7 @@ class MainScreenReducerTests: XCTestCase {
         // Test
         XCTAssertTrue(state.shouldOpenStationSearch)
     }
-    
+
     func testStationSearchOpened() {
         // Prepare
         var state = MainScreenState.applyEvents(initial: .initial, events: [

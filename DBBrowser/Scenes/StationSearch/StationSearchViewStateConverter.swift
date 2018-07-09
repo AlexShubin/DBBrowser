@@ -2,13 +2,13 @@
 //  Copyright © 2018 AlexShubin. All rights reserved.
 //
 
-struct StationSearchViewStateConverter: StateConverter {
-    func convert(state: StationSearchState) -> StationSearchViewState {
+struct StationSearchViewStateConverter: Converter {
+    func convert(from input: StationSearchState) -> StationSearchViewState {
         var items: [StationSearchViewState.SectionItem]
-        if state.shouldSearch {
+        if input.shouldSearch {
             items = [.loading]
         } else {
-            switch state.searchResult {
+            switch input.searchResult {
             case .success(let stations):
                 items = stations.map { .station(StationCell.State(stationName: $0.name)) }
             case .error:
