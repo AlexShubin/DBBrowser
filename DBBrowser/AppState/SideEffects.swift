@@ -28,7 +28,7 @@ struct AppSideEffects: SideEffects {
     let stationSearch: StationSearchSideEffectsType
     let mainScreen: MainScreenSideEffectsType
 
-    init(coordinator: Coordinator,
+    init(coordinator: SceneCoordinatorType,
          stationFinder: StationFinder) {
         stationSearch = StationSearchSideEffects(coordinator: coordinator,
                                                  stationFinder: stationFinder)

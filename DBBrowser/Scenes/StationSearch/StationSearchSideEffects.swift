@@ -25,9 +25,9 @@ extension StationSearchSideEffectsType {
 struct StationSearchSideEffects: StationSearchSideEffectsType {
 
     private let _stationFinder: StationFinder
-    private let _coordinator: Coordinator
+    private let _coordinator: SceneCoordinatorType
 
-    init(coordinator: Coordinator,
+    init(coordinator: SceneCoordinatorType,
          stationFinder: StationFinder) {
         _coordinator = coordinator
         _stationFinder = stationFinder

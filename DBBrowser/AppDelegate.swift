@@ -18,10 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let coordinator = SceneCoordinator(window: window!, viewControllerFactory: vcFactory)
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = ["Authorization": "Bearer 276098a8e6050448131e70eab83cae6a"]
-        let url = URL(string: "https://api.deutschebahn.com/fahrplan-plus/v1")!
-        let fahrplanService = ApiFahrplanService(baseUrl: url,
+        let fahrplanUrl = URL(string: "https://api.deutschebahn.com/fahrplan-plus/v1")!
+        let timetablesUrl = URL(string: "https://api.deutschebahn.com/timetables/v1")!
+        let fahrplanService = ApiFahrplanService(baseUrl: fahrplanUrl,
                                                  configuration: configuration)
-
+        let timetablesService = ApiTimetableService(baseUrl: timetablesUrl,
+                                                    configuration: configuration)
         let stationFinder = ApiStationFinder(fahrplanService: fahrplanService,
                                              stationConverter: StationConverter())
 

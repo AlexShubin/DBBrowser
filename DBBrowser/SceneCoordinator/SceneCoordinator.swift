@@ -6,7 +6,7 @@
 import RxSwift
 import RxCocoa
 
-protocol Coordinator {
+protocol SceneCoordinatorType {
     /// Transition to another scene.
     @discardableResult
     func transition(to scene: Scene, type: SceneTransitionType) -> Observable<Void>
@@ -16,7 +16,7 @@ protocol Coordinator {
     func pop(animated: Bool, toRoot: Bool) -> Observable<Void>
 }
 
-extension Coordinator {
+extension SceneCoordinatorType {
     @discardableResult
     func popToRoot() -> Observable<Void> {
         return pop(animated: true, toRoot: true)
@@ -28,7 +28,7 @@ extension Coordinator {
     }
 }
 
-class SceneCoordinator: Coordinator {
+class SceneCoordinator: SceneCoordinatorType {
 
     private let _window: UIWindow
     private let _viewControllerFactory: ViewControllerFactory

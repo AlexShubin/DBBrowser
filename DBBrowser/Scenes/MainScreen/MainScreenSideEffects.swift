@@ -20,9 +20,9 @@ extension MainScreenSideEffectsType {
 
 struct MainScreenSideEffects: MainScreenSideEffectsType {
 
-    private let _coordinator: Coordinator
+    private let _coordinator: SceneCoordinatorType
 
-    init(coordinator: Coordinator) {
+    init(coordinator: SceneCoordinatorType) {
         _coordinator = coordinator
     }
 
