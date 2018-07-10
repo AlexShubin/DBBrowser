@@ -9,11 +9,22 @@ class DateTimeFormatterTests: XCTestCase {
 
     let formatter = AppDateTimeFormatter()
 
-    func testTimetablesApiFormat() {
-        let result = formatter.date(from: "1807072151", style: .timetablesApi)
+    func testTimetablesApiDateTime() {
+        let result = formatter.date(from: "1807072151", style: .timetablesApiDateTime)
         XCTAssertEqual(result, Date.testSample(from: "07-07-2018 21:51"))
     }
 
+    func testTimetablesApiDate() {
+        let result = formatter.string(from: .testSample(from: "07-07-2018 21:51"),
+                                      style: .timetablesApiDate)
+        XCTAssertEqual(result, "180707")
+    }
+    
+    func testTimetablesApiTime() {
+        let result = formatter.string(from: .testSample(from: "07-07-2018 21:51"),
+                                      style: .timetablesApiTime)
+        XCTAssertEqual(result, "21")
+    }
 }
 
 private extension Date {

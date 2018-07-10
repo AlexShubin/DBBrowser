@@ -20,7 +20,7 @@ struct TimetableConverter: Converter {
                                                 number: stop.tripLabel.number,
                                                 stations: arrival.path.components(separatedBy: "|"),
                                                 time: _dateFormatter.date(from: arrival.time,
-                                                                          style: .timetablesApi),
+                                                                          style: .timetablesApiDateTime),
                                                 platform: arrival.platform))
             }
             if let departure = stop.departure {
@@ -28,7 +28,7 @@ struct TimetableConverter: Converter {
                                                 number: stop.tripLabel.number,
                                                 stations: departure.path.components(separatedBy: "|"),
                                                 time: _dateFormatter.date(from: departure.time,
-                                                                          style: .timetablesApi),
+                                                                          style: .timetablesApiDateTime),
                                                 platform: departure.platform))
             }
         }
