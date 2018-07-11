@@ -23,11 +23,11 @@ protocol SceneCoordinatorType {
     func dismiss() -> Observable<Void>
 }
 
-class SceneCoordinator: SceneCoordinatorType {
+struct SceneCoordinator: SceneCoordinatorType {
     private let _viewControllerFactory: ViewControllerFactory
     private let _navigationController = UINavigationController()
 
-    required init(window: UIWindow, viewControllerFactory: ViewControllerFactory) {
+    init(window: UIWindow, viewControllerFactory: ViewControllerFactory) {
         window.rootViewController = _navigationController
         _viewControllerFactory = viewControllerFactory
     }
@@ -46,9 +46,9 @@ class SceneCoordinator: SceneCoordinatorType {
 
     func present(scene: Scene) -> Observable<Void> {
         let subject = PublishSubject<Void>()
-        let viewController = _viewControllerFactory.make(scene)
-        viewController.modalPresentationStyle = .overFullScreen
-        _navigationController.present(viewController, animated: true) {
+        let vc = _viewControllerFactory.make(scene)
+        vc.modalPresentationStyle = .overFullScreen
+        _navigationController.present(vc, animated: true) {
             subject.onNext(())
         }
         return subject
@@ -70,9 +70,8 @@ class SceneCoordinator: SceneCoordinatorType {
             .take(1)
             .bind(to: subject)
         guard _navigationController.popViewController(animated: false) != nil else {
-            fatalError("can't navigate back from")
+            fatalError("Can't navigate back")
         }
-
         return subject
     }
 
