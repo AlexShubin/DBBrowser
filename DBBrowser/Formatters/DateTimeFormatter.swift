@@ -24,7 +24,7 @@ struct AppDateTimeFormatter: DateTimeFormatter {
         _formatter.dateFormat = style.rawValue
         return _formatter.date(from: string)!
     }
-    
+
     func string(from date: Date, style: DateTimeFormatterStyle) -> String {
         _formatter.dateFormat = style.rawValue
         return _formatter.string(from: date)

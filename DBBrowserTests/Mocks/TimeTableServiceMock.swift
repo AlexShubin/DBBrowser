@@ -10,7 +10,7 @@ class TimeTableServiceMock: TimetableService {
         invocations.onNext(#function)
         return expected
     }
-    
+
     let invocations = PublishSubject<String>()
     var expected = Observable.just(ApiTimetable(stops: []))
 }

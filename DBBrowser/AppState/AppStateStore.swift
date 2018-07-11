@@ -19,10 +19,10 @@ struct AppStateStore: StateStore {
 
     init(sideEffects: SideEffects, scheduler: SchedulerType = MainScheduler.instance) {
 
-        let _eventBus = PublishRelay<AppEvent>()
-        eventBus = _eventBus
+        let events = PublishRelay<AppEvent>()
+        eventBus = events
         let eventBusFeedback: FeedbackLoop = { _ -> Observable<AppEvent> in
-            _eventBus.asObservable()
+            events.asObservable()
         }
 
         var feedBacks = sideEffects.feedbackLoops

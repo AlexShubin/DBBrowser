@@ -6,7 +6,7 @@
 struct TimetableState: State, Equatable {
     typealias Event = TimetableEvent
     static let initial = TimetableState()
-    
+
     var timetableResult: TimetableLoaderResult = .success(Timetable(arrivals: [], departures: []))
     var shouldLoadTimetable = false
     var station: Station?
@@ -24,7 +24,7 @@ enum TimetableEvent {
 
 // MARK: - Queries
 extension TimetableState {
-    
+
 }
 
 // MARK: - Reducer

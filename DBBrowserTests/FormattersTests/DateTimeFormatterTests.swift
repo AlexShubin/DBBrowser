@@ -19,7 +19,7 @@ class DateTimeFormatterTests: XCTestCase {
                                       style: .timetablesApiDate)
         XCTAssertEqual(result, "180707")
     }
-    
+
     func testTimetablesApiTime() {
         let result = formatter.string(from: .testSample(from: "07-07-2018 21:51"),
                                       style: .timetablesApiTime)

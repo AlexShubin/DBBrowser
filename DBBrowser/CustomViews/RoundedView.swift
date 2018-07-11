@@ -14,7 +14,9 @@ class RoundedView: UIView {
     }
 
     private var _shapeLayer: CAShapeLayer {
+        //swiftlint:disable force_cast
         return layer as! CAShapeLayer
+        //swiftlint:enable force_cast
     }
 
     override var backgroundColor: UIColor? {

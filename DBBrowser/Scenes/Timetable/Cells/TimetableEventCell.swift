@@ -10,7 +10,7 @@ class TimetableEventCell: UITableViewCell {
         let number: String
         let time: String
     }
-    
+
     enum Constants {
         enum CategoryLabel {
             static let topOffset: CGFloat = 8
@@ -24,18 +24,18 @@ class TimetableEventCell: UITableViewCell {
             static let trailingOffset: CGFloat = -16
         }
     }
-    
+
     private let _categoryLabel = UILabel()
     private let _numberLabel = UILabel()
     private let _timeLabel = UILabel()
     private let _platformCaption = UILabel()
     private let _platformLabel = UILabel()
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         _setupLayout()
     }
-    
+
     private func _setupLayout() {
         contentView.addSubview(_categoryLabel)
         _categoryLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +62,7 @@ class TimetableEventCell: UITableViewCell {
             _timeLabel.bottomAnchor.constraint(equalTo: _categoryLabel.bottomAnchor)
             ])
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

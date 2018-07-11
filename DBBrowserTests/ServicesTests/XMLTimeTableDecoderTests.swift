@@ -5,6 +5,7 @@
 @testable import DBBrowser
 import XCTest
 
+//swiftlint:disable line_length
 class XMLTimeTableDecoderTests: XCTestCase {
 
     let decoder = XMLTimeTableDecoder()

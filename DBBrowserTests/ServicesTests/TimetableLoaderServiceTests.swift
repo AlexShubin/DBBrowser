@@ -8,21 +8,21 @@ import RxSwift
 import RxTest
 
 class TimetableLoaderServiceTests: XCTestCase {
-    
+
     let timetableServiceMock = TimeTableServiceMock()
     let dateFormatterMock = DateTimeFormatterMock()
     var timetableLoader: TimetableLoader!
-    
+
     let testScheduler = TestScheduler(initialClock: 0)
     let bag = DisposeBag()
-    
+
     override func setUp() {
         super.setUp()
         timetableLoader = ApiTimetableLoader(timetableService: timetableServiceMock,
                                              timetableConverter: TimetableConverter(dateFormatter: dateFormatterMock),
                                              dateFormatter: dateFormatterMock)
     }
-    
+
     func testTimetableLoadingSucceededOnApiSuccess() {
         // Prepare
         timetableServiceMock.expected = .just(ApiTimetable(stops: []))
@@ -37,7 +37,7 @@ class TimetableLoaderServiceTests: XCTestCase {
             return
         }
     }
-    
+
     func testTimetableLoadingFailsOnApiError() {
         // Prepare
         timetableServiceMock.expected = .error(RxError.unknown)

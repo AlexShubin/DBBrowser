@@ -10,17 +10,17 @@ protocol TimetableService {
 }
 
 struct ApiTimetableService: TimetableService {
-    
+
     private let _baseUrl: URL
     private let _urlSession: URLSession
-    
+
     private let _decoder = XMLTimeTableDecoder()
-    
+
     init(baseUrl: URL, configuration: URLSessionConfiguration) {
         _urlSession = URLSession(configuration: configuration)
         _baseUrl = baseUrl
     }
-    
+
     func loadTimetable(evaNo: String, date: String, hour: String) -> Observable<ApiTimetable> {
         let request = URLRequest(url: _baseUrl.appendingPathComponent("/plan/\(evaNo)/\(date)/\(hour)"))
         return _urlSession.rx.data(request: request)

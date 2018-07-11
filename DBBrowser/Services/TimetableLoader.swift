@@ -15,11 +15,11 @@ enum TimetableLoaderError: String, Error, Equatable {
 }
 
 struct ApiTimetableLoader: TimetableLoader {
-    
+
     private let _timetableService: TimetableService
     private let _timetableConverter: TimetableConverter
     private let _dateFormatter: DateTimeFormatter
-    
+
     init(timetableService: TimetableService,
          timetableConverter: TimetableConverter,
          dateFormatter: DateTimeFormatter) {
@@ -27,7 +27,7 @@ struct ApiTimetableLoader: TimetableLoader {
         _timetableConverter = timetableConverter
         _dateFormatter = dateFormatter
     }
-    
+
     func load(station: Station, dateTime: Date) -> Observable<TimetableLoaderResult> {
         let date = _dateFormatter.string(from: dateTime, style: .timetablesApiDate)
         let time = _dateFormatter.string(from: dateTime, style: .timetablesApiTime)

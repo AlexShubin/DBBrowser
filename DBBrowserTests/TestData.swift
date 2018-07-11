@@ -8,6 +8,7 @@
 
 import Foundation
 
+//swiftlint:disable line_length
 enum TestData {
     static let stationName1 = "Munchen Hbf"
     static let stationId1 = 123
