@@ -4,8 +4,8 @@
 
 import Foundation
 
-struct Timetable {
-    struct Event {
+struct Timetable: Equatable {
+    struct Event: Equatable {
         let category: String
         let number: String
         let stations: [String]
