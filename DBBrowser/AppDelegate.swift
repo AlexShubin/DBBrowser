@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                          stationFinder: stationFinder)
         appStateStore = AppStateStore(sideEffects: sideEffects)
         vcFactory.setUp(appStateStore: appStateStore)
-        coordinator.transition(to: .mainScreen, type: .root)
+        coordinator.setRoot(scene: .mainScreen)
         return true
     }
 }

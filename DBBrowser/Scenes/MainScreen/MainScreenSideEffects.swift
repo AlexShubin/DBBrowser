@@ -28,7 +28,7 @@ struct MainScreenSideEffects: MainScreenSideEffectsType {
 
     var openStationSearch:() -> Observable<AppEvent> {
         return {
-            self._coordinator.transition(to: .stationSearch, type: .modal)
+            self._coordinator.present(scene: .stationSearch)
                 .map { .mainScreen(.stationSearchOpened) }
         }
     }

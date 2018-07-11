@@ -49,7 +49,7 @@ struct StationSearchSideEffects: StationSearchSideEffectsType {
 
     var close: () -> Observable<AppEvent> {
         return {
-            self._coordinator.pop()
+            self._coordinator.dismiss()
                 .map { .stationSearch(.closed) }
         }
     }

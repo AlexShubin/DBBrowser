@@ -84,7 +84,6 @@
 		B8F437D320A836A300977CE3 /* FahrplanStationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D220A836A300977CE3 /* FahrplanStationBuilder.swift */; };
 		B8F437D520A8392100977CE3 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D420A8392100977CE3 /* TestData.swift */; };
 		B8F437D820A848FF00977CE3 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D720A848FF00977CE3 /* SceneCoordinator.swift */; };
-		B8F437DC20A8492F00977CE3 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437DB20A8492F00977CE3 /* SceneTransitionType.swift */; };
 		B8F437DE20A84A7D00977CE3 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437DD20A84A7D00977CE3 /* Scene.swift */; };
 		B8F437E120A84E4400977CE3 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */; };
 		B8F4C6C320B005C300E62DAE /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4C6C220B005C300E62DAE /* Result.swift */; };
@@ -190,7 +189,6 @@
 		B8F437D220A836A300977CE3 /* FahrplanStationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrplanStationBuilder.swift; sourceTree = "<group>"; };
 		B8F437D420A8392100977CE3 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		B8F437D720A848FF00977CE3 /* SceneCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
-		B8F437DB20A8492F00977CE3 /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
 		B8F437DD20A84A7D00977CE3 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		B8F4C6C220B005C300E62DAE /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -534,7 +532,6 @@
 			isa = PBXGroup;
 			children = (
 				B8F437D720A848FF00977CE3 /* SceneCoordinator.swift */,
-				B8F437DB20A8492F00977CE3 /* SceneTransitionType.swift */,
 				B8F437DD20A84A7D00977CE3 /* Scene.swift */,
 				B8A59AEC20BA98A10083FC36 /* ViewControllerFactory.swift */,
 			);
@@ -863,7 +860,6 @@
 				B8A9387920CFCECC007460C6 /* MainScreenViewStateConverter.swift in Sources */,
 				B8F437CA20A8305600977CE3 /* StationConverter.swift in Sources */,
 				B8AAF49A20B9808A000C9ADE /* StateStoreBindable.swift in Sources */,
-				B8F437DC20A8492F00977CE3 /* SceneTransitionType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
