@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vcFactory = ViewControllerFactory(stationSearchViewStateConverter: StationSearchViewStateConverter(),
                                               mainScreenViewStateConverter: MainScreenViewStateConverter())
         let coordinator: SceneCoordinatorType = SceneCoordinator(window: window!, viewControllerFactory: vcFactory)
+
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = ["Authorization": "Bearer 276098a8e6050448131e70eab83cae6a"]
         let fahrplanUrl = URL(string: "https://api.deutschebahn.com/fahrplan-plus/v1")!
@@ -24,11 +25,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                  configuration: configuration)
         let timetableService = ApiTimetableService(baseUrl: timetablesUrl,
                                                    configuration: configuration)
+        let dateFormatter = AppDateTimeFormatter()
+        let timetableLoader = ApiTimetableLoader(timetableService: timetableService,
+                                                 timetableConverter: TimetableConverter(dateFormatter: dateFormatter),
+                                                 dateFormatter: dateFormatter)
         let stationFinder = ApiStationFinder(fahrplanService: fahrplanService,
                                              stationConverter: StationConverter())
-
         let sideEffects = AppSideEffects(coordinator: coordinator,
-                                         stationFinder: stationFinder)
+                                         stationFinder: stationFinder,
+                                         timetableLoader: timetableLoader)
         appStateStore = AppStateStore(sideEffects: sideEffects)
         vcFactory.setUp(appStateStore: appStateStore)
         coordinator.setRoot(scene: .mainScreen)

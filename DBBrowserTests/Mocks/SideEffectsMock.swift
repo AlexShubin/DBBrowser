@@ -7,4 +7,5 @@
 struct SideEffectsMock: SideEffects {
     var mainScreen: MainScreenSideEffectsType
     var stationSearch: StationSearchSideEffectsType
+    var timetable: TimetableSideEffectsType
 }

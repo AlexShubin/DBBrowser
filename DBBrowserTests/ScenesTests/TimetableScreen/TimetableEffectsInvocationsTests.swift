@@ -7,9 +7,9 @@ import XCTest
 import RxTest
 import RxSwift
 
-class MainScreenEffectsInvocationsTests: XCTestCase {
+class TimetableEffectsInvocationsTests: XCTestCase {
 
-    let mainScreenSideEffects = MainScreenSideEffectsMock()
+    let timetableSideEffects = TimetableSideEffectsMock()
     let testScheduler = TestScheduler(initialClock: 0)
     let bag = DisposeBag()
 
@@ -18,22 +18,24 @@ class MainScreenEffectsInvocationsTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sideEffects = SideEffectsMock(mainScreen: mainScreenSideEffects,
+        sideEffects = SideEffectsMock(mainScreen: MainScreenSideEffectsMock(),
                                       stationSearch: StationSearchSideEffectsMock(),
-                                      timetable: TimetableSideEffectsMock())
+                                      timetable: timetableSideEffects)
         stateStore = AppStateStore(sideEffects: sideEffects, scheduler: testScheduler)
     }
 
-    func testOpenStationSearch() {
+    func testLoadTimetable() {
         let effectsObserver = testScheduler.createObserver(String.self)
 
+        let params = TimetableLoadParamsBuilder().build()
         testScheduler.createColdObservable([
-            Recorded.next(210, .mainScreen(.openStationSearch))
+            Recorded.next(210, .timetable(.timetableLoadParams(params))),
+            Recorded.next(220, .timetable(.loadTimetable))
             ])
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
 
-        mainScreenSideEffects.effects
+        timetableSideEffects.effects
             .subscribe(effectsObserver)
             .disposed(by: bag)
 
@@ -42,7 +44,7 @@ class MainScreenEffectsInvocationsTests: XCTestCase {
         }
 
         XCTAssertEqual(effectsObserver.events, [
-            Recorded.next(210, "openStationSearch")
+            Recorded.next(220, "loadTimetable")
             ])
     }
 }
