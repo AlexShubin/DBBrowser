@@ -10,7 +10,7 @@ class LoadingCell: UITableViewCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        _setupViewHierarchy()
+        _setupLayout()
 
         backgroundColor = .clear
     }
@@ -19,7 +19,7 @@ class LoadingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func _setupViewHierarchy() {
+    private func _setupLayout() {
         addSubview(_spinner)
         _spinner.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

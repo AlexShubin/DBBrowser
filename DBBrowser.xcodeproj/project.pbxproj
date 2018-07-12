@@ -14,6 +14,7 @@
 		B8004D1A20F66C54006A1A83 /* TimetableReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8004D1920F66C54006A1A83 /* TimetableReducerTests.swift */; };
 		B8004D1D20F66CCC006A1A83 /* TimetableEventBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8004D1C20F66CCC006A1A83 /* TimetableEventBuilder.swift */; };
 		B8004D1F20F67D7B006A1A83 /* TimetableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8004D1E20F67D7B006A1A83 /* TimetableBuilder.swift */; };
+		B80877A320F7BDB000025B18 /* TimetableQueriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80877A220F7BDAF00025B18 /* TimetableQueriesTests.swift */; };
 		B81D7CA120F236D500A4F7BC /* Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D7CA020F236D500A4F7BC /* Timetable.swift */; };
 		B81D7CA320F2387800A4F7BC /* TimetableConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D7CA220F2387800A4F7BC /* TimetableConverter.swift */; };
 		B81D7CA520F238E800A4F7BC /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D7CA420F238E800A4F7BC /* Converter.swift */; };
@@ -120,6 +121,7 @@
 		B8004D1920F66C54006A1A83 /* TimetableReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableReducerTests.swift; sourceTree = "<group>"; };
 		B8004D1C20F66CCC006A1A83 /* TimetableEventBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableEventBuilder.swift; sourceTree = "<group>"; };
 		B8004D1E20F67D7B006A1A83 /* TimetableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableBuilder.swift; sourceTree = "<group>"; };
+		B80877A220F7BDAF00025B18 /* TimetableQueriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableQueriesTests.swift; sourceTree = "<group>"; };
 		B81D7CA020F236D500A4F7BC /* Timetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable.swift; sourceTree = "<group>"; };
 		B81D7CA220F2387800A4F7BC /* TimetableConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableConverter.swift; sourceTree = "<group>"; };
 		B81D7CA420F238E800A4F7BC /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			children = (
 				B8004D1920F66C54006A1A83 /* TimetableReducerTests.swift */,
 				B870B2C520F7A984002BD34D /* TimetableViewStateConverterTests.swift */,
+				B80877A220F7BDAF00025B18 /* TimetableQueriesTests.swift */,
 			);
 			path = TimetableScreen;
 			sourceTree = "<group>";
@@ -922,6 +925,7 @@
 				B870B2CA20F7B04D002BD34D /* TimetableLoadParamsBuilder.swift in Sources */,
 				B8AAF49820B97C16000C9ADE /* StationSearchViewStateConverterTests.swift in Sources */,
 				B88828BF20F344A8005802A4 /* TimetableConverterTests.swift in Sources */,
+				B80877A320F7BDB000025B18 /* TimetableQueriesTests.swift in Sources */,
 				B8004D1F20F67D7B006A1A83 /* TimetableBuilder.swift in Sources */,
 				B8F1E51720CFE600000F1606 /* State+ApplyEvents.swift in Sources */,
 				B8F437D520A8392100977CE3 /* TestData.swift in Sources */,

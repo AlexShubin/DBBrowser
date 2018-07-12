@@ -21,7 +21,9 @@ enum TimetableEvent {
 
 // MARK: - Queries
 extension TimetableState {
-
+    var queryLoadTimetable: TimetableLoadParams? {
+        return shouldLoadTimetable ? timetableLoadParams : nil
+    }
 }
 
 // MARK: - Reducer

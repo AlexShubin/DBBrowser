@@ -16,7 +16,7 @@ class ErrorCell: UITableViewCell, Emitable {
     private let _label = UILabel()
     private let _retryButton = UIButton(type: .system)
 
-    var bag = DisposeBag()
+    private(set) var bag = DisposeBag()
     let events: ControlEvent<Event>
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
