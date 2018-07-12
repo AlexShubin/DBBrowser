@@ -28,8 +28,8 @@ class TimetableLoaderServiceTests: XCTestCase {
         timetableServiceMock.expected = .just(ApiTimetable(stops: []))
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(station: Station(name: "", evaId: 0),
-                                      dateTime: Date(timeIntervalSince1970: 1000000))
+            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
+                                                  date: Date(timeIntervalSince1970: 1000000)))
         }
         // Test
         guard case .success? = testObserver.events.first?.value.element else {
@@ -43,8 +43,8 @@ class TimetableLoaderServiceTests: XCTestCase {
         timetableServiceMock.expected = .error(RxError.unknown)
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(station: Station(name: "", evaId: 0),
-                                      dateTime: Date(timeIntervalSince1970: 1000000))
+            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
+                                                  date: Date(timeIntervalSince1970: 1000000)))
         }
         // Test
         guard case .error? = testObserver.events.first?.value.element else {

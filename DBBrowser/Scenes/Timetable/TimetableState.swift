@@ -9,12 +9,12 @@ struct TimetableState: State, Equatable {
 
     var timetableResult: TimetableLoaderResult = .success(Timetable(arrivals: [], departures: []))
     var shouldLoadTimetable = false
-    var station: Station?
+    var timetableLoadParams: TimetableLoadParams?
 }
 
 // MARK: - Events
 enum TimetableEvent {
-    case station(Station)
+    case timetableLoadParams(TimetableLoadParams)
     case loadTimetable
     case timetableLoaded(TimetableLoaderResult)
 }
@@ -29,8 +29,8 @@ extension TimetableState {
     static func reduce(state: TimetableState, event: TimetableEvent) -> TimetableState {
         var result = state
         switch event {
-        case .station(let station):
-            result.station = station
+        case .timetableLoadParams(let params):
+            result.timetableLoadParams = params
         case .loadTimetable:
             result.shouldLoadTimetable = true
         case .timetableLoaded(let timetableResult):

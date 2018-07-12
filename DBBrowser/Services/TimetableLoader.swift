@@ -7,7 +7,7 @@ import RxSwift
 typealias TimetableLoaderResult = Result<Timetable, TimetableLoaderError>
 
 protocol TimetableLoader {
-    func load(station: Station, dateTime: Date) -> Observable<TimetableLoaderResult>
+    func load(with params: TimetableLoadParams) -> Observable<TimetableLoaderResult>
 }
 
 enum TimetableLoaderError: String, Error, Equatable {
@@ -28,11 +28,11 @@ struct ApiTimetableLoader: TimetableLoader {
         _dateFormatter = dateFormatter
     }
 
-    func load(station: Station, dateTime: Date) -> Observable<TimetableLoaderResult> {
-        let date = _dateFormatter.string(from: dateTime, style: .ApiTimetablesDate)
-        let time = _dateFormatter.string(from: dateTime, style: .ApiTimetablesTime)
+    func load(with params: TimetableLoadParams) -> Observable<TimetableLoaderResult> {
+        let date = _dateFormatter.string(from: params.date, style: .ApiTimetablesDate)
+        let time = _dateFormatter.string(from: params.date, style: .ApiTimetablesTime)
         return _timetableService
-            .loadTimetable(evaNo: String(station.evaId), date: date, hour: time)
+            .loadTimetable(evaNo: String(params.station.evaId), date: date, hour: time)
             .map {
                 .success(self._timetableConverter.convert(from: $0))
         }
