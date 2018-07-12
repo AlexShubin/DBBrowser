@@ -7,4 +7,5 @@ import UIKit
 enum Scene {
     case mainScreen
     case stationSearch
+    case timetable
 }

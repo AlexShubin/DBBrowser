@@ -3,8 +3,8 @@
 //
 
 struct MainScreenViewStateConverter: Converter {
-    func convert(from input: MainScreenState) -> MainScreenViewState {
-        switch input.departure {
+    func convert(from input: TimetableState) -> MainScreenViewState {
+        switch input.station {
         case .none:
             return MainScreenViewState(departure: .placeholder(L10n.MainScreen.departurePlaceholder))
         case .some(let station):

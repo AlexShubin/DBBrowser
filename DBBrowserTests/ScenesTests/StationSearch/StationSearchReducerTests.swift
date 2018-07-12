@@ -41,18 +41,4 @@ class StationSearchReducerTests: XCTestCase {
         // Test
         XCTAssertEqual(state.selectedStation, expectedResult[1])
     }
-
-    func testClose() {
-        var state = StationSearchState.initial
-        state = StationSearchState.reduce(state: state, event: .close)
-        XCTAssertTrue(state.shouldClose)
-    }
-
-    func testCloseMakesStateInitial() {
-        let state = StationSearchState.applyEvents(initial: .initial, events: [
-            .close,
-            .closed
-            ])
-        XCTAssertEqual(state, .initial)
-    }
 }

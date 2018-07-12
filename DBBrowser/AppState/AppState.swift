@@ -5,8 +5,8 @@
 // MARK: - State
 struct AppState {
     var stationSearch = StationSearchState.initial
-    var mainScreen = MainScreenState.initial
     var timetable = TimetableState.initial
+    var coordinator = SceneCoordinatorState.initial
     static var initial: AppState {
         return AppState()
     }
@@ -15,8 +15,8 @@ struct AppState {
 // MARK: - Events
 enum AppEvent {
     case stationSearch(StationSearchEvent)
-    case mainScreen(MainScreenEvent)
     case timetable(TimetableEvent)
+    case coordinator(CoordinatorEvent)
 }
 
 // MARK: - Reducer
@@ -26,10 +26,10 @@ extension AppState {
         switch event {
         case .stationSearch(let event):
             result.stationSearch = StationSearchState.reduce(state: state.stationSearch, event: event)
-        case .mainScreen(let event):
-            result.mainScreen = MainScreenState.reduce(state: state.mainScreen, event: event)
         case .timetable(let event):
             result.timetable = TimetableState.reduce(state: state.timetable, event: event)
+        case .coordinator(let event):
+            result.coordinator = SceneCoordinatorState.reduce(state: state.coordinator, event: event)
         }
         return result
     }

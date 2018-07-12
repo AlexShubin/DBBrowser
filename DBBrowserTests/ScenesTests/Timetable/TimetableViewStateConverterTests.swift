@@ -18,7 +18,7 @@ class TimetableViewStateConverterTests: XCTestCase {
     func testLoadingConverted() {
         // Prepare
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .timetableLoadParams(TimetableLoadParamsBuilder().build()),
+            .station(StationBuilder().build()),
             .loadTimetable
             ])
         // Run

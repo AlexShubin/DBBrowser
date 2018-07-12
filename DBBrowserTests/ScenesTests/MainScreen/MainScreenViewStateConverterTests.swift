@@ -9,8 +9,7 @@ class MainScreenViewStateConverterTests: XCTestCase {
 
     func testNoStationConverted() {
         // Prepare
-        var state = MainScreenState.initial
-        state.departure = nil
+        let state = TimetableState.initial
         // Run
         let converted = MainScreenViewStateConverter().convert(from: state)
         // Test
@@ -19,12 +18,15 @@ class MainScreenViewStateConverterTests: XCTestCase {
 
     func testChosenStationConverted() {
         // Prepare
-        let expectedStation = StationBuilder().build()
-        var state = MainScreenState.initial
-        state.departure = expectedStation
+        let station = StationBuilder()
+            .with(name: TestData.stationName1)
+            .build()
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .station(station)
+            ])
         // Run
         let converted = MainScreenViewStateConverter().convert(from: state)
         // Test
-        XCTAssertEqual(converted.departure, .chosen(expectedStation.name))
+        XCTAssertEqual(converted.departure, .chosen(TestData.stationName1))
     }
 }

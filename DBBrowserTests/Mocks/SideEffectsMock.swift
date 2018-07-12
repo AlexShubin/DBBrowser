@@ -5,7 +5,7 @@
 @testable import DBBrowser
 
 struct SideEffectsMock: SideEffects {
-    var mainScreen: MainScreenSideEffectsType
+    var sceneCoordinator: SceneCoordinatorSideEffectsType
     var stationSearch: StationSearchSideEffectsType
     var timetable: TimetableSideEffectsType
 }

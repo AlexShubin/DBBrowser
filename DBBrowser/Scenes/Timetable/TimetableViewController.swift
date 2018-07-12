@@ -31,7 +31,7 @@ class TimetableViewController: UIViewController {
         super.viewDidLoad()
         _setupLayout()
 
-        view.backgroundColor = .clear
+        _tableView.separatorStyle = .none
 
         _tableView.registerCell(ofType: TimetableEventCell.self)
         _tableView.registerCell(ofType: LoadingCell.self)
@@ -65,6 +65,12 @@ extension TimetableViewController: StateStoreBindable {
             .map { $0.sections }
             .asObservable()
             .bind(to: _tableView.rx.items(dataSource: dataSource))
+            .disposed(by: bag)
+
+        // Bind UI
+        rx.methodInvoked(#selector(viewDidLoad))
+            .map { _ in .timetable(.loadTimetable) }
+            .bind(to: stateStore.eventBus)
             .disposed(by: bag)
     }
 

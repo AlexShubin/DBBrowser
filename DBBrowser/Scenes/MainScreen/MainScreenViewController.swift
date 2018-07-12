@@ -66,14 +66,14 @@ class MainScreenViewController: UIViewController {
             sheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
-        // Departure stack view
-        let departureStack = UIStackView(arrangedSubviews: [_fromLabelCaption, _fromLabel])
-        departureStack.axis = .vertical
-        departureStack.spacing = 6
+        // Station stack view
+        let stationStack = UIStackView(arrangedSubviews: [_fromLabelCaption, _fromLabel])
+        stationStack.axis = .vertical
+        stationStack.spacing = 6
         // Search button
         _searchButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         // Stack view
-        let stack = UIStackView(arrangedSubviews: [departureStack, _searchButton])
+        let stack = UIStackView(arrangedSubviews: [stationStack, _searchButton])
         stack.axis = .vertical
         stack.spacing = 24
         sheetView.addSubview(stack)
@@ -103,7 +103,7 @@ extension MainScreenViewController: StateStoreBindable {
         // State to view state conversion
         let viewState: Signal<MainScreenViewState> = stateStore
             .stateBus
-            .map { $0.mainScreen }
+            .map { $0.timetable }
             .distinctUntilChanged()
             .flatMap { [weak self] in
                 if let viewState = self?._converter.convert(from: $0) {
@@ -122,7 +122,13 @@ extension MainScreenViewController: StateStoreBindable {
         _fromLabel.addGestureRecognizer(tgr)
         tgr.rx.event
             .map { _ in
-                return .mainScreen(.openStationSearch)
+                .coordinator(.show(.stationSearch, .modal))
+            }
+            .bind(to: stateStore.eventBus)
+            .disposed(by: bag)
+        _searchButton.rx.tap
+            .map {
+                .coordinator(.show( .timetable, .modal))
             }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)

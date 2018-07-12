@@ -9,16 +9,16 @@ class TimetableReducerTests: XCTestCase {
 
     func testInitial() {
         let state = TimetableState.initial
-        XCTAssertNil(state.timetableLoadParams)
+        XCTAssertNil(state.station)
         XCTAssertFalse(state.shouldLoadTimetable)
     }
 
-    func testTimetableLoadParamsEventSetsTimetableLoadParams() {
-        let timetableLoadParams = TimetableLoadParamsBuilder().build()
+    func testStationEventSetsStation() {
+        let station = StationBuilder().build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .timetableLoadParams(timetableLoadParams)
+            .station(station)
             ])
-        XCTAssertEqual(state.timetableLoadParams, timetableLoadParams)
+        XCTAssertEqual(state.station, station)
     }
 
     func testLoadTimetableEventShouldSetLoadFlag() {
@@ -31,8 +31,11 @@ class TimetableReducerTests: XCTestCase {
     func testTimetableLoadedEventShoudSetResultInState() {
         let timetableResult: TimetableLoaderResult = .success(TimetableBuilder().build())
         let state = TimetableState.applyEvents(initial: .initial, events: [
+            .station(StationBuilder().build()),
+            .loadTimetable,
             .timetableLoaded(timetableResult)
             ])
         XCTAssertEqual(state.timetableResult, timetableResult)
+        XCTAssertFalse(state.shouldLoadTimetable)
     }
 }

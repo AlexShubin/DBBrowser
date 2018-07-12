@@ -18,7 +18,7 @@ class StationSearchEffectsInvocationsTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sideEffects = SideEffectsMock(mainScreen: MainScreenSideEffectsMock(),
+        sideEffects = SideEffectsMock(sceneCoordinator: SceneCoordinatorSideEffectsMock(),
                                       stationSearch: stationSearchSideEffects,
                                       timetable: TimetableSideEffectsMock())
         stateStore = AppStateStore(sideEffects: sideEffects, scheduler: testScheduler)

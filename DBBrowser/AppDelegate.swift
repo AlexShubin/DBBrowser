@@ -13,8 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        let dateFormatter = AppDateTimeFormatter()
+        let timetableViewStateConverter = TimetableViewStateConverter(dateFormatter: dateFormatter)
         let vcFactory = ViewControllerFactory(stationSearchViewStateConverter: StationSearchViewStateConverter(),
-                                              mainScreenViewStateConverter: MainScreenViewStateConverter())
+                                              mainScreenViewStateConverter: MainScreenViewStateConverter(),
+                                              timetableViewStateConverter: timetableViewStateConverter)
         let coordinator: SceneCoordinatorType = SceneCoordinator(window: window!, viewControllerFactory: vcFactory)
 
         let configuration = URLSessionConfiguration.default
@@ -25,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                  configuration: configuration)
         let timetableService = ApiTimetableService(baseUrl: timetablesUrl,
                                                    configuration: configuration)
-        let dateFormatter = AppDateTimeFormatter()
+
         let timetableLoader = ApiTimetableLoader(timetableService: timetableService,
                                                  timetableConverter: TimetableConverter(dateFormatter: dateFormatter),
                                                  dateFormatter: dateFormatter)

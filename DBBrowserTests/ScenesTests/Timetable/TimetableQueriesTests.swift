@@ -7,19 +7,18 @@ import XCTest
 
 class TimetableQueriesTests: XCTestCase {
 
-    func testQueryLoadTimetable_returnsSearchParamsWhenShouldLoadAndParamsProvided() {
-        let params = TimetableLoadParamsBuilder().build()
+    func testQueryLoadTimetable_returnsSearchParamsWhenShouldLoadAndAllInfoProvided() {
+        let station = StationBuilder().build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .timetableLoadParams(params),
+            .station(station),
             .loadTimetable
             ])
-        XCTAssertEqual(state.queryLoadTimetable, params)
+        XCTAssertEqual(state.queryLoadTimetable?.station, station)
     }
 
     func testQueryLoadTimetable_returnsNilWhenShouldLoadEventNotReceived() {
-        let params = TimetableLoadParamsBuilder().build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .timetableLoadParams(params)
+            .station(StationBuilder().build())
             ])
         XCTAssertNil(state.queryLoadTimetable)
     }

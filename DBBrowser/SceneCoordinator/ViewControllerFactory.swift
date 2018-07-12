@@ -8,12 +8,15 @@ class ViewControllerFactory {
 
     private let _stationSearchViewStateConverter: StationSearchViewStateConverter
     private let _mainScreenViewStateConverter: MainScreenViewStateConverter
+    private let _timetableViewStateConverter: TimetableViewStateConverter
     private var _appStateStore: StateStore!
 
     init(stationSearchViewStateConverter: StationSearchViewStateConverter,
-         mainScreenViewStateConverter: MainScreenViewStateConverter) {
+         mainScreenViewStateConverter: MainScreenViewStateConverter,
+         timetableViewStateConverter: TimetableViewStateConverter) {
         _stationSearchViewStateConverter = stationSearchViewStateConverter
         _mainScreenViewStateConverter = mainScreenViewStateConverter
+        _timetableViewStateConverter = timetableViewStateConverter
     }
 
     func setUp(appStateStore: StateStore) {
@@ -28,6 +31,10 @@ class ViewControllerFactory {
             return vc
         case .stationSearch:
             let vc = StationSearchViewController(converter: _stationSearchViewStateConverter)
+            vc.subscribe(to: _appStateStore)
+            return vc
+        case .timetable:
+            let vc = TimetableViewController(converter: _timetableViewStateConverter)
             vc.subscribe(to: _appStateStore)
             return vc
         }

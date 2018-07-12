@@ -13,30 +13,29 @@ protocol FeedbackLoopsHolder {
 
 protocol SideEffects: FeedbackLoopsHolder {
     var stationSearch: StationSearchSideEffectsType { get }
-    var mainScreen: MainScreenSideEffectsType { get }
     var timetable: TimetableSideEffectsType { get }
+    var sceneCoordinator: SceneCoordinatorSideEffectsType { get }
 }
 
 extension SideEffects {
     var feedbackLoops: [FeedbackLoop] {
         return stationSearch.feedbackLoops
-            + mainScreen.feedbackLoops
             + timetable.feedbackLoops
+            + sceneCoordinator.feedbackLoops
     }
 }
 
 struct AppSideEffects: SideEffects {
 
     let stationSearch: StationSearchSideEffectsType
-    let mainScreen: MainScreenSideEffectsType
     let timetable: TimetableSideEffectsType
+    let sceneCoordinator: SceneCoordinatorSideEffectsType
 
     init(coordinator: SceneCoordinatorType,
          stationFinder: StationFinder,
          timetableLoader: TimetableLoader) {
-        stationSearch = StationSearchSideEffects(coordinator: coordinator,
-                                                 stationFinder: stationFinder)
-        mainScreen = MainScreenSideEffects(coordinator: coordinator)
+        stationSearch = StationSearchSideEffects(stationFinder: stationFinder)
         timetable = TimetableSideEffects(timetableLoader: timetableLoader)
+        sceneCoordinator = SceneCoordinatorSideEffects(coordinator: coordinator)
     }
 }

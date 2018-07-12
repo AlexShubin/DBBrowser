@@ -133,7 +133,7 @@ extension StationSearchViewController: StateStoreBindable {
         _searchBar.rx
             .cancelButtonClicked
             .map {
-                .stationSearch(.close)
+                .coordinator(.close(.modal))
             }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)

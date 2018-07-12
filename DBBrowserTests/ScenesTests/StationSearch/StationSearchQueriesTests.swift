@@ -25,16 +25,4 @@ class StationSearchQueriesTests: XCTestCase {
         state.selectedStation = StationBuilder().build()
         XCTAssertEqual(state.querySelectedStation, state.selectedStation)
     }
-
-    func testQueryClose_returnsNotNilWhenShouldClose() {
-        var state = StationSearchState.initial
-        state.shouldClose = true
-        XCTAssertNotNil(state.queryClose)
-    }
-
-    func testQueryClose_returnsNilWhenShouldNotClose() {
-        var state = StationSearchState.initial
-        state.shouldClose = false
-        XCTAssertNil(state.queryClose)
-    }
 }

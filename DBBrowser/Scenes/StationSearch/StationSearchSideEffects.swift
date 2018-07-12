@@ -9,15 +9,13 @@ import Foundation
 protocol StationSearchSideEffectsType: FeedbackLoopsHolder {
     var search: (String) -> Observable<AppEvent> { get }
     var selectStation: (Station) -> Observable<AppEvent> { get }
-    var close: () -> Observable<AppEvent> { get }
 }
 
 extension StationSearchSideEffectsType {
     var feedbackLoops: [FeedbackLoop] {
         return [
             react(query: { $0.stationSearch.querySearch }, effects: search),
-            react(query: { $0.stationSearch.querySelectedStation }, effects: selectStation),
-            react(query: { $0.stationSearch.queryClose }, effects: close)
+            react(query: { $0.stationSearch.querySelectedStation }, effects: selectStation)
         ]
     }
 }
@@ -25,11 +23,8 @@ extension StationSearchSideEffectsType {
 struct StationSearchSideEffects: StationSearchSideEffectsType {
 
     private let _stationFinder: StationFinder
-    private let _coordinator: SceneCoordinatorType
 
-    init(coordinator: SceneCoordinatorType,
-         stationFinder: StationFinder) {
-        _coordinator = coordinator
+    init(stationFinder: StationFinder) {
         _stationFinder = stationFinder
     }
 
@@ -42,15 +37,8 @@ struct StationSearchSideEffects: StationSearchSideEffectsType {
 
     var selectStation: (Station) -> Observable<AppEvent> {
         return {
-            .of(.mainScreen(.departure($0)),
-                .stationSearch(.close))
-        }
-    }
-
-    var close: () -> Observable<AppEvent> {
-        return {
-            self._coordinator.dismiss()
-                .map { .stationSearch(.closed) }
+            .of(.timetable(.station($0)),
+                .coordinator(.close(.modal)))
         }
     }
 }
