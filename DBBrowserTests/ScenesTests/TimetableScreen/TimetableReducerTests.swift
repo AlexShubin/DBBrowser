@@ -25,7 +25,7 @@ class TimetableReducerTests: XCTestCase {
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .loadTimetable
             ])
-        XCTAssertEqual(state.shouldLoadTimetable, true)
+        XCTAssertTrue(state.shouldLoadTimetable)
     }
 
     func testTimetableLoadedEventShoudSetResultInState() {

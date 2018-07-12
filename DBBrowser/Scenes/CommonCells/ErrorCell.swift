@@ -6,7 +6,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class StationSearchErrorCell: UITableViewCell, Emitable {
+class ErrorCell: UITableViewCell, Emitable {
 
     enum Event {
         case retryTap

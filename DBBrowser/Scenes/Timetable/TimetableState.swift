@@ -10,7 +10,6 @@ struct TimetableState: State, Equatable {
     var timetableResult: TimetableLoaderResult = .success(Timetable(arrivals: [], departures: []))
     var shouldLoadTimetable = false
     var station: Station?
-//    var shouldClose = false
 }
 
 // MARK: - Events
@@ -18,8 +17,6 @@ enum TimetableEvent {
     case station(Station)
     case loadTimetable
     case timetableLoaded(TimetableLoaderResult)
-    case close
-    case closed
 }
 
 // MARK: - Queries
@@ -38,10 +35,6 @@ extension TimetableState {
             result.shouldLoadTimetable = true
         case .timetableLoaded(let timetableResult):
             result.timetableResult = timetableResult
-        case .close:
-            break
-        case .closed:
-            break
         }
         return result
     }

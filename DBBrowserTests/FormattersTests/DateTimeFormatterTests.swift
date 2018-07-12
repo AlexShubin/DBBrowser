@@ -10,19 +10,19 @@ class DateTimeFormatterTests: XCTestCase {
     let formatter = AppDateTimeFormatter()
 
     func testTimetablesApiDateTime() {
-        let result = formatter.date(from: "1807072151", style: .timetablesApiDateTime)
+        let result = formatter.date(from: "1807072151", style: .ApiTimetablesDateTime)
         XCTAssertEqual(result, Date.testSample(from: "07-07-2018 21:51"))
     }
 
     func testTimetablesApiDate() {
         let result = formatter.string(from: .testSample(from: "07-07-2018 21:51"),
-                                      style: .timetablesApiDate)
+                                      style: .ApiTimetablesDate)
         XCTAssertEqual(result, "180707")
     }
 
     func testTimetablesApiTime() {
         let result = formatter.string(from: .testSample(from: "07-07-2018 21:51"),
-                                      style: .timetablesApiTime)
+                                      style: .ApiTimetablesTime)
         XCTAssertEqual(result, "21")
     }
 }

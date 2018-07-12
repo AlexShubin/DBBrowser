@@ -29,8 +29,8 @@ struct ApiTimetableLoader: TimetableLoader {
     }
 
     func load(station: Station, dateTime: Date) -> Observable<TimetableLoaderResult> {
-        let date = _dateFormatter.string(from: dateTime, style: .timetablesApiDate)
-        let time = _dateFormatter.string(from: dateTime, style: .timetablesApiTime)
+        let date = _dateFormatter.string(from: dateTime, style: .ApiTimetablesDate)
+        let time = _dateFormatter.string(from: dateTime, style: .ApiTimetablesTime)
         return _timetableService
             .loadTimetable(evaNo: String(station.evaId), date: date, hour: time)
             .map {

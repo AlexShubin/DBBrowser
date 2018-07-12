@@ -46,8 +46,8 @@ class StationSearchViewController: UIViewController {
         _tableView.separatorStyle = .none
 
         _tableView.registerCell(ofType: StationCell.self)
-        _tableView.registerCell(ofType: StationSearchLoadingCell.self)
-        _tableView.registerCell(ofType: StationSearchErrorCell.self)
+        _tableView.registerCell(ofType: LoadingCell.self)
+        _tableView.registerCell(ofType: ErrorCell.self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -147,10 +147,10 @@ extension StationSearchViewController: StateStoreBindable {
                 cell.render(state: cellState)
                 return cell
             case .loading:
-                let cell: StationSearchLoadingCell = tableView.dequeueReusableCell(for: indexPath)
+                let cell: LoadingCell = tableView.dequeueReusableCell(for: indexPath)
                 return cell
             case .error:
-                let cell: StationSearchErrorCell = tableView.dequeueReusableCell(for: indexPath)
+                let cell: ErrorCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.events
                     .map {
                         switch $0 {

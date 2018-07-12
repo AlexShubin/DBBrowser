@@ -4,7 +4,7 @@
 
 import UIKit
 
-class StationSearchLoadingCell: UITableViewCell {
+class LoadingCell: UITableViewCell {
 
     private let _spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 

@@ -10,9 +10,10 @@ protocol DateTimeFormatter {
 }
 
 enum DateTimeFormatterStyle: String {
-    case timetablesApiDateTime = "YYMMddHHmm"
-    case timetablesApiDate = "YYMMdd"
-    case timetablesApiTime = "HH"
+    case ApiTimetablesDateTime = "YYMMddHHmm"
+    case ApiTimetablesDate = "YYMMdd"
+    case ApiTimetablesTime = "HH"
+    case UserTimetable = "HH:mm dd MMM"
 }
 
 struct AppDateTimeFormatter: DateTimeFormatter {

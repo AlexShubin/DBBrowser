@@ -5,12 +5,6 @@
 import UIKit
 
 class TimetableEventCell: UITableViewCell {
-    struct State {
-        let category: String
-        let number: String
-        let time: String
-    }
-
     enum Constants {
         enum CategoryLabel {
             static let topOffset: CGFloat = 8
@@ -65,5 +59,19 @@ class TimetableEventCell: UITableViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension TimetableEventCell: DataDriven {
+    struct State: Equatable {
+        let category: String
+        let number: String
+        let time: String
+    }
+
+    func render(state: State) {
+        _categoryLabel.text = state.category
+        _numberLabel.text = state.number
+        _timeLabel.text = state.time
     }
 }

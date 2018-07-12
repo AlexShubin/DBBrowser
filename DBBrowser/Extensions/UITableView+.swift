@@ -5,7 +5,6 @@
 import UIKit
 
 extension UITableView {
-
     func registerCell<T: UITableViewCell>(ofType type: T.Type) {
         let typeName = String(describing: type)
         register(type, forCellReuseIdentifier: typeName)
