@@ -32,6 +32,7 @@ class TimetableViewController: UIViewController {
         _setupLayout()
 
         _tableView.separatorStyle = .none
+        title = L10n.Timetable.title
 
         _tableView.registerCell(ofType: TimetableEventCell.self)
         _tableView.registerCell(ofType: LoadingCell.self)

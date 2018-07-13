@@ -22,7 +22,11 @@ struct TimetableViewStateConverter: Converter {
                         TimetableEventCell.State(category: $0.category,
                                                  number: $0.number,
                                                  time: _dateFormatter.string(from: $0.time,
-                                                                             style: .UserTimetable))
+                                                                             style: .UserTimetableTime),
+                                                 platform: $0.platform,
+                                                 date: _dateFormatter.string(from: $0.time,
+                                                                             style: .UserTimetableDate),
+                                                 corrStation: $0.stations.last ?? "")
                     )
                 }
             case .error:

@@ -48,6 +48,8 @@ class TimetableViewStateConverterTests: XCTestCase {
         let event = TimetableEventBuilder()
             .with(category: TestData.Timetable.category1)
             .with(number: TestData.Timetable.number1)
+            .with(platform: TestData.Timetable.platform1)
+            .with(stations: [TestData.stationName1, TestData.stationName2])
             .build()
         let timetableWithDepartures = TimetableBuilder()
             .with(departures: [event])
@@ -67,6 +69,9 @@ class TimetableViewStateConverterTests: XCTestCase {
         }
         XCTAssertEqual(cellState.category, TestData.Timetable.category1)
         XCTAssertEqual(cellState.number, TestData.Timetable.number1)
+        XCTAssertEqual(cellState.platform, TestData.Timetable.platform1)
         XCTAssertEqual(cellState.time, "123")
+        XCTAssertEqual(cellState.date, "123")
+        XCTAssertEqual(cellState.corrStation, TestData.stationName2)
     }
 }

@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        _setupNavBar()
+
         let dateFormatter = AppDateTimeFormatter()
         let timetableViewStateConverter = TimetableViewStateConverter(dateFormatter: dateFormatter)
         let vcFactory = ViewControllerFactory(stationSearchViewStateConverter: StationSearchViewStateConverter(),
@@ -41,5 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         vcFactory.setUp(appStateStore: appStateStore)
         coordinator.setRoot(scene: .mainScreen)
         return true
+    }
+
+    private func _setupNavBar() {
+        let navBar = UINavigationBar.appearance()
+        navBar.tintColor = UIColor(asset: Asset.Colors.dbRed)
     }
 }

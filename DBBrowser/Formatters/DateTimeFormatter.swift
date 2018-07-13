@@ -13,7 +13,8 @@ enum DateTimeFormatterStyle: String {
     case ApiTimetablesDateTime = "YYMMddHHmm"
     case ApiTimetablesDate = "YYMMdd"
     case ApiTimetablesTime = "HH"
-    case UserTimetable = "HH:mm dd MMM"
+    case UserTimetableTime = "HH:mm"
+    case UserTimetableDate = "dd MMM"
 }
 
 struct AppDateTimeFormatter: DateTimeFormatter {

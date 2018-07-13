@@ -80,7 +80,7 @@ class MainScreenViewController: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: sheetView.topAnchor, constant: 24),
-            stack.bottomAnchor.constraint(equalTo: sheetView.bottomAnchor, constant: -24),
+            stack.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor, constant: -24),
             stack.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor, constant: 24),
             stack.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor, constant: -24)
             ])

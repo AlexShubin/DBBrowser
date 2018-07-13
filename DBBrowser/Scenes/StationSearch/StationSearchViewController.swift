@@ -56,16 +56,10 @@ class StationSearchViewController: UIViewController {
     }
 
     private func _setupLayout() {
-        let topAnchor: NSLayoutYAxisAnchor
-        if #available(iOS 11.0, *) {
-            topAnchor = view.safeAreaLayoutGuide.topAnchor
-        } else {
-            topAnchor = view.topAnchor
-        }
         view.addSubview(_containerView)
         _containerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _containerView.topAnchor.constraint(equalTo: topAnchor, constant: 32),
+            _containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             _containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             _containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
