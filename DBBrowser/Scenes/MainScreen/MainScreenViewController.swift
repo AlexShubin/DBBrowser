@@ -103,7 +103,7 @@ extension MainScreenViewController: StateStoreBindable {
         // State to view state conversion
         let viewState: Signal<MainScreenViewState> = stateStore
             .stateBus
-            .map { $0.timetable }
+            .map { $0.mainScreen }
             .distinctUntilChanged()
             .flatMap { [weak self] in
                 if let viewState = self?._converter.convert(from: $0) {

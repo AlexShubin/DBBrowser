@@ -9,7 +9,7 @@ class MainScreenViewStateConverterTests: XCTestCase {
 
     func testNoStationConverted() {
         // Prepare
-        let state = TimetableState.initial
+        let state = MainScreenState.initial
         // Run
         let converted = MainScreenViewStateConverter().convert(from: state)
         // Test
@@ -21,7 +21,7 @@ class MainScreenViewStateConverterTests: XCTestCase {
         let station = StationBuilder()
             .with(name: TestData.stationName1)
             .build()
-        let state = TimetableState.applyEvents(initial: .initial, events: [
+        let state = MainScreenState.applyEvents(initial: .initial, events: [
             .station(station)
             ])
         // Run

@@ -131,6 +131,10 @@ extension StationSearchViewController: StateStoreBindable {
             }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
+        rx.methodInvoked(#selector(viewDidDisappear(_:)))
+            .map { _ in .stationSearch(.clear) }
+            .bind(to: stateStore.eventBus)
+            .disposed(by: bag)
     }
 
     private func _dataSource(with eventBus: PublishRelay<AppEvent>) -> DataSource {

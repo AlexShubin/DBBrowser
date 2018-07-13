@@ -19,6 +19,7 @@ enum StationSearchEvent {
     case startSearch
     case found(StationFinderResult)
     case selected(Int)
+    case clear
 }
 
 // MARK: - Queries
@@ -45,6 +46,8 @@ extension StationSearchState {
             result.searchString = str
         case .selected(let index):
             result.selectedStation = state._station(with: index)
+        case .clear:
+            result = .initial
         }
         return result
     }
