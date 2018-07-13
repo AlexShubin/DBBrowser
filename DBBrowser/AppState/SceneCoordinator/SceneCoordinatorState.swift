@@ -4,7 +4,7 @@
 
 // MARK: - State
 struct SceneCoordinatorState: State {
-    typealias Event = CoordinatorEvent
+    typealias Event = SceneCoordinatorEvent
     static let initial = SceneCoordinatorState()
 
     var shouldShow: (Scene, PresentationStyle)?
@@ -12,7 +12,7 @@ struct SceneCoordinatorState: State {
 }
 
 // MARK: - Events
-enum CoordinatorEvent {
+enum SceneCoordinatorEvent {
     case show(Scene, PresentationStyle)
     case shown
     case close(PresentationStyle)
@@ -31,7 +31,7 @@ extension SceneCoordinatorState {
 
 // MARK: - Reducer
 extension SceneCoordinatorState {
-    static func reduce(state: SceneCoordinatorState, event: CoordinatorEvent) -> SceneCoordinatorState {
+    static func reduce(state: SceneCoordinatorState, event: SceneCoordinatorEvent) -> SceneCoordinatorState {
         var result = state
         switch event {
         case .show(let scene, let style):

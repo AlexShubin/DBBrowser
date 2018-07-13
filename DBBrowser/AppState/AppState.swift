@@ -16,7 +16,7 @@ struct AppState {
 enum AppEvent {
     case stationSearch(StationSearchEvent)
     case timetable(TimetableEvent)
-    case coordinator(CoordinatorEvent)
+    case coordinator(SceneCoordinatorEvent)
 }
 
 // MARK: - Reducer

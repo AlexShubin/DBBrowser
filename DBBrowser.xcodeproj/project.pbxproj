@@ -271,6 +271,15 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		B8056CDD20F86C7B006DA70C /* StationSearch */ = {
+			isa = PBXGroup;
+			children = (
+				B831E83A20AC20B400B951DB /* StationSearchState.swift */,
+				B853867020B174BE003FB667 /* StationSearchSideEffects.swift */,
+			);
+			path = StationSearch;
+			sourceTree = "<group>";
+		};
 		B808238920D4F5970001599E /* Timetable */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +315,7 @@
 		B831E83120AC1EEC00B951DB /* AppState */ = {
 			isa = PBXGroup;
 			children = (
+				B8056CDD20F86C7B006DA70C /* StationSearch */,
 				B89DCF3420F7F2CA00DF30C2 /* Timetable */,
 				B89DCF2B20F7E85D00DF30C2 /* SceneCoordinator */,
 				B831E83220AC1EEC00B951DB /* AppState.swift */,
@@ -347,8 +357,6 @@
 			isa = PBXGroup;
 			children = (
 				B853867A20B18029003FB667 /* Cells */,
-				B831E83A20AC20B400B951DB /* StationSearchState.swift */,
-				B853867020B174BE003FB667 /* StationSearchSideEffects.swift */,
 				B853867820B17E04003FB667 /* StationSearchViewState.swift */,
 				B8AAF49520B97A9E000C9ADE /* StationSearchViewStateConverter.swift */,
 				B8AAF48C20B96CB5000C9ADE /* StationSearchViewController.swift */,

@@ -1,9 +1,11 @@
 
-"main_screen.departure_caption" = "Departure station";
-"main_screen.departure_placeholder" = "Departure station";
+"main_screen.station_caption" = "Station";
+"main_screen.station_placeholder" = "Station";
 "main_screen.search_button" = "Show timetable";
 
 "station_search.placeholder" = "Start typing station name";
+
+"timetable.platform_caption" = "Platform:";
 
 "loading_error" = "Something went wrong...";
 "retry_button_text" = "Try again";

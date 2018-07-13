@@ -31,7 +31,7 @@ class MainScreenViewController: UIViewController {
 
         view.backgroundColor = .white
 
-        _fromLabelCaption.text = L10n.MainScreen.departureCaption
+        _fromLabelCaption.text = L10n.MainScreen.stationCaption
 
         _fromLabel.font = UIFont.systemFont(ofSize: 36, weight: .medium)
         _fromLabel.isUserInteractionEnabled = true
@@ -128,14 +128,14 @@ extension MainScreenViewController: StateStoreBindable {
             .disposed(by: bag)
         _searchButton.rx.tap
             .map {
-                .coordinator(.show( .timetable, .modal))
+                .coordinator(.show( .timetable, .push))
             }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
     }
 
     private func _render(_ state: MainScreenViewState) {
-        switch state.departure {
+        switch state.station {
         case .placeholder(let str):
             _fromLabel.text = str
             _fromLabel.textColor = .lightGray

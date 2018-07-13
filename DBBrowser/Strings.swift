@@ -13,17 +13,22 @@ internal enum L10n {
   internal static let retryButtonText = L10n.tr("Localizable", "retry_button_text")
 
   internal enum MainScreen {
-    /// Departure station
-    internal static let departureCaption = L10n.tr("Localizable", "main_screen.departure_caption")
-    /// Departure station
-    internal static let departurePlaceholder = L10n.tr("Localizable", "main_screen.departure_placeholder")
     /// Show timetable
     internal static let searchButton = L10n.tr("Localizable", "main_screen.search_button")
+    /// Station
+    internal static let stationCaption = L10n.tr("Localizable", "main_screen.station_caption")
+    /// Station
+    internal static let stationPlaceholder = L10n.tr("Localizable", "main_screen.station_placeholder")
   }
 
   internal enum StationSearch {
     /// Start typing station name
     internal static let placeholder = L10n.tr("Localizable", "station_search.placeholder")
+  }
+
+  internal enum Timetable {
+    /// Platform:
+    internal static let platformCaption = L10n.tr("Localizable", "timetable.platform_caption")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name

@@ -13,7 +13,7 @@ class MainScreenViewStateConverterTests: XCTestCase {
         // Run
         let converted = MainScreenViewStateConverter().convert(from: state)
         // Test
-        XCTAssertEqual(converted.departure, .placeholder(L10n.MainScreen.departurePlaceholder))
+        XCTAssertEqual(converted.station, .placeholder(L10n.MainScreen.stationPlaceholder))
     }
 
     func testChosenStationConverted() {
@@ -27,6 +27,6 @@ class MainScreenViewStateConverterTests: XCTestCase {
         // Run
         let converted = MainScreenViewStateConverter().convert(from: state)
         // Test
-        XCTAssertEqual(converted.departure, .chosen(TestData.stationName1))
+        XCTAssertEqual(converted.station, .chosen(TestData.stationName1))
     }
 }

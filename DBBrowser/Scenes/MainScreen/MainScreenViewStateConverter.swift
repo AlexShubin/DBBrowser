@@ -6,9 +6,9 @@ struct MainScreenViewStateConverter: Converter {
     func convert(from input: TimetableState) -> MainScreenViewState {
         switch input.station {
         case .none:
-            return MainScreenViewState(departure: .placeholder(L10n.MainScreen.departurePlaceholder))
+            return MainScreenViewState(station: .placeholder(L10n.MainScreen.stationPlaceholder))
         case .some(let station):
-            return MainScreenViewState(departure: .chosen(station.name))
+            return MainScreenViewState(station: .chosen(station.name))
         }
     }
 }

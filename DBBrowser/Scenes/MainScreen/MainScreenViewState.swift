@@ -3,9 +3,9 @@
 //
 
 struct MainScreenViewState: Equatable {
-    enum Departure: Equatable {
+    enum Station: Equatable {
         case placeholder(String)
         case chosen(String)
     }
-    var departure: Departure
+    var station: Station
 }
