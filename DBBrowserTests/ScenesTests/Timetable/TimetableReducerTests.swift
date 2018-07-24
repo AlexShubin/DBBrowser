@@ -38,4 +38,18 @@ class TimetableReducerTests: XCTestCase {
         XCTAssertEqual(state.timetableResult, timetableResult)
         XCTAssertFalse(state.shouldLoadTimetable)
     }
+
+    func testChangeTableWithIndex0ShouldSetCurrentTableToDepartures() {
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .changeTable(0)
+            ])
+        XCTAssertEqual(state.currentTable, .departures)
+    }
+
+    func testChangeTableWithIndex1ShouldSetCurrentTableToArrivals() {
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .changeTable(1)
+            ])
+        XCTAssertEqual(state.currentTable, .arrivlas)
+    }
 }

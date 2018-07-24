@@ -429,6 +429,15 @@
 			path = Timetable;
 			sourceTree = "<group>";
 		};
+		B89E812F2102092F000884FE /* Converters */ = {
+			isa = PBXGroup;
+			children = (
+				B8F437C920A8305600977CE3 /* StationConverter.swift */,
+				B81D7CA220F2387800A4F7BC /* TimetableConverter.swift */,
+			);
+			path = Converters;
+			sourceTree = "<group>";
+		};
 		B8A9387520CFCBC8007460C6 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,7 +496,6 @@
 				B8AAF49B20B98097000C9ADE /* Utils */,
 				B8F437DF20A84E2E00977CE3 /* Scenes */,
 				B8F437D620A848E400977CE3 /* SceneCoordinator */,
-				B8F437CB20A8305F00977CE3 /* APIConverters */,
 				B8F437C820A8301F00977CE3 /* Services */,
 				B8F437C220A8288C00977CE3 /* Models */,
 				B8F437C120A827F800977CE3 /* API */,
@@ -532,6 +540,7 @@
 		B8F437C120A827F800977CE3 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				B89E812F2102092F000884FE /* Converters */,
 				B808238920D4F5970001599E /* Timetable */,
 				B85EE93E20A6D2F500F52C54 /* Fahrplan */,
 			);
@@ -556,15 +565,6 @@
 				B82B967D20F476B80018E1F3 /* TimetableLoader.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		B8F437CB20A8305F00977CE3 /* APIConverters */ = {
-			isa = PBXGroup;
-			children = (
-				B8F437C920A8305600977CE3 /* StationConverter.swift */,
-				B81D7CA220F2387800A4F7BC /* TimetableConverter.swift */,
-			);
-			path = APIConverters;
 			sourceTree = "<group>";
 		};
 		B8F437CE20A8349600977CE3 /* Mocks */ = {

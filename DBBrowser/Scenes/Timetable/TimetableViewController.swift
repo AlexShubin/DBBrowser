@@ -10,13 +10,17 @@ import RxOptional
 
 class TimetableViewController: UIViewController {
 
-    private typealias DataSource = RxTableViewSectionedReloadDataSource<TimetableViewState.Section>
+    private typealias DataSource = RxTableViewSectionedAnimatedDataSource<TimetableViewState.Section>
 
     let bag = DisposeBag()
 
     private let _converter: TimetableViewStateConverter
 
     private let _tableView = UITableView(frame: .zero, style: .grouped)
+    private let _segmentedControl = UISegmentedControl(items: [
+            L10n.Timetable.SegmentedControl.departures,
+            L10n.Timetable.SegmentedControl.arrivals
+        ])
 
     init(converter: TimetableViewStateConverter) {
         _converter = converter
@@ -32,7 +36,8 @@ class TimetableViewController: UIViewController {
         _setupLayout()
 
         _tableView.separatorStyle = .none
-        title = L10n.Timetable.title
+        _segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)],
+                                                 for: .normal)
 
         _tableView.registerCell(ofType: TimetableEventCell.self)
         _tableView.registerCell(ofType: LoadingCell.self)
@@ -42,6 +47,7 @@ class TimetableViewController: UIViewController {
     private func _setupLayout() {
         view.addSubview(_tableView)
         _tableView.pinToSuperview()
+        navigationItem.titleView = _segmentedControl
     }
 }
 
@@ -71,6 +77,12 @@ extension TimetableViewController: StateStoreBindable {
         // Bind UI
         rx.methodInvoked(#selector(viewDidLoad))
             .map { _ in .timetable(.loadTimetable) }
+            .bind(to: stateStore.eventBus)
+            .disposed(by: bag)
+
+        _segmentedControl.rx.value
+            .skip(1)
+            .map { .timetable(.changeTable($0)) }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
     }

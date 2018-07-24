@@ -143,7 +143,7 @@ class TimetableEventCell: UITableViewCell {
 
 // MARK: - DataDriven
 extension TimetableEventCell: DataDriven {
-    struct State: Equatable {
+    struct State: Hashable {
         let category: String
         let number: String
         let time: String

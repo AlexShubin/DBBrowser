@@ -24,6 +24,7 @@ enum AppEvent {
 // MARK: - Reducer
 extension AppState {
     static func reduce(state: AppState, event: AppEvent) -> AppState {
+        debugPrint("EVENT: \(event)")
         var result = state
         switch event {
         case .mainScreen(let event):

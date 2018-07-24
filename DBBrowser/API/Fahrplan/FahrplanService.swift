@@ -22,11 +22,12 @@ struct ApiFahrplanService: FahrplanService {
     }
 
     func searchStation(namePart: String) -> Observable<[FahrplanStation]> {
-        let request = URLRequest(url: _baseUrl.appendingPathComponent("/location/\(namePart)"))
-        return _urlSession.rx.data(request: request)
-            .map {
-                os_log("Response: %@", String(data: $0, encoding: .utf8) ?? "")
-                return try self._decoder.decode([FahrplanStation].self, from: $0)
-        }
+//        let request = URLRequest(url: _baseUrl.appendingPathComponent("/location/\(namePart)"))
+//        return _urlSession.rx.data(request: request)
+//            .map {
+//                os_log("Response: %@", String(data: $0, encoding: .utf8) ?? "")
+//                return try self._decoder.decode([FahrplanStation].self, from: $0)
+//        }
+        return .just([FahrplanStation(name: "Munchen", id: 123)])
     }
 }

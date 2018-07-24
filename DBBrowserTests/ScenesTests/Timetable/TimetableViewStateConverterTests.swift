@@ -56,7 +56,8 @@ class TimetableViewStateConverterTests: XCTestCase {
             .with(arrivals: [])
             .build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .timetableLoaded(.success(timetableWithDepartures))
+            .timetableLoaded(.success(timetableWithDepartures)),
+            .changeTable(0)
             ])
         // Run
         let converted = converter.convert(from: state)
@@ -73,5 +74,71 @@ class TimetableViewStateConverterTests: XCTestCase {
         XCTAssertEqual(cellState.time, "123")
         XCTAssertEqual(cellState.date, "123")
         XCTAssertEqual(cellState.corrStation, TestData.stationName2)
+    }
+
+    func testTimetableWithDeparturesInArrivalsModeConvertedToNoElementsState() {
+        // Prepare
+        let timetableWithDepartures = TimetableBuilder()
+            .with(departures: [TimetableEventBuilder().build()])
+            .with(arrivals: [])
+            .build()
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .timetableLoaded(.success(timetableWithDepartures)),
+            .changeTable(1)
+            ])
+        // Run
+        let converted = converter.convert(from: state)
+        // Test
+        XCTAssertNil(converted.sections.first?.items.first)
+    }
+
+    func testTimetableWithArrivalsConverted() {
+        // Prepare
+        dateFormatterMock.expectedString = "123"
+        let event = TimetableEventBuilder()
+            .with(category: TestData.Timetable.category1)
+            .with(number: TestData.Timetable.number1)
+            .with(platform: TestData.Timetable.platform1)
+            .with(stations: [TestData.stationName1, TestData.stationName2])
+            .build()
+        let timetableWithDepartures = TimetableBuilder()
+            .with(departures: [])
+            .with(arrivals: [event])
+            .build()
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .timetableLoaded(.success(timetableWithDepartures)),
+            .changeTable(1)
+            ])
+        // Run
+        let converted = converter.convert(from: state)
+        // Test
+        XCTAssertEqual(converted.sections.count, 1)
+        XCTAssertEqual(converted.sections.first?.items.count, 1)
+        guard case .event(let cellState)? = converted.sections.first?.items.first else {
+            XCTFail("Unexpected cell type")
+            return
+        }
+        XCTAssertEqual(cellState.category, TestData.Timetable.category1)
+        XCTAssertEqual(cellState.number, TestData.Timetable.number1)
+        XCTAssertEqual(cellState.platform, TestData.Timetable.platform1)
+        XCTAssertEqual(cellState.time, "123")
+        XCTAssertEqual(cellState.date, "123")
+        XCTAssertEqual(cellState.corrStation, TestData.stationName2)
+    }
+
+    func testTimetableWithArrivalsInDeparturessModeConvertedToNoElementsState() {
+        // Prepare
+        let timetableWithDepartures = TimetableBuilder()
+            .with(departures: [])
+            .with(arrivals: [TimetableEventBuilder().build()])
+            .build()
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .timetableLoaded(.success(timetableWithDepartures)),
+            .changeTable(0)
+            ])
+        // Run
+        let converted = converter.convert(from: state)
+        // Test
+        XCTAssertNil(converted.sections.first?.items.first)
     }
 }

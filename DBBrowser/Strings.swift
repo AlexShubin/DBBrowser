@@ -29,10 +29,15 @@ internal enum L10n {
   internal enum Timetable {
     /// platform
     internal static let platformCaption = L10n.tr("Localizable", "timetable.platform_caption")
-    /// Timetable
-    internal static let title = L10n.tr("Localizable", "timetable.title")
     /// towards:
     internal static let towards = L10n.tr("Localizable", "timetable.towards")
+
+    internal enum SegmentedControl {
+      /// Arrivals
+      internal static let arrivals = L10n.tr("Localizable", "timetable.segmented_control.arrivals")
+      /// Departures
+      internal static let departures = L10n.tr("Localizable", "timetable.segmented_control.departures")
+    }
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
