@@ -6,7 +6,7 @@ import RxDataSources
 
 struct TimetableViewState: Equatable {
 
-    struct Section: AnimatableSectionModelType, Hashable {
+    struct Section: SectionModelType, Equatable {
         var items: [SectionItem]
         init(original: Section, items: [SectionItem]) {
             self = original
@@ -15,23 +15,12 @@ struct TimetableViewState: Equatable {
         init (items: [SectionItem]) {
             self.items = items
         }
-        var hashValue: Int {
-            return items.reduce(0) {
-                $0 ^ $1.hashValue
-            }
-        }
-        var identity: Section {
-            return self
-        }
     }
 
-    enum SectionItem: IdentifiableType, Hashable {
+    enum SectionItem: Equatable {
         case event(TimetableEventCell.State)
         case loading
         case error
-        var identity: SectionItem {
-            return self
-        }
     }
 
     var sections: [Section]

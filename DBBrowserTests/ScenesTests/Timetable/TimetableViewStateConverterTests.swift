@@ -141,4 +141,24 @@ class TimetableViewStateConverterTests: XCTestCase {
         // Test
         XCTAssertNil(converted.sections.first?.items.first)
     }
+
+    func testTimetableDeparturesTableConvertedTo0Index() {
+        // Prepare
+        var state = TimetableState.initial
+        state.currentTable = .departures
+        // Run
+        let converted = converter.convert(from: state)
+        // Test
+        XCTAssertEqual(converted.segmentedControlIndex, 0)
+    }
+
+    func testTimetableArrivalsTableConvertedTo1Index() {
+        // Prepare
+        var state = TimetableState.initial
+        state.currentTable = .arrivals
+        // Run
+        let converted = converter.convert(from: state)
+        // Test
+        XCTAssertEqual(converted.segmentedControlIndex, 1)
+    }
 }

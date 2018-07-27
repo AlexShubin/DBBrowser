@@ -11,7 +11,7 @@ struct TimetableState: State, Equatable {
 
     enum Table: Int {
         case departures = 0
-        case arrivlas = 1
+        case arrivals = 1
     }
 
     var timetableResult: TimetableLoaderResult = .success(Timetable(arrivals: [], departures: []))

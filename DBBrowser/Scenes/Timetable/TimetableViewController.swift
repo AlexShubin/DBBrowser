@@ -10,7 +10,7 @@ import RxOptional
 
 class TimetableViewController: UIViewController {
 
-    private typealias DataSource = RxTableViewSectionedAnimatedDataSource<TimetableViewState.Section>
+    private typealias DataSource = RxTableViewSectionedReloadDataSource<TimetableViewState.Section>
 
     let bag = DisposeBag()
 
@@ -72,6 +72,11 @@ extension TimetableViewController: StateStoreBindable {
             .map { $0.sections }
             .asObservable()
             .bind(to: _tableView.rx.items(dataSource: dataSource))
+            .disposed(by: bag)
+        viewState.map { $0.segmentedControlIndex }
+            .asObservable()
+            .take(1)
+            .bind(to: _segmentedControl.rx.selectedSegmentIndex)
             .disposed(by: bag)
 
         // Bind UI

@@ -50,6 +50,6 @@ class TimetableReducerTests: XCTestCase {
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .changeTable(1)
             ])
-        XCTAssertEqual(state.currentTable, .arrivlas)
+        XCTAssertEqual(state.currentTable, .arrivals)
     }
 }

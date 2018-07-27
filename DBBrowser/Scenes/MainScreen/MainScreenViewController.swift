@@ -118,9 +118,9 @@ extension MainScreenViewController: StateStoreBindable {
             })
             .disposed(by: bag)
         // UI Events
-        let tgr = UITapGestureRecognizer()
-        _fromLabel.addGestureRecognizer(tgr)
-        tgr.rx.event
+        let fromLabelRecognizer = UITapGestureRecognizer()
+        _fromLabel.addGestureRecognizer(fromLabelRecognizer)
+        fromLabelRecognizer.rx.event
             .map { _ in
                 .coordinator(.show(.stationSearch, .modal))
             }

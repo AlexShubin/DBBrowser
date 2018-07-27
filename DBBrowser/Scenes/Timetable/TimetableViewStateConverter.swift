@@ -21,7 +21,7 @@ struct TimetableViewStateConverter: Converter {
                 switch input.currentTable {
                 case .departures:
                     items = _items(from: events.departures)
-                case .arrivlas:
+                case .arrivals:
                     items = _items(from: events.arrivals)
                 }
             case .error:
