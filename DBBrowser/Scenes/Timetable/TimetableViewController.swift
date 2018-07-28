@@ -36,6 +36,7 @@ class TimetableViewController: UIViewController {
         _setupLayout()
 
         _tableView.separatorStyle = .none
+        _tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 10))
         _segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)],
                                                  for: .normal)
 
@@ -68,8 +69,7 @@ extension TimetableViewController: StateStoreBindable {
 
         // State render
         let dataSource = _dataSource(with: stateStore.eventBus)
-        viewState
-            .map { $0.sections }
+        viewState.map { $0.sections }
             .asObservable()
             .bind(to: _tableView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
@@ -84,7 +84,6 @@ extension TimetableViewController: StateStoreBindable {
             .map { _ in .timetable(.loadTimetable) }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
-
         _segmentedControl.rx.value
             .skip(1)
             .map { .timetable(.changeTable($0)) }

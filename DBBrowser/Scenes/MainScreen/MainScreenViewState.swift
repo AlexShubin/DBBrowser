@@ -3,9 +3,10 @@
 //
 
 struct MainScreenViewState: Equatable {
-    enum Station: Equatable {
+    enum Field: Equatable {
         case placeholder(String)
         case chosen(String)
     }
-    var station: Station
+    var station: Field
+    var date: String
 }

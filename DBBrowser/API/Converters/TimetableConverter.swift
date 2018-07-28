@@ -4,23 +4,23 @@
 
 import Foundation
 
-struct TimetableConverter: Converter {
+struct TimetableConverter {
     private let _dateFormatter: DateTimeFormatter
 
     init(dateFormatter: DateTimeFormatter) {
         _dateFormatter = dateFormatter
     }
 
-    func convert(from input: ApiTimetable) -> Timetable {
+    func convert(from apiTimetable: ApiTimetable) -> Timetable {
         var arrivals = [Timetable.Event]()
         var departures = [Timetable.Event]()
-        input.stops.forEach { stop in
+        apiTimetable.stops.forEach { stop in
             if let arrival = stop.arrival {
                 arrivals.append(Timetable.Event(category: stop.tripLabel.category,
                                                 number: stop.tripLabel.number,
                                                 stations: arrival.path.components(separatedBy: "|"),
                                                 time: _dateFormatter.date(from: arrival.time,
-                                                                          style: .ApiTimetablesDateTime),
+                                                                          style: .apiTimetablesDateTime),
                                                 platform: arrival.platform))
             }
             if let departure = stop.departure {
@@ -28,7 +28,7 @@ struct TimetableConverter: Converter {
                                                 number: stop.tripLabel.number,
                                                 stations: departure.path.components(separatedBy: "|"),
                                                 time: _dateFormatter.date(from: departure.time,
-                                                                          style: .ApiTimetablesDateTime),
+                                                                          style: .apiTimetablesDateTime),
                                                 platform: departure.platform))
             }
         }

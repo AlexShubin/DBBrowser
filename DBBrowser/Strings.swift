@@ -13,11 +13,13 @@ internal enum L10n {
   internal static let retryButtonText = L10n.tr("Localizable", "retry_button_text")
 
   internal enum MainScreen {
+    /// Date and hour
+    internal static let dateCaption = L10n.tr("Localizable", "main_screen.date_caption")
     /// Show timetable
     internal static let searchButton = L10n.tr("Localizable", "main_screen.search_button")
     /// Station
     internal static let stationCaption = L10n.tr("Localizable", "main_screen.station_caption")
-    /// Select station
+    /// Select a station
     internal static let stationPlaceholder = L10n.tr("Localizable", "main_screen.station_placeholder")
   }
 

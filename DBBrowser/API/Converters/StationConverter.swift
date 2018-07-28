@@ -2,9 +2,9 @@
 //  Copyright © 2018 AlexShubin. All rights reserved.
 //
 
-struct StationConverter: Converter {
-    func convert(from input: FahrplanStation) -> Station {
-        return Station(name: input.name,
-                       evaId: input.id)
+struct StationConverter {
+    func convert(from apiStation: FahrplanStation) -> Station {
+        return Station(name: apiStation.name,
+                       evaId: apiStation.id)
     }
 }

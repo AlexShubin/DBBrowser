@@ -2,12 +2,15 @@
 //  Copyright © 2018 AlexShubin. All rights reserved.
 //
 
+import Foundation
+
 // MARK: - State
 struct MainScreenState: State, Equatable {
     typealias Event = MainScreenEvent
     static let initial = MainScreenState()
 
     var station: Station?
+    var date = Date()
 }
 
 // MARK: - Events

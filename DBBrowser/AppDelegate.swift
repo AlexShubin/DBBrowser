@@ -17,8 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let dateFormatter = AppDateTimeFormatter()
         let timetableViewStateConverter = TimetableViewStateConverter(dateFormatter: dateFormatter)
+        let mainScreenViewStateConverter = MainScreenViewStateConverter(dateFormatter: dateFormatter)
         let vcFactory = ViewControllerFactory(stationSearchViewStateConverter: StationSearchViewStateConverter(),
-                                              mainScreenViewStateConverter: MainScreenViewStateConverter(),
+                                              mainScreenViewStateConverter: mainScreenViewStateConverter,
                                               timetableViewStateConverter: timetableViewStateConverter)
         let coordinator: SceneCoordinatorType = SceneCoordinator(window: window!, viewControllerFactory: vcFactory)
 

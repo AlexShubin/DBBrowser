@@ -12,8 +12,10 @@ class MainScreenViewController: UIViewController {
 
     private let _converter: MainScreenViewStateConverter
 
-    private let _fromLabelCaption = UILabel()
+    private let _fromCaption = UILabel()
     private let _fromLabel = UILabel()
+    private let _dateCaption = UILabel()
+    private let _dateLabel = UILabel()
     private let _searchButton = UIButton(type: .system)
 
     init(converter: MainScreenViewStateConverter) {
@@ -31,10 +33,13 @@ class MainScreenViewController: UIViewController {
 
         view.backgroundColor = .white
 
-        _fromLabelCaption.text = L10n.MainScreen.stationCaption
+        _fromCaption.text = L10n.MainScreen.stationCaption
+        _dateCaption.text = L10n.MainScreen.dateCaption
 
-        _fromLabel.font = UIFont.systemFont(ofSize: 36, weight: .medium)
+        _fromLabel.font = Constants.Fonts.inputLabels
         _fromLabel.isUserInteractionEnabled = true
+        _dateLabel.font = Constants.Fonts.inputLabels
+        _dateLabel.textColor = .black
 
         _searchButton.backgroundColor = UIColor(asset: Asset.Colors.dbRed)
         _searchButton.layer.cornerRadius = 8
@@ -67,13 +72,17 @@ class MainScreenViewController: UIViewController {
             sheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
         // Station stack view
-        let stationStack = UIStackView(arrangedSubviews: [_fromLabelCaption, _fromLabel])
+        let stationStack = UIStackView(arrangedSubviews: [_fromCaption, _fromLabel])
         stationStack.axis = .vertical
         stationStack.spacing = 6
+        // Date stack view
+        let dateStack = UIStackView(arrangedSubviews: [_dateCaption, _dateLabel])
+        dateStack.axis = .vertical
+        dateStack.spacing = 6
         // Search button
         _searchButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         // Stack view
-        let stack = UIStackView(arrangedSubviews: [stationStack, _searchButton])
+        let stack = UIStackView(arrangedSubviews: [stationStack, dateStack, _searchButton])
         stack.axis = .vertical
         stack.spacing = 24
         sheetView.addSubview(stack)
@@ -135,13 +144,26 @@ extension MainScreenViewController: StateStoreBindable {
     }
 
     private func _render(_ state: MainScreenViewState) {
-        switch state.station {
+        _render(field: state.station, in: _fromLabel)
+        _dateLabel.text = state.date
+    }
+
+    private func _render(field: MainScreenViewState.Field, in label: UILabel) {
+        switch field {
         case .placeholder(let str):
-            _fromLabel.text = str
-            _fromLabel.textColor = .lightGray
+            label.text = str
+            label.textColor = .lightGray
         case .chosen(let str):
-            _fromLabel.text = str
-            _fromLabel.textColor = .black
+            label.text = str
+            label.textColor = .black
+        }
+    }
+}
+
+private extension MainScreenViewController {
+    enum Constants {
+        enum Fonts {
+            static let inputLabels = UIFont.systemFont(ofSize: 34, weight: .medium)
         }
     }
 }

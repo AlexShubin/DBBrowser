@@ -2,13 +2,25 @@
 //  Copyright © 2018 AlexShubin. All rights reserved.
 //
 
-struct MainScreenViewStateConverter: Converter {
-    func convert(from input: MainScreenState) -> MainScreenViewState {
-        switch input.station {
+struct MainScreenViewStateConverter: ViewStateConverter {
+    private typealias Field = MainScreenViewState.Field
+
+    private var _dateFormatter: DateTimeFormatter
+
+    init(dateFormatter: DateTimeFormatter) {
+        _dateFormatter = dateFormatter
+    }
+
+    func convert(from state: MainScreenState) -> MainScreenViewState {
+        let stationField: Field
+        switch state.station {
         case .none:
-            return MainScreenViewState(station: .placeholder(L10n.MainScreen.stationPlaceholder))
+            stationField = .placeholder(L10n.MainScreen.stationPlaceholder)
         case .some(let station):
-            return MainScreenViewState(station: .chosen(station.name))
+            stationField = .chosen(station.name)
         }
+        return MainScreenViewState(station: stationField,
+                                   date: _dateFormatter.string(from: state.date,
+                                                               style: .userMainScreenDateTime))
     }
 }

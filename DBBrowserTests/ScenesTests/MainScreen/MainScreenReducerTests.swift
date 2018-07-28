@@ -7,11 +7,6 @@ import XCTest
 
 class MainScreenReducerTests: XCTestCase {
 
-    func testInitial() {
-        let state = MainScreenState.initial
-        XCTAssertNil(state.station)
-    }
-
     func testStationEventPutsStationIntoState() {
         let station = StationBuilder().build()
         let state = MainScreenState.applyEvents(initial: .initial, events: [

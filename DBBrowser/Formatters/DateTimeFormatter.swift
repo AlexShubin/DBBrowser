@@ -10,19 +10,24 @@ protocol DateTimeFormatter {
 }
 
 enum DateTimeFormatterStyle: String {
-    case ApiTimetablesDateTime = "YYMMddHHmm"
-    case ApiTimetablesDate = "YYMMdd"
-    case ApiTimetablesTime = "HH"
-    case UserTimetableTime = "HH:mm"
-    case UserTimetableDate = "dd MMM"
+    case apiTimetablesDateTime = "YYMMddHHmm"
+    case apiTimetablesDate = "YYMMdd"
+    case apiTimetablesTime = "HH"
+    case userTimetableTime = "HH:mm"
+    case userTimetableDate = "dd MMM"
+    case userMainScreenDateTime = "dd MMM, HH:mm"
 }
 
 struct AppDateTimeFormatter: DateTimeFormatter {
-    private let _formatter = DateFormatter()
+    private let _timeZone = TimeZone.CEST
+    private let _formatter: DateFormatter
     private let _dateLock = NSLock()
     private let _stringLock = NSLock()
 
-    public init() {}
+    public init() {
+        _formatter = DateFormatter()
+        _formatter.timeZone = _timeZone
+    }
 
     func date(from string: String, style: DateTimeFormatterStyle) -> Date {
         defer { _dateLock.unlock() }

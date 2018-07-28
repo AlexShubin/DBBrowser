@@ -2,7 +2,7 @@
 //  Copyright © 2018 AlexShubin. All rights reserved.
 //
 
-struct TimetableViewStateConverter: Converter {
+struct TimetableViewStateConverter: ViewStateConverter {
 
     private let _dateFormatter: DateTimeFormatter
 
@@ -10,15 +10,15 @@ struct TimetableViewStateConverter: Converter {
         _dateFormatter = dateFormatter
     }
 
-    func convert(from input: TimetableState) -> TimetableViewState {
+    func convert(from state: TimetableState) -> TimetableViewState {
         let items: [TimetableViewState.SectionItem]
-        let segmentedControlIndex = input.currentTable.rawValue
-        if input.shouldLoadTimetable {
+        let segmentedControlIndex = state.currentTable.rawValue
+        if state.shouldLoadTimetable {
             items = [.loading]
         } else {
-            switch input.timetableResult {
+            switch state.timetableResult {
             case .success(let events):
-                switch input.currentTable {
+                switch state.currentTable {
                 case .departures:
                     items = _items(from: events.departures)
                 case .arrivals:
@@ -38,10 +38,10 @@ struct TimetableViewStateConverter: Converter {
                 TimetableEventCell.State(category: $0.category,
                                          number: $0.number,
                                          time: _dateFormatter.string(from: $0.time,
-                                                                     style: .UserTimetableTime),
+                                                                     style: .userTimetableTime),
                                          platform: $0.platform,
                                          date: _dateFormatter.string(from: $0.time,
-                                                                     style: .UserTimetableDate),
+                                                                     style: .userTimetableDate),
                                          corrStation: $0.stations.last ?? "")
             )
         }
