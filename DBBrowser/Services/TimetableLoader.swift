@@ -35,12 +35,23 @@ struct ApiTimetableLoader: TimetableLoader {
             .loadTimetable(evaNo: String(params.station.evaId), date: date, hour: time)
             .map {
                 var timetable = self._timetableConverter.convert(from: $0)
-                timetable.departures.sort(by: { $0.time <= $1.time })
-                timetable.arrivals.sort(by: { $0.time <= $1.time })
+                timetable.arrivals = timetable.arrivals.trimOutdated(before: params.date).sortedByTime
+                timetable.departures = timetable.departures.trimOutdated(before: params.date).sortedByTime
                 return .success(timetable)
             }
             .catchError { _ in
                 .just(.error(.unknown))
         }
+    }
+
+}
+
+private extension Array where Element == Timetable.Event {
+    var sortedByTime: [Timetable.Event] {
+        return sorted(by: { $0.time <= $1.time })
+    }
+
+    func trimOutdated(before date: Date) -> [Timetable.Event] {
+        return filter { $0.time >= date }
     }
 }

@@ -54,7 +54,7 @@ class TimetableLoaderServiceTests: XCTestCase {
         }
     }
 
-    func testTestDeparturesSortedByTime() {
+    func testDeparturesSortedByTime() {
         // Prepare
         let earlierTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:20")).build()
         let laterTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:30")).build()
@@ -74,7 +74,7 @@ class TimetableLoaderServiceTests: XCTestCase {
         XCTAssertEqual(timetable.departures, [earlierTrain, laterTrain])
     }
 
-    func testTestArrivalsSortedByTime() {
+    func testArrivalsSortedByTime() {
         // Prepare
         let earlierTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:20")).build()
         let laterTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:30")).build()
@@ -92,6 +92,46 @@ class TimetableLoaderServiceTests: XCTestCase {
             return
         }
         XCTAssertEqual(timetable.arrivals, [earlierTrain, laterTrain])
+    }
+
+    func testTrimsOutdatedDepartures() {
+        // Prepare
+        let earlierTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:20")).build()
+        let laterTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:30")).build()
+        let departures = [laterTrain, earlierTrain]
+        timetableConverterMock.expected = TimetableBuilder().with(departures: departures).build()
+        timetableServiceMock.expected = .just(ApiTimetable(stops: []))
+        // Run
+        let testObserver = testScheduler.start {
+            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
+                                                  date: Date.testSample(from: "02-12-1987 12:25")))
+        }
+        // Test
+        guard case .success(let timetable)? = testObserver.firstElement else {
+            XCTFail("Unexpected result")
+            return
+        }
+        XCTAssertEqual(timetable.departures, [laterTrain])
+    }
+
+    func testTrimsOutdatedArrivals() {
+        // Prepare
+        let earlierTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:20")).build()
+        let laterTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:30")).build()
+        let arrivals = [laterTrain, earlierTrain]
+        timetableConverterMock.expected = TimetableBuilder().with(arrivals: arrivals).build()
+        timetableServiceMock.expected = .just(ApiTimetable(stops: []))
+        // Run
+        let testObserver = testScheduler.start {
+            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
+                                                  date: Date.testSample(from: "02-12-1987 12:25")))
+        }
+        // Test
+        guard case .success(let timetable)? = testObserver.firstElement else {
+            XCTFail("Unexpected result")
+            return
+        }
+        XCTAssertEqual(timetable.arrivals, [laterTrain])
     }
 }
 
