@@ -4,7 +4,11 @@
 
 import Foundation
 
-struct TimetableConverter {
+protocol TimetableConverter {
+    func convert(from apiTimetable: ApiTimetable) -> Timetable
+}
+
+struct ApiTimetableConverter: TimetableConverter {
     private let _dateFormatter: DateTimeFormatter
 
     init(dateFormatter: DateTimeFormatter) {

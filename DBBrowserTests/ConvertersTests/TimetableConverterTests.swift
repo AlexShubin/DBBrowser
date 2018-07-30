@@ -7,12 +7,12 @@ import XCTest
 
 class TimetableConverterTests: XCTestCase {
 
-    var converter: TimetableConverter!
+    var converter: ApiTimetableConverter!
     let dateTimeFormatterMock = DateTimeFormatterMock()
 
     override func setUp() {
         super.setUp()
-        converter = TimetableConverter(dateFormatter: dateTimeFormatterMock)
+        converter = ApiTimetableConverter(dateFormatter: dateTimeFormatterMock)
     }
 
     func testArrivalElementsCountConvertedWhenDepartureAndArrivalAreInDifferentStops() {

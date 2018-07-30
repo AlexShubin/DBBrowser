@@ -34,8 +34,11 @@ struct ApiTimetableLoader: TimetableLoader {
         return _timetableService
             .loadTimetable(evaNo: String(params.station.evaId), date: date, hour: time)
             .map {
-                .success(self._timetableConverter.convert(from: $0))
-        }
+                var timetable = self._timetableConverter.convert(from: $0)
+                timetable.departures.sort(by: { $0.time <= $1.time })
+                timetable.arrivals.sort(by: { $0.time <= $1.time })
+                return .success(timetable)
+            }
             .catchError { _ in
                 .just(.error(.unknown))
         }

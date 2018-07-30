@@ -17,7 +17,7 @@ class MainScreenViewStateConverterTests: XCTestCase {
 
     func testNoStationConverted() {
         // Prepare
-        let state = MainScreenState.initial
+        let state = AppState.initial
         // Run
         let converted = mainScreenViewStateConverter.convert(from: state)
         // Test
@@ -26,8 +26,8 @@ class MainScreenViewStateConverterTests: XCTestCase {
 
     func testChosenStationConverted() {
         // Prepare
-        var state = MainScreenState.initial
-        state.station = StationBuilder()
+        var state = AppState.initial
+        state.timetable.station = StationBuilder()
             .with(name: TestData.stationName1)
             .build()
         // Run
@@ -38,8 +38,8 @@ class MainScreenViewStateConverterTests: XCTestCase {
 
     func testRightDateAndStylePassedToConverter() {
         // Prepare
-        var state = MainScreenState.initial
-        state.date = TestData.date1
+        var state = AppState.initial
+        state.timetable.date = TestData.date1
         // Run
         _ = mainScreenViewStateConverter.convert(from: state)
         // Test
@@ -50,7 +50,7 @@ class MainScreenViewStateConverterTests: XCTestCase {
 
     func testRightStringPassedOutFromConverter() {
         // Prepare
-        let state = MainScreenState.initial
+        let state = AppState.initial
         dateFormatterMock.expectedString = "123"
         // Run
         let converted = mainScreenViewStateConverter.convert(from: state)

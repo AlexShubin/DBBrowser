@@ -37,8 +37,7 @@ struct StationSearchSideEffects: StationSearchSideEffectsType {
 
     var selectStation: (Station) -> Observable<AppEvent> {
         return {
-            .of(.mainScreen(.station($0)),
-                .timetable(.station($0)),
+            .of(.timetable(.station($0)),
                 .coordinator(.close(.modal)))
         }
     }

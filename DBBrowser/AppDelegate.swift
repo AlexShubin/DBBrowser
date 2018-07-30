@@ -31,9 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                  configuration: configuration)
         let timetableService = ApiTimetableService(baseUrl: timetablesUrl,
                                                    configuration: configuration)
-
+        let timetableConverter = ApiTimetableConverter(dateFormatter: dateFormatter)
         let timetableLoader = ApiTimetableLoader(timetableService: timetableService,
-                                                 timetableConverter: TimetableConverter(dateFormatter: dateFormatter),
+                                                 timetableConverter: timetableConverter,
                                                  dateFormatter: dateFormatter)
         let stationFinder = ApiStationFinder(fahrplanService: fahrplanService,
                                              stationConverter: StationConverter())

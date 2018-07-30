@@ -12,6 +12,6 @@ struct Timetable: Equatable {
         let time: Date
         let platform: String
     }
-    let arrivals: [Event]
-    let departures: [Event]
+    var arrivals: [Event]
+    var departures: [Event]
 }

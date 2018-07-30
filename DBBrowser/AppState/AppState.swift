@@ -3,7 +3,7 @@
 //
 
 // MARK: - State
-struct AppState {
+struct AppState: Equatable {
     var mainScreen = MainScreenState.initial
     var stationSearch = StationSearchState.initial
     var timetable = TimetableState.initial

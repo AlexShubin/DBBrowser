@@ -46,3 +46,12 @@ extension SceneCoordinatorState {
         return result
     }
 }
+
+// MARK: - Equatable
+extension SceneCoordinatorState: Equatable {
+    static func == (lhs: SceneCoordinatorState, rhs: SceneCoordinatorState) -> Bool {
+        return lhs.shouldClose == rhs.shouldClose
+            && lhs.shouldShow?.0 == rhs.shouldShow?.0
+            && lhs.shouldShow?.1 == rhs.shouldShow?.1
+    }
+}
