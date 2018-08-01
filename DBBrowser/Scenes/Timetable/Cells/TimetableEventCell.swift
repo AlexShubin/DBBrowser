@@ -29,21 +29,22 @@ class TimetableEventCell: UITableViewCell {
 
         _categoryLabel.font = Constants.Fonts.header
         _categoryLabel.textColor = UIColor(asset: Asset.Colors.dbRed)
-        _numberLabel.font = Constants.Fonts.regular
+        _numberLabel.font = Constants.Fonts.smallBold
         _numberLabel.textColor = .black
-        _platformCaption.font = Constants.Fonts.regular
+        _platformCaption.font = Constants.Fonts.smallBold
         _platformCaption.textColor = .gray
         _platformLabel.font = Constants.Fonts.header
         _platformLabel.textColor = UIColor(asset: Asset.Colors.dbRed)
         _timeLabel.font = Constants.Fonts.header
         _timeLabel.textColor = UIColor(asset: Asset.Colors.dbRed)
-        _dateLabel.font = Constants.Fonts.regular
+        _dateLabel.font = Constants.Fonts.smallBold
         _dateLabel.textColor = .gray
-        _corrStationCaption.font = Constants.Fonts.regular
+        _corrStationCaption.font = Constants.Fonts.smallBold
         _corrStationCaption.textColor = .gray
+        _corrStationLabel.font = Constants.Fonts.medium
+        _corrStationLabel.textColor = .black
 
         _platformCaption.text = L10n.Timetable.platformCaption
-        _corrStationCaption.text = L10n.Timetable.towards
     }
 
     private func _setupLayout() {
@@ -149,6 +150,7 @@ extension TimetableEventCell: DataDriven {
         let time: String
         let platform: String
         let date: String
+        let corrStationCaption: String
         let corrStation: String
     }
 
@@ -158,6 +160,7 @@ extension TimetableEventCell: DataDriven {
         _timeLabel.text = state.time
         _platformLabel.text = state.platform
         _dateLabel.text = state.date
+        _corrStationCaption.text = state.corrStationCaption
         _corrStationLabel.text = state.corrStation
     }
 }
@@ -200,8 +203,8 @@ extension TimetableEventCell {
         }
         enum Fonts {
             static let header = UIFont.boldSystemFont(ofSize: 20)
-            static let regular = UIFont.boldSystemFont(ofSize: 14)
-            static let medium = UIFont.boldSystemFont(ofSize: 16)
+            static let smallBold = UIFont.boldSystemFont(ofSize: 14)
+            static let medium = UIFont.systemFont(ofSize: 16)
         }
         static let cornerRadius: CGFloat = 8
     }

@@ -29,6 +29,10 @@ internal enum L10n {
   }
 
   internal enum Timetable {
+    /// from:
+    internal static let from = L10n.tr("Localizable", "timetable.from")
+    /// Load more
+    internal static let loadMore = L10n.tr("Localizable", "timetable.load_more")
     /// platform
     internal static let platformCaption = L10n.tr("Localizable", "timetable.platform_caption")
     /// towards:

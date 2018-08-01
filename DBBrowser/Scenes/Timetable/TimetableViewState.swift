@@ -21,6 +21,7 @@ struct TimetableViewState: Equatable {
         case event(TimetableEventCell.State)
         case loading
         case error
+        case loadMore(TimetableMoreCell.State)
     }
 
     var sections: [Section]

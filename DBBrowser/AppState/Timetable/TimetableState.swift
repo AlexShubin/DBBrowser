@@ -14,8 +14,12 @@ struct TimetableState: State, Equatable {
         case arrivals = 1
     }
 
-    var timetableResult: TimetableLoaderResult = .success(Timetable(arrivals: [], departures: []))
-    var shouldLoadTimetable = false
+    enum LoadingState {
+        case error, success, loading
+    }
+
+    var timetable = Timetable(arrivals: [], departures: [])
+    var loadingState = LoadingState.success
 
     var currentTable = Table.departures
 
@@ -34,7 +38,7 @@ enum TimetableEvent {
 // MARK: - Queries
 extension TimetableState {
     var queryLoadTimetable: TimetableLoadParams? {
-        guard shouldLoadTimetable,
+        guard case .loading = loadingState,
             let station = station else {
             return nil
         }
@@ -50,10 +54,15 @@ extension TimetableState {
         case .station(let station):
             result.station = station
         case .loadTimetable:
-            result.shouldLoadTimetable = true
+            result.loadingState = .loading
         case .timetableLoaded(let timetableResult):
-            result.timetableResult = timetableResult
-            result.shouldLoadTimetable = false
+            switch timetableResult {
+            case .success(let timetable):
+                result.timetable += timetable
+                result.loadingState = .success
+            case .error:
+                result.loadingState = .error
+            }
         case .changeTable(let tableIndex):
             result.currentTable = Table(rawValue: tableIndex) ?? .departures
         }

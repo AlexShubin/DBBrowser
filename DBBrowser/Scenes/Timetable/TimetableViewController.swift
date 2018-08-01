@@ -43,6 +43,7 @@ class TimetableViewController: UIViewController {
         _tableView.registerCell(ofType: TimetableEventCell.self)
         _tableView.registerCell(ofType: LoadingCell.self)
         _tableView.registerCell(ofType: ErrorCell.self)
+        _tableView.registerCell(ofType: TimetableMoreCell.self)
     }
 
     private func _setupLayout() {
@@ -112,6 +113,10 @@ extension TimetableViewController: StateStoreBindable {
                     }
                     .bind(to: eventBus)
                     .disposed(by: cell.bag)
+                return cell
+            case .loadMore(let cellState):
+                let cell: TimetableMoreCell = tableView.dequeueReusableCell(for: indexPath)
+                cell.render(state: cellState)
                 return cell
             }
         })

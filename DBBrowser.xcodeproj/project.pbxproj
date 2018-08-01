@@ -87,6 +87,7 @@
 		B8D22602210F31CB0071B994 /* TestableObserver+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D22601210F31CA0071B994 /* TestableObserver+.swift */; };
 		B8D22604210F33CC0071B994 /* TimetableConverterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D22603210F33CC0071B994 /* TimetableConverterMock.swift */; };
 		B8DE6E0E210CAD0800F298F3 /* TimeZone+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DE6E0D210CAD0800F298F3 /* TimeZone+.swift */; };
+		B8E9CF79211092A600528954 /* TimetableMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E9CF78211092A600528954 /* TimetableMoreCell.swift */; };
 		B8F1E51720CFE600000F1606 /* State+ApplyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1E51620CFE600000F1606 /* State+ApplyEvents.swift */; };
 		B8F437C420A8298E00977CE3 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C320A8298E00977CE3 /* Station.swift */; };
 		B8F437C620A82A9500977CE3 /* FahrplanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C520A82A9500977CE3 /* FahrplanService.swift */; };
@@ -204,6 +205,7 @@
 		B8D22601210F31CA0071B994 /* TestableObserver+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TestableObserver+.swift"; sourceTree = "<group>"; };
 		B8D22603210F33CC0071B994 /* TimetableConverterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableConverterMock.swift; sourceTree = "<group>"; };
 		B8DE6E0D210CAD0800F298F3 /* TimeZone+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeZone+.swift"; sourceTree = "<group>"; };
+		B8E9CF78211092A600528954 /* TimetableMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableMoreCell.swift; sourceTree = "<group>"; };
 		B8F1E51620CFE600000F1606 /* State+ApplyEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "State+ApplyEvents.swift"; sourceTree = "<group>"; };
 		B8F437C320A8298E00977CE3 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		B8F437C520A82A9500977CE3 /* FahrplanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrplanService.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				B8004D1420F65D20006A1A83 /* TimetableEventCell.swift */,
+				B8E9CF78211092A600528954 /* TimetableMoreCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -940,6 +943,7 @@
 				B8A59AED20BA98A10083FC36 /* ViewControllerFactory.swift in Sources */,
 				B895CB3620F918DC00FF8A36 /* MainScreenState.swift in Sources */,
 				B831E83920AC1EEC00B951DB /* AppStateStore.swift in Sources */,
+				B8E9CF79211092A600528954 /* TimetableMoreCell.swift in Sources */,
 				B80877A520F7BF3500025B18 /* TimetableSideEffects.swift in Sources */,
 				B892CFBF20BAC39000176A15 /* UIView+.swift in Sources */,
 				B8849FFB20F7A23A00BCD93A /* TimetableViewStateConverter.swift in Sources */,

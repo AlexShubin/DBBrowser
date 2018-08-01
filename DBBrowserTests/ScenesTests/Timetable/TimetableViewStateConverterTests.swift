@@ -74,6 +74,7 @@ class TimetableViewStateConverterTests: XCTestCase {
         XCTAssertEqual(cellState.time, "123")
         XCTAssertEqual(cellState.date, "123")
         XCTAssertEqual(cellState.corrStation, TestData.stationName2)
+        XCTAssertEqual(cellState.corrStationCaption, L10n.Timetable.towards)
     }
 
     func testTimetableWithDeparturesInArrivalsModeConvertedToNoElementsState() {
@@ -124,6 +125,7 @@ class TimetableViewStateConverterTests: XCTestCase {
         XCTAssertEqual(cellState.time, "123")
         XCTAssertEqual(cellState.date, "123")
         XCTAssertEqual(cellState.corrStation, TestData.stationName2)
+        XCTAssertEqual(cellState.corrStationCaption, L10n.Timetable.from)
     }
 
     func testTimetableWithArrivalsInDeparturessModeConvertedToNoElementsState() {

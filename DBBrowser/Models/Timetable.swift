@@ -15,3 +15,8 @@ struct Timetable: Equatable {
     var arrivals: [Event]
     var departures: [Event]
 }
+
+func += (lhs: inout Timetable, rhs: Timetable) {
+    lhs = Timetable(arrivals: lhs.arrivals + rhs.arrivals,
+                    departures: lhs.departures + rhs.departures)
+}
