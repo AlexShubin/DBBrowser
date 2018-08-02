@@ -33,6 +33,8 @@ enum TimetableEvent {
     case loadTimetable
     case timetableLoaded(TimetableLoaderResult)
     case changeTable(Int)
+    case cleanUp
+    case dateToLoad(Date)
 }
 
 // MARK: - Queries
@@ -66,6 +68,10 @@ extension TimetableState {
             }
         case .changeTable(let tableIndex):
             result.currentTable = Table(rawValue: tableIndex) ?? .departures
+        case .cleanUp:
+            result.timetable = Timetable(arrivals: [], departures: [])
+        case .dateToLoad(let date):
+            result.dateToLoad = date
         }
         return result
     }

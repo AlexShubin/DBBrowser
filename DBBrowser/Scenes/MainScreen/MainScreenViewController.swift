@@ -136,7 +136,7 @@ extension MainScreenViewController: StateStoreBindable {
             .disposed(by: bag)
         _searchButton.rx.tap
             .map {
-                .coordinator(.show( .timetable, .push))
+                .mainScreen(.openTimetable)
             }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
