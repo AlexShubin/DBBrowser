@@ -11,23 +11,31 @@ struct TimetableViewStateConverter: ViewStateConverter {
     }
 
     func convert(from state: TimetableState) -> TimetableViewState {
-        let items: [TimetableViewState.SectionItem]
-        let segmentedControlIndex = state.currentTable.rawValue
+        var items = [TimetableViewState.SectionItem]()
+        switch state.currentTable {
+        case .departures:
+            items += _items(from: state.timetable.departures, corrStationCaption: L10n.Timetable.towards)
+        case .arrivals:
+            items += _items(from: state.timetable.arrivals, corrStationCaption: L10n.Timetable.from)
+        }
         switch state.loadingState {
         case .error:
-            items = [.error]
-        case .success:
-            switch state.currentTable {
-            case .departures:
-                items = _items(from: state.timetable.departures, corrStationCaption: L10n.Timetable.towards)
-            case .arrivals:
-                items = _items(from: state.timetable.arrivals, corrStationCaption: L10n.Timetable.from)
+            if items.count > 0 {
+                items += [.loadMore(.normal)]
+            } else {
+                items = [.error]
             }
+        case .success:
+            items += [.loadMore(.normal)]
         case .loading:
-            items = [.loading]
+            if items.count > 0 {
+                items += [.loadMore(.loading)]
+            } else {
+                items = [.loading]
+            }
         }
         return TimetableViewState(sections: [TimetableViewState.Section(items: items)],
-                                  segmentedControlIndex: segmentedControlIndex)
+                                  segmentedControlIndex: state.currentTable.rawValue)
     }
 
     private func _items(from timeTableEvents: [Timetable.Event],

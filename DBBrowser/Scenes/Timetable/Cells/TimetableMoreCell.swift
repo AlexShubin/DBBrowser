@@ -68,16 +68,17 @@ class TimetableMoreCell: UITableViewCell, Emitable {
 
 // MARK: - DataDriven
 extension TimetableMoreCell: DataDriven {
-    struct State: Hashable {
-        var isLoading: Bool
+    enum State: Hashable {
+        case normal, loading
     }
 
     func render(state: State) {
-        if state.isLoading {
+        switch state {
+        case .loading:
             _spinner.startAnimating()
             _button.isEnabled = false
             _button.setImage(nil, for: .normal)
-        } else {
+        case .normal:
             _spinner.stopAnimating()
             _button.isEnabled = true
             _button.setImage(UIImage(asset: Asset.doubleArrowDown), for: .normal)

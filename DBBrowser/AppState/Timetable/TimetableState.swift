@@ -24,7 +24,7 @@ struct TimetableState: State, Equatable {
     var currentTable = Table.departures
 
     var station: Station?
-    var date = Date()
+    var dateToLoad = Date()
 }
 
 // MARK: - Events
@@ -42,7 +42,7 @@ extension TimetableState {
             let station = station else {
             return nil
         }
-        return TimetableLoadParams(station: station, date: date)
+        return TimetableLoadParams(station: station, date: dateToLoad)
     }
 }
 
@@ -60,6 +60,7 @@ extension TimetableState {
             case .success(let timetable):
                 result.timetable += timetable
                 result.loadingState = .success
+                result.dateToLoad = state.dateToLoad.startOfTheNextHour
             case .error:
                 result.loadingState = .error
             }

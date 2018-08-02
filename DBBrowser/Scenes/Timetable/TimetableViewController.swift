@@ -117,6 +117,15 @@ extension TimetableViewController: StateStoreBindable {
             case .loadMore(let cellState):
                 let cell: TimetableMoreCell = tableView.dequeueReusableCell(for: indexPath)
                 cell.render(state: cellState)
+                cell.events
+                    .map {
+                        switch $0 {
+                        case .moreTap:
+                            return .timetable(.loadTimetable)
+                        }
+                    }
+                    .bind(to: eventBus)
+                    .disposed(by: cell.bag)
                 return cell
             }
         })

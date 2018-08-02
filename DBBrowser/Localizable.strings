@@ -1,6 +1,6 @@
 
 "main_screen.station_caption" = "Station";
-"main_screen.date_caption" = "Date and hour";
+"main_screen.date_caption" = "Date and time";
 "main_screen.station_placeholder" = "Select a station";
 "main_screen.search_button" = "Show timetable";
 

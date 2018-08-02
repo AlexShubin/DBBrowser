@@ -20,7 +20,7 @@ struct MainScreenViewStateConverter: ViewStateConverter {
             stationField = .chosen(station.name)
         }
         return MainScreenViewState(station: stationField,
-                                   date: _dateFormatter.string(from: state.timetable.date,
+                                   date: _dateFormatter.string(from: state.timetable.dateToLoad,
                                                                style: .userMainScreenDateTime))
     }
 }

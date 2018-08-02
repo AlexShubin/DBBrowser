@@ -63,7 +63,6 @@ class TimetableViewStateConverterTests: XCTestCase {
         let converted = converter.convert(from: state)
         // Test
         XCTAssertEqual(converted.sections.count, 1)
-        XCTAssertEqual(converted.sections.first?.items.count, 1)
         guard case .event(let cellState)? = converted.sections.first?.items.first else {
             XCTFail("Unexpected cell type")
             return
@@ -77,7 +76,7 @@ class TimetableViewStateConverterTests: XCTestCase {
         XCTAssertEqual(cellState.corrStationCaption, L10n.Timetable.towards)
     }
 
-    func testTimetableWithDeparturesInArrivalsModeConvertedToNoElementsState() {
+    func testTimetableWithDeparturesInArrivalsModeConvertedToLoadMoreButton() {
         // Prepare
         let timetableWithDepartures = TimetableBuilder()
             .with(departures: [TimetableEventBuilder().build()])
@@ -90,7 +89,11 @@ class TimetableViewStateConverterTests: XCTestCase {
         // Run
         let converted = converter.convert(from: state)
         // Test
-        XCTAssertNil(converted.sections.first?.items.first)
+        guard case .loadMore(let cellState)? = converted.sections.first?.items.first else {
+            XCTFail("Unexpected cell type")
+            return
+        }
+        XCTAssertEqual(cellState, .normal)
     }
 
     func testTimetableWithArrivalsConverted() {
@@ -114,7 +117,6 @@ class TimetableViewStateConverterTests: XCTestCase {
         let converted = converter.convert(from: state)
         // Test
         XCTAssertEqual(converted.sections.count, 1)
-        XCTAssertEqual(converted.sections.first?.items.count, 1)
         guard case .event(let cellState)? = converted.sections.first?.items.first else {
             XCTFail("Unexpected cell type")
             return
@@ -128,7 +130,7 @@ class TimetableViewStateConverterTests: XCTestCase {
         XCTAssertEqual(cellState.corrStationCaption, L10n.Timetable.from)
     }
 
-    func testTimetableWithArrivalsInDeparturessModeConvertedToNoElementsState() {
+    func testTimetableWithArrivalsInDeparturessModeConvertedToLoadMoreButton() {
         // Prepare
         let timetableWithDepartures = TimetableBuilder()
             .with(departures: [])
@@ -141,7 +143,11 @@ class TimetableViewStateConverterTests: XCTestCase {
         // Run
         let converted = converter.convert(from: state)
         // Test
-        XCTAssertNil(converted.sections.first?.items.first)
+        guard case .loadMore(let cellState)? = converted.sections.first?.items.first else {
+            XCTFail("Unexpected cell type")
+            return
+        }
+        XCTAssertEqual(cellState, .normal)
     }
 
     func testTimetableDeparturesTableConvertedTo0Index() {
@@ -162,5 +168,62 @@ class TimetableViewStateConverterTests: XCTestCase {
         let converted = converter.convert(from: state)
         // Test
         XCTAssertEqual(converted.segmentedControlIndex, 1)
+    }
+
+    func testTimetableLoadAgainConvertedLoadingButtonState() {
+        // Prepare
+        let event = TimetableEventBuilder()
+            .with(category: TestData.Timetable.category1)
+            .with(number: TestData.Timetable.number1)
+            .with(platform: TestData.Timetable.platform1)
+            .with(stations: [TestData.stationName1, TestData.stationName2])
+            .build()
+        let timetableWithDepartures = TimetableBuilder()
+            .with(departures: [event])
+            .with(arrivals: [])
+            .build()
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .timetableLoaded(.success(timetableWithDepartures)),
+            .changeTable(0),
+            .loadTimetable
+            ])
+        // Run
+        let converted = converter.convert(from: state)
+        // Test
+        XCTAssertEqual(converted.sections.count, 1)
+        guard case .loadMore(let cellState)? = converted.sections.first?.items.last else {
+            XCTFail("Unexpected cell type")
+            return
+        }
+        XCTAssertEqual(cellState, .loading)
+    }
+
+    func testTimetableLoadAgainAndReceivedErrorConvertedNormalButtonState() {
+        // Prepare
+        let event = TimetableEventBuilder()
+            .with(category: TestData.Timetable.category1)
+            .with(number: TestData.Timetable.number1)
+            .with(platform: TestData.Timetable.platform1)
+            .with(stations: [TestData.stationName1, TestData.stationName2])
+            .build()
+        let timetableWithDepartures = TimetableBuilder()
+            .with(departures: [event])
+            .with(arrivals: [])
+            .build()
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .timetableLoaded(.success(timetableWithDepartures)),
+            .changeTable(0),
+            .loadTimetable,
+            .timetableLoaded(.error(.unknown))
+            ])
+        // Run
+        let converted = converter.convert(from: state)
+        // Test
+        XCTAssertEqual(converted.sections.count, 1)
+        guard case .loadMore(let cellState)? = converted.sections.first?.items.last else {
+            XCTFail("Unexpected cell type")
+            return
+        }
+        XCTAssertEqual(cellState, .normal)
     }
 }

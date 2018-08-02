@@ -39,7 +39,7 @@ class MainScreenViewStateConverterTests: XCTestCase {
     func testRightDateAndStylePassedToConverter() {
         // Prepare
         var state = AppState.initial
-        state.timetable.date = TestData.date1
+        state.timetable.dateToLoad = TestData.date1
         // Run
         _ = mainScreenViewStateConverter.convert(from: state)
         // Test
