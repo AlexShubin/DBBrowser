@@ -7,10 +7,14 @@ import XCTest
 
 class StationSearchReducerTests: XCTestCase {
 
-    func testSearchString() {
-        var state = StationSearchState.initial
-        state = StationSearchState.reduce(state: state, event: .searchString("123"))
-        XCTAssertEqual(state.searchString, "123")
+    func testSearchStringShouldSetSearchStringAndDisposeSearch() {
+        let state = StationSearchState.applyEvents(initial: .initial, events: [
+            .searchString("123"),
+            .startSearch,
+            .searchString("12345")
+            ])
+        XCTAssertEqual(state.searchString, "12345")
+        XCTAssertFalse(state.shouldSearch)
     }
 
     func testStartSearch() {

@@ -110,7 +110,7 @@ extension StationSearchViewController: StateStoreBindable {
             .text
             .filterNil()
             .filterEmpty()
-            .throttle(1, scheduler: MainScheduler.instance)
+            .throttle(0.2, scheduler: MainScheduler.instance)
             .flatMap {
                 Observable.of(.stationSearch(.searchString($0)),
                               .stationSearch(.startSearch))

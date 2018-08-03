@@ -44,6 +44,7 @@ extension StationSearchState {
             result.shouldSearch = false
         case .searchString(let str):
             result.searchString = str
+            result.shouldSearch = false
         case .selected(let index):
             result.selectedStation = state._station(with: index)
         case .clear:

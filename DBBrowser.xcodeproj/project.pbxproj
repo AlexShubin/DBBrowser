@@ -264,7 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				B8004D1920F66C54006A1A83 /* TimetableReducerTests.swift */,
-				B870B2C520F7A984002BD34D /* TimetableViewStateConverterTests.swift */,
 				B80877A220F7BDAF00025B18 /* TimetableQueriesTests.swift */,
 				B80877A620F7C1EE00025B18 /* TimetableEffectsInvocationsTests.swift */,
 			);
@@ -388,6 +387,9 @@
 			isa = PBXGroup;
 			children = (
 				B88828BE20F344A8005802A4 /* TimetableConverterTests.swift */,
+				B870B2C520F7A984002BD34D /* TimetableViewStateConverterTests.swift */,
+				B8A9387A20CFCF64007460C6 /* MainScreenViewStateConverterTests.swift */,
+				B8AAF49720B97C16000C9ADE /* StationSearchViewStateConverterTests.swift */,
 			);
 			path = ConvertersTests;
 			sourceTree = "<group>";
@@ -442,14 +444,6 @@
 				B81D7CA220F2387800A4F7BC /* ApiTimetableConverter.swift */,
 			);
 			path = Converters;
-			sourceTree = "<group>";
-		};
-		B8A9387520CFCBC8007460C6 /* MainScreen */ = {
-			isa = PBXGroup;
-			children = (
-				B8A9387A20CFCF64007460C6 /* MainScreenViewStateConverterTests.swift */,
-			);
-			path = MainScreen;
 			sourceTree = "<group>";
 		};
 		B8AAF49220B976A2000C9ADE /* Extensions */ = {
@@ -525,7 +519,7 @@
 				B88828D320F36292005802A4 /* FormattersTests */,
 				B88828BD20F3448C005802A4 /* ConvertersTests */,
 				B8F1E51820CFE633000F1606 /* ServicesTests */,
-				B8F4C6C420B00CF300E62DAE /* ScenesTests */,
+				B8F4C6C420B00CF300E62DAE /* AppStateTests */,
 				B8F437D120A8365700977CE3 /* Builders */,
 				B8F437CE20A8349600977CE3 /* Mocks */,
 				B8F437D420A8392100977CE3 /* TestData.swift */,
@@ -624,14 +618,13 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		B8F4C6C420B00CF300E62DAE /* ScenesTests */ = {
+		B8F4C6C420B00CF300E62DAE /* AppStateTests */ = {
 			isa = PBXGroup;
 			children = (
 				B8004D1820F66C30006A1A83 /* Timetable */,
-				B8A9387520CFCBC8007460C6 /* MainScreen */,
 				B8F4C6C520B00CFC00E62DAE /* StationSearch */,
 			);
-			path = ScenesTests;
+			path = AppStateTests;
 			sourceTree = "<group>";
 		};
 		B8F4C6C520B00CFC00E62DAE /* StationSearch */ = {
@@ -640,7 +633,6 @@
 				B8F4C6C620B00D2400E62DAE /* StationSearchReducerTests.swift */,
 				B8F4C6CA20B0119F00E62DAE /* StationSearchQueriesTests.swift */,
 				B853867220B1792D003FB667 /* StationSearchEffectsInvocationsTests.swift */,
-				B8AAF49720B97C16000C9ADE /* StationSearchViewStateConverterTests.swift */,
 			);
 			path = StationSearch;
 			sourceTree = "<group>";
