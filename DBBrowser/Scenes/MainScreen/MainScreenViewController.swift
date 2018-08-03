@@ -5,6 +5,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxOptional
 
 class MainScreenViewController: UIViewController {
 
@@ -112,13 +113,10 @@ extension MainScreenViewController: StateStoreBindable {
         // State to view state conversion
         let viewState: Signal<MainScreenViewState> = stateStore
             .stateBus
+            .map { $0.timetable }
             .distinctUntilChanged()
-            .flatMap { [weak self] in
-                if let viewState = self?._converter.convert(from: $0) {
-                    return .just(viewState)
-                }
-                return .empty()
-        }
+            .map { [weak self] in self?._converter.convert(from: $0) }
+            .filterNil()
         // State render
         viewState
             .emit(onNext: { [weak self] in
@@ -135,8 +133,9 @@ extension MainScreenViewController: StateStoreBindable {
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
         _searchButton.rx.tap
-            .map {
-                .mainScreen(.openTimetable)
+            .flatMap {
+                Observable.of(.timetable(.reset),
+                              .coordinator(.show(.timetable, .push)))
             }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)

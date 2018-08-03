@@ -18,10 +18,7 @@ class TimetableEffectsInvocationsTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sideEffects = SideEffectsMock(mainScreen: MainScreenSideEffectsMock(),
-                                      sceneCoordinator: SceneCoordinatorSideEffectsMock(),
-                                      stationSearch: StationSearchSideEffectsMock(),
-                                      timetable: timetableSideEffects)
+        sideEffects = SideEffectsMock(timetable: timetableSideEffects)
         stateStore = AppStateStore(sideEffects: sideEffects, scheduler: testScheduler)
     }
 

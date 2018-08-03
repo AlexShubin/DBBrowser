@@ -24,6 +24,7 @@ struct TimetableState: State, Equatable {
     var currentTable = Table.departures
 
     var station: Station?
+    var date = Date()
     var dateToLoad = Date()
 }
 
@@ -33,8 +34,7 @@ enum TimetableEvent {
     case loadTimetable
     case timetableLoaded(TimetableLoaderResult)
     case changeTable(Int)
-    case cleanUp
-    case dateToLoad(Date)
+    case reset
 }
 
 // MARK: - Queries
@@ -68,10 +68,9 @@ extension TimetableState {
             }
         case .changeTable(let tableIndex):
             result.currentTable = Table(rawValue: tableIndex) ?? .departures
-        case .cleanUp:
+        case .reset:
             result.timetable = Timetable(arrivals: [], departures: [])
-        case .dateToLoad(let date):
-            result.dateToLoad = date
+            result.dateToLoad = state.date
         }
         return result
     }

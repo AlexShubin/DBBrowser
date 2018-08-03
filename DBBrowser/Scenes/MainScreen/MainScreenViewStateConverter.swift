@@ -11,16 +11,16 @@ struct MainScreenViewStateConverter: ViewStateConverter {
         _dateFormatter = dateFormatter
     }
 
-    func convert(from state: AppState) -> MainScreenViewState {
+    func convert(from state: TimetableState) -> MainScreenViewState {
         let stationField: Field
-        switch state.timetable.station {
+        switch state.station {
         case .none:
             stationField = .placeholder(L10n.MainScreen.stationPlaceholder)
         case .some(let station):
             stationField = .chosen(station.name)
         }
         return MainScreenViewState(station: stationField,
-                                   date: _dateFormatter.string(from: state.mainScreen.date,
+                                   date: _dateFormatter.string(from: state.date,
                                                                style: .userMainScreenDateTime))
     }
 }

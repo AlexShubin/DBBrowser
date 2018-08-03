@@ -14,6 +14,8 @@ struct Timetable: Equatable {
     }
     var arrivals: [Event]
     var departures: [Event]
+
+    static let empty = Timetable(arrivals: [], departures: [])
 }
 
 func += (lhs: inout Timetable, rhs: Timetable) {
