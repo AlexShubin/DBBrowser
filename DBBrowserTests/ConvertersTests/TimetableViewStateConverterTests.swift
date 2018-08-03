@@ -126,7 +126,7 @@ class TimetableViewStateConverterTests: XCTestCase {
         XCTAssertEqual(cellState.platform, TestData.Timetable.platform1)
         XCTAssertEqual(cellState.time, "123")
         XCTAssertEqual(cellState.date, "123")
-        XCTAssertEqual(cellState.corrStation, TestData.stationName2)
+        XCTAssertEqual(cellState.corrStation, TestData.stationName1)
         XCTAssertEqual(cellState.corrStationCaption, L10n.Timetable.from)
     }
 

@@ -11,13 +11,8 @@ struct TimetableViewStateConverter: ViewStateConverter {
     }
 
     func convert(from state: TimetableState) -> TimetableViewState {
-        var items = [TimetableViewState.SectionItem]()
-        switch state.currentTable {
-        case .departures:
-            items += _items(from: state.timetable.departures, corrStationCaption: L10n.Timetable.towards)
-        case .arrivals:
-            items += _items(from: state.timetable.arrivals, corrStationCaption: L10n.Timetable.from)
-        }
+        var items = _items(from: state.timetable,
+                           table: state.currentTable)
         switch state.loadingState {
         case .error:
             if items.count > 0 {
@@ -38,10 +33,27 @@ struct TimetableViewStateConverter: ViewStateConverter {
                                   segmentedControlIndex: state.currentTable.rawValue)
     }
 
-    private func _items(from timeTableEvents: [Timetable.Event],
-                        corrStationCaption: String) -> [TimetableViewState.SectionItem] {
-        return timeTableEvents.map {
-            TimetableViewState.SectionItem.event(
+    private func _items(from timetable: Timetable,
+                        table: TimetableState.Table) -> [TimetableViewState.SectionItem] {
+        let corrStationCaption: String
+        let events: [Timetable.Event]
+        switch table {
+        case .departures:
+            corrStationCaption = L10n.Timetable.towards
+            events = timetable.departures
+        case .arrivals:
+            corrStationCaption = L10n.Timetable.from
+            events = timetable.arrivals
+        }
+        return events.map {
+            let corrStation: String
+            switch table {
+            case .departures:
+                corrStation = $0.stations.last ?? ""
+            case .arrivals:
+                corrStation = $0.stations.first ?? ""
+            }
+            return TimetableViewState.SectionItem.event(
                 TimetableEventCell.State(category: $0.category,
                                          number: $0.number,
                                          time: _dateFormatter.string(from: $0.time,
@@ -50,7 +62,7 @@ struct TimetableViewStateConverter: ViewStateConverter {
                                          date: _dateFormatter.string(from: $0.time,
                                                                      style: .userTimetableDate),
                                          corrStationCaption: corrStationCaption,
-                                         corrStation: $0.stations.last ?? "")
+                                         corrStation: corrStation)
             )
         }
     }
