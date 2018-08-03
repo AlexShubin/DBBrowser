@@ -29,11 +29,11 @@ struct ApiTimetableConverter: TimetableConverter {
             }
             if let departure = stop.departure {
                 departures.append(Timetable.Event(category: stop.tripLabel.category,
-                                                number: stop.tripLabel.number,
-                                                stations: departure.path.components(separatedBy: "|"),
-                                                time: _dateFormatter.date(from: departure.time,
-                                                                          style: .apiTimetablesDateTime),
-                                                platform: departure.platform))
+                                                  number: stop.tripLabel.number,
+                                                  stations: departure.path.components(separatedBy: "|"),
+                                                  time: _dateFormatter.date(from: departure.time,
+                                                                            style: .apiTimetablesDateTime),
+                                                  platform: departure.platform))
             }
         }
         return Timetable(arrivals: arrivals, departures: departures)
