@@ -11,8 +11,8 @@ struct TimetableViewStateConverter: ViewStateConverter {
     }
 
     func convert(from state: TimetableState) -> TimetableViewState {
-        var items = _items(from: state.timetable,
-                           table: state.currentTable)
+        var items = _eventsItems(from: state.timetable,
+                                 table: state.currentTable)
         switch state.loadingState {
         case .error:
             if items.count > 0 {
@@ -33,8 +33,8 @@ struct TimetableViewStateConverter: ViewStateConverter {
                                   segmentedControlIndex: state.currentTable.rawValue)
     }
 
-    private func _items(from timetable: Timetable,
-                        table: TimetableState.Table) -> [TimetableViewState.SectionItem] {
+    private func _eventsItems(from timetable: Timetable,
+                              table: TimetableState.Table) -> [TimetableViewState.SectionItem] {
         let corrStationCaption: String
         let events: [Timetable.Event]
         switch table {
