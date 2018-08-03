@@ -48,7 +48,7 @@ class TimetableReducerTests: XCTestCase {
         XCTAssertEqual(state.loadingState, .error)
     }
 
-    func testTimetableLoadedEventShoudSetTimeTableInStateAndNextSetsShouldAddTimetableEvents() {
+    func testTimetableLoadedEventShoudSetTimetableInStateAndNextSetsShouldAddTimetableEvents() {
         // Prepare
         let timetable1 = TimetableBuilder().build()
         let timetable2 = TimetableBuilder().build()

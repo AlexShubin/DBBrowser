@@ -16,11 +16,11 @@ enum TimetableLoaderError: String, Error, Equatable {
 
 struct ApiTimetableLoader: TimetableLoader {
 
-    private let _timetableService: TimetableService
+    private let _timetableService: TimetablesService
     private let _timetableConverter: TimetableConverter
     private let _dateFormatter: DateTimeFormatter
 
-    init(timetableService: TimetableService,
+    init(timetableService: TimetablesService,
          timetableConverter: TimetableConverter,
          dateFormatter: DateTimeFormatter) {
         _timetableService = timetableService

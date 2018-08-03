@@ -5,9 +5,15 @@
 @testable import DBBrowser
 
 final class ApiStopBuilder {
+    private var _id = TestData.Timetable.id1
     private var _tripLabel = ApiTripLabelBuilder().build()
     private var _arrival: ApiEvent? = ApiEventBuilder().build()
     private var _departure: ApiEvent? = ApiEventBuilder().build()
+
+    func with(id: String) -> ApiStopBuilder {
+        _id = id
+        return self
+    }
 
     func with(tripLabel: ApiTripLabel) -> ApiStopBuilder {
         _tripLabel = tripLabel
@@ -25,6 +31,6 @@ final class ApiStopBuilder {
     }
 
     func build() -> ApiStop {
-        return .init(tripLabel: _tripLabel, arrival: _arrival, departure: _departure)
+        return .init(id: _id, tripLabel: _tripLabel, arrival: _arrival, departure: _departure)
     }
 }

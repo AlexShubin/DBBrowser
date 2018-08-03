@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let timetablesUrl = URL(string: "https://api.deutschebahn.com/timetables/v1")!
         let fahrplanService = ApiFahrplanService(baseUrl: fahrplanUrl,
                                                  configuration: configuration)
-        let timetableService = ApiTimetableService(baseUrl: timetablesUrl,
+        let timetableService = ApiTimetablesService(baseUrl: timetablesUrl,
                                                    configuration: configuration)
         let timetableConverter = ApiTimetableConverter(dateFormatter: dateFormatter)
         let timetableLoader = ApiTimetableLoader(timetableService: timetableService,

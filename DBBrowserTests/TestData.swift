@@ -17,6 +17,7 @@ enum TestData {
     static let date1 = Date.testSample(from: "1807071000")
 
     enum Timetable {
+        static let id1 = "3207621895872414763-1807072151-1"
         static let category1 = "ICE"
         static let number1 = "691"
         static let platform1 = "18"
@@ -24,6 +25,7 @@ enum TestData {
         static let time1 = Date.testSample(from: timeString1)
         static let stations1 = "Berlin Hbf (tief)|Berlin Südkreuz|Lutherstadt Wittenberg Hbf|Leipzig Hbf|Erfurt Hbf|Eisenach|Fulda|Frankfurt(Main)Hbf|Mannheim Hbf|Stuttgart Hbf|Ulm Hbf|Augsburg Hbf|München-Pasing"
 
+        static let id2 = "-381142949737100268-1807072144-1"
         static let category2 = "RE"
         static let number2 = "1718"
         static let platform2 = "15"
