@@ -31,10 +31,15 @@ struct TimetableState: State, Equatable {
 
 // MARK: - Events
 enum TimetableEvent {
+    /// Sets station.
     case station(Station)
+    /// Start loading timetable for current dateToLoad.
     case loadTimetable
+    /// Sets loaded timetable to the state and encreases dateToLoad to the next hour.
     case timetableLoaded(TimetableLoaderResult)
+    /// Changes current table.
     case changeTable(Int)
+    /// Empties current timetable and sets dateToLoad to `date` (from the main screen).
     case reset
 }
 
