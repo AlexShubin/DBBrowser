@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                  timetableConverter: timetableConverter,
                                                  dateFormatter: dateFormatter)
         let stationFinder = ApiStationFinder(fahrplanService: fahrplanService,
-                                             stationConverter: StationConverter())
+                                             stationConverter: ApiStationConverter())
         let sideEffects = AppSideEffects(coordinator: coordinator,
                                          stationFinder: stationFinder,
                                          timetableLoader: timetableLoader)

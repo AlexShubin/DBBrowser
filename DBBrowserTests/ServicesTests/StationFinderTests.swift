@@ -18,7 +18,7 @@ class StationFinderTests: XCTestCase {
     override func setUp() {
         super.setUp()
         stationFinder = ApiStationFinder(fahrplanService: fahrplanServiceMock,
-                                                          stationConverter: StationConverter())
+                                                          stationConverter: ApiStationConverter())
     }
 
     func testStationSearchSucceededOnApiSuccess() {

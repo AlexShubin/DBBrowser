@@ -17,9 +17,9 @@ enum StationFinderError: String, Error, Equatable {
 struct ApiStationFinder: StationFinder {
 
     private let _fahrplanService: FahrplanService
-    private let _stationConverter: StationConverter
+    private let _stationConverter: ApiStationConverter
 
-    init(fahrplanService: FahrplanService, stationConverter: StationConverter) {
+    init(fahrplanService: FahrplanService, stationConverter: ApiStationConverter) {
         _fahrplanService = fahrplanService
         _stationConverter = stationConverter
     }

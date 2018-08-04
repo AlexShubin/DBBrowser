@@ -94,7 +94,7 @@
 		B8F1E51720CFE600000F1606 /* State+ApplyEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1E51620CFE600000F1606 /* State+ApplyEvents.swift */; };
 		B8F437C420A8298E00977CE3 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C320A8298E00977CE3 /* Station.swift */; };
 		B8F437C620A82A9500977CE3 /* FahrplanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C520A82A9500977CE3 /* FahrplanService.swift */; };
-		B8F437CA20A8305600977CE3 /* StationConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C920A8305600977CE3 /* StationConverter.swift */; };
+		B8F437CA20A8305600977CE3 /* ApiStationConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437C920A8305600977CE3 /* ApiStationConverter.swift */; };
 		B8F437CD20A8335C00977CE3 /* StationFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437CC20A8335C00977CE3 /* StationFinder.swift */; };
 		B8F437D020A8354900977CE3 /* FahrplanServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437CF20A8354900977CE3 /* FahrplanServiceMock.swift */; };
 		B8F437D320A836A300977CE3 /* FahrplanStationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F437D220A836A300977CE3 /* FahrplanStationBuilder.swift */; };
@@ -215,7 +215,7 @@
 		B8F1E51620CFE600000F1606 /* State+ApplyEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "State+ApplyEvents.swift"; sourceTree = "<group>"; };
 		B8F437C320A8298E00977CE3 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		B8F437C520A82A9500977CE3 /* FahrplanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrplanService.swift; sourceTree = "<group>"; };
-		B8F437C920A8305600977CE3 /* StationConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationConverter.swift; sourceTree = "<group>"; };
+		B8F437C920A8305600977CE3 /* ApiStationConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiStationConverter.swift; sourceTree = "<group>"; };
 		B8F437CC20A8335C00977CE3 /* StationFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationFinder.swift; sourceTree = "<group>"; };
 		B8F437CF20A8354900977CE3 /* FahrplanServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrplanServiceMock.swift; sourceTree = "<group>"; };
 		B8F437D220A836A300977CE3 /* FahrplanStationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrplanStationBuilder.swift; sourceTree = "<group>"; };
@@ -305,6 +305,7 @@
 				B86A73472114F12A00C38070 /* Timetable */,
 				B89F54AC20F0F5650070C765 /* TimetablesDecoder.swift */,
 				B8B412FA20F3DB7A00003EEB /* TimetablesService.swift */,
+				B81D7CA220F2387800A4F7BC /* ApiTimetableConverter.swift */,
 			);
 			path = Timetables;
 			sourceTree = "<group>";
@@ -336,7 +337,6 @@
 				B89DCF2B20F7E85D00DF30C2 /* SceneCoordinator */,
 				B831E83220AC1EEC00B951DB /* AppState.swift */,
 				B831E83320AC1EEC00B951DB /* SideEffects.swift */,
-				B831E83420AC1EEC00B951DB /* State.swift */,
 				B831E83520AC1EEC00B951DB /* AppStateStore.swift */,
 			);
 			path = AppState;
@@ -353,6 +353,7 @@
 		B85EE93E20A6D2F500F52C54 /* Fahrplan */ = {
 			isa = PBXGroup;
 			children = (
+				B8F437C920A8305600977CE3 /* ApiStationConverter.swift */,
 				B8F437C520A82A9500977CE3 /* FahrplanService.swift */,
 				B892CFBA20BAB12000176A15 /* FahrplanStation.swift */,
 			);
@@ -467,8 +468,6 @@
 		B89E812F2102092F000884FE /* Converters */ = {
 			isa = PBXGroup;
 			children = (
-				B8F437C920A8305600977CE3 /* StationConverter.swift */,
-				B81D7CA220F2387800A4F7BC /* ApiTimetableConverter.swift */,
 			);
 			path = Converters;
 			sourceTree = "<group>";
@@ -489,6 +488,7 @@
 			isa = PBXGroup;
 			children = (
 				B8AAF48E20B96D2E000C9ADE /* DataDriven.swift */,
+				B831E83420AC1EEC00B951DB /* State.swift */,
 				B8AAF49920B9808A000C9ADE /* StateStoreBindable.swift */,
 				B81D7CA420F238E800A4F7BC /* ViewStateConverter.swift */,
 			);
@@ -966,7 +966,7 @@
 				B8B412FB20F3DB7A00003EEB /* TimetablesService.swift in Sources */,
 				B8004D1720F66935006A1A83 /* TimetableState.swift in Sources */,
 				B8A9387920CFCECC007460C6 /* MainScreenViewStateConverter.swift in Sources */,
-				B8F437CA20A8305600977CE3 /* StationConverter.swift in Sources */,
+				B8F437CA20A8305600977CE3 /* ApiStationConverter.swift in Sources */,
 				B8AAF49A20B9808A000C9ADE /* StateStoreBindable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,7 +6,7 @@ import UIKit
 
 class StationCell: UITableViewCell {
 
-    struct State: Equatable {
+    struct State: Hashable {
         var stationName: String
     }
 
