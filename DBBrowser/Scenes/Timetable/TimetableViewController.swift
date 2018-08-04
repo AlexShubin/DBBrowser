@@ -61,12 +61,8 @@ extension TimetableViewController: StateStoreBindable {
             .stateBus
             .map { $0.timetable }
             .distinctUntilChanged()
-            .flatMap { [weak self] in
-                if let viewState = self?._converter.convert(from: $0) {
-                    return .just(viewState)
-                }
-                return .empty()
-        }
+            .map { [weak self] in self?._converter.convert(from: $0) }
+            .filterNil()
 
         // State render
         let dataSource = _dataSource(with: stateStore.eventBus)

@@ -5,7 +5,7 @@
 import Foundation
 
 protocol TimetableConverter {
-    func convert(from apiTimetable: ApiTimetable) -> Timetable
+    func convert(from apiTimetable: ApiTimetable, changes: ApiChanges) -> Timetable
 }
 
 struct ApiTimetableConverter: TimetableConverter {
@@ -15,27 +15,37 @@ struct ApiTimetableConverter: TimetableConverter {
         _dateFormatter = dateFormatter
     }
 
-    func convert(from apiTimetable: ApiTimetable) -> Timetable {
+    func convert(from apiTimetable: ApiTimetable, changes: ApiChanges) -> Timetable {
         var arrivals = [Timetable.Event]()
         var departures = [Timetable.Event]()
         apiTimetable.stops.forEach { stop in
             if let arrival = stop.arrival {
-                arrivals.append(Timetable.Event(category: stop.tripLabel.category,
-                                                number: stop.tripLabel.number,
-                                                stations: arrival.path.components(separatedBy: "|"),
-                                                time: _dateFormatter.date(from: arrival.time,
-                                                                          style: .apiTimetablesDateTime),
-                                                platform: arrival.platform))
+                let changedEvent = changes.stops.first { $0.id == stop.id }?.arrival
+                arrivals.append(_convert(tripLabel: stop.tripLabel,
+                                         apiEvent: arrival,
+                                         apiChangedEvent: changedEvent))
             }
             if let departure = stop.departure {
-                departures.append(Timetable.Event(category: stop.tripLabel.category,
-                                                  number: stop.tripLabel.number,
-                                                  stations: departure.path.components(separatedBy: "|"),
-                                                  time: _dateFormatter.date(from: departure.time,
-                                                                            style: .apiTimetablesDateTime),
-                                                  platform: departure.platform))
+                let changedEvent = changes.stops.first { $0.id == stop.id }?.departure
+                departures.append(_convert(tripLabel: stop.tripLabel,
+                                           apiEvent: departure,
+                                           apiChangedEvent: changedEvent))
             }
         }
         return Timetable(arrivals: arrivals, departures: departures)
+    }
+
+    func _convert(tripLabel: ApiTripLabel,
+                  apiEvent: ApiEvent,
+                  apiChangedEvent: ApiChangedEvent?) -> Timetable.Event {
+        let path = apiChangedEvent?.path ?? apiEvent.path
+        let time = apiChangedEvent?.time ?? apiEvent.time
+        let platform = apiChangedEvent?.platform ?? apiEvent.platform
+        return Timetable.Event(category: tripLabel.category,
+                               number: tripLabel.number,
+                               stations: path.components(separatedBy: "|"),
+                               time: _dateFormatter.date(from: time,
+                                                         style: .apiTimetablesDateTime),
+                               platform: platform)
     }
 }

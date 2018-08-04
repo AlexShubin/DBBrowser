@@ -5,7 +5,7 @@
 @testable import DBBrowser
 
 class TimetableConverterMock: TimetableConverter {
-    func convert(from apiTimetable: ApiTimetable) -> Timetable {
+    func convert(from apiTimetable: ApiTimetable, changes: ApiChanges) -> Timetable {
         return expected
     }
 

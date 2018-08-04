@@ -26,7 +26,8 @@ class TimetableLoaderServiceTests: XCTestCase {
 
     func testTimetableLoadingSucceededOnApiSuccess() {
         // Prepare
-        timetableServiceMock.expectedTimetable = .just(ApiTimetable(stops: []))
+        timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
+        timetableServiceMock.expectedChanges = .just(ApiChangesBuilder().build())
         // Run
         let testObserver = testScheduler.start {
             self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
@@ -42,6 +43,7 @@ class TimetableLoaderServiceTests: XCTestCase {
     func testTimetableLoadingFailsOnApiError() {
         // Prepare
         timetableServiceMock.expectedTimetable = .error(RxError.unknown)
+        timetableServiceMock.expectedChanges = .just(ApiChangesBuilder().build())
         // Run
         let testObserver = testScheduler.start {
             self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
@@ -52,6 +54,22 @@ class TimetableLoaderServiceTests: XCTestCase {
             XCTFail("Unexpected result")
             return
         }
+    }
+
+    func testTimetableAndChangesEndpointsEnvokedAtTheSametime() {
+        // Prepare
+        let invocationsObserver = testScheduler.createObserver(String.self)
+        timetableServiceMock.invocations
+            .subscribe(invocationsObserver)
+            .disposed(by: bag)
+        // Run
+        _ = testScheduler.start {
+            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
+                                                  date: Date(timeIntervalSince1970: 1000000)))
+        }
+        // Test
+        XCTAssertTrue(invocationsObserver.events.contains(Recorded.next(100, "loadTimetable(evaNo:date:hour:)")))
+        XCTAssertTrue(invocationsObserver.events.contains(Recorded.next(100, "loadChanges(evaNo:)")))
     }
 
     func testDeparturesSortedByTime() {

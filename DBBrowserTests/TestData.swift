@@ -7,6 +7,7 @@
 //
 
 import Foundation
+@testable import DBBrowser
 
 //swiftlint:disable line_length
 enum TestData {
@@ -32,12 +33,21 @@ enum TestData {
         static let timeString2 = "1807072151"
         static let time2 = Date.testSample(from: timeString2)
         static let stations2 = "Augsburg Hbf|Günzburg|Ulm Hbf|Stuttgart Hbf|Mannheim Hbf|Frankfurt(M) Flughafen Fernbf|Frankfurt(Main)Hbf|Eisenach|Gotha|Erfurt Hbf|Halle(Saale)Hbf|Bitterfeld|Berlin Südkreuz|Berlin Hbf (tief)"
+
+        static let id3 = "-7265364076564664702-1808032329-1"
+        static let category3 = "RB"
+        static let number3 = "1890"
+        static let platform3 = "8"
+        static let timeString3 = "1807080600"
+        static let time3 = Date.testSample(from: timeString3)
+        static let stations3 = "München-Pasing|Augsburg Hbf|Ansbach|Stuttgart Hbf"
     }
 }
 
 private extension Date {
     static func testSample(from str: String) -> Date {
         let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.CEST
         formatter.dateFormat = "YYMMddHHmm"
         return formatter.date(from: str)!
     }

@@ -18,7 +18,7 @@ struct TimetableState: State, Equatable {
         case error, success, loading
     }
 
-    var timetable = Timetable(arrivals: [], departures: [])
+    var timetable = Timetable.empty
     var loadingState = LoadingState.success
 
     var currentTable = Table.departures
@@ -69,7 +69,7 @@ extension TimetableState {
         case .changeTable(let tableIndex):
             result.currentTable = Table(rawValue: tableIndex) ?? .departures
         case .reset:
-            result.timetable = Timetable(arrivals: [], departures: [])
+            result.timetable = Timetable.empty
             result.dateToLoad = state.date
         }
         return result

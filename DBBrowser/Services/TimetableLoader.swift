@@ -29,15 +29,17 @@ struct ApiTimetableLoader: TimetableLoader {
     }
 
     func load(with params: TimetableLoadParams) -> Observable<TimetableLoaderResult> {
+        let evaNo = String(params.station.evaId)
         let date = _dateFormatter.string(from: params.date, style: .apiTimetablesDate)
         let time = _dateFormatter.string(from: params.date, style: .apiTimetablesTime)
-        return _timetableService
-            .loadTimetable(evaNo: String(params.station.evaId), date: date, hour: time)
-            .map {
-                var timetable = self._timetableConverter.convert(from: $0)
-                timetable.arrivals = timetable.arrivals.trimOutdated(before: params.date).sortedByTime
-                timetable.departures = timetable.departures.trimOutdated(before: params.date).sortedByTime
-                return .success(timetable)
+        return Observable.combineLatest(
+            _timetableService.loadTimetable(evaNo: evaNo, date: date, hour: time),
+            _timetableService.loadChanges(evaNo: evaNo)
+        ) { (apiTimetable, apiChanges) in
+            var timetable = self._timetableConverter.convert(from: apiTimetable, changes: apiChanges)
+            timetable.arrivals = timetable.arrivals.trimOutdated(before: params.date).sortedByTime
+            timetable.departures = timetable.departures.trimOutdated(before: params.date).sortedByTime
+            return .success(timetable)
             }
             .catchError { _ in
                 .just(.error(.unknown))
