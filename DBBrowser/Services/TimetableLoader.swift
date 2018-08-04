@@ -52,7 +52,9 @@ struct ApiTimetableLoader: TimetableLoader {
             .trimOutdated(before: params.date)
             .sortedByTime
         if let corrStation = params.corrStation {
-            result = result.filter { $0.stations.contains(corrStation.name) }
+            result = result.filter {
+                $0.stations.contains(where: { $0.contains(corrStation.name) || corrStation.name.contains($0) })
+            }
         }
         return result
     }
