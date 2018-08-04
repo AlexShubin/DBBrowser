@@ -13,7 +13,7 @@ struct StationSearchSideEffectsMock: StationSearchSideEffectsType {
         }
     }
 
-    var selectStation: (Station) -> Observable<AppEvent> {
+    var selectStation: (TimetableEvent) -> Observable<AppEvent> {
         return { _ in
             self.effects.onNext(#function)
             return .empty()

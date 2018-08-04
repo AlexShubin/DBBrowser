@@ -7,10 +7,15 @@ struct StationSearchState: State, Equatable {
     typealias Event = StationSearchEvent
     static let initial = StationSearchState()
 
+    enum Mode {
+        case station, corrStation
+    }
+
     var searchResult = StationFinderResult.success([])
     var shouldSearch = false
     var searchString = ""
     var selectedStation: Station?
+    var mode = Mode.station
 }
 
 // MARK: - Events
@@ -20,6 +25,7 @@ enum StationSearchEvent {
     case found(StationFinderResult)
     case selected(Int)
     case clear
+    case mode(StationSearchState.Mode)
 }
 
 // MARK: - Queries
@@ -27,8 +33,16 @@ extension StationSearchState {
     var querySearch: String? {
         return shouldSearch ? searchString : nil
     }
-    var querySelectedStation: Station? {
-        return selectedStation
+    var querySelectedStation: TimetableEvent? {
+        guard let station = selectedStation else {
+            return nil
+        }
+        switch mode {
+        case .station:
+            return .station(station)
+        case .corrStation:
+            return .corrStation(station)
+        }
     }
 }
 
@@ -49,6 +63,8 @@ extension StationSearchState {
             result.selectedStation = state._station(with: index)
         case .clear:
             result = .initial
+        case .mode(let mode):
+            result.mode = mode
         }
         return result
     }

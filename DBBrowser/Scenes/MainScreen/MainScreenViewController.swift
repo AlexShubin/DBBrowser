@@ -134,11 +134,25 @@ extension MainScreenViewController: StateStoreBindable {
             })
             .disposed(by: bag)
         // UI Events
-        let fromLabelRecognizer = UITapGestureRecognizer()
-        _stationLabel.addGestureRecognizer(fromLabelRecognizer)
-        fromLabelRecognizer.rx.event
-            .map { _ in
-                .coordinator(.show(.stationSearch, .modal))
+        let stationLabelRecognizer = UITapGestureRecognizer()
+        _stationLabel.addGestureRecognizer(stationLabelRecognizer)
+        stationLabelRecognizer.rx.event
+            .flatMap { _ in
+                Observable.of(
+                    .stationSearch(.mode(.station)),
+                    .coordinator(.show(.stationSearch, .modal))
+                )
+            }
+            .bind(to: stateStore.eventBus)
+            .disposed(by: bag)
+        let corrStationLabelRecognizer = UITapGestureRecognizer()
+        _corrStationLabel.addGestureRecognizer(corrStationLabelRecognizer)
+        corrStationLabelRecognizer.rx.event
+            .flatMap { _ in
+                Observable.of(
+                    .stationSearch(.mode(.corrStation)),
+                    .coordinator(.show(.stationSearch, .modal))
+                )
             }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)

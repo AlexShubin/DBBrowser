@@ -8,7 +8,7 @@ import Foundation
 
 protocol StationSearchSideEffectsType: FeedbackLoopsHolder {
     var search: (String) -> Observable<AppEvent> { get }
-    var selectStation: (Station) -> Observable<AppEvent> { get }
+    var selectStation: (TimetableEvent) -> Observable<AppEvent> { get }
 }
 
 extension StationSearchSideEffectsType {
@@ -35,9 +35,9 @@ struct StationSearchSideEffects: StationSearchSideEffectsType {
         }
     }
 
-    var selectStation: (Station) -> Observable<AppEvent> {
+    var selectStation: (TimetableEvent) -> Observable<AppEvent> {
         return {
-            .of(.timetable(.station($0)),
+            .of(.timetable($0),
                 .coordinator(.close(.modal)))
         }
     }

@@ -23,6 +23,12 @@ class StationSearchReducerTests: XCTestCase {
         XCTAssertTrue(state.shouldSearch)
     }
 
+    func testMode() {
+        var state = StationSearchState.initial
+        state = StationSearchState.reduce(state: state, event: .mode(.corrStation))
+        XCTAssertEqual(state.mode, .corrStation)
+    }
+
     func testFound() {
         let expectedResult = StationFinderResult.success([StationBuilder().build()])
         var state = StationSearchState.initial

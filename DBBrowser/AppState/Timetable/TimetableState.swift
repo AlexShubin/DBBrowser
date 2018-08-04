@@ -30,9 +30,11 @@ struct TimetableState: State, Equatable {
 }
 
 // MARK: - Events
-enum TimetableEvent {
+enum TimetableEvent: Equatable {
     /// Sets station.
     case station(Station)
+    /// Sets corresponding station.
+    case corrStation(Station)
     /// Start loading timetable for current dateToLoad.
     case loadTimetable
     /// Sets loaded timetable to the state and encreases dateToLoad to the next hour.
@@ -50,7 +52,7 @@ extension TimetableState {
             let station = station else {
             return nil
         }
-        return TimetableLoadParams(station: station, date: dateToLoad)
+        return TimetableLoadParams(station: station, date: dateToLoad, corrStation: corrStation)
     }
 }
 
@@ -77,6 +79,8 @@ extension TimetableState {
         case .reset:
             result.timetable = Timetable.empty
             result.dateToLoad = state.date
+        case .corrStation(let station):
+            result.corrStation = station
         }
         return result
     }

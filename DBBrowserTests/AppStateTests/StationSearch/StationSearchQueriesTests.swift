@@ -20,9 +20,27 @@ class StationSearchQueriesTests: XCTestCase {
         XCTAssertNil(state.querySearch)
     }
 
-    func testQueryStationSelected_returnsStationWhenStationSelected() {
-        var state = StationSearchState.initial
-        state.selectedStation = StationBuilder().build()
-        XCTAssertEqual(state.querySelectedStation, state.selectedStation)
+    func testQueryStationSelected_returnsStationWhenStationSelectedAndModeIsStation() {
+        let station = StationBuilder().build()
+        let state = StationSearchState.applyEvents(initial: .initial, events: [
+                .mode(.station),
+                .searchString("123"),
+                .startSearch,
+                .found(.success([station])),
+                .selected(0)
+            ])
+        XCTAssertEqual(state.querySelectedStation, .station(station))
+    }
+
+    func testQueryStationSelected_returnsCorrStationWhenStationSelectedAndModeIsCorrStation() {
+        let station = StationBuilder().build()
+        let state = StationSearchState.applyEvents(initial: .initial, events: [
+            .mode(.corrStation),
+            .searchString("123"),
+            .startSearch,
+            .found(.success([station])),
+            .selected(0)
+            ])
+        XCTAssertEqual(state.querySelectedStation, .corrStation(station))
     }
 }

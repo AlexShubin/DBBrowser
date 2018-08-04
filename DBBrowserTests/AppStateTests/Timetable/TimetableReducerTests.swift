@@ -10,6 +10,7 @@ class TimetableReducerTests: XCTestCase {
     func testInitial() {
         let state = TimetableState.initial
         XCTAssertNil(state.station)
+        XCTAssertNil(state.corrStation)
         XCTAssertEqual(state.loadingState, .success)
         XCTAssertEqual(state.timetable, Timetable(arrivals: [], departures: []))
         XCTAssertEqual(state.currentTable, .departures)
@@ -21,6 +22,14 @@ class TimetableReducerTests: XCTestCase {
             .station(station)
             ])
         XCTAssertEqual(state.station, station)
+    }
+
+    func testCorrStationEventSetsCorrStation() {
+        let station = StationBuilder().build()
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .corrStation(station)
+            ])
+        XCTAssertEqual(state.corrStation, station)
     }
 
     func testLoadTimetableEventShouldSetLoadFlag() {
