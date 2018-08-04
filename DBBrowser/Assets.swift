@@ -47,6 +47,7 @@ internal enum Asset {
   internal enum Colors {
     internal static let dbRed = ColorAsset(name: "dbRed")
   }
+  internal static let btnClose = ImageAsset(name: "btnClose")
   internal static let doubleArrowDown = ImageAsset(name: "doubleArrowDown")
   internal static let error = ImageAsset(name: "error")
   internal static let mainScreenImage = ImageAsset(name: "mainScreenImage")
@@ -56,6 +57,7 @@ internal enum Asset {
     Colors.dbRed,
   ]
   internal static let allImages: [ImageAsset] = [
+    btnClose,
     doubleArrowDown,
     error,
     mainScreenImage,
