@@ -56,7 +56,7 @@ class TimetableLoaderServiceTests: XCTestCase {
         }
     }
 
-    func testTimetableAndChangesEndpointsEnvokedAtTheSametime() {
+    func testTimetableAndChangesEndpointsEnvokedAtTheSameTime() {
         // Prepare
         let invocationsObserver = testScheduler.createObserver(String.self)
         timetableServiceMock.invocations
@@ -68,8 +68,41 @@ class TimetableLoaderServiceTests: XCTestCase {
                                                   date: Date(timeIntervalSince1970: 1000000)))
         }
         // Test
-        XCTAssertTrue(invocationsObserver.events.contains(Recorded.next(100, "loadTimetable(evaNo:date:hour:)")))
-        XCTAssertTrue(invocationsObserver.events.contains(Recorded.next(100, "loadChanges(evaNo:)")))
+        XCTAssertEqual(invocationsObserver.events
+            .filter { $0 == Recorded.next(100, "loadTimetable(evaNo:date:hour:)") }
+            .count,
+            1
+        )
+        XCTAssertEqual(invocationsObserver.events
+            .filter { $0 == Recorded.next(100, "loadChanges(evaNo:)") }
+            .count,
+            1
+        )
+    }
+
+    func testTimetableAndChangesEndpointsEnvokedAtTheSameTimeDoubleTimeForSpecialEvaId() {
+        // Prepare
+        let berlinHbf = 8011160
+        let invocationsObserver = testScheduler.createObserver(String.self)
+        timetableServiceMock.invocations
+            .subscribe(invocationsObserver)
+            .disposed(by: bag)
+        // Run
+        _ = testScheduler.start {
+            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: berlinHbf),
+                                                  date: Date(timeIntervalSince1970: 1000000)))
+        }
+        // Test
+        XCTAssertEqual(invocationsObserver.events
+            .filter { $0 == Recorded.next(100, "loadTimetable(evaNo:date:hour:)") }
+            .count,
+            2
+        )
+        XCTAssertEqual(invocationsObserver.events
+            .filter { $0 == Recorded.next(100, "loadChanges(evaNo:)") }
+            .count,
+            2
+        )
     }
 
     func testDeparturesSortedByTime() {
