@@ -37,8 +37,8 @@ struct ApiTimetableLoader: TimetableLoader {
             _timetableService.loadChanges(evaNo: evaNo)
         ) { (apiTimetable, apiChanges) in
             var timetable = self._timetableConverter.convert(from: apiTimetable, changes: apiChanges)
-            timetable.arrivals = timetable.arrivals.trimOutdated(before: params.date).sortedByTime
-            timetable.departures = timetable.departures.trimOutdated(before: params.date).sortedByTime
+            timetable.arrivals = self._applyFiltersAndSort(to: timetable.arrivals, params: params)
+            timetable.departures = self._applyFiltersAndSort(to: timetable.departures, params: params)
             return .success(timetable)
             }
             .catchError { _ in
@@ -46,6 +46,16 @@ struct ApiTimetableLoader: TimetableLoader {
         }
     }
 
+    private func _applyFiltersAndSort(to events: [Timetable.Event],
+                                      params: TimetableLoadParams) -> [Timetable.Event] {
+        var result = events
+            .trimOutdated(before: params.date)
+            .sortedByTime
+        if let corrStation = params.corrStation {
+            result = result.filter { $0.stations.contains(corrStation.name) }
+        }
+        return result
+    }
 }
 
 private extension Array where Element == Timetable.Event {

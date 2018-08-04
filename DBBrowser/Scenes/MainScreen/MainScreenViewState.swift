@@ -9,4 +9,5 @@ struct MainScreenViewState: Equatable {
     }
     var station: Field
     var date: String
+    var corrStation: Field
 }

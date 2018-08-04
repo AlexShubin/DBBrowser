@@ -19,8 +19,16 @@ struct MainScreenViewStateConverter: ViewStateConverter {
         case .some(let station):
             stationField = .chosen(station.name)
         }
+        let corrStationField: Field
+        switch state.corrStation {
+        case .none:
+            corrStationField = .placeholder(L10n.MainScreen.corrStationPlaceholder)
+        case .some(let station):
+            corrStationField = .chosen(station.name)
+        }
         return MainScreenViewState(station: stationField,
                                    date: _dateFormatter.string(from: state.date,
-                                                               style: .userMainScreenDateTime))
+                                                               style: .userMainScreenDateTime),
+                                   corrStation: corrStationField)
     }
 }

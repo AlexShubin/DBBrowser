@@ -151,6 +151,50 @@ class TimetableLoaderServiceTests: XCTestCase {
         }
         XCTAssertEqual(timetable.arrivals, [laterTrain])
     }
+
+    func testFiltersDeparturesByCorrStation() {
+        // Prepare
+        let withCorrStation = TimetableEventBuilder().with(stations: ["123", "456", "789"]).build()
+        let withoutCorrStation = TimetableEventBuilder().with(stations: ["1011", "1213", "1415"]).build()
+        timetableConverterMock.expected = TimetableBuilder()
+            .with(departures: [withCorrStation, withoutCorrStation])
+            .build()
+        timetableServiceMock.expectedTimetable = .just(ApiTimetable(stops: []))
+        // Run
+        let testObserver = testScheduler.start {
+            self.timetableLoader.load(with: .init(station: StationBuilder().build(),
+                                                  date: TestData.date1,
+                                                  corrStation: StationBuilder().with(name: "456").build()))
+        }
+        // Test
+        guard case .success(let timetable)? = testObserver.firstElement else {
+            XCTFail("Unexpected result")
+            return
+        }
+        XCTAssertEqual(timetable.departures, [withCorrStation])
+    }
+
+    func testFiltersArrivalsByCorrStation() {
+        // Prepare
+        let withCorrStation = TimetableEventBuilder().with(stations: ["1011", "1213", "1415"]).build()
+        let withoutCorrStation = TimetableEventBuilder().with(stations: ["123", "456", "789"]).build()
+        timetableConverterMock.expected = TimetableBuilder()
+            .with(arrivals: [withCorrStation, withoutCorrStation])
+            .build()
+        timetableServiceMock.expectedTimetable = .just(ApiTimetable(stops: []))
+        // Run
+        let testObserver = testScheduler.start {
+            self.timetableLoader.load(with: .init(station: StationBuilder().build(),
+                                                  date: TestData.date1,
+                                                  corrStation: StationBuilder().with(name: "1415").build()))
+        }
+        // Test
+        guard case .success(let timetable)? = testObserver.firstElement else {
+            XCTFail("Unexpected result")
+            return
+        }
+        XCTAssertEqual(timetable.arrivals, [withCorrStation])
+    }
 }
 
 private extension Date {

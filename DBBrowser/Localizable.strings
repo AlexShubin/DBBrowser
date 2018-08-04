@@ -1,7 +1,9 @@
 
 "main_screen.station_caption" = "Station";
+"main_screen.corr_station_caption" = "Corresponding station";
 "main_screen.date_caption" = "Date and time";
 "main_screen.station_placeholder" = "Select a station";
+"main_screen.corr_station_placeholder" = "Select a station";
 "main_screen.search_button" = "Show timetable";
 
 "station_search.placeholder" = "Start typing station name";

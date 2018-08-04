@@ -24,6 +24,7 @@ struct TimetableState: State, Equatable {
     var currentTable = Table.departures
 
     var station: Station?
+    var corrStation: Station?
     var date = Date()
     var dateToLoad = Date()
 }

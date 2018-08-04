@@ -13,8 +13,10 @@ class MainScreenViewController: UIViewController {
 
     private let _converter: MainScreenViewStateConverter
 
-    private let _fromCaption = UILabel()
-    private let _fromLabel = UILabel()
+    private let _stationCaption = UILabel()
+    private let _stationLabel = UILabel()
+    private let _corrStationCaption = UILabel()
+    private let _corrStationLabel = UILabel()
     private let _dateCaption = UILabel()
     private let _dateLabel = UILabel()
     private let _searchButton = UIButton(type: .system)
@@ -34,11 +36,15 @@ class MainScreenViewController: UIViewController {
 
         view.backgroundColor = .white
 
-        _fromCaption.text = L10n.MainScreen.stationCaption
-        _dateCaption.text = L10n.MainScreen.dateCaption
+        _stationCaption.text = L10n.MainScreen.stationCaption
+        _stationLabel.font = Constants.Fonts.inputLabels
+        _stationLabel.isUserInteractionEnabled = true
 
-        _fromLabel.font = Constants.Fonts.inputLabels
-        _fromLabel.isUserInteractionEnabled = true
+        _corrStationCaption.text = L10n.MainScreen.corrStationCaption
+        _corrStationLabel.font = Constants.Fonts.inputLabels
+        _corrStationLabel.isUserInteractionEnabled = true
+
+        _dateCaption.text = L10n.MainScreen.dateCaption
         _dateLabel.font = Constants.Fonts.inputLabels
         _dateLabel.textColor = .black
 
@@ -73,19 +79,23 @@ class MainScreenViewController: UIViewController {
             sheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
         // Station stack view
-        let stationStack = UIStackView(arrangedSubviews: [_fromCaption, _fromLabel])
+        let stationStack = UIStackView(arrangedSubviews: [_stationCaption, _stationLabel])
         stationStack.axis = .vertical
-        stationStack.spacing = 6
+        stationStack.spacing = Constants.Field.spacing
+        // Corr station stack view
+        let corrStationStack = UIStackView(arrangedSubviews: [_corrStationCaption, _corrStationLabel])
+        corrStationStack.axis = .vertical
+        corrStationStack.spacing = Constants.Field.spacing
         // Date stack view
         let dateStack = UIStackView(arrangedSubviews: [_dateCaption, _dateLabel])
         dateStack.axis = .vertical
-        dateStack.spacing = 6
+        dateStack.spacing = Constants.Field.spacing
         // Search button
         _searchButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         // Stack view
-        let stack = UIStackView(arrangedSubviews: [stationStack, dateStack, _searchButton])
+        let stack = UIStackView(arrangedSubviews: [stationStack, dateStack, corrStationStack, _searchButton])
         stack.axis = .vertical
-        stack.spacing = 24
+        stack.spacing = Constants.FieldsStack.spacing
         sheetView.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -125,7 +135,7 @@ extension MainScreenViewController: StateStoreBindable {
             .disposed(by: bag)
         // UI Events
         let fromLabelRecognizer = UITapGestureRecognizer()
-        _fromLabel.addGestureRecognizer(fromLabelRecognizer)
+        _stationLabel.addGestureRecognizer(fromLabelRecognizer)
         fromLabelRecognizer.rx.event
             .map { _ in
                 .coordinator(.show(.stationSearch, .modal))
@@ -142,7 +152,8 @@ extension MainScreenViewController: StateStoreBindable {
     }
 
     private func _render(_ state: MainScreenViewState) {
-        _render(field: state.station, in: _fromLabel)
+        _render(field: state.station, in: _stationLabel)
+        _render(field: state.corrStation, in: _corrStationLabel)
         _dateLabel.text = state.date
     }
 
@@ -162,6 +173,12 @@ private extension MainScreenViewController {
     enum Constants {
         enum Fonts {
             static let inputLabels = UIFont.systemFont(ofSize: 34, weight: .medium)
+        }
+        enum Field {
+            static let spacing: CGFloat = 4
+        }
+        enum FieldsStack {
+            static let spacing: CGFloat = 18
         }
     }
 }
