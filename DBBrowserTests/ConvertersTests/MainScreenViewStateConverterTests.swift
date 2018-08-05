@@ -21,7 +21,8 @@ class MainScreenViewStateConverterTests: XCTestCase {
         // Run
         let converted = mainScreenViewStateConverter.convert(from: state)
         // Test
-        XCTAssertEqual(converted.station, .placeholder(L10n.MainScreen.stationPlaceholder))
+        XCTAssertEqual(converted.station.caption, L10n.MainScreen.stationCaption)
+        XCTAssertEqual(converted.station.field, .placeholder(L10n.MainScreen.stationPlaceholder))
     }
 
     func testChosenStationConverted() {
@@ -33,7 +34,31 @@ class MainScreenViewStateConverterTests: XCTestCase {
         // Run
         let converted = mainScreenViewStateConverter.convert(from: state)
         // Test
-        XCTAssertEqual(converted.station, .chosen(TestData.stationName1))
+        XCTAssertEqual(converted.station.caption, L10n.MainScreen.stationCaption)
+        XCTAssertEqual(converted.station.field, .chosen(TestData.stationName1))
+    }
+
+    func testNoCorrStationConverted() {
+        // Prepare
+        let state = TimetableState.initial
+        // Run
+        let converted = mainScreenViewStateConverter.convert(from: state)
+        // Test
+        XCTAssertEqual(converted.station.caption, L10n.MainScreen.stationCaption)
+        XCTAssertEqual(converted.station.field, .placeholder(L10n.MainScreen.corrStationPlaceholder))
+    }
+
+    func testChosenCorrStationConverted() {
+        // Prepare
+        var state = TimetableState.initial
+        state.corrStation = StationBuilder()
+            .with(name: TestData.stationName1)
+            .build()
+        // Run
+        let converted = mainScreenViewStateConverter.convert(from: state)
+        // Test
+        XCTAssertEqual(converted.corrStation.caption, L10n.MainScreen.corrStationCaption)
+        XCTAssertEqual(converted.corrStation.field, .chosen(TestData.stationName1))
     }
 
     func testRightDateAndStylePassedToConverter() {
@@ -55,6 +80,6 @@ class MainScreenViewStateConverterTests: XCTestCase {
         // Run
         let converted = mainScreenViewStateConverter.convert(from: state)
         // Test
-        XCTAssertEqual(converted.date, "123")
+        XCTAssertEqual(converted.date.field, .chosen("123"))
     }
 }

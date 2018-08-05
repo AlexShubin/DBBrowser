@@ -3,7 +3,7 @@
 //
 
 struct MainScreenViewStateConverter: ViewStateConverter {
-    private typealias Field = MainScreenViewState.Field
+    private typealias Field = InputField.State.Field
 
     private var _dateFormatter: DateTimeFormatter
 
@@ -26,9 +26,13 @@ struct MainScreenViewStateConverter: ViewStateConverter {
         case .some(let station):
             corrStationField = .chosen(station.name)
         }
-        return MainScreenViewState(station: stationField,
-                                   date: _dateFormatter.string(from: state.date,
-                                                               style: .userMainScreenDateTime),
-                                   corrStation: corrStationField)
+        let dateField = Field.chosen(_dateFormatter.string(from: state.date,
+                                                           style: .userMainScreenDateTime))
+        return MainScreenViewState(station: InputField.State(field: stationField,
+                                                             caption: L10n.MainScreen.stationCaption),
+                                   date: InputField.State(field: dateField,
+                                                          caption: L10n.MainScreen.dateCaption),
+                                   corrStation: InputField.State(field: corrStationField,
+                                                                 caption: L10n.MainScreen.corrStationCaption))
     }
 }

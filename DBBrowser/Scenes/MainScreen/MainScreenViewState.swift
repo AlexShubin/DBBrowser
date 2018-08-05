@@ -3,11 +3,7 @@
 //
 
 struct MainScreenViewState: Equatable {
-    enum Field: Equatable {
-        case placeholder(String)
-        case chosen(String)
-    }
-    var station: Field
-    var date: String
-    var corrStation: Field
+    var station: InputField.State
+    var date: InputField.State
+    var corrStation: InputField.State
 }

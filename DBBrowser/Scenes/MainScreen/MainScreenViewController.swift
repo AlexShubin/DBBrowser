@@ -13,12 +13,9 @@ class MainScreenViewController: UIViewController {
 
     private let _converter: MainScreenViewStateConverter
 
-    private let _stationCaption = UILabel()
-    private let _stationLabel = UILabel()
-    private let _corrStationCaption = UILabel()
-    private let _corrStationLabel = UILabel()
-    private let _dateCaption = UILabel()
-    private let _dateLabel = UILabel()
+    private let _station = InputField()
+    private let _corrStation = InputField()
+    private let _date = InputField()
     private let _searchButton = UIButton(type: .system)
 
     init(converter: MainScreenViewStateConverter) {
@@ -35,18 +32,6 @@ class MainScreenViewController: UIViewController {
         _setupLayout()
 
         view.backgroundColor = .white
-
-        _stationCaption.text = L10n.MainScreen.stationCaption
-        _stationLabel.font = Constants.Fonts.inputLabels
-        _stationLabel.isUserInteractionEnabled = true
-
-        _corrStationCaption.text = L10n.MainScreen.corrStationCaption
-        _corrStationLabel.font = Constants.Fonts.inputLabels
-        _corrStationLabel.isUserInteractionEnabled = true
-
-        _dateCaption.text = L10n.MainScreen.dateCaption
-        _dateLabel.font = Constants.Fonts.inputLabels
-        _dateLabel.textColor = .black
 
         _searchButton.backgroundColor = UIColor(asset: Asset.Colors.dbRed)
         _searchButton.layer.cornerRadius = 8
@@ -78,22 +63,10 @@ class MainScreenViewController: UIViewController {
             sheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             sheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
-        // Station stack view
-        let stationStack = UIStackView(arrangedSubviews: [_stationCaption, _stationLabel])
-        stationStack.axis = .vertical
-        stationStack.spacing = Constants.Field.spacing
-        // Corr station stack view
-        let corrStationStack = UIStackView(arrangedSubviews: [_corrStationCaption, _corrStationLabel])
-        corrStationStack.axis = .vertical
-        corrStationStack.spacing = Constants.Field.spacing
-        // Date stack view
-        let dateStack = UIStackView(arrangedSubviews: [_dateCaption, _dateLabel])
-        dateStack.axis = .vertical
-        dateStack.spacing = Constants.Field.spacing
         // Search button
         _searchButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         // Stack view
-        let stack = UIStackView(arrangedSubviews: [stationStack, dateStack, corrStationStack, _searchButton])
+        let stack = UIStackView(arrangedSubviews: [_station, _date, _corrStation, _searchButton])
         stack.axis = .vertical
         stack.spacing = Constants.FieldsStack.spacing
         sheetView.addSubview(stack)
@@ -134,25 +107,27 @@ extension MainScreenViewController: StateStoreBindable {
             })
             .disposed(by: bag)
         // UI Events
-        let stationLabelRecognizer = UITapGestureRecognizer()
-        _stationLabel.addGestureRecognizer(stationLabelRecognizer)
-        stationLabelRecognizer.rx.event
-            .flatMap { _ in
-                Observable.of(
-                    .stationSearch(.mode(.station)),
-                    .coordinator(.show(.stationSearch, .modal))
-                )
+        _station.events
+            .flatMap { (event) -> Observable<AppEvent> in
+                switch event {
+                case .tap:
+                    return .of(
+                        .stationSearch(.mode(.station)),
+                        .coordinator(.show(.stationSearch, .modal))
+                    )
+                }
             }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
-        let corrStationLabelRecognizer = UITapGestureRecognizer()
-        _corrStationLabel.addGestureRecognizer(corrStationLabelRecognizer)
-        corrStationLabelRecognizer.rx.event
-            .flatMap { _ in
-                Observable.of(
-                    .stationSearch(.mode(.corrStation)),
-                    .coordinator(.show(.stationSearch, .modal))
-                )
+        _corrStation.events
+            .flatMap { (event) -> Observable<AppEvent> in
+                switch event {
+                case .tap:
+                    return .of(
+                        .stationSearch(.mode(.corrStation)),
+                        .coordinator(.show(.stationSearch, .modal))
+                    )
+                }
             }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
@@ -166,31 +141,16 @@ extension MainScreenViewController: StateStoreBindable {
     }
 
     private func _render(_ state: MainScreenViewState) {
-        _render(field: state.station, in: _stationLabel)
-        _render(field: state.corrStation, in: _corrStationLabel)
-        _dateLabel.text = state.date
-    }
-
-    private func _render(field: MainScreenViewState.Field, in label: UILabel) {
-        switch field {
-        case .placeholder(let str):
-            label.text = str
-            label.textColor = .lightGray
-        case .chosen(let str):
-            label.text = str
-            label.textColor = .black
-        }
+        _station.render(state: state.station)
+        _corrStation.render(state: state.corrStation)
+        _date.render(state: state.date)
     }
 }
 
+// MARK: - Constants
+
 private extension MainScreenViewController {
     enum Constants {
-        enum Fonts {
-            static let inputLabels = UIFont.systemFont(ofSize: 34, weight: .medium)
-        }
-        enum Field {
-            static let spacing: CGFloat = 4
-        }
         enum FieldsStack {
             static let spacing: CGFloat = 18
         }
