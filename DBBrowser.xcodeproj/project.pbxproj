@@ -327,7 +327,6 @@
 			isa = PBXGroup;
 			children = (
 				B8224EF420BAF07100F9132A /* RoundedView.swift */,
-				B8E240422117142A009E7861 /* InputField.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -377,6 +376,7 @@
 		B8602DF920A9A922001BEDC2 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				B8F0AC5F21179AC300E6DA78 /* Views */,
 				B8F437E020A84E4400977CE3 /* MainScreenViewController.swift */,
 				B8A9387820CFCECC007460C6 /* MainScreenViewStateConverter.swift */,
 				B8A9387120CFC9E9007460C6 /* MainScreenViewState.swift */,
@@ -564,6 +564,14 @@
 				B8B401D520A5DEF500D25B2C /* Info.plist */,
 			);
 			path = DBBrowserTests;
+			sourceTree = "<group>";
+		};
+		B8F0AC5F21179AC300E6DA78 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8E240422117142A009E7861 /* InputField.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		B8F1E51820CFE633000F1606 /* ServicesTests */ = {
