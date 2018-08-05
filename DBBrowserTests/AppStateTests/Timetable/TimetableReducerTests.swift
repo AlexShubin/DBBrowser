@@ -32,6 +32,15 @@ class TimetableReducerTests: XCTestCase {
         XCTAssertEqual(state.corrStation, station)
     }
 
+    func testCorrStationClearEventClearsCorrStation() {
+        let station = StationBuilder().build()
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .corrStation(station),
+            .clearCorrStation
+            ])
+        XCTAssertNil(state.corrStation)
+    }
+
     func testLoadTimetableEventShouldSetLoadFlag() {
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .loadTimetable

@@ -35,6 +35,8 @@ enum TimetableEvent: Equatable {
     case station(Station)
     /// Sets corresponding station.
     case corrStation(Station)
+    /// Clears corresponding station.
+    case clearCorrStation
     /// Start loading timetable for current dateToLoad.
     case loadTimetable
     /// Sets loaded timetable to the state and encreases dateToLoad to the next hour.
@@ -81,6 +83,8 @@ extension TimetableState {
             result.dateToLoad = state.date
         case .corrStation(let station):
             result.corrStation = station
+        case .clearCorrStation:
+            result.corrStation = nil
         }
         return result
     }

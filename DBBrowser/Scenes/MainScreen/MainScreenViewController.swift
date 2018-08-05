@@ -115,6 +115,8 @@ extension MainScreenViewController: StateStoreBindable {
                         .stationSearch(.mode(.station)),
                         .coordinator(.show(.stationSearch, .modal))
                     )
+                case .clear:
+                    return .empty()
                 }
             }
             .bind(to: stateStore.eventBus)
@@ -127,6 +129,8 @@ extension MainScreenViewController: StateStoreBindable {
                         .stationSearch(.mode(.corrStation)),
                         .coordinator(.show(.stationSearch, .modal))
                     )
+                case .clear:
+                    return .just(.timetable(.clearCorrStation))
                 }
             }
             .bind(to: stateStore.eventBus)

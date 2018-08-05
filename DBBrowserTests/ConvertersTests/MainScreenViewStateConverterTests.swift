@@ -23,6 +23,7 @@ class MainScreenViewStateConverterTests: XCTestCase {
         // Test
         XCTAssertEqual(converted.station.caption, L10n.MainScreen.stationCaption)
         XCTAssertEqual(converted.station.field, .placeholder(L10n.MainScreen.stationPlaceholder))
+        XCTAssertTrue(converted.station.isClearButtonHidden)
     }
 
     func testChosenStationConverted() {
@@ -36,6 +37,7 @@ class MainScreenViewStateConverterTests: XCTestCase {
         // Test
         XCTAssertEqual(converted.station.caption, L10n.MainScreen.stationCaption)
         XCTAssertEqual(converted.station.field, .chosen(TestData.stationName1))
+        XCTAssertTrue(converted.station.isClearButtonHidden)
     }
 
     func testNoCorrStationConverted() {
@@ -44,8 +46,9 @@ class MainScreenViewStateConverterTests: XCTestCase {
         // Run
         let converted = mainScreenViewStateConverter.convert(from: state)
         // Test
-        XCTAssertEqual(converted.station.caption, L10n.MainScreen.stationCaption)
-        XCTAssertEqual(converted.station.field, .placeholder(L10n.MainScreen.corrStationPlaceholder))
+        XCTAssertEqual(converted.corrStation.caption, L10n.MainScreen.corrStationCaption)
+        XCTAssertEqual(converted.corrStation.field, .placeholder(L10n.MainScreen.corrStationPlaceholder))
+        XCTAssertFalse(converted.corrStation.isClearButtonHidden)
     }
 
     func testChosenCorrStationConverted() {
@@ -59,6 +62,7 @@ class MainScreenViewStateConverterTests: XCTestCase {
         // Test
         XCTAssertEqual(converted.corrStation.caption, L10n.MainScreen.corrStationCaption)
         XCTAssertEqual(converted.corrStation.field, .chosen(TestData.stationName1))
+        XCTAssertFalse(converted.corrStation.isClearButtonHidden)
     }
 
     func testRightDateAndStylePassedToConverter() {
@@ -81,5 +85,7 @@ class MainScreenViewStateConverterTests: XCTestCase {
         let converted = mainScreenViewStateConverter.convert(from: state)
         // Test
         XCTAssertEqual(converted.date.field, .chosen("123"))
+        XCTAssertEqual(converted.date.caption, L10n.MainScreen.dateCaption)
+        XCTAssertTrue(converted.date.isClearButtonHidden)
     }
 }

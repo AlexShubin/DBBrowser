@@ -479,13 +479,6 @@
 			path = Timetable;
 			sourceTree = "<group>";
 		};
-		B89E812F2102092F000884FE /* Converters */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Converters;
-			sourceTree = "<group>";
-		};
 		B8AAF49220B976A2000C9ADE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,7 +579,6 @@
 		B8F437C120A827F800977CE3 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				B89E812F2102092F000884FE /* Converters */,
 				B808238920D4F5970001599E /* Timetables */,
 				B85EE93E20A6D2F500F52C54 /* Fahrplan */,
 			);

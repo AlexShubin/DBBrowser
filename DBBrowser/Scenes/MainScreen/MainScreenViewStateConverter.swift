@@ -29,10 +29,13 @@ struct MainScreenViewStateConverter: ViewStateConverter {
         let dateField = Field.chosen(_dateFormatter.string(from: state.date,
                                                            style: .userMainScreenDateTime))
         return MainScreenViewState(station: InputField.State(field: stationField,
-                                                             caption: L10n.MainScreen.stationCaption),
+                                                             caption: L10n.MainScreen.stationCaption,
+                                                             isClearButtonHidden: true),
                                    date: InputField.State(field: dateField,
-                                                          caption: L10n.MainScreen.dateCaption),
+                                                          caption: L10n.MainScreen.dateCaption,
+                                                          isClearButtonHidden: true),
                                    corrStation: InputField.State(field: corrStationField,
-                                                                 caption: L10n.MainScreen.corrStationCaption))
+                                                                 caption: L10n.MainScreen.corrStationCaption,
+                                                                 isClearButtonHidden: false))
     }
 }

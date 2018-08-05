@@ -52,9 +52,8 @@ struct ApiTimetableLoader: TimetableLoader {
                 _timetableService.loadTimetable(evaNo: evaId, date: day, hour: time),
                 _timetableService.loadTimetable(evaNo: String(additionalEvaId), date: day, hour: time)
             ) { $0 + $1 }
-        } else {
-            return _timetableService.loadTimetable(evaNo: evaId, date: day, hour: time)
         }
+        return _timetableService.loadTimetable(evaNo: evaId, date: day, hour: time)
     }
 
     private func _loadChanges(station: Station) -> Observable<ApiChanges> {
@@ -64,14 +63,15 @@ struct ApiTimetableLoader: TimetableLoader {
                 _timetableService.loadChanges(evaNo: evaId),
                 _timetableService.loadChanges(evaNo: String(additionalEvaId))
             ) { $0 + $1 }
-        } else {
-            return _timetableService.loadChanges(evaNo: evaId)
         }
+        return _timetableService.loadChanges(evaNo: evaId)
     }
 
     private func _applyFiltersAndSort(to events: [Timetable.Event],
                                       params: TimetableLoadParams) -> [Timetable.Event] {
         var result = events
+            // dunno what they mean when the stations are empty. Let's filter these events out for now.
+            .filter { !$0.stations.isEmpty }
             .trimOutdated(before: params.date)
             .sortedByTime
         if let corrStation = params.corrStation {
