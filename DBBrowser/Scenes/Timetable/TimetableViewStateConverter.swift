@@ -4,15 +4,16 @@
 
 struct TimetableViewStateConverter: ViewStateConverter {
 
-    private let _dateFormatter: DateTimeFormatter
+    private let _timetableEventCellConverter: TimetableEventCellConverterType
 
-    init(dateFormatter: DateTimeFormatter) {
-        _dateFormatter = dateFormatter
+    init(timetableEventCellConverter: TimetableEventCellConverterType) {
+        _timetableEventCellConverter = timetableEventCellConverter
     }
 
     func convert(from state: TimetableState) -> TimetableViewState {
         var items = _eventsItems(from: state.timetable,
-                                 table: state.currentTable)
+                                 table: state.currentTable,
+                                 userCorrStation: state.corrStation)
         switch state.loadingState {
         case .error:
             if items.count > 0 {
@@ -34,37 +35,19 @@ struct TimetableViewStateConverter: ViewStateConverter {
     }
 
     private func _eventsItems(from timetable: Timetable,
-                              table: TimetableState.Table) -> [TimetableViewState.SectionItem] {
-        let corrStationCaption: String
+                              table: TimetableState.Table,
+                              userCorrStation: Station?) -> [TimetableViewState.SectionItem] {
         let events: [Timetable.Event]
         switch table {
         case .departures:
-            corrStationCaption = L10n.Timetable.towards
             events = timetable.departures
         case .arrivals:
-            corrStationCaption = L10n.Timetable.from
             events = timetable.arrivals
         }
         return events.map {
-            let corrStation: String
-            switch table {
-            case .departures:
-                corrStation = $0.stations.last ?? ""
-            case .arrivals:
-                corrStation = $0.stations.first ?? ""
-            }
-            return TimetableViewState.SectionItem.event(
-                TimetableEventCell.State(
-                    categoryAndNumber: .init(topText: $0.category,
-                                             bottomText: $0.number),
-                    timeAndDate: .init(topText: _dateFormatter.string(from: $0.time, style: .userTimetableTime),
-                                       bottomText: _dateFormatter.string(from: $0.time, style: .userTimetableDate)),
-                    platform: .init(topText: $0.platform,
-                                    bottomText: L10n.Timetable.platformCaption),
-                    corrStation: .init(caption: corrStationCaption,
-                                       station: corrStation),
-                    throughStation: nil)
-            )
+            .event(self._timetableEventCellConverter.convert(from: $0,
+                                                             table: table,
+                                                             userCorrStation: userCorrStation))
         }
     }
 }

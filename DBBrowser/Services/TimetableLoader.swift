@@ -76,7 +76,7 @@ struct ApiTimetableLoader: TimetableLoader {
             .sortedByTime
         if let corrStation = params.corrStation {
             result = result.filter {
-                $0.stations.contains(where: { $0.contains(corrStation.name) || corrStation.name.contains($0) })
+                $0.stations.contains(where: { $0.interrelated(to: corrStation.name) })
             }
         }
         return result

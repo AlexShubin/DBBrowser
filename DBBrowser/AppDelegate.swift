@@ -18,7 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _setupNavBar()
 
         let dateFormatter = AppDateTimeFormatter()
-        let timetableViewStateConverter = TimetableViewStateConverter(dateFormatter: dateFormatter)
+        let timetableEventCellConverter = TimetableEventCellConverter(dateFormatter: dateFormatter)
+        let timetableViewStateConverter = TimetableViewStateConverter(
+            timetableEventCellConverter: timetableEventCellConverter
+        )
         let mainScreenViewStateConverter = MainScreenViewStateConverter(dateFormatter: dateFormatter)
         let vcFactory = ViewControllerFactory(stationSearchViewStateConverter: StationSearchViewStateConverter(),
                                               mainScreenViewStateConverter: mainScreenViewStateConverter,

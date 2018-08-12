@@ -75,6 +75,8 @@ class TimetableEventCell: UITableViewCell {
 
     private func _setupInfoContainerLayout() {
         let stationStack = UIStackView(arrangedSubviews: [_corrStationView, _throughStationView])
+        stationStack.axis = .vertical
+        stationStack.spacing = Constants.StationStack.spacing
         _infoContainer.addSubview(stationStack)
         stationStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -141,6 +143,7 @@ extension TimetableEventCell {
             static let topOffset: CGFloat = 8
             static let bottomOffset: CGFloat = -8
             static let trailingOffset: CGFloat = -16
+            static let spacing: CGFloat = 4
         }
         static let cornerRadius: CGFloat = 8
     }

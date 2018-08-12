@@ -15,6 +15,8 @@ enum TestData {
     static let stationId1 = 123
     static let stationName2 = "Nurnberg Hbf"
     static let stationId2 = 321
+    static let stationName3 = "Ingolstadt Hbf"
+    static let stationId3 = 321767
     static let date1 = Date.testSample(from: "1807071000")
 
     enum Timetable {
