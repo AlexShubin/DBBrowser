@@ -11,6 +11,7 @@
 "timetable.platform_caption" = "platform";
 "timetable.towards" = "towards:";
 "timetable.from" = "from:";
+"timetable.through" = "through:";
 "timetable.segmented_control.departures" = "Departures";
 "timetable.segmented_control.arrivals" = "Arrivals";
 "timetable.load_more" = "Load more";

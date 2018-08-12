@@ -39,6 +39,8 @@ internal enum L10n {
     internal static let loadMore = L10n.tr("Localizable", "timetable.load_more")
     /// platform
     internal static let platformCaption = L10n.tr("Localizable", "timetable.platform_caption")
+    /// through:
+    internal static let through = L10n.tr("Localizable", "timetable.through")
     /// towards:
     internal static let towards = L10n.tr("Localizable", "timetable.towards")
 

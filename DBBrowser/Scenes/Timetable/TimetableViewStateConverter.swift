@@ -54,15 +54,16 @@ struct TimetableViewStateConverter: ViewStateConverter {
                 corrStation = $0.stations.first ?? ""
             }
             return TimetableViewState.SectionItem.event(
-                TimetableEventCell.State(category: $0.category,
-                                         number: $0.number,
-                                         time: _dateFormatter.string(from: $0.time,
-                                                                     style: .userTimetableTime),
-                                         platform: $0.platform,
-                                         date: _dateFormatter.string(from: $0.time,
-                                                                     style: .userTimetableDate),
-                                         corrStationCaption: corrStationCaption,
-                                         corrStation: corrStation)
+                TimetableEventCell.State(
+                    categoryAndNumber: .init(topText: $0.category,
+                                             bottomText: $0.number),
+                    timeAndDate: .init(topText: _dateFormatter.string(from: $0.time, style: .userTimetableTime),
+                                       bottomText: _dateFormatter.string(from: $0.time, style: .userTimetableDate)),
+                    platform: .init(topText: $0.platform,
+                                    bottomText: L10n.Timetable.platformCaption),
+                    corrStation: .init(caption: corrStationCaption,
+                                       station: corrStation),
+                    throughStation: nil)
             )
         }
     }

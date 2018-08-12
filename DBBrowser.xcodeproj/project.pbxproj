@@ -46,6 +46,10 @@
 		B853867720B17B5A003FB667 /* SideEffectsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867620B17B5A003FB667 /* SideEffectsMock.swift */; };
 		B853867920B17E04003FB667 /* StationSearchViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867820B17E04003FB667 /* StationSearchViewState.swift */; };
 		B856025120A62FEE00B25893 /* StationFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856025020A62FEE00B25893 /* StationFinderTests.swift */; };
+		B85F5441211DC19200C94878 /* TimetableTopDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F5440211DC19200C94878 /* TimetableTopDataView.swift */; };
+		B85F5443211DC3FF00C94878 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F5442211DC3FF00C94878 /* Fonts.swift */; };
+		B85F5445211DCDD100C94878 /* TimetableStationNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F5444211DCDD100C94878 /* TimetableStationNameView.swift */; };
+		B85F5447211DD77000C94878 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F5446211DD77000C94878 /* String+.swift */; };
 		B8602DF820A99E44001BEDC2 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8602DF720A99E44001BEDC2 /* Assets.swift */; };
 		B86A734C2114FA2600C38070 /* ApiChangedStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A734B2114F1DF00C38070 /* ApiChangedStop.swift */; };
 		B86A734D2114FA2B00C38070 /* ApiChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A73492114F1DF00C38070 /* ApiChanges.swift */; };
@@ -168,6 +172,10 @@
 		B853867620B17B5A003FB667 /* SideEffectsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffectsMock.swift; sourceTree = "<group>"; };
 		B853867820B17E04003FB667 /* StationSearchViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewState.swift; sourceTree = "<group>"; };
 		B856025020A62FEE00B25893 /* StationFinderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationFinderTests.swift; sourceTree = "<group>"; };
+		B85F5440211DC19200C94878 /* TimetableTopDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableTopDataView.swift; sourceTree = "<group>"; };
+		B85F5442211DC3FF00C94878 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		B85F5444211DCDD100C94878 /* TimetableStationNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableStationNameView.swift; sourceTree = "<group>"; };
+		B85F5446211DD77000C94878 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B8602DF720A99E44001BEDC2 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		B86A73492114F1DF00C38070 /* ApiChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiChanges.swift; sourceTree = "<group>"; };
 		B86A734A2114F1DF00C38070 /* ApiChangedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiChangedEvent.swift; sourceTree = "<group>"; };
@@ -273,6 +281,8 @@
 			isa = PBXGroup;
 			children = (
 				B8004D1420F65D20006A1A83 /* TimetableEventCell.swift */,
+				B85F5440211DC19200C94878 /* TimetableTopDataView.swift */,
+				B85F5444211DCDD100C94878 /* TimetableStationNameView.swift */,
 				B8E9CF78211092A600528954 /* TimetableMoreCell.swift */,
 			);
 			path = Cells;
@@ -487,6 +497,7 @@
 				B8DE6E0D210CAD0800F298F3 /* TimeZone+.swift */,
 				B816D52B21133E6800069B48 /* Date+.swift */,
 				B81AB5AA2114BA1300D31BFC /* UIApplication+.swift */,
+				B85F5446211DD77000C94878 /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -542,6 +553,7 @@
 				B8224EF620BAF4A900F9132A /* Localizable.strings */,
 				B8224EF820BAF58E00F9132A /* Strings.swift */,
 				B8602DF720A99E44001BEDC2 /* Assets.swift */,
+				B85F5442211DC3FF00C94878 /* Fonts.swift */,
 				B8B401C720A5DEF500D25B2C /* LaunchScreen.storyboard */,
 				B8B401CA20A5DEF500D25B2C /* Info.plist */,
 			);
@@ -930,7 +942,9 @@
 				B88828C720F34C45005802A4 /* ApiStop.swift in Sources */,
 				B8602DF820A99E44001BEDC2 /* Assets.swift in Sources */,
 				B892CFBB20BAB12000176A15 /* FahrplanStation.swift in Sources */,
+				B85F5443211DC3FF00C94878 /* Fonts.swift in Sources */,
 				B8F437DE20A84A7D00977CE3 /* Scene.swift in Sources */,
+				B85F5445211DCDD100C94878 /* TimetableStationNameView.swift in Sources */,
 				B8A9387220CFC9E9007460C6 /* MainScreenViewState.swift in Sources */,
 				B89DCF2D20F7E9FD00DF30C2 /* SceneCoordinatorState.swift in Sources */,
 				B86A734D2114FA2B00C38070 /* ApiChanges.swift in Sources */,
@@ -950,6 +964,7 @@
 				B892CFBD20BABD8600176A15 /* LoadingCell.swift in Sources */,
 				B82B968520F5E84D0018E1F3 /* TimetableViewController.swift in Sources */,
 				B86A734C2114FA2600C38070 /* ApiChangedStop.swift in Sources */,
+				B85F5441211DC19200C94878 /* TimetableTopDataView.swift in Sources */,
 				B8F437CD20A8335C00977CE3 /* StationFinder.swift in Sources */,
 				B831E83820AC1EEC00B951DB /* State.swift in Sources */,
 				B88828D020F35E7F005802A4 /* DateTimeFormatter.swift in Sources */,
@@ -982,6 +997,7 @@
 				B8B412FB20F3DB7A00003EEB /* TimetablesService.swift in Sources */,
 				B8004D1720F66935006A1A83 /* TimetableState.swift in Sources */,
 				B8A9387920CFCECC007460C6 /* MainScreenViewStateConverter.swift in Sources */,
+				B85F5447211DD77000C94878 /* String+.swift in Sources */,
 				B8F437CA20A8305600977CE3 /* ApiStationConverter.swift in Sources */,
 				B8AAF49A20B9808A000C9ADE /* StateStoreBindable.swift in Sources */,
 			);

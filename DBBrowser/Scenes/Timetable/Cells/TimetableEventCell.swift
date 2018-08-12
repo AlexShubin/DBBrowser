@@ -9,14 +9,11 @@ class TimetableEventCell: UITableViewCell {
     private let _headerContainer = UIView()
     private let _infoContainer = UIView()
 
-    private let _categoryLabel = UILabel()
-    private let _numberLabel = UILabel()
-    private let _timeLabel = UILabel()
-    private let _dateLabel = UILabel()
-    private let _platformCaption = UILabel()
-    private let _platformLabel = UILabel()
-    private let _corrStationCaption = UILabel()
-    private let _corrStationLabel = UILabel()
+    private let _categoryAndNumberView = TimetableTopDataView(alignment: .left)
+    private let _timeAndDateView = TimetableTopDataView(alignment: .right)
+    private let _platformView = TimetableTopDataView(alignment: .center)
+    private let _corrStationView = TimetableStationNameView()
+    private let _throughStationView = TimetableStationNameView()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,25 +23,6 @@ class TimetableEventCell: UITableViewCell {
         backgroundColor = .clear
         _backgroundView.backgroundColor = .white
         _backgroundView.layer.cornerRadius = Constants.cornerRadius
-
-        _categoryLabel.font = Constants.Fonts.header
-        _categoryLabel.textColor = UIColor(asset: Asset.Colors.dbRed)
-        _numberLabel.font = Constants.Fonts.smallBold
-        _numberLabel.textColor = .black
-        _platformCaption.font = Constants.Fonts.smallBold
-        _platformCaption.textColor = .gray
-        _platformLabel.font = Constants.Fonts.header
-        _platformLabel.textColor = UIColor(asset: Asset.Colors.dbRed)
-        _timeLabel.font = Constants.Fonts.header
-        _timeLabel.textColor = UIColor(asset: Asset.Colors.dbRed)
-        _dateLabel.font = Constants.Fonts.smallBold
-        _dateLabel.textColor = .gray
-        _corrStationCaption.font = Constants.Fonts.smallBold
-        _corrStationCaption.textColor = .gray
-        _corrStationLabel.font = Constants.Fonts.medium
-        _corrStationLabel.textColor = .black
-
-        _platformCaption.text = L10n.Timetable.platformCaption
     }
 
     private func _setupLayout() {
@@ -69,71 +47,45 @@ class TimetableEventCell: UITableViewCell {
     }
 
     private func _setupHeaderContainerLayout() {
-        _headerContainer.addSubview(_categoryLabel)
-        _categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        _headerContainer.addSubview(_categoryAndNumberView)
+        _categoryAndNumberView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _categoryLabel.topAnchor.constraint(equalTo: _headerContainer.topAnchor,
-                                                constant: Constants.CategoryLabel.topOffset),
-            _categoryLabel.leadingAnchor.constraint(equalTo: _headerContainer.leadingAnchor,
-                                                    constant: Constants.CategoryLabel.leadingOffset)
+            _categoryAndNumberView.topAnchor.constraint(equalTo: _headerContainer.topAnchor,
+                                                        constant: Constants.CategoryAndNumberView.topOffset),
+            _categoryAndNumberView.leadingAnchor.constraint(equalTo: _headerContainer.leadingAnchor,
+                                                            constant: Constants.CategoryAndNumberView.leadingOffset),
+            _categoryAndNumberView.bottomAnchor.constraint(equalTo: _headerContainer.bottomAnchor,
+                                                           constant: Constants.CategoryAndNumberView.bottomOffset)
             ])
-        _headerContainer.addSubview(_numberLabel)
-        _numberLabel.translatesAutoresizingMaskIntoConstraints = false
+        _headerContainer.addSubview(_platformView)
+        _platformView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _numberLabel.leadingAnchor.constraint(equalTo: _headerContainer.leadingAnchor,
-                                                  constant: Constants.NumberLabel.leadingOffset),
-            _numberLabel.bottomAnchor.constraint(equalTo: _headerContainer.bottomAnchor,
-                                                 constant: Constants.NumberLabel.bottomOffset),
-            _numberLabel.topAnchor.constraint(equalTo: _categoryLabel.bottomAnchor,
-                                              constant: Constants.NumberLabel.topOffset)
+            _platformView.centerYAnchor.constraint(equalTo: _categoryAndNumberView.centerYAnchor),
+            _platformView.centerXAnchor.constraint(equalTo: _headerContainer.centerXAnchor,
+                                                   constant: Constants.PlatformView.xOffset)
             ])
-        _headerContainer.addSubview(_platformCaption)
-        _platformCaption.translatesAutoresizingMaskIntoConstraints = false
+        _headerContainer.addSubview(_timeAndDateView)
+        _timeAndDateView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _platformCaption.centerYAnchor.constraint(equalTo: _numberLabel.centerYAnchor),
-            _platformCaption.centerXAnchor.constraint(equalTo: _headerContainer.centerXAnchor,
-                                                      constant: Constants.PlatformCaption.leadingOffset)
-            ])
-        _headerContainer.addSubview(_platformLabel)
-        _platformLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            _platformLabel.centerYAnchor.constraint(equalTo: _categoryLabel.centerYAnchor),
-            _platformLabel.centerXAnchor.constraint(equalTo: _headerContainer.centerXAnchor,
-                                                    constant: Constants.PlatformLabel.leadingOffset)
-            ])
-        _headerContainer.addSubview(_timeLabel)
-        _timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            _timeLabel.trailingAnchor.constraint(equalTo: _headerContainer.trailingAnchor,
-                                                 constant: Constants.TimeLabel.trailingOffset),
-            _timeLabel.centerYAnchor.constraint(equalTo: _categoryLabel.centerYAnchor)
-            ])
-        _headerContainer.addSubview(_dateLabel)
-        _dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            _dateLabel.trailingAnchor.constraint(equalTo: _headerContainer.trailingAnchor,
-                                                 constant: Constants.DateLabel.trailingOffset),
-            _dateLabel.centerYAnchor.constraint(equalTo: _numberLabel.centerYAnchor)
+            _timeAndDateView.trailingAnchor.constraint(equalTo: _headerContainer.trailingAnchor,
+                                                       constant: Constants.TimeAndDateView.trailingOffset),
+            _timeAndDateView.centerYAnchor.constraint(equalTo: _categoryAndNumberView.centerYAnchor)
             ])
     }
 
     private func _setupInfoContainerLayout() {
-        _infoContainer.addSubview(_corrStationCaption)
-        _corrStationCaption.translatesAutoresizingMaskIntoConstraints = false
+        let stationStack = UIStackView(arrangedSubviews: [_corrStationView, _throughStationView])
+        _infoContainer.addSubview(stationStack)
+        stationStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _corrStationCaption.leadingAnchor.constraint(equalTo: _infoContainer.leadingAnchor,
-                                                         constant: Constants.CorrStationCaption.leadingOffset)
-            ])
-        _infoContainer.addSubview(_corrStationLabel)
-        _corrStationLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            _corrStationLabel.leadingAnchor.constraint(equalTo: _corrStationCaption.trailingAnchor,
-                                                       constant: Constants.CorrStation.leadingOffset),
-            _corrStationLabel.bottomAnchor.constraint(equalTo: _infoContainer.bottomAnchor,
-                                                      constant: Constants.CorrStation.bottomOffset),
-            _corrStationLabel.topAnchor.constraint(equalTo: _infoContainer.topAnchor,
-                                                   constant: Constants.CorrStation.topOffset),
-            _corrStationLabel.centerYAnchor.constraint(equalTo: _corrStationCaption.centerYAnchor)
+            stationStack.leadingAnchor.constraint(equalTo: _infoContainer.leadingAnchor,
+                                                  constant: Constants.StationStack.leadingOffset),
+            stationStack.bottomAnchor.constraint(equalTo: _infoContainer.bottomAnchor,
+                                                 constant: Constants.StationStack.bottomOffset),
+            stationStack.topAnchor.constraint(equalTo: _infoContainer.topAnchor,
+                                              constant: Constants.StationStack.topOffset),
+            stationStack.trailingAnchor.constraint(equalTo: _infoContainer.trailingAnchor,
+                                                   constant: Constants.StationStack.trailingOffset)
             ])
     }
 
@@ -144,67 +96,51 @@ class TimetableEventCell: UITableViewCell {
 
 // MARK: - DataDriven
 extension TimetableEventCell: DataDriven {
-    struct State: Hashable {
-        let category: String
-        let number: String
-        let time: String
-        let platform: String
-        let date: String
-        let corrStationCaption: String
-        let corrStation: String
+    struct State: Equatable {
+        let categoryAndNumber: TimetableTopDataView.State
+        let timeAndDate: TimetableTopDataView.State
+        let platform: TimetableTopDataView.State
+        let corrStation: TimetableStationNameView.State
+        let throughStation: TimetableStationNameView.State?
     }
 
     func render(state: State) {
-        _categoryLabel.text = state.category
-        _numberLabel.text = state.number
-        _timeLabel.text = state.time
-        _platformLabel.text = state.platform
-        _dateLabel.text = state.date
-        _corrStationCaption.text = state.corrStationCaption
-        _corrStationLabel.text = state.corrStation
+        _categoryAndNumberView.render(state: state.categoryAndNumber)
+        _timeAndDateView.render(state: state.timeAndDate)
+        _platformView.render(state: state.platform)
+        _corrStationView.render(state: state.corrStation)
+        if let throughStation = state.throughStation {
+            _throughStationView.render(state: throughStation)
+            _throughStationView.isHidden = false
+        } else {
+            _throughStationView.isHidden = true
+        }
     }
 }
 
 // MARK: - Constants
 extension TimetableEventCell {
     enum Constants {
-        enum CategoryLabel {
+        enum CategoryAndNumberView {
             static let topOffset: CGFloat = 8
             static let leadingOffset: CGFloat = 16
-        }
-        enum NumberLabel {
-            static let leadingOffset: CGFloat = 16
-            static let topOffset: CGFloat = 4
             static let bottomOffset: CGFloat = -8
         }
-        enum TimeLabel {
+        enum TimeAndDateView {
             static let trailingOffset: CGFloat = -16
         }
-        enum DateLabel {
-            static let trailingOffset: CGFloat = -16
-        }
-        enum PlatformCaption {
-            static let leadingOffset: CGFloat = -10
-        }
-        enum PlatformLabel {
-            static let leadingOffset: CGFloat = -10
+        enum PlatformView {
+            static let xOffset: CGFloat = -10
         }
         enum BackgroundView {
             static let topOffset: CGFloat = 8
             static let bottomOffset: CGFloat = -8
         }
-        enum CorrStationCaption {
+        enum StationStack {
             static let leadingOffset: CGFloat = 16
-        }
-        enum CorrStation {
-            static let leadingOffset: CGFloat = 8
             static let topOffset: CGFloat = 8
             static let bottomOffset: CGFloat = -8
-        }
-        enum Fonts {
-            static let header = UIFont.boldSystemFont(ofSize: 20)
-            static let smallBold = UIFont.boldSystemFont(ofSize: 14)
-            static let medium = UIFont.systemFont(ofSize: 16)
+            static let trailingOffset: CGFloat = -16
         }
         static let cornerRadius: CGFloat = 8
     }
