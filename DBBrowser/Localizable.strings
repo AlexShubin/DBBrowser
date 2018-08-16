@@ -8,6 +8,8 @@
 
 "station_search.placeholder" = "Start typing station name";
 
+"date_picker.top_label" = "Select time and date";
+
 "timetable.platform_caption" = "platform";
 "timetable.towards" = "towards:";
 "timetable.from" = "from:";

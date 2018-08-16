@@ -24,10 +24,10 @@ protocol SceneCoordinatorType {
 }
 
 struct SceneCoordinator: SceneCoordinatorType {
-    private let _viewControllerFactory: ViewControllerFactory
+    private let _viewControllerFactory: SceneFactory
     private let _navigationController = UINavigationController()
 
-    init(window: UIWindow, viewControllerFactory: ViewControllerFactory) {
+    init(window: UIWindow, viewControllerFactory: SceneFactory) {
         window.rootViewController = _navigationController
         _viewControllerFactory = viewControllerFactory
     }

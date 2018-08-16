@@ -121,6 +121,17 @@ extension MainScreenViewController: StateStoreBindable {
             }
             .bind(to: stateStore.eventBus)
             .disposed(by: bag)
+        _date.events
+            .flatMap { (event) -> Observable<AppEvent> in
+                switch event {
+                case .tap:
+                    return .just(.coordinator(.show(.datePicker, .modal)))
+                case .clear:
+                    return .empty()
+                }
+            }
+            .bind(to: stateStore.eventBus)
+            .disposed(by: bag)
         _corrStation.events
             .flatMap { (event) -> Observable<AppEvent> in
                 switch event {

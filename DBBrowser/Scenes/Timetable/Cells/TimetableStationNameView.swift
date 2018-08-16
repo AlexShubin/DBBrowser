@@ -13,7 +13,7 @@ class TimetableStationNameView: UIView {
         super.init(frame: .zero)
         _setupLayout()
 
-        _caption.font = UIFont.DB.boldCaption
+        _caption.font = UIFont.DB.boldCaptionSmall
         _caption.textColor = .gray
         _stationLabel.font = UIFont.DB.regular
         _stationLabel.textColor = .black

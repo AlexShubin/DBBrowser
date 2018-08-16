@@ -12,6 +12,11 @@ internal enum L10n {
   /// Try again
   internal static let retryButtonText = L10n.tr("Localizable", "retry_button_text")
 
+  internal enum DatePicker {
+    /// Select time and date
+    internal static let topLabel = L10n.tr("Localizable", "date_picker.top_label")
+  }
+
   internal enum MainScreen {
     /// Corresponding station
     internal static let corrStationCaption = L10n.tr("Localizable", "main_screen.corr_station_caption")

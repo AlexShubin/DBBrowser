@@ -16,10 +16,10 @@ class TimetableTopDataView: UIView {
         super.init(frame: .zero)
         _setupLayout()
 
-        _topLabel.font = UIFont.DB.header
+        _topLabel.font = UIFont.DB.boldHeaderSmall
         _topLabel.textColor = UIColor(asset: Asset.Colors.dbRed)
         _topLabel.textAlignment = _alignment
-        _bottomLabel.font = UIFont.DB.boldCaption
+        _bottomLabel.font = UIFont.DB.boldCaptionSmall
         _bottomLabel.textColor = .gray
         _bottomLabel.textAlignment = _alignment
     }
