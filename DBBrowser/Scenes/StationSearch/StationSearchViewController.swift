@@ -44,6 +44,7 @@ class StationSearchViewController: UIViewController {
         _searchBar.placeholder = L10n.StationSearch.placeholder
         _containerView.isUserInteractionEnabled = true
         _tableView.separatorStyle = .none
+        _tableView.backgroundColor = UIColor(asset: Asset.Colors.backgroundGray)
 
         _tableView.registerCell(ofType: StationCell.self)
         _tableView.registerCell(ofType: LoadingCell.self)

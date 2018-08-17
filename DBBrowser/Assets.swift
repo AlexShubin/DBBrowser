@@ -45,6 +45,7 @@ internal struct ColorAsset {
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
   internal enum Colors {
+    internal static let backgroundGray = ColorAsset(name: "backgroundGray")
     internal static let dbRed = ColorAsset(name: "dbRed")
   }
   internal static let btnClose = ImageAsset(name: "btnClose")
@@ -54,6 +55,7 @@ internal enum Asset {
 
   // swiftlint:disable trailing_comma
   internal static let allColors: [ColorAsset] = [
+    Colors.backgroundGray,
     Colors.dbRed,
   ]
   internal static let allImages: [ImageAsset] = [

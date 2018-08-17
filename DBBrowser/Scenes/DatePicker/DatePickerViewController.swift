@@ -50,7 +50,7 @@ class DatePickerViewController: UIViewController {
         _topLabel.text = L10n.DatePicker.topLabel
         _topLabel.font = UIFont.DB.headerSmall
 
-        _bottomContainerView.backgroundColor = .white
+        _bottomContainerView.backgroundColor = UIColor(asset: Asset.Colors.backgroundGray)
 
         _doneButton.backgroundColor = UIColor(asset: Asset.Colors.dbRed)
         _doneButton.layer.cornerRadius = 8
@@ -143,7 +143,7 @@ private extension DatePickerViewController {
         }
         enum DoneButton {
             static let topOffset: CGFloat = 24
-            static let bottomOffset: CGFloat = -24
+            static let bottomOffset: CGFloat = -48
             static let leadingOffset: CGFloat = 24
             static let trailingOffset: CGFloat = -24
             static let height: CGFloat = 48
