@@ -107,6 +107,10 @@ extension MainScreenViewController: StateStoreBindable {
             })
             .disposed(by: bag)
         // UI Events
+        _bindUIEvents(to: stateStore)
+    }
+
+    private func _bindUIEvents(to stateStore: StateStore) {
         _station.events
             .flatMap { (event) -> Observable<AppEvent> in
                 switch event {

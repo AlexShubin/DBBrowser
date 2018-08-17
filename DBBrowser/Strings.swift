@@ -7,12 +7,16 @@ import Foundation
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 internal enum L10n {
+  /// Cancel
+  internal static let cancelButtonText = L10n.tr("Localizable", "cancel_button_text")
   /// Something went wrong...
   internal static let loadingError = L10n.tr("Localizable", "loading_error")
   /// Try again
   internal static let retryButtonText = L10n.tr("Localizable", "retry_button_text")
 
   internal enum DatePicker {
+    /// Done
+    internal static let doneButtonLabel = L10n.tr("Localizable", "date_picker.done_button_label")
     /// Select time and date
     internal static let topLabel = L10n.tr("Localizable", "date_picker.top_label")
   }

@@ -9,6 +9,7 @@
 "station_search.placeholder" = "Start typing station name";
 
 "date_picker.top_label" = "Select time and date";
+"date_picker.done_button_label" = "Done";
 
 "timetable.platform_caption" = "platform";
 "timetable.towards" = "towards:";
@@ -20,4 +21,5 @@
 
 "loading_error" = "Something went wrong...";
 "retry_button_text" = "Try again";
+"cancel_button_text" = "Cancel";
 
