@@ -343,14 +343,6 @@
 			path = Timetables;
 			sourceTree = "<group>";
 		};
-		B8224EF320BAF05700F9132A /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-				B8224EF420BAF07100F9132A /* RoundedView.swift */,
-			);
-			path = CustomViews;
-			sourceTree = "<group>";
-		};
 		B82B968320F5E8230018E1F3 /* Timetable */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,15 +445,6 @@
 			path = Changes;
 			sourceTree = "<group>";
 		};
-		B8849FF920F7A18400BCD93A /* CommonCells */ = {
-			isa = PBXGroup;
-			children = (
-				B8FCC48C20CD7DAB007314ED /* ErrorCell.swift */,
-				B892CFBC20BABD8600176A15 /* LoadingCell.swift */,
-			);
-			path = CommonCells;
-			sourceTree = "<group>";
-		};
 		B88828BD20F3448C005802A4 /* ConvertersTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,12 +473,14 @@
 			path = FormattersTests;
 			sourceTree = "<group>";
 		};
-		B89C080E210C9BD000A6EE9E /* UI */ = {
+		B89C080E210C9BD000A6EE9E /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
-				B8849FF920F7A18400BCD93A /* CommonCells */,
+				B8224EF420BAF07100F9132A /* RoundedView.swift */,
+				B8FCC48C20CD7DAB007314ED /* ErrorCell.swift */,
+				B892CFBC20BABD8600176A15 /* LoadingCell.swift */,
 			);
-			path = UI;
+			path = CommonUI;
 			sourceTree = "<group>";
 		};
 		B89DCF2B20F7E85D00DF30C2 /* SceneCoordinator */ = {
@@ -564,9 +549,8 @@
 		B8B401BD20A5DEF400D25B2C /* DBBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				B89C080E210C9BD000A6EE9E /* UI */,
+				B89C080E210C9BD000A6EE9E /* CommonUI */,
 				B88828CE20F35E52005802A4 /* Formatters */,
-				B8224EF320BAF05700F9132A /* CustomViews */,
 				B8AAF49220B976A2000C9ADE /* Extensions */,
 				B831E83120AC1EEC00B951DB /* AppState */,
 				B8AAF49B20B98097000C9ADE /* Utils */,

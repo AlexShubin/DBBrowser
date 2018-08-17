@@ -6,9 +6,10 @@ import Foundation
 
 extension Date {
     var startOfTheNextHour: Date {
-        var components = Calendar.current.dateComponents([.year, .month, .day, .hour], from: self)
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.year, .month, .day, .hour], from: self)
         components.minute = 0
         components.hour = components.hour! + 1
-        return Calendar.current.date(from: components)!
+        return calendar.date(from: components)!
     }
 }
