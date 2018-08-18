@@ -55,6 +55,8 @@ class DatePickerViewController: UIViewController {
         _commentLabel.text = L10n.DatePicker.availablility(Constants.timetableAvailableForNextHours)
         _commentLabel.font = UIFont.DB.boldCaptionSmall
         _commentLabel.textColor = .gray
+        _commentLabel.numberOfLines = 0
+        _commentLabel.lineBreakMode = .byWordWrapping
 
         _bottomContainerView.backgroundColor = UIColor(asset: Asset.Colors.backgroundGray)
 
