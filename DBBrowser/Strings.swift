@@ -15,6 +15,10 @@ internal enum L10n {
   internal static let retryButtonText = L10n.tr("Localizable", "retry_button_text")
 
   internal enum DatePicker {
+    /// Timetable is available only for the next %d hours
+    internal static func availablility(_ p1: Int) -> String {
+      return L10n.tr("Localizable", "date_picker.availablility", p1)
+    }
     /// Done
     internal static let doneButtonLabel = L10n.tr("Localizable", "date_picker.done_button_label")
     /// Select time and date

@@ -9,6 +9,9 @@ PODS:
   - RxFeedback (1.0.3):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
+  - RxKeyboard (0.8.3):
+    - RxCocoa (>= 4.1.0)
+    - RxSwift (>= 4.1.0)
   - RxOptional (3.5.0):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
@@ -23,6 +26,7 @@ DEPENDENCIES:
   - RxCocoa
   - RxDataSources
   - RxFeedback
+  - RxKeyboard
   - RxOptional
   - RxSwift
   - RxTest
@@ -36,6 +40,7 @@ SPEC REPOS:
     - RxCocoa
     - RxDataSources
     - RxFeedback
+    - RxKeyboard
     - RxOptional
     - RxSwift
     - RxTest
@@ -48,6 +53,7 @@ SPEC CHECKSUMS:
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
   RxFeedback: 0b032eb82a4cf858b3b97fb8eb30a895f837fbda
+  RxKeyboard: e5efbaa109c35be909dd888e53de0f0efdf5169e
   RxOptional: bd32ff8ca9df4177683d56ffeb618a9d4d5d5cad
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   RxTest: 8da864c0ee47534f586ff18fb0c7e5b2f1fe5023
@@ -55,6 +61,6 @@ SPEC CHECKSUMS:
   SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
   SWXMLHash: 6bbc0bf72975a18ceda469fb7d6a886a26d81694
 
-PODFILE CHECKSUM: c13fb6651d8ea99ba3162704ce3daae3a3da8518
+PODFILE CHECKSUM: f605b89f37388f5a9b43cc687b9e0d45c9361783
 
 COCOAPODS: 1.5.3

@@ -125,4 +125,14 @@ class TimetableEventCellConverterTests: XCTestCase {
         XCTAssertNil(cellState.throughStation?.station)
     }
 
+    func testEmptyPlatformConvertedToQuestionMark() {
+        // Prepare
+        let event = TimetableEventBuilder()
+            .with(platform: "")
+            .build()
+        // Run
+        let cellState = converter.convert(from: event, table: .departures, userCorrStation: nil)
+        // Test
+        XCTAssertEqual(cellState.platform.topText, "?")
+    }
 }

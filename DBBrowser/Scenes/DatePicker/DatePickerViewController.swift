@@ -14,21 +14,24 @@ class DatePickerViewController: UIViewController {
 
     let bag = DisposeBag()
 
-    //private let _converter: StationSearchViewStateConverter
+    private let _converter: DatePickerViewStateConverter
 
     private let _topContainerView = RoundedView()
     private let _bottomContainerView = UIView()
     private let _topLabel = UILabel()
-    private let _datePicker = UIDatePicker()
+    private let _commentLabel = UILabel()
     private let _doneButton = UIButton(type: .system)
     private let _cancelButton = UIButton(type: .system)
+    private let _datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.timeZone = TimeZone.CEST
+        picker.minimumDate = Date()
+        picker.maximumDate = picker.minimumDate?.adding(hours: Constants.timetableAvailableForNextHours)
+        return picker
+    }()
 
-    //    init(converter: StationSearchViewStateConverter) {
-    //        _converter = converter
-    //        super.init(nibName: nil, bundle: nil)
-    //    }
-
-    init() {
+    init(converter: DatePickerViewStateConverter) {
+        _converter = converter
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -49,6 +52,9 @@ class DatePickerViewController: UIViewController {
 
         _topLabel.text = L10n.DatePicker.topLabel
         _topLabel.font = UIFont.DB.headerSmall
+        _commentLabel.text = L10n.DatePicker.availablility(Constants.timetableAvailableForNextHours)
+        _commentLabel.font = UIFont.DB.boldCaptionSmall
+        _commentLabel.textColor = .gray
 
         _bottomContainerView.backgroundColor = UIColor(asset: Asset.Colors.backgroundGray)
 
@@ -79,9 +85,19 @@ class DatePickerViewController: UIViewController {
             _topLabel.leadingAnchor.constraint(equalTo: _topContainerView.leadingAnchor,
                                                constant: Constants.TopLabel.leadingOffset),
             _topLabel.topAnchor.constraint(equalTo: _topContainerView.topAnchor,
-                                           constant: Constants.TopLabel.topOffset),
-            _topLabel.bottomAnchor.constraint(equalTo: _topContainerView.bottomAnchor,
-                                              constant: Constants.TopLabel.bottomOffset)
+                                           constant: Constants.TopLabel.topOffset)
+            ])
+        _topContainerView.addSubview(_commentLabel)
+        _commentLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            _commentLabel.leadingAnchor.constraint(equalTo: _topContainerView.leadingAnchor,
+                                               constant: Constants.CommentLabel.leadingOffset),
+            _commentLabel.topAnchor.constraint(equalTo: _topLabel.bottomAnchor,
+                                           constant: Constants.CommentLabel.topOffset),
+            _commentLabel.bottomAnchor.constraint(equalTo: _topContainerView.bottomAnchor,
+                                              constant: Constants.CommentLabel.bottomOffset),
+            _commentLabel.trailingAnchor.constraint(equalTo: _topContainerView.trailingAnchor,
+                                                    constant: Constants.CommentLabel.trailingOffset)
             ])
         _topContainerView.addSubview(_cancelButton)
         _cancelButton.translatesAutoresizingMaskIntoConstraints = false
@@ -126,6 +142,40 @@ class DatePickerViewController: UIViewController {
             ])
     }
 }
+// MARK: - DataDriven
+extension DatePickerViewController: StateStoreBindable {
+    func subscribe(to stateStore: StateStore) {
+        // State to view state conversion
+        let viewState: Signal<DatePickerViewState> = stateStore
+            .stateBus
+            .map { $0.timetable }
+            .distinctUntilChanged()
+            .map { [weak self] in self?._converter.convert(from: $0) }
+            .filterNil()
+        // State render
+        viewState
+            .map { $0.date }
+            .asObservable()
+            .take(1)
+            .bind(to: _datePicker.rx.date)
+            .disposed(by: bag)
+        // UI Events
+        _doneButton.rx.tap
+            .flatMap { [weak self] () -> Observable<AppEvent> in
+                guard let date = self?._datePicker.date else {
+                    return .empty()
+                }
+                return .of(.timetable(.date(date)),
+                           .coordinator(.close(.modal)))
+            }
+            .bind(to: stateStore.eventBus)
+            .disposed(by: bag)
+        _cancelButton.rx.tap
+            .map { .coordinator(.close(.modal)) }
+            .bind(to: stateStore.eventBus)
+            .disposed(by: bag)
+    }
+}
 
 // MARK: - Constants
 private extension DatePickerViewController {
@@ -133,9 +183,14 @@ private extension DatePickerViewController {
         enum TopLabel {
             static let topOffset: CGFloat = 16
             static let leadingOffset: CGFloat = 16
-            static let bottomOffset: CGFloat = -16
         }
         enum CancelButton {
+            static let trailingOffset: CGFloat = -16
+        }
+        enum CommentLabel {
+            static let topOffset: CGFloat = 8
+            static let leadingOffset: CGFloat = 16
+            static let bottomOffset: CGFloat = -16
             static let trailingOffset: CGFloat = -16
         }
         enum DatePicker {
@@ -148,5 +203,13 @@ private extension DatePickerViewController {
             static let trailingOffset: CGFloat = -24
             static let height: CGFloat = 48
         }
+        static let timetableAvailableForNextHours = 18
+    }
+}
+
+// MARK: - Helpers
+private extension Date {
+    func adding(hours: Int) -> Date {
+        return self.addingTimeInterval(3600 * Double(hours))
     }
 }

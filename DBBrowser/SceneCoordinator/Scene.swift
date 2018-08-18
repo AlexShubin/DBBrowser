@@ -15,14 +15,17 @@ class SceneFactory {
     private let _stationSearchViewStateConverter: StationSearchViewStateConverter
     private let _mainScreenViewStateConverter: MainScreenViewStateConverter
     private let _timetableViewStateConverter: TimetableViewStateConverter
+    private let _datePickerViewStateConverter: DatePickerViewStateConverter
     private var _appStateStore: StateStore!
 
     init(stationSearchViewStateConverter: StationSearchViewStateConverter,
          mainScreenViewStateConverter: MainScreenViewStateConverter,
-         timetableViewStateConverter: TimetableViewStateConverter) {
+         timetableViewStateConverter: TimetableViewStateConverter,
+         datePickerViewStateConverter: DatePickerViewStateConverter) {
         _stationSearchViewStateConverter = stationSearchViewStateConverter
         _mainScreenViewStateConverter = mainScreenViewStateConverter
         _timetableViewStateConverter = timetableViewStateConverter
+        _datePickerViewStateConverter = datePickerViewStateConverter
     }
 
     func setUp(appStateStore: StateStore) {
@@ -44,7 +47,8 @@ class SceneFactory {
             vc.subscribe(to: _appStateStore)
             return vc
         case .datePicker:
-            let vc = DatePickerViewController()
+            let vc = DatePickerViewController(converter: _datePickerViewStateConverter)
+            vc.subscribe(to: _appStateStore)
             return vc
         }
     }

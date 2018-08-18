@@ -12,9 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        guard !UIApplication.isInUnitTesting else {
-            return true
-        }
+        guard !UIApplication.isInUnitTesting else { return true }
         _setupNavBar()
 
         let dateFormatter = AppDateTimeFormatter()
@@ -23,9 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             timetableEventCellConverter: timetableEventCellConverter
         )
         let mainScreenViewStateConverter = MainScreenViewStateConverter(dateFormatter: dateFormatter)
-        let vcFactory = SceneFactory(stationSearchViewStateConverter: StationSearchViewStateConverter(),
-                                              mainScreenViewStateConverter: mainScreenViewStateConverter,
-                                              timetableViewStateConverter: timetableViewStateConverter)
+        let vcFactory = SceneFactory(
+            stationSearchViewStateConverter: StationSearchViewStateConverter(),
+            mainScreenViewStateConverter: mainScreenViewStateConverter,
+            timetableViewStateConverter: timetableViewStateConverter,
+            datePickerViewStateConverter: DatePickerViewStateConverter()
+        )
         let coordinator: SceneCoordinatorType = SceneCoordinator(window: window!, viewControllerFactory: vcFactory)
 
         let configuration = URLSessionConfiguration.default

@@ -16,6 +16,7 @@ target 'DBBrowser' do
   pod 'RxFeedback'
   pod 'RxOptional'
   pod 'SWXMLHash', '~> 4.0.0'
+  pod 'RxKeyboard'
 end
 
 target 'DBBrowserTests' do

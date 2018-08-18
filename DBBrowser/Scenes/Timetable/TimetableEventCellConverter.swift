@@ -46,7 +46,7 @@ struct TimetableEventCellConverter: TimetableEventCellConverterType {
                                                               style: .userTimetableTime),
                                bottomText: _dateFormatter.string(from: event.time,
                                                                  style: .userTimetableDate)),
-            platform: .init(topText: event.platform,
+            platform: .init(topText: event.platform.isEmpty ? "?" : event.platform,
                             bottomText: L10n.Timetable.platformCaption),
             corrStation: .init(caption: corrStationCaption,
                                station: corrStation),

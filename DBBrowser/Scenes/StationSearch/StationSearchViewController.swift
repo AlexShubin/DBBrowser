@@ -7,6 +7,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import RxOptional
+import RxKeyboard
 
 class StationSearchViewController: UIViewController {
 
@@ -49,6 +50,12 @@ class StationSearchViewController: UIViewController {
         _tableView.registerCell(ofType: StationCell.self)
         _tableView.registerCell(ofType: LoadingCell.self)
         _tableView.registerCell(ofType: ErrorCell.self)
+
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { [weak self] in
+                self?._tableView.contentInset.bottom = $0
+            })
+            .disposed(by: bag)
     }
 
     override func viewDidAppear(_ animated: Bool) {

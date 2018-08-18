@@ -22,7 +22,6 @@
 		B80877A520F7BF3500025B18 /* TimetableSideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80877A420F7BF3500025B18 /* TimetableSideEffects.swift */; };
 		B80877A720F7C1EE00025B18 /* TimetableEffectsInvocationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80877A620F7C1EE00025B18 /* TimetableEffectsInvocationsTests.swift */; };
 		B80877A920F7C21400025B18 /* TimetableSideEffectsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80877A820F7C21400025B18 /* TimetableSideEffectsMock.swift */; };
-		B816D52C21133E6800069B48 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816D52B21133E6800069B48 /* Date+.swift */; };
 		B81AB5AB2114BA1300D31BFC /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81AB5AA2114BA1300D31BFC /* UIApplication+.swift */; };
 		B81D7CA120F236D500A4F7BC /* Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D7CA020F236D500A4F7BC /* Timetable.swift */; };
 		B81D7CA320F2387800A4F7BC /* ApiTimetableConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D7CA220F2387800A4F7BC /* ApiTimetableConverter.swift */; };
@@ -84,6 +83,8 @@
 		B8A9387220CFC9E9007460C6 /* MainScreenViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A9387120CFC9E9007460C6 /* MainScreenViewState.swift */; };
 		B8A9387920CFCECC007460C6 /* MainScreenViewStateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A9387820CFCECC007460C6 /* MainScreenViewStateConverter.swift */; };
 		B8A9387B20CFCF64007460C6 /* MainScreenViewStateConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A9387A20CFCF64007460C6 /* MainScreenViewStateConverterTests.swift */; };
+		B8AAECB0212812D5008C5E8D /* DatePickerViewStateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAECAF212812D4008C5E8D /* DatePickerViewStateConverter.swift */; };
+		B8AAECB22128133A008C5E8D /* DatePickerViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAECB12128133A008C5E8D /* DatePickerViewState.swift */; };
 		B8AAF48D20B96CB5000C9ADE /* StationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAF48C20B96CB5000C9ADE /* StationSearchViewController.swift */; };
 		B8AAF48F20B96D2E000C9ADE /* DataDriven.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAF48E20B96D2E000C9ADE /* DataDriven.swift */; };
 		B8AAF49120B9764C000C9ADE /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AAF49020B9764C000C9ADE /* StationCell.swift */; };
@@ -153,7 +154,6 @@
 		B80877A420F7BF3500025B18 /* TimetableSideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableSideEffects.swift; sourceTree = "<group>"; };
 		B80877A620F7C1EE00025B18 /* TimetableEffectsInvocationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableEffectsInvocationsTests.swift; sourceTree = "<group>"; };
 		B80877A820F7C21400025B18 /* TimetableSideEffectsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableSideEffectsMock.swift; sourceTree = "<group>"; };
-		B816D52B21133E6800069B48 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		B81AB5AA2114BA1300D31BFC /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		B81D7CA020F236D500A4F7BC /* Timetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable.swift; sourceTree = "<group>"; };
 		B81D7CA220F2387800A4F7BC /* ApiTimetableConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTimetableConverter.swift; sourceTree = "<group>"; };
@@ -215,6 +215,8 @@
 		B8A9387120CFC9E9007460C6 /* MainScreenViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewState.swift; sourceTree = "<group>"; };
 		B8A9387820CFCECC007460C6 /* MainScreenViewStateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewStateConverter.swift; sourceTree = "<group>"; };
 		B8A9387A20CFCF64007460C6 /* MainScreenViewStateConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewStateConverterTests.swift; sourceTree = "<group>"; };
+		B8AAECAF212812D4008C5E8D /* DatePickerViewStateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewStateConverter.swift; sourceTree = "<group>"; };
+		B8AAECB12128133A008C5E8D /* DatePickerViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewState.swift; sourceTree = "<group>"; };
 		B8AAF48C20B96CB5000C9ADE /* StationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewController.swift; sourceTree = "<group>"; };
 		B8AAF48E20B96D2E000C9ADE /* DataDriven.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDriven.swift; sourceTree = "<group>"; };
 		B8AAF49020B9764C000C9ADE /* StationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCell.swift; sourceTree = "<group>"; };
@@ -380,6 +382,8 @@
 			isa = PBXGroup;
 			children = (
 				B84AA5B2212174DC0010DC56 /* DatePickerViewController.swift */,
+				B8AAECB12128133A008C5E8D /* DatePickerViewState.swift */,
+				B8AAECAF212812D4008C5E8D /* DatePickerViewStateConverter.swift */,
 			);
 			path = DatePicker;
 			sourceTree = "<group>";
@@ -508,7 +512,6 @@
 				B8AAF49320B976AF000C9ADE /* UITableView+.swift */,
 				B892CFBE20BAC39000176A15 /* UIView+.swift */,
 				B8DE6E0D210CAD0800F298F3 /* TimeZone+.swift */,
-				B816D52B21133E6800069B48 /* Date+.swift */,
 				B81AB5AA2114BA1300D31BFC /* UIApplication+.swift */,
 				B85F5446211DD77000C94878 /* String+.swift */,
 			);
@@ -842,6 +845,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxFeedback/RxFeedback.framework",
+				"${BUILT_PRODUCTS_DIR}/RxKeyboard/RxKeyboard.framework",
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SWXMLHash/SWXMLHash.framework",
@@ -852,6 +856,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxFeedback.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxKeyboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWXMLHash.framework",
@@ -962,6 +967,7 @@
 				B8F4C6C320B005C300E62DAE /* Result.swift in Sources */,
 				B81D7CA120F236D500A4F7BC /* Timetable.swift in Sources */,
 				B81D7CA320F2387800A4F7BC /* ApiTimetableConverter.swift in Sources */,
+				B8AAECB22128133A008C5E8D /* DatePickerViewState.swift in Sources */,
 				B88828C720F34C45005802A4 /* ApiStop.swift in Sources */,
 				B8C797A9212025060096DB33 /* TimetableEventCellConverter.swift in Sources */,
 				B8602DF820A99E44001BEDC2 /* Assets.swift in Sources */,
@@ -975,7 +981,6 @@
 				B86A734D2114FA2B00C38070 /* ApiChanges.swift in Sources */,
 				B8F437C620A82A9500977CE3 /* FahrplanService.swift in Sources */,
 				B831E83B20AC20B400B951DB /* StationSearchState.swift in Sources */,
-				B816D52C21133E6800069B48 /* Date+.swift in Sources */,
 				B89DCF3320F7F25F00DF30C2 /* PresentationStyle.swift in Sources */,
 				B81AB5AB2114BA1300D31BFC /* UIApplication+.swift in Sources */,
 				B8F437C420A8298E00977CE3 /* Station.swift in Sources */,
@@ -1021,6 +1026,7 @@
 				B8B412FB20F3DB7A00003EEB /* TimetablesService.swift in Sources */,
 				B8004D1720F66935006A1A83 /* TimetableState.swift in Sources */,
 				B8A9387920CFCECC007460C6 /* MainScreenViewStateConverter.swift in Sources */,
+				B8AAECB0212812D5008C5E8D /* DatePickerViewStateConverter.swift in Sources */,
 				B85F5447211DD77000C94878 /* String+.swift in Sources */,
 				B8F437CA20A8305600977CE3 /* ApiStationConverter.swift in Sources */,
 				B8AAF49A20B9808A000C9ADE /* StateStoreBindable.swift in Sources */,

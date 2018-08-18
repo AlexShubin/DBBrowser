@@ -10,6 +10,7 @@
 
 "date_picker.top_label" = "Select time and date";
 "date_picker.done_button_label" = "Done";
+"date_picker.availablility" = "Timetable is available only for the next %d hours";
 
 "timetable.platform_caption" = "platform";
 "timetable.towards" = "towards:";

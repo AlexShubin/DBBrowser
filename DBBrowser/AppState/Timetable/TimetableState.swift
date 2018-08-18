@@ -45,6 +45,8 @@ enum TimetableEvent: Equatable {
     case changeTable(Int)
     /// Empties current timetable and sets dateToLoad to `date` (from the main screen).
     case reset
+    /// Sets search start date.
+    case date(Date)
 }
 
 // MARK: - Queries
@@ -85,7 +87,23 @@ extension TimetableState {
             result.corrStation = station
         case .clearCorrStation:
             result.corrStation = nil
+        case .date(let date):
+            result.date = date
         }
         return result
+    }
+}
+
+// MARK: - Helpers
+
+private extension Date {
+    /// Returns the beginning of the next hour.
+    /// For example for 15:47 - returns 16:00.
+    var startOfTheNextHour: Date {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.year, .month, .day, .hour], from: self)
+        components.minute = 0
+        components.hour = components.hour! + 1
+        return calendar.date(from: components)!
     }
 }
