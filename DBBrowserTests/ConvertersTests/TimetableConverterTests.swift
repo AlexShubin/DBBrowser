@@ -55,6 +55,7 @@ class TimetableConverterTests: XCTestCase {
             .with(tripLabel: apiTripLabel)
             .with(arrival: apiEvent)
             .with(departure: nil)
+            .with(id: TestData.Timetable.id1)
             .build()
         let apiTimetable = ApiTimetableBuilder()
             .with(stops: [apiStop])
@@ -64,11 +65,13 @@ class TimetableConverterTests: XCTestCase {
         // Test
         XCTAssertEqual(result.arrivals.count, 1)
         XCTAssertEqual(result.departures.count, 0)
-        XCTAssertEqual(result.arrivals.first?.number, TestData.Timetable.number1)
-        XCTAssertEqual(result.arrivals.first?.category, TestData.Timetable.category1)
-        XCTAssertEqual(result.arrivals.first?.platform, TestData.Timetable.platform1)
-        XCTAssertEqual(result.arrivals.first?.stations, TestData.Timetable.stations1.components(separatedBy: "|"))
-        XCTAssertEqual(result.arrivals.first?.time, TestData.Timetable.time1)
+        XCTAssertEqual(result.arrivals.first,
+                       Timetable.Event(id: TestData.Timetable.id1,
+                                       category: TestData.Timetable.category1,
+                                       number: TestData.Timetable.number1,
+                                       stations: TestData.Timetable.stations1.components(separatedBy: "|"),
+                                       time: TestData.Timetable.time1,
+                                       platform: TestData.Timetable.platform1))
     }
 
     func testDepartureEventConverted() {
@@ -95,11 +98,13 @@ class TimetableConverterTests: XCTestCase {
         // Test
         XCTAssertEqual(result.departures.count, 1)
         XCTAssertEqual(result.arrivals.count, 0)
-        XCTAssertEqual(result.departures.first?.number, TestData.Timetable.number1)
-        XCTAssertEqual(result.departures.first?.category, TestData.Timetable.category1)
-        XCTAssertEqual(result.departures.first?.platform, TestData.Timetable.platform1)
-        XCTAssertEqual(result.departures.first?.stations, TestData.Timetable.stations1.components(separatedBy: "|"))
-        XCTAssertEqual(result.departures.first?.time, TestData.Timetable.time1)
+        XCTAssertEqual(result.departures.first,
+                       Timetable.Event(id: TestData.Timetable.id1,
+                                       category: TestData.Timetable.category1,
+                                       number: TestData.Timetable.number1,
+                                       stations: TestData.Timetable.stations1.components(separatedBy: "|"),
+                                       time: TestData.Timetable.time1,
+                                       platform: TestData.Timetable.platform1))
     }
 
     func testArrivalChangesAppliedToAppropriateEvents() {

@@ -21,13 +21,15 @@ struct ApiTimetableConverter: TimetableConverter {
         apiTimetable.stops.forEach { stop in
             if let arrival = stop.arrival {
                 let changedEvent = changes.stops.first { $0.id == stop.id }?.arrival
-                arrivals.append(_convert(tripLabel: stop.tripLabel,
+                arrivals.append(_convert(id: stop.id,
+                                         tripLabel: stop.tripLabel,
                                          apiEvent: arrival,
                                          apiChangedEvent: changedEvent))
             }
             if let departure = stop.departure {
                 let changedEvent = changes.stops.first { $0.id == stop.id }?.departure
-                departures.append(_convert(tripLabel: stop.tripLabel,
+                departures.append(_convert(id: stop.id,
+                                           tripLabel: stop.tripLabel,
                                            apiEvent: departure,
                                            apiChangedEvent: changedEvent))
             }
@@ -35,13 +37,15 @@ struct ApiTimetableConverter: TimetableConverter {
         return Timetable(arrivals: arrivals, departures: departures)
     }
 
-    func _convert(tripLabel: ApiTripLabel,
+    func _convert(id: String,
+                  tripLabel: ApiTripLabel,
                   apiEvent: ApiEvent,
                   apiChangedEvent: ApiChangedEvent?) -> Timetable.Event {
         let path = apiChangedEvent?.path ?? apiEvent.path
         let time = apiChangedEvent?.time ?? apiEvent.time
         let platform = apiChangedEvent?.platform ?? apiEvent.platform
-        return Timetable.Event(category: tripLabel.category,
+        return Timetable.Event(id: id,
+                               category: tripLabel.category,
                                number: tripLabel.number,
                                stations: path.components(separatedBy: "|"),
                                time: _dateFormatter.date(from: time,
