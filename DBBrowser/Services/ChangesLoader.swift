@@ -19,7 +19,6 @@ enum ChangesLoaderError: String, Error, Equatable {
 }
 
 struct ApiChangesLoader: ChangesLoader {
-
     private let _timetableService: TimetablesService
     private let _changesConverter: ChangesConverter
     private let _dateFormatter: DateTimeFormatter
