@@ -7,7 +7,7 @@ import RxSwift
 @testable import DBBrowser
 import RxTest
 
-class TimetableLoaderServiceTests: XCTestCase {
+class TimetableLoaderTests: XCTestCase {
 
     let timetableServiceMock = TimetableServiceMock()
     let dateFormatterMock = DateTimeFormatterMock()
@@ -31,7 +31,7 @@ class TimetableLoaderServiceTests: XCTestCase {
         // Run
         let testObserver = testScheduler.start {
             self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
-                                                  date: Date(timeIntervalSince1970: 1000000)))
+                                                  date: TestData.date1))
         }
         // Test
         guard case .success? = testObserver.firstElement else {
@@ -47,7 +47,7 @@ class TimetableLoaderServiceTests: XCTestCase {
         // Run
         let testObserver = testScheduler.start {
             self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
-                                                  date: Date(timeIntervalSince1970: 1000000)))
+                                                  date: TestData.date1))
         }
         // Test
         guard case .error? = testObserver.firstElement else {
