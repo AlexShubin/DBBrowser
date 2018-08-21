@@ -32,13 +32,8 @@ struct ApiTimetableLoader: TimetableLoader {
         let evaId = String(params.station.evaId)
         let day = _dateFormatter.string(from: params.date, style: .apiTimetablesDate)
         let time = _dateFormatter.string(from: params.date, style: .apiTimetablesTime)
-        return Observable.combineLatest(
-            _timetableService.loadTimetable(evaNo: evaId, date: day, hour: time),
-            _timetableService.loadChanges(evaNo: evaId)
-        ) { (apiTimetable, apiChanges) in
-            var timetable = self._timetableConverter.convert(from: apiTimetable,
-                                                             changes: apiChanges,
-                                                             station: params.station)
+        return _timetableService.loadTimetable(evaNo: evaId, date: day, hour: time).map {
+            var timetable = self._timetableConverter.convert(from: $0, station: params.station)
             timetable.arrivals = self._applyFiltersAndSort(to: timetable.arrivals, params: params)
             timetable.departures = self._applyFiltersAndSort(to: timetable.departures, params: params)
             return .success(timetable)

@@ -56,30 +56,6 @@ class TimetableLoaderTests: XCTestCase {
         }
     }
 
-    func testTimetableAndChangesEndpointsEnvokedAtTheSameTime() {
-        // Prepare
-        let invocationsObserver = testScheduler.createObserver(String.self)
-        timetableServiceMock.invocations
-            .subscribe(invocationsObserver)
-            .disposed(by: bag)
-        // Run
-        _ = testScheduler.start {
-            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
-                                                  date: Date(timeIntervalSince1970: 1000000)))
-        }
-        // Test
-        XCTAssertEqual(invocationsObserver.events
-            .filter { $0 == Recorded.next(100, "loadTimetable(evaNo:date:hour:)") }
-            .count,
-            1
-        )
-        XCTAssertEqual(invocationsObserver.events
-            .filter { $0 == Recorded.next(100, "loadChanges(evaNo:)") }
-            .count,
-            1
-        )
-    }
-
     func testDeparturesSortedByTime() {
         // Prepare
         let earlierTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:20")).build()
