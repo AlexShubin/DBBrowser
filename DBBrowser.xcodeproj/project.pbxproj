@@ -39,6 +39,7 @@
 		B831E83820AC1EEC00B951DB /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831E83420AC1EEC00B951DB /* State.swift */; };
 		B831E83920AC1EEC00B951DB /* AppStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831E83520AC1EEC00B951DB /* AppStateStore.swift */; };
 		B831E83B20AC20B400B951DB /* StationSearchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831E83A20AC20B400B951DB /* StationSearchState.swift */; };
+		B83BBCA4212BF55000259114 /* Changes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83BBCA3212BF55000259114 /* Changes.swift */; };
 		B8476864212036BE00B82EC0 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8476863212036BE00B82EC0 /* StringExtensionsTests.swift */; };
 		B84AA5B3212174DC0010DC56 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84AA5B2212174DC0010DC56 /* DatePickerViewController.swift */; };
 		B853867120B174BE003FB667 /* StationSearchSideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853867020B174BE003FB667 /* StationSearchSideEffects.swift */; };
@@ -171,6 +172,7 @@
 		B831E83420AC1EEC00B951DB /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		B831E83520AC1EEC00B951DB /* AppStateStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStateStore.swift; sourceTree = "<group>"; };
 		B831E83A20AC20B400B951DB /* StationSearchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchState.swift; sourceTree = "<group>"; };
+		B83BBCA3212BF55000259114 /* Changes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Changes.swift; sourceTree = "<group>"; };
 		B8476863212036BE00B82EC0 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		B84AA5B2212174DC0010DC56 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		B853867020B174BE003FB667 /* StationSearchSideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchSideEffects.swift; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 				B8F437C320A8298E00977CE3 /* Station.swift */,
 				B8F4C6C220B005C300E62DAE /* Result.swift */,
 				B81D7CA020F236D500A4F7BC /* Timetable.swift */,
+				B83BBCA3212BF55000259114 /* Changes.swift */,
 				B870B2C720F7AE1D002BD34D /* TimetableLoadParams.swift */,
 			);
 			path = Models;
@@ -984,6 +987,7 @@
 				B89DCF3320F7F25F00DF30C2 /* PresentationStyle.swift in Sources */,
 				B81AB5AB2114BA1300D31BFC /* UIApplication+.swift in Sources */,
 				B8F437C420A8298E00977CE3 /* Station.swift in Sources */,
+				B83BBCA4212BF55000259114 /* Changes.swift in Sources */,
 				B8224EF520BAF07100F9132A /* RoundedView.swift in Sources */,
 				B8AAF49620B97A9E000C9ADE /* StationSearchViewStateConverter.swift in Sources */,
 				B8B401BF20A5DEF400D25B2C /* AppDelegate.swift in Sources */,

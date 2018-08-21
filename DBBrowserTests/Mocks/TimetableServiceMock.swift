@@ -17,6 +17,6 @@ class TimetableServiceMock: TimetablesService {
     }
 
     let invocations = PublishSubject<String>()
-    var expectedTimetable = Observable.just(ApiTimetable(stops: []))
+    var expectedTimetable = Observable.just(ApiTimetableBuilder().build())
     var expectedChanges = Observable.just(ApiChanges(stops: []))
 }

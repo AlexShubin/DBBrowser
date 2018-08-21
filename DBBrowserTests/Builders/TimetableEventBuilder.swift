@@ -12,6 +12,7 @@ final class TimetableEventBuilder {
     private var _time = TestData.Timetable.time1
     private var _platform = TestData.Timetable.platform1
     private var _id = TestData.Timetable.id1
+    private var _station = StationBuilder().build()
 
     func with(category: String) -> TimetableEventBuilder {
         _category = category
@@ -25,6 +26,11 @@ final class TimetableEventBuilder {
 
     func with(stations: [String]) -> TimetableEventBuilder {
         _stations = stations
+        return self
+    }
+
+    func with(station: Station) -> TimetableEventBuilder {
+        _station = station
         return self
     }
 
@@ -45,6 +51,7 @@ final class TimetableEventBuilder {
 
     func build() -> Timetable.Event {
         return Timetable.Event(id: _id,
+                               station: _station,
                                category: _category,
                                number: _number,
                                stations: _stations,

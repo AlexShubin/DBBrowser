@@ -7,6 +7,7 @@ import Foundation
 struct Timetable: Equatable {
     struct Event: Equatable {
         let id: String
+        let station: Station
         let category: String
         let number: String
         let stations: [String]

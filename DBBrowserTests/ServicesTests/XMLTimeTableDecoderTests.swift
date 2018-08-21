@@ -20,13 +20,11 @@ class XMLTimetableDecoderTests: XCTestCase {
             return
         }
 
-        XCTAssertEqual(result.stops[0].id, "4471729078023853954-1807071328-14")
-        XCTAssertEqual(result.stops[0].tripLabel.category, "ICE")
-        XCTAssertEqual(result.stops[0].tripLabel.number, "691")
-        XCTAssertEqual(result.stops[0].arrival?.platform, "18")
-        XCTAssertEqual(result.stops[0].arrival?.time, "1807072130")
-        XCTAssertEqual(result.stops[0].arrival?.path, "Berlin Hbf (tief)|Berlin Südkreuz|Lutherstadt Wittenberg Hbf|Leipzig Hbf|Erfurt Hbf|Eisenach|Fulda|Frankfurt(Main)Hbf|Mannheim Hbf|Stuttgart Hbf|Ulm Hbf|Augsburg Hbf|München-Pasing")
-        XCTAssertNil(result.stops[0].departure)
+        XCTAssertEqual(result.stops[0],
+                       ApiStop(id: "4471729078023853954-1807071328-14",
+                               tripLabel: ApiTripLabel(category: "ICE", number: "691"),
+                               arrival: ApiEvent(platform: "18", time: "1807072130", path: "Berlin Hbf (tief)|Berlin Südkreuz|Lutherstadt Wittenberg Hbf|Leipzig Hbf|Erfurt Hbf|Eisenach|Fulda|Frankfurt(Main)Hbf|Mannheim Hbf|Stuttgart Hbf|Ulm Hbf|Augsburg Hbf|München-Pasing"),
+                               departure: nil))
 
         XCTAssertEqual(result.stops[1].id, "3207621895872414763-1807072151-1")
         XCTAssertEqual(result.stops[1].tripLabel.category, "ICE")

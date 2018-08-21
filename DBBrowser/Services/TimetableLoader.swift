@@ -29,11 +29,16 @@ struct ApiTimetableLoader: TimetableLoader {
     }
 
     func load(with params: TimetableLoadParams) -> Observable<TimetableLoaderResult> {
+        let evaId = String(params.station.evaId)
+        let day = _dateFormatter.string(from: params.date, style: .apiTimetablesDate)
+        let time = _dateFormatter.string(from: params.date, style: .apiTimetablesTime)
         return Observable.combineLatest(
-            _loadTimetable(station: params.station, date: params.date),
-            _loadChanges(station: params.station)
+            _timetableService.loadTimetable(evaNo: evaId, date: day, hour: time),
+            _timetableService.loadChanges(evaNo: evaId)
         ) { (apiTimetable, apiChanges) in
-            var timetable = self._timetableConverter.convert(from: apiTimetable, changes: apiChanges)
+            var timetable = self._timetableConverter.convert(from: apiTimetable,
+                                                             changes: apiChanges,
+                                                             station: params.station)
             timetable.arrivals = self._applyFiltersAndSort(to: timetable.arrivals, params: params)
             timetable.departures = self._applyFiltersAndSort(to: timetable.departures, params: params)
             return .success(timetable)
@@ -41,30 +46,6 @@ struct ApiTimetableLoader: TimetableLoader {
             .catchError { _ in
                 .just(.error(.unknown))
         }
-    }
-
-    private func _loadTimetable(station: Station, date: Date) -> Observable<ApiTimetable> {
-        let evaId = String(station.evaId)
-        let day = _dateFormatter.string(from: date, style: .apiTimetablesDate)
-        let time = _dateFormatter.string(from: date, style: .apiTimetablesTime)
-        if let additionalEvaId = station.additionalEvaId {
-            return Observable.combineLatest(
-                _timetableService.loadTimetable(evaNo: evaId, date: day, hour: time),
-                _timetableService.loadTimetable(evaNo: String(additionalEvaId), date: day, hour: time)
-            ) { $0 + $1 }
-        }
-        return _timetableService.loadTimetable(evaNo: evaId, date: day, hour: time)
-    }
-
-    private func _loadChanges(station: Station) -> Observable<ApiChanges> {
-        let evaId = String(station.evaId)
-        if let additionalEvaId = station.additionalEvaId {
-            return Observable.combineLatest(
-                _timetableService.loadChanges(evaNo: evaId),
-                _timetableService.loadChanges(evaNo: String(additionalEvaId))
-            ) { $0 + $1 }
-        }
-        return _timetableService.loadChanges(evaNo: evaId)
     }
 
     private func _applyFiltersAndSort(to events: [Timetable.Event],

@@ -3,7 +3,7 @@
 //
 
 /// Timetable stop.
-struct ApiStop {
+struct ApiStop: Equatable {
     /// An id that uniquely identifies the stop.
     /// It consists of the following three elements separated by dashes.
     ///     - a 'daily trip id' that uniquely identifies a trip within one day.

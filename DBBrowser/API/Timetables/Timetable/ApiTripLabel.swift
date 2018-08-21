@@ -3,7 +3,7 @@
 //
 
 /// Timetable trip label.
-struct ApiTripLabel {
+struct ApiTripLabel: Equatable {
     /// Category. Trip category, e.g. "ICE" or "RE".
     let category: String
     /// Trip/train number, e.g. "4523".

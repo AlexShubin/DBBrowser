@@ -3,7 +3,7 @@
 //
 
 /// Timetable event: arrival or departure.
-struct ApiEvent {
+struct ApiEvent: Equatable {
     /// Planned platform.
     let platform: String
     /// Planned time. Planned departure or arrival time.
