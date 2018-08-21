@@ -52,7 +52,9 @@ class TimetableViewStateConverterTests: XCTestCase {
             .with(arrivals: [])
             .build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .corrStation(StationBuilder().with(name: TestData.stationName1).build()),
+            .corrStation(StationBuilder {
+                $0.name = TestData.stationName1
+                }.build()),
             .timetableLoaded(.success(timetableWithDepartures)),
             .changeTable(0)
             ])
@@ -73,7 +75,9 @@ class TimetableViewStateConverterTests: XCTestCase {
             .with(departures: [event1, event2])
             .with(arrivals: [event3])
             .build()
-        let corrStation = StationBuilder().with(evaId: TestData.stationId1).build()
+        let corrStation = StationBuilder {
+            $0.evaId = TestData.stationId1
+            }.build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .corrStation(corrStation),
             .timetableLoaded(.success(timetableWithDepartures)),
@@ -96,7 +100,9 @@ class TimetableViewStateConverterTests: XCTestCase {
             .with(departures: [event1, event2])
             .with(arrivals: [event3])
             .build()
-        let corrStation = StationBuilder().with(evaId: TestData.stationId1).build()
+        let corrStation = StationBuilder {
+            $0.name = TestData.stationName2
+            }.build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .corrStation(corrStation),
             .timetableLoaded(.success(timetableWithDepartures)),

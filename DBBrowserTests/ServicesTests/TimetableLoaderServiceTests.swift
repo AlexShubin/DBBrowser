@@ -172,7 +172,9 @@ class TimetableLoaderServiceTests: XCTestCase {
         let testObserver = testScheduler.start {
             self.timetableLoader.load(with: .init(station: StationBuilder().build(),
                                                   date: TestData.date1,
-                                                  corrStation: StationBuilder().with(name: "456").build()))
+                                                  corrStation: StationBuilder {
+                                                    $0.name = "456"
+                                                    }.build()))
         }
         // Test
         guard case .success(let timetable)? = testObserver.firstElement else {
@@ -194,7 +196,9 @@ class TimetableLoaderServiceTests: XCTestCase {
         let testObserver = testScheduler.start {
             self.timetableLoader.load(with: .init(station: StationBuilder().build(),
                                                   date: TestData.date1,
-                                                  corrStation: StationBuilder().with(name: "141").build()))
+                                                  corrStation: StationBuilder {
+                                                    $0.name = "141"
+                                                    }.build()))
         }
         // Test
         guard case .success(let timetable)? = testObserver.firstElement else {

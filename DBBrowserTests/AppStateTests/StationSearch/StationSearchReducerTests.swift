@@ -40,8 +40,14 @@ class StationSearchReducerTests: XCTestCase {
     func testStationSelected() {
         // Prepare
         let expectedResult = [
-            StationBuilder().with(evaId: TestData.stationId1).with(name: TestData.stationName1).build(),
-            StationBuilder().with(evaId: TestData.stationId2).with(name: TestData.stationName2).build()
+            StationBuilder {
+                $0.name = TestData.stationName1
+                $0.evaId = TestData.stationId1
+                }.build(),
+            StationBuilder {
+                $0.name = TestData.stationName2
+                $0.evaId = TestData.stationId2
+                }.build()
             ]
         // Run
         let state = StationSearchState.applyEvents(initial: .initial, events: [

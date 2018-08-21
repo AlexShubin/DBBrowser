@@ -29,9 +29,9 @@ class MainScreenViewStateConverterTests: XCTestCase {
     func testChosenStationConverted() {
         // Prepare
         var state = TimetableState.initial
-        state.station = StationBuilder()
-            .with(name: TestData.stationName1)
-            .build()
+        state.station = StationBuilder {
+            $0.name = TestData.stationName1
+            }.build()
         // Run
         let converted = mainScreenViewStateConverter.convert(from: state)
         // Test
@@ -54,9 +54,9 @@ class MainScreenViewStateConverterTests: XCTestCase {
     func testChosenCorrStationConverted() {
         // Prepare
         var state = TimetableState.initial
-        state.corrStation = StationBuilder()
-            .with(name: TestData.stationName1)
-            .build()
+        state.corrStation = StationBuilder {
+            $0.name = TestData.stationName1
+            }.build()
         // Run
         let converted = mainScreenViewStateConverter.convert(from: state)
         // Test

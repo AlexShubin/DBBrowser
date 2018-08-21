@@ -35,8 +35,12 @@ class StationSearchViewStateConverterTests: XCTestCase {
     func testLoadedConverted() {
         // Prepare
         let stations = [
-            StationBuilder().with(name: TestData.stationName1),
-            StationBuilder().with(name: TestData.stationName2)
+            StationBuilder {
+                $0.name = TestData.stationName1
+                },
+            StationBuilder {
+                $0.name = TestData.stationName2
+                }
             ].map { $0.build() }
         var state = StationSearchState.initial
         state.searchResult = .success(stations)

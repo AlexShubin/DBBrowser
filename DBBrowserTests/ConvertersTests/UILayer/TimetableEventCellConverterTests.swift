@@ -72,7 +72,9 @@ class TimetableEventCellConverterTests: XCTestCase {
         let event = TimetableEventBuilder()
             .with(stations: [TestData.stationName1, TestData.stationName2])
             .build()
-        let userCorrStation = StationBuilder().with(name: TestData.stationName1).build()
+        let userCorrStation = StationBuilder {
+            $0.name = TestData.stationName1
+            }.build()
         // Run
         let cellState = converter.convert(from: event,
                                           table: .departures,
@@ -87,7 +89,9 @@ class TimetableEventCellConverterTests: XCTestCase {
         let event = TimetableEventBuilder()
             .with(stations: [TestData.stationName1, TestData.stationName2])
             .build()
-        let userCorrStation = StationBuilder().with(name: TestData.stationName2).build()
+        let userCorrStation = StationBuilder {
+            $0.name = TestData.stationName2
+            }.build()
         // Run
         let cellState = converter.convert(from: event,
                                           table: .arrivals,
@@ -102,7 +106,9 @@ class TimetableEventCellConverterTests: XCTestCase {
         let event = TimetableEventBuilder()
             .with(stations: [TestData.stationName1, TestData.stationName2])
             .build()
-        let userCorrStation = StationBuilder().with(name: TestData.stationName2).build()
+        let userCorrStation = StationBuilder {
+            $0.name = TestData.stationName2
+            }.build()
         // Run
         let cellState = converter.convert(from: event,
                                           table: .departures,
@@ -116,7 +122,9 @@ class TimetableEventCellConverterTests: XCTestCase {
         let event = TimetableEventBuilder()
             .with(stations: [TestData.stationName1, TestData.stationName2])
             .build()
-        let userCorrStation = StationBuilder().with(name: TestData.stationName1).build()
+        let userCorrStation = StationBuilder {
+            $0.name = TestData.stationName1
+            }.build()
         // Run
         let cellState = converter.convert(from: event,
                                           table: .arrivals,
