@@ -21,15 +21,39 @@ extension TimetableSideEffectsType {
 struct TimetableSideEffects: TimetableSideEffectsType {
 
     private let _timetableLoader: TimetableLoader
+    private let _changesLoader: ChangesLoader
 
-    init(timetableLoader: TimetableLoader) {
+    init(timetableLoader: TimetableLoader, changesLoader: ChangesLoader) {
         _timetableLoader = timetableLoader
+        _changesLoader = changesLoader
     }
 
     var loadTimetable: (TimetableLoadParams) -> Observable<AppEvent> {
         return {
-            self._timetableLoader.load(with: $0)
-                .map { .timetable(.timetableLoaded($0)) }
+            if $0.shouldLoadChanges {
+                return Observable.combineLatest(
+                    self._timetableLoader.load(station: $0.station, date: $0.date, corrStation: $0.corrStation),
+                    self._changesLoader.load(with: $0.station)) {
+                        switch ($0, $1) {
+                        case (.success(let timetable), .success(let changes)):
+                            return .of(.timetable(.changesLoaded(changes)),
+                                       .timetable(.timetableLoaded(timetable)))
+                        case (.error, _), (_, .error):
+                            return .just(.timetable(.timetableLoadingError))
+                        }
+                    }
+                    .flatMap { appEvets -> Observable<AppEvent> in appEvets }
+            } else {
+                return self._timetableLoader.load(station: $0.station, date: $0.date, corrStation: $0.corrStation)
+                    .map {
+                        switch $0 {
+                        case .success(let timetable):
+                            return .timetable(.timetableLoaded(timetable))
+                        case .error:
+                            return.timetable(.timetableLoadingError)
+                        }
+                }
+            }
         }
     }
 }

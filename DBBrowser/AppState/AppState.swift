@@ -13,7 +13,7 @@ struct AppState: Equatable {
 }
 
 // MARK: - Events
-enum AppEvent {
+enum AppEvent: Equatable {
     case stationSearch(StationSearchEvent)
     case timetable(TimetableEvent)
     case coordinator(SceneCoordinatorEvent)

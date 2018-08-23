@@ -19,7 +19,7 @@ struct StationSearchState: State, Equatable {
 }
 
 // MARK: - Events
-enum StationSearchEvent {
+enum StationSearchEvent: Equatable {
     case searchString(String)
     case startSearch
     case found(StationFinderResult)

@@ -34,7 +34,7 @@ class ChangesLoaderTests: XCTestCase {
         changesConverterMock.expected = ChangesBuilder().build()
         // Run
         let testObserver = testScheduler.start {
-            self.changesLoader.load(with: "")
+            self.changesLoader.load(with: StationBuilder().build())
         }
         // Test
         XCTAssertEqual(testObserver.firstElement, .success(changesConverterMock.expected))
@@ -45,7 +45,7 @@ class ChangesLoaderTests: XCTestCase {
         timetableServiceMock.expectedChanges = .error(RxError.unknown)
         // Run
         let testObserver = testScheduler.start {
-            self.changesLoader.load(with: "")
+            self.changesLoader.load(with: StationBuilder().build())
         }
         // Test
         guard case .error? = testObserver.firstElement else {

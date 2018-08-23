@@ -30,8 +30,9 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedChanges = .just(ApiChangesBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
-                                                  date: TestData.date1))
+            self.timetableLoader.load(station: StationBuilder().build(),
+                                      date: TestData.date1,
+                                      corrStation: nil)
         }
         // Test
         guard case .success? = testObserver.firstElement else {
@@ -46,8 +47,9 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedChanges = .just(ApiChangesBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
-                                                  date: TestData.date1))
+            self.timetableLoader.load(station: StationBuilder().build(),
+                                      date: TestData.date1,
+                                      corrStation: nil)
         }
         // Test
         guard case .error? = testObserver.firstElement else {
@@ -65,8 +67,9 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
-                                                  date: Date(timeIntervalSince1970: 1000000)))
+            self.timetableLoader.load(station: StationBuilder().build(),
+                                      date: Date(timeIntervalSince1970: 1000000),
+                                      corrStation: nil)
         }
         // Test
         guard case .success(let timetable)? = testObserver.firstElement else {
@@ -85,8 +88,9 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
-                                                  date: Date(timeIntervalSince1970: 1000000)))
+            self.timetableLoader.load(station: StationBuilder().build(),
+                                      date: Date(timeIntervalSince1970: 1000000),
+                                      corrStation: nil)
         }
         // Test
         guard case .success(let timetable)? = testObserver.firstElement else {
@@ -105,8 +109,9 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
-                                                  date: Date.testSample(from: "02-12-1987 12:25")))
+            self.timetableLoader.load(station: StationBuilder().build(),
+                                      date: Date.testSample(from: "02-12-1987 12:25"),
+                                      corrStation: nil)
         }
         // Test
         guard case .success(let timetable)? = testObserver.firstElement else {
@@ -125,8 +130,9 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(with: .init(station: Station(name: "", evaId: 0),
-                                                  date: Date.testSample(from: "02-12-1987 12:25")))
+            self.timetableLoader.load(station: StationBuilder().build(),
+                                      date: Date.testSample(from: "02-12-1987 12:25"),
+                                      corrStation: nil)
         }
         // Test
         guard case .success(let timetable)? = testObserver.firstElement else {
@@ -146,11 +152,9 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(with: .init(station: StationBuilder().build(),
-                                                  date: TestData.date1,
-                                                  corrStation: StationBuilder {
-                                                    $0.name = "456"
-                                                    }.build()))
+            self.timetableLoader.load(station: StationBuilder().build(),
+                                      date: TestData.date1,
+                                      corrStation: StationBuilder { $0.name = "456" }.build())
         }
         // Test
         guard case .success(let timetable)? = testObserver.firstElement else {
@@ -170,11 +174,9 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(with: .init(station: StationBuilder().build(),
-                                                  date: TestData.date1,
-                                                  corrStation: StationBuilder {
-                                                    $0.name = "141"
-                                                    }.build()))
+            self.timetableLoader.load(station: StationBuilder().build(),
+                                      date: TestData.date1,
+                                      corrStation: StationBuilder { $0.name = "141" }.build())
         }
         // Test
         guard case .success(let timetable)? = testObserver.firstElement else {

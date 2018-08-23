@@ -27,6 +27,7 @@ enum TestData {
         static let timeString1 = "1807072130"
         static let time1 = Date.testSample(from: timeString1)
         static let stations1 = "Berlin Hbf (tief)|Berlin Südkreuz|Lutherstadt Wittenberg Hbf|Leipzig Hbf|Erfurt Hbf|Eisenach|Fulda|Frankfurt(Main)Hbf|Mannheim Hbf|Stuttgart Hbf|Ulm Hbf|Augsburg Hbf|München-Pasing"
+        static let stationsArray1 = stations1.components(separatedBy: "|")
 
         static let id2 = "-381142949737100268-1807072144-1"
         static let category2 = "RE"
@@ -35,6 +36,7 @@ enum TestData {
         static let timeString2 = "1807072151"
         static let time2 = Date.testSample(from: timeString2)
         static let stations2 = "Augsburg Hbf|Günzburg|Ulm Hbf|Stuttgart Hbf|Mannheim Hbf|Frankfurt(M) Flughafen Fernbf|Frankfurt(Main)Hbf|Eisenach|Gotha|Erfurt Hbf|Halle(Saale)Hbf|Bitterfeld|Berlin Südkreuz|Berlin Hbf (tief)"
+        static let stationsArray2 = stations2.components(separatedBy: "|")
 
         static let id3 = "-7265364076564664702-1808032329-1"
         static let category3 = "RB"
@@ -43,6 +45,7 @@ enum TestData {
         static let timeString3 = "1807080600"
         static let time3 = Date.testSample(from: timeString3)
         static let stations3 = "München-Pasing|Augsburg Hbf|Ansbach|Stuttgart Hbf"
+        static let stationsArray3 = stations3.components(separatedBy: "|")
     }
 }
 

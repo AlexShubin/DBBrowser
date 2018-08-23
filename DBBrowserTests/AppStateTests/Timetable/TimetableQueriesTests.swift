@@ -23,7 +23,8 @@ class TimetableQueriesTests: XCTestCase {
             ])
         XCTAssertEqual(state.queryLoadTimetable, TimetableLoadParams(station: station,
                                                                      date: TestData.date1,
-                                                                     corrStation: corrStation))
+                                                                     corrStation: corrStation,
+                                                                     shouldLoadChanges: true))
     }
 
     func testQueryLoadTimetable_returnsNilWhenShouldLoadEventNotReceived() {

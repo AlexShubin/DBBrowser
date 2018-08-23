@@ -18,6 +18,7 @@ struct TimetableState: State, Equatable {
         case error, success, loading
     }
 
+    var changes: Changes?
     var timetable = Timetable.empty
     var loadingState = LoadingState.success
 
@@ -40,13 +41,17 @@ enum TimetableEvent: Equatable {
     /// Start loading timetable for current dateToLoad.
     case loadTimetable
     /// Sets loaded timetable to the state and encreases dateToLoad to the next hour.
-    case timetableLoaded(TimetableLoaderResult)
+    case timetableLoaded(Timetable)
+    /// Timetable loading finished with error.
+    case timetableLoadingError
     /// Changes current table.
     case changeTable(Int)
     /// Empties current timetable and sets dateToLoad to `date` (from the main screen).
     case reset
     /// Sets search start date.
     case date(Date)
+    /// Sets loaded changes.
+    case changesLoaded(Changes)
 }
 
 // MARK: - Queries
@@ -56,7 +61,10 @@ extension TimetableState {
             let station = station else {
             return nil
         }
-        return TimetableLoadParams(station: station, date: dateToLoad, corrStation: corrStation)
+        return TimetableLoadParams(station: station,
+                                   date: dateToLoad,
+                                   corrStation: corrStation,
+                                   shouldLoadChanges: changes == nil)
     }
 }
 
@@ -69,15 +77,12 @@ extension TimetableState {
             result.station = station
         case .loadTimetable:
             result.loadingState = .loading
-        case .timetableLoaded(let timetableResult):
-            switch timetableResult {
-            case .success(let timetable):
-                result.timetable += timetable
-                result.loadingState = .success
-                result.dateToLoad = state.dateToLoad.startOfTheNextHour
-            case .error:
-                result.loadingState = .error
-            }
+        case .timetableLoaded(let timetable):
+            result.timetable += timetable
+            result.loadingState = .success
+            result.dateToLoad = state.dateToLoad.startOfTheNextHour
+        case .timetableLoadingError:
+            result.loadingState = .error
         case .changeTable(let tableIndex):
             result.currentTable = Table(rawValue: tableIndex) ?? .departures
         case .reset:
@@ -89,6 +94,8 @@ extension TimetableState {
             result.corrStation = nil
         case .date(let date):
             result.date = date
+        case .changesLoaded(let changes):
+            result.changes = changes
         }
         return result
     }

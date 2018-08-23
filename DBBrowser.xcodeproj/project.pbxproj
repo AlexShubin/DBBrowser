@@ -67,6 +67,9 @@
 		B870B2C620F7A984002BD34D /* TimetableViewStateConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870B2C520F7A984002BD34D /* TimetableViewStateConverterTests.swift */; };
 		B870B2C820F7AE1D002BD34D /* TimetableLoadParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870B2C720F7AE1D002BD34D /* TimetableLoadParams.swift */; };
 		B870B2CA20F7B04D002BD34D /* TimetableLoadParamsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870B2C920F7B04D002BD34D /* TimetableLoadParamsBuilder.swift */; };
+		B87E3A97212E92EF00417470 /* TimetableSideEffectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87E3A96212E92EF00417470 /* TimetableSideEffectsTests.swift */; };
+		B87E3A99212E935800417470 /* TimetableLoaderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87E3A98212E935800417470 /* TimetableLoaderMock.swift */; };
+		B87E3A9B212E949C00417470 /* ChangesLoaderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87E3A9A212E949C00417470 /* ChangesLoaderMock.swift */; };
 		B8849FFB20F7A23A00BCD93A /* TimetableViewStateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8849FFA20F7A23A00BCD93A /* TimetableViewStateConverter.swift */; };
 		B88828BF20F344A8005802A4 /* TimetableConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88828BE20F344A8005802A4 /* TimetableConverterTests.swift */; };
 		B88828C120F34514005802A4 /* ApiEventBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88828C020F34514005802A4 /* ApiEventBuilder.swift */; };
@@ -207,6 +210,9 @@
 		B870B2C520F7A984002BD34D /* TimetableViewStateConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewStateConverterTests.swift; sourceTree = "<group>"; };
 		B870B2C720F7AE1D002BD34D /* TimetableLoadParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLoadParams.swift; sourceTree = "<group>"; };
 		B870B2C920F7B04D002BD34D /* TimetableLoadParamsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLoadParamsBuilder.swift; sourceTree = "<group>"; };
+		B87E3A96212E92EF00417470 /* TimetableSideEffectsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableSideEffectsTests.swift; sourceTree = "<group>"; };
+		B87E3A98212E935800417470 /* TimetableLoaderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLoaderMock.swift; sourceTree = "<group>"; };
+		B87E3A9A212E949C00417470 /* ChangesLoaderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesLoaderMock.swift; sourceTree = "<group>"; };
 		B8849FFA20F7A23A00BCD93A /* TimetableViewStateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewStateConverter.swift; sourceTree = "<group>"; };
 		B88828BE20F344A8005802A4 /* TimetableConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableConverterTests.swift; sourceTree = "<group>"; };
 		B88828C020F34514005802A4 /* ApiEventBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEventBuilder.swift; sourceTree = "<group>"; };
@@ -322,6 +328,7 @@
 				B8004D1920F66C54006A1A83 /* TimetableReducerTests.swift */,
 				B80877A220F7BDAF00025B18 /* TimetableQueriesTests.swift */,
 				B80877A620F7C1EE00025B18 /* TimetableEffectsInvocationsTests.swift */,
+				B87E3A96212E92EF00417470 /* TimetableSideEffectsTests.swift */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -700,6 +707,8 @@
 				B82B968120F489930018E1F3 /* TimetableServiceMock.swift */,
 				B8D22603210F33CC0071B994 /* TimetableConverterMock.swift */,
 				B83BBCB0212C580800259114 /* ChangesConverterMock.swift */,
+				B87E3A98212E935800417470 /* TimetableLoaderMock.swift */,
+				B87E3A9A212E949C00417470 /* ChangesLoaderMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1089,6 +1098,8 @@
 				B8F4C6CB20B0119F00E62DAE /* StationSearchQueriesTests.swift in Sources */,
 				B80877A720F7C1EE00025B18 /* TimetableEffectsInvocationsTests.swift in Sources */,
 				B83BBCB1212C580800259114 /* ChangesConverterMock.swift in Sources */,
+				B87E3A97212E92EF00417470 /* TimetableSideEffectsTests.swift in Sources */,
+				B87E3A9B212E949C00417470 /* ChangesLoaderMock.swift in Sources */,
 				B807037621158DAC0079570C /* ApiChangedEventBuilder.swift in Sources */,
 				B8C797AB212028100096DB33 /* TimetableEventCellConverterMock.swift in Sources */,
 				B8F437D320A836A300977CE3 /* FahrplanStationBuilder.swift in Sources */,
@@ -1098,6 +1109,7 @@
 				B853867520B179D8003FB667 /* StationSearchSideEffectsMock.swift in Sources */,
 				B853867320B1792D003FB667 /* StationSearchEffectsInvocationsTests.swift in Sources */,
 				B88828D220F36071005802A4 /* DateTimeFormatterMock.swift in Sources */,
+				B87E3A99212E935800417470 /* TimetableLoaderMock.swift in Sources */,
 				B853867720B17B5A003FB667 /* SideEffectsMock.swift in Sources */,
 				B8F437D020A8354900977CE3 /* FahrplanServiceMock.swift in Sources */,
 				B83BBCAF212C578500259114 /* ChangesLoaderTests.swift in Sources */,

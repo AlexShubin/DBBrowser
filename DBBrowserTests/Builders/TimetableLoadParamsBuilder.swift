@@ -6,20 +6,15 @@
 import Foundation
 
 final class TimetableLoadParamsBuilder {
-    private var _station = StationBuilder().build()
-    private var _date = TestData.Timetable.time1
-
-    func with(station: Station) -> TimetableLoadParamsBuilder {
-        _station = station
-        return self
-    }
-
-    func with(date: Date) -> TimetableLoadParamsBuilder {
-        _date = date
-        return self
-    }
+    var station = StationBuilder().build()
+    var date = TestData.Timetable.time1
+    var corrStation: Station?
+    var shouldLoadChanges = false
 
     func build() -> TimetableLoadParams {
-        return TimetableLoadParams(station: _station, date: _date)
+        return TimetableLoadParams(station: station,
+                                   date: date,
+                                   corrStation: corrStation,
+                                   shouldLoadChanges: shouldLoadChanges)
     }
 }

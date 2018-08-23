@@ -36,16 +36,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fahrplanService = ApiFahrplanService(baseUrl: fahrplanUrl,
                                                  configuration: configuration)
         let timetableService = ApiTimetablesService(baseUrl: timetablesUrl,
-                                                   configuration: configuration)
+                                                    configuration: configuration)
         let timetableConverter = ApiTimetableConverter(dateFormatter: dateFormatter)
+        let changesConverter = ApiChangesConverter(dateFormatter: dateFormatter)
         let timetableLoader = ApiTimetableLoader(timetableService: timetableService,
                                                  timetableConverter: timetableConverter,
                                                  dateFormatter: dateFormatter)
+        let changesLoader = ApiChangesLoader(timetableService: timetableService,
+                                             changesConverter: changesConverter,
+                                             dateFormatter: dateFormatter)
         let stationFinder = ApiStationFinder(fahrplanService: fahrplanService,
                                              stationConverter: ApiStationConverter())
         let sideEffects = AppSideEffects(coordinator: coordinator,
                                          stationFinder: stationFinder,
-                                         timetableLoader: timetableLoader)
+                                         timetableLoader: timetableLoader,
+                                         changesLoader: changesLoader)
         appStateStore = AppStateStore(sideEffects: sideEffects)
         vcFactory.setUp(appStateStore: appStateStore)
         coordinator.setRoot(scene: .mainScreen)

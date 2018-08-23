@@ -51,15 +51,13 @@ class TimetableReducerTests: XCTestCase {
     func testTimetableLoadingErrorEventShoudSetErrorInLoadingStateAndDontAffectTimetable() {
         // Prepare
         let timetable = TimetableBuilder().build()
-        let success: TimetableLoaderResult = .success(timetable)
-        let error: TimetableLoaderResult = .error(.unknown)
         // Run
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .station(StationBuilder().build()),
             .loadTimetable,
-            .timetableLoaded(success),
+            .timetableLoaded(timetable),
             .loadTimetable,
-            .timetableLoaded(error)
+            .timetableLoadingError
             ])
         // Test
         XCTAssertEqual(state.timetable, timetable)
@@ -74,9 +72,9 @@ class TimetableReducerTests: XCTestCase {
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .station(StationBuilder().build()),
             .loadTimetable,
-            .timetableLoaded(.success(timetable1)),
+            .timetableLoaded(timetable1),
             .loadTimetable,
-            .timetableLoaded(.success(timetable2))
+            .timetableLoaded(timetable2)
             ])
         // Test
         let timetableSum = TimetableBuilder()
@@ -84,6 +82,23 @@ class TimetableReducerTests: XCTestCase {
             .with(departures: timetable1.departures + timetable2.departures)
             .build()
         XCTAssertEqual(state.timetable, timetableSum)
+        XCTAssertEqual(state.loadingState, .success)
+    }
+
+    func testTimetableLoadedWithChangesEventShoudSetTimetableAndChanges() {
+        // Prepare
+        let timetable1 = TimetableBuilder().build()
+        let changes1 = ChangesBuilder().build()
+        // Run
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .station(StationBuilder().build()),
+            .loadTimetable,
+            .timetableLoaded(timetable1),
+            .changesLoaded(changes1)
+            ])
+        // Test
+        XCTAssertEqual(state.timetable, timetable1)
+        XCTAssertEqual(state.changes, changes1)
         XCTAssertEqual(state.loadingState, .success)
     }
 
@@ -105,7 +120,7 @@ class TimetableReducerTests: XCTestCase {
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .station(StationBuilder().build()),
             .loadTimetable,
-            .timetableLoaded(.success(TimetableBuilder().build())),
+            .timetableLoaded(TimetableBuilder().build()),
             .reset
             ])
         XCTAssertEqual(state.timetable, Timetable.empty)

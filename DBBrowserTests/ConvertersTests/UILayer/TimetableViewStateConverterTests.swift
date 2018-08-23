@@ -34,7 +34,7 @@ class TimetableViewStateConverterTests: XCTestCase {
     func testErrorConverted() {
         // Prepare
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .timetableLoaded(.error(.unknown))
+            .timetableLoadingError
             ])
         // Run
         let converted = converter.convert(from: state)
@@ -55,7 +55,7 @@ class TimetableViewStateConverterTests: XCTestCase {
             .corrStation(StationBuilder {
                 $0.name = TestData.stationName1
                 }.build()),
-            .timetableLoaded(.success(timetableWithDepartures)),
+            .timetableLoaded(timetableWithDepartures),
             .changeTable(0)
             ])
         // Run
@@ -80,7 +80,7 @@ class TimetableViewStateConverterTests: XCTestCase {
             }.build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .corrStation(corrStation),
-            .timetableLoaded(.success(timetableWithDepartures)),
+            .timetableLoaded(timetableWithDepartures),
             .changeTable(TimetableState.Table.departures.rawValue)
             ])
         // Run
@@ -105,7 +105,7 @@ class TimetableViewStateConverterTests: XCTestCase {
             }.build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .corrStation(corrStation),
-            .timetableLoaded(.success(timetableWithDepartures)),
+            .timetableLoaded(timetableWithDepartures),
             .changeTable(TimetableState.Table.arrivals.rawValue)
             ])
         // Run
@@ -115,6 +115,40 @@ class TimetableViewStateConverterTests: XCTestCase {
                        [.convert(event3, .arrivals, corrStation)])
     }
 
+    func testEventCellChangesAppliedAndPassedToTheCellConverter() {
+        // Prepare
+        let event = TimetableEventBuilder()
+            .with(id: TestData.Timetable.id1)
+            .with(platform: TestData.Timetable.platform1)
+            .with(stations: TestData.Timetable.stationsArray1)
+            .with(time: TestData.Timetable.time1)
+            .build()
+        let changedEvent = ChangesEventBuilder {
+            $0.id = TestData.Timetable.id1
+            $0.platform = TestData.Timetable.platform2
+            $0.stations = TestData.Timetable.stationsArray2
+            $0.time = TestData.Timetable.time2
+        }.build()
+        let timetable = TimetableBuilder().with(departures: [event]).build()
+        let changes = ChangesBuilder { $0.departures = [changedEvent] }.build()
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .timetableLoaded(timetable),
+            .changesLoaded(changes),
+            .changeTable(TimetableState.Table.departures.rawValue)
+            ])
+        // Run
+        _ = converter.convert(from: state)
+        // Test
+        let expectedEvent = TimetableEventBuilder()
+            .with(id: TestData.Timetable.id1)
+            .with(platform: TestData.Timetable.platform2)
+            .with(stations: TestData.Timetable.stationsArray2)
+            .with(time: TestData.Timetable.time2)
+            .build()
+        XCTAssertEqual(timetableEventCellConverterMock.invocations,
+                       [.convert(expectedEvent, .departures, nil)])
+    }
+
     func testTimetableWithDeparturesInArrivalsModeConvertedToLoadMoreButton() {
         // Prepare
         let timetableWithDepartures = TimetableBuilder()
@@ -122,7 +156,7 @@ class TimetableViewStateConverterTests: XCTestCase {
             .with(arrivals: [])
             .build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .timetableLoaded(.success(timetableWithDepartures)),
+            .timetableLoaded(timetableWithDepartures),
             .changeTable(1)
             ])
         // Run
@@ -142,7 +176,7 @@ class TimetableViewStateConverterTests: XCTestCase {
             .with(arrivals: [TimetableEventBuilder().build()])
             .build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .timetableLoaded(.success(timetableWithDepartures)),
+            .timetableLoaded(timetableWithDepartures),
             .changeTable(0)
             ])
         // Run
@@ -188,7 +222,7 @@ class TimetableViewStateConverterTests: XCTestCase {
             .with(arrivals: [])
             .build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .timetableLoaded(.success(timetableWithDepartures)),
+            .timetableLoaded(timetableWithDepartures),
             .changeTable(0),
             .loadTimetable
             ])
@@ -216,10 +250,10 @@ class TimetableViewStateConverterTests: XCTestCase {
             .with(arrivals: [])
             .build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .timetableLoaded(.success(timetableWithDepartures)),
+            .timetableLoaded(timetableWithDepartures),
             .changeTable(0),
             .loadTimetable,
-            .timetableLoaded(.error(.unknown))
+            .timetableLoadingError
             ])
         // Run
         let converted = converter.convert(from: state)

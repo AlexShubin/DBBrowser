@@ -12,7 +12,7 @@ struct SceneCoordinatorState: State {
 }
 
 // MARK: - Events
-enum SceneCoordinatorEvent {
+enum SceneCoordinatorEvent: Equatable {
     case show(Scene, PresentationStyle)
     case shown
     case close(PresentationStyle)

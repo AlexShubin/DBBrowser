@@ -11,7 +11,7 @@ import RxSwift
 typealias ChangesLoaderResult = Result<Changes, ChangesLoaderError>
 
 protocol ChangesLoader {
-    func load(with evaId: String) -> Observable<ChangesLoaderResult>
+    func load(with station: Station) -> Observable<ChangesLoaderResult>
 }
 
 enum ChangesLoaderError: String, Error, Equatable {
@@ -31,8 +31,8 @@ struct ApiChangesLoader: ChangesLoader {
         _dateFormatter = dateFormatter
     }
 
-    func load(with evaId: String) -> Observable<ChangesLoaderResult> {
-        return _timetableService.loadChanges(evaNo: evaId).map {
+    func load(with station: Station) -> Observable<ChangesLoaderResult> {
+        return _timetableService.loadChanges(evaNo: String(station.evaId)).map {
             .success(self._changesConverter.convert(from: $0))
             }
             .catchError { _ in
