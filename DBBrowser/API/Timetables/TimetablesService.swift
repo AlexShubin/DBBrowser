@@ -23,6 +23,16 @@ struct ApiTimetablesService: TimetablesService {
         _baseUrl = baseUrl
     }
 
+    /// This public interface allows access to information about a station.
+    func station(evaNo: Int) -> Observable<[ApiStationInfo]> {
+        let request = URLRequest(url: _baseUrl.appendingPathComponent("station/\(evaNo)"))
+        return _urlSession.rx.data(request: request)
+            .map {
+                os_log("Response: %@", String(data: $0, encoding: .utf8) ?? "")
+                return self._decoder.decodeStationInfo($0)
+        }
+    }
+
     /// Returns a Timetable object (see Timetable) that contains planned data
     /// for the specified station (evaNo) within the hourly time slice given by date (format YYMMDD)
     /// and hour (format HH). The data includes stops for all trips that arrive or depart within that slice.

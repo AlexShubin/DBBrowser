@@ -70,6 +70,7 @@
 		B87E3A97212E92EF00417470 /* TimetableSideEffectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87E3A96212E92EF00417470 /* TimetableSideEffectsTests.swift */; };
 		B87E3A99212E935800417470 /* TimetableLoaderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87E3A98212E935800417470 /* TimetableLoaderMock.swift */; };
 		B87E3A9B212E949C00417470 /* ChangesLoaderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87E3A9A212E949C00417470 /* ChangesLoaderMock.swift */; };
+		B87E3A9E212EAC7C00417470 /* ApiStationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87E3A9D212EAC7C00417470 /* ApiStationInfo.swift */; };
 		B8849FFB20F7A23A00BCD93A /* TimetableViewStateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8849FFA20F7A23A00BCD93A /* TimetableViewStateConverter.swift */; };
 		B88828BF20F344A8005802A4 /* TimetableConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88828BE20F344A8005802A4 /* TimetableConverterTests.swift */; };
 		B88828C120F34514005802A4 /* ApiEventBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88828C020F34514005802A4 /* ApiEventBuilder.swift */; };
@@ -213,6 +214,7 @@
 		B87E3A96212E92EF00417470 /* TimetableSideEffectsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableSideEffectsTests.swift; sourceTree = "<group>"; };
 		B87E3A98212E935800417470 /* TimetableLoaderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableLoaderMock.swift; sourceTree = "<group>"; };
 		B87E3A9A212E949C00417470 /* ChangesLoaderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesLoaderMock.swift; sourceTree = "<group>"; };
+		B87E3A9D212EAC7C00417470 /* ApiStationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiStationInfo.swift; sourceTree = "<group>"; };
 		B8849FFA20F7A23A00BCD93A /* TimetableViewStateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableViewStateConverter.swift; sourceTree = "<group>"; };
 		B88828BE20F344A8005802A4 /* TimetableConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableConverterTests.swift; sourceTree = "<group>"; };
 		B88828C020F34514005802A4 /* ApiEventBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEventBuilder.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 		B808238920D4F5970001599E /* Timetables */ = {
 			isa = PBXGroup;
 			children = (
+				B87E3A9C212EAC6B00417470 /* Station */,
 				B86A73482114F1D500C38070 /* Changes */,
 				B86A73472114F12A00C38070 /* Timetable */,
 				B89F54AC20F0F5650070C765 /* TimetablesDecoder.swift */,
@@ -490,6 +493,14 @@
 				B86A734A2114F1DF00C38070 /* ApiChangedEvent.swift */,
 			);
 			path = Changes;
+			sourceTree = "<group>";
+		};
+		B87E3A9C212EAC6B00417470 /* Station */ = {
+			isa = PBXGroup;
+			children = (
+				B87E3A9D212EAC7C00417470 /* ApiStationInfo.swift */,
+			);
+			path = Station;
 			sourceTree = "<group>";
 		};
 		B88828BD20F3448C005802A4 /* ConvertersTests */ = {
@@ -1032,6 +1043,7 @@
 				B8F437C620A82A9500977CE3 /* FahrplanService.swift in Sources */,
 				B831E83B20AC20B400B951DB /* StationSearchState.swift in Sources */,
 				B89DCF3320F7F25F00DF30C2 /* PresentationStyle.swift in Sources */,
+				B87E3A9E212EAC7C00417470 /* ApiStationInfo.swift in Sources */,
 				B81AB5AB2114BA1300D31BFC /* UIApplication+.swift in Sources */,
 				B8F437C420A8298E00977CE3 /* Station.swift in Sources */,
 				B83BBCA4212BF55000259114 /* Changes.swift in Sources */,

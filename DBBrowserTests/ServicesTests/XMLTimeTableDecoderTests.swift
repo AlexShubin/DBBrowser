@@ -158,4 +158,17 @@ class XMLTimetableDecoderTests: XCTestCase {
         </timetable>
         """.data(using: .utf8)!
     }
+
+    func testXMLStationsDataParsedCorrectly() {
+        let result = decoder.decodeStationInfo(_testXMLStationData)
+        XCTAssertEqual(result, [ApiStationInfo(meta: "8070952|8071068|8089021|8098160")])
+    }
+
+    private var _testXMLStationData: Data {
+        return """
+        <stations>
+            <station p="11|12 D - G|12|13 A - D|13|14|13 D - G|13 A - C|13 C - D|11 D - G|14 A - D|14 A - C|14 C - D|14 E - F|11 C - D|13 E - F|11 E - F|11 A - D|12 A - D|14 D - G|12 C - D|12 E - F" meta="8070952|8071068|8089021|8098160" name="Berlin Hbf" eva="8011160" ds100="BLS" db="true" creationts="18-08-02 16:20:18.519"/>
+        </stations>
+        """.data(using: .utf8)!
+    }
 }

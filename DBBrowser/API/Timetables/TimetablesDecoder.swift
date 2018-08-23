@@ -10,7 +10,7 @@ enum TimetablesDecoderError: Error {
 
 struct XMLTimetablesDecoder {
 
-    // MARK: Timetable decoder
+    // MARK: - Timetable decoder
 
     func decodeTimetable(_ data: Data) throws -> ApiTimetable {
         let xml = SWXMLHash.parse(data)
@@ -42,7 +42,7 @@ struct XMLTimetablesDecoder {
         return ApiEvent(platform: platform, time: time, path: path)
     }
 
-    // MARK: Changes decoder
+    // MARK: - Changes decoder
 
     func decodeChanges(_ data: Data) throws -> ApiChanges {
         let xml = SWXMLHash.parse(data)
@@ -63,5 +63,14 @@ struct XMLTimetablesDecoder {
                                time: xmlEvent.attribute(by: "ct")?.text,
                                path: xmlEvent.attribute(by: "cpth")?.text,
                                status: xmlEvent.attribute(by: "cs")?.text)
+    }
+
+    // MARK: - Station info decoder
+
+    func decodeStationInfo(_ data: Data) -> [ApiStationInfo] {
+        let xml = SWXMLHash.parse(data)
+        return xml["stations"]["station"].all.map {
+            return ApiStationInfo(meta: $0.element?.attribute(by: "meta")?.text)
+        }
     }
 }
