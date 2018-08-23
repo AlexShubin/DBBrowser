@@ -33,8 +33,7 @@ class TimetableConverterTests: XCTestCase {
                           apiStopWithDeparture])
             .build()
         // Run
-        let result = converter.convert(from: apiTimetable,
-                                       station: StationBuilder().build())
+        let result = converter.convert(from: apiTimetable)
         // Test
         XCTAssertEqual(result.arrivals.count, 3)
         XCTAssertEqual(result.departures.count, 2)
@@ -60,16 +59,13 @@ class TimetableConverterTests: XCTestCase {
         let apiTimetable = ApiTimetableBuilder()
             .with(stops: [apiStop])
             .build()
-        let expectedStation = StationBuilder().build()
         // Run
-        let result = converter.convert(from: apiTimetable,
-                                       station: expectedStation)
+        let result = converter.convert(from: apiTimetable)
         // Test
         XCTAssertEqual(result.arrivals.count, 1)
         XCTAssertEqual(result.departures.count, 0)
         XCTAssertEqual(result.arrivals.first,
                        Timetable.Event(id: TestData.Timetable.id1,
-                                       station: expectedStation,
                                        category: TestData.Timetable.category1,
                                        number: TestData.Timetable.number1,
                                        stations: TestData.Timetable.stations1.components(separatedBy: "|"),
@@ -96,16 +92,13 @@ class TimetableConverterTests: XCTestCase {
         let apiTimetable = ApiTimetableBuilder()
             .with(stops: [apiStop])
             .build()
-        let expectedStation = StationBuilder().build()
         // Run
-        let result = converter.convert(from: apiTimetable,
-                                       station: expectedStation)
+        let result = converter.convert(from: apiTimetable)
         // Test
         XCTAssertEqual(result.departures.count, 1)
         XCTAssertEqual(result.arrivals.count, 0)
         XCTAssertEqual(result.departures.first,
                        Timetable.Event(id: TestData.Timetable.id1,
-                                       station: expectedStation,
                                        category: TestData.Timetable.category1,
                                        number: TestData.Timetable.number1,
                                        stations: TestData.Timetable.stations1.components(separatedBy: "|"),

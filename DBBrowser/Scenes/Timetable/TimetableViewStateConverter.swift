@@ -63,7 +63,6 @@ struct TimetableViewStateConverter: ViewStateConverter {
         return events.map { event in
             if let changed = changes.first(where: { $0.id == event.id }) {
                 return Timetable.Event(id: event.id,
-                                       station: event.station,
                                        category: event.category,
                                        number: event.number,
                                        stations: changed.stations ?? event.stations,

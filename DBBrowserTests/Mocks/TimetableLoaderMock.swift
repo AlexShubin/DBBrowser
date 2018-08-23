@@ -11,13 +11,13 @@ import Foundation
 import RxSwift
 
 class TimetableLoaderMock: TimetableLoader {
-    func load(station: Station, date: Date, corrStation: Station?) -> Observable<TimetableLoaderResult> {
-        invocations.append(.load(station: station, date: date, corrStation: corrStation))
+    func load(evaId: Int, date: Date, corrStation: Station?) -> Observable<TimetableLoaderResult> {
+        invocations.append(.load(evaId: evaId, date: date, corrStation: corrStation))
         return expected
     }
 
     enum Invocation: Equatable {
-        case load(station: Station, date: Date, corrStation: Station?)
+        case load(evaId: Int, date: Date, corrStation: Station?)
     }
 
     var invocations = [Invocation]()

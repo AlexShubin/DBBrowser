@@ -6,8 +6,8 @@ import RxSwift
 import os.log
 
 protocol TimetablesService {
-    func loadTimetable(evaNo: String, date: String, hour: String) -> Observable<ApiTimetable>
-    func loadChanges(evaNo: String) -> Observable<ApiChanges>
+    func loadTimetable(evaNo: Int, date: String, hour: String) -> Observable<ApiTimetable>
+    func loadChanges(evaNo: Int) -> Observable<ApiChanges>
 }
 
 /// Service duplicates API Timetables service. Returns plain models.
@@ -33,7 +33,7 @@ struct ApiTimetablesService: TimetablesService {
     ///
     /// Planned data is generated many hours in advance and is static, i.e. it does never change.
     /// It should be cached by web caches.public interface allows access to information about a station.
-    func loadTimetable(evaNo: String, date: String, hour: String) -> Observable<ApiTimetable> {
+    func loadTimetable(evaNo: Int, date: String, hour: String) -> Observable<ApiTimetable> {
         let request = URLRequest(url: _baseUrl.appendingPathComponent("/plan/\(evaNo)/\(date)/\(hour)"))
         return _urlSession.rx.data(request: request)
             .map {
@@ -53,7 +53,7 @@ struct ApiTimetablesService: TimetablesService {
     /// attributes ct, cp, cs or cpth. Changes may also include 'planned' attributes if there is no
     /// associated planned data for the change (e.g. an unplanned stop or trip).
     /// Full changes are updated every 30s and should be cached for that period by web caches.
-    func loadChanges(evaNo: String) -> Observable<ApiChanges> {
+    func loadChanges(evaNo: Int) -> Observable<ApiChanges> {
         let request = URLRequest(url: _baseUrl.appendingPathComponent("fchg/\(evaNo)"))
         return _urlSession.rx.data(request: request)
             .map {

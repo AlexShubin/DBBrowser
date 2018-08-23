@@ -51,7 +51,6 @@ final class TimetableEventBuilder {
 
     func build() -> Timetable.Event {
         return Timetable.Event(id: _id,
-                               station: _station,
                                category: _category,
                                number: _number,
                                stations: _stations,

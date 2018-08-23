@@ -32,8 +32,8 @@ struct TimetableSideEffects: TimetableSideEffectsType {
         return {
             if $0.shouldLoadChanges {
                 return Observable.combineLatest(
-                    self._timetableLoader.load(station: $0.station, date: $0.date, corrStation: $0.corrStation),
-                    self._changesLoader.load(with: $0.station)) {
+                    self._timetableLoader.load(evaId: $0.station.evaId, date: $0.date, corrStation: $0.corrStation),
+                    self._changesLoader.load(evaId: $0.station.evaId)) {
                         switch ($0, $1) {
                         case (.success(let timetable), .success(let changes)):
                             return .of(.timetable(.changesLoaded(changes)),
@@ -44,7 +44,7 @@ struct TimetableSideEffects: TimetableSideEffectsType {
                     }
                     .flatMap { appEvets -> Observable<AppEvent> in appEvets }
             } else {
-                return self._timetableLoader.load(station: $0.station, date: $0.date, corrStation: $0.corrStation)
+                return self._timetableLoader.load(evaId: $0.station.evaId, date: $0.date, corrStation: $0.corrStation)
                     .map {
                         switch $0 {
                         case .success(let timetable):

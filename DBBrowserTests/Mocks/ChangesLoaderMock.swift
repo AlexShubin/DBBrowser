@@ -11,13 +11,13 @@ import Foundation
 import RxSwift
 
 class ChangesLoaderMock: ChangesLoader {
-    func load(with station: Station) -> Observable<ChangesLoaderResult> {
-        invocations.append(.load(station: station))
+    func load(evaId: Int) -> Observable<ChangesLoaderResult> {
+        invocations.append(.load(evaId: evaId))
         return expected
     }
 
     enum Invocation: Equatable {
-        case load(station: Station)
+        case load(evaId: Int)
     }
 
     var invocations = [Invocation]()

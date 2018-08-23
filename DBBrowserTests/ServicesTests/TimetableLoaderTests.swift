@@ -30,7 +30,7 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedChanges = .just(ApiChangesBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(station: StationBuilder().build(),
+            self.timetableLoader.load(evaId: TestData.stationId1,
                                       date: TestData.date1,
                                       corrStation: nil)
         }
@@ -47,7 +47,7 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedChanges = .just(ApiChangesBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(station: StationBuilder().build(),
+            self.timetableLoader.load(evaId: TestData.stationId1,
                                       date: TestData.date1,
                                       corrStation: nil)
         }
@@ -67,7 +67,7 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(station: StationBuilder().build(),
+            self.timetableLoader.load(evaId: TestData.stationId1,
                                       date: Date(timeIntervalSince1970: 1000000),
                                       corrStation: nil)
         }
@@ -88,7 +88,7 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(station: StationBuilder().build(),
+            self.timetableLoader.load(evaId: TestData.stationId1,
                                       date: Date(timeIntervalSince1970: 1000000),
                                       corrStation: nil)
         }
@@ -109,7 +109,7 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(station: StationBuilder().build(),
+            self.timetableLoader.load(evaId: TestData.stationId1,
                                       date: Date.testSample(from: "02-12-1987 12:25"),
                                       corrStation: nil)
         }
@@ -130,7 +130,7 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(station: StationBuilder().build(),
+            self.timetableLoader.load(evaId: TestData.stationId1,
                                       date: Date.testSample(from: "02-12-1987 12:25"),
                                       corrStation: nil)
         }
@@ -152,7 +152,7 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(station: StationBuilder().build(),
+            self.timetableLoader.load(evaId: TestData.stationId1,
                                       date: TestData.date1,
                                       corrStation: StationBuilder { $0.name = "456" }.build())
         }
@@ -174,7 +174,7 @@ class TimetableLoaderTests: XCTestCase {
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
-            self.timetableLoader.load(station: StationBuilder().build(),
+            self.timetableLoader.load(evaId: TestData.stationId1,
                                       date: TestData.date1,
                                       corrStation: StationBuilder { $0.name = "141" }.build())
         }

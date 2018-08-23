@@ -40,7 +40,7 @@ class TimetableSideEffectsTests: XCTestCase {
         }
         // Test
         XCTAssertEqual(timetableLoaderMock.invocations,
-                       [.load(station: station, date: TestData.date1, corrStation: nil)])
+                       [.load(evaId: station.evaId, date: TestData.date1, corrStation: nil)])
         XCTAssertTrue(changesLoaderMock.invocations.isEmpty)
     }
 
@@ -56,9 +56,9 @@ class TimetableSideEffectsTests: XCTestCase {
         }
         // Test
         XCTAssertEqual(timetableLoaderMock.invocations,
-                       [.load(station: station, date: TestData.date1, corrStation: nil)])
+                       [.load(evaId: station.evaId, date: TestData.date1, corrStation: nil)])
         XCTAssertEqual(changesLoaderMock.invocations,
-                       [.load(station: station)])
+                       [.load(evaId: station.evaId)])
     }
 
     func testTimetableAndChangesReceivedOnSuccess() {

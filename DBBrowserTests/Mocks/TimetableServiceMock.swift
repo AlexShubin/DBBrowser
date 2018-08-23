@@ -6,12 +6,12 @@
 import RxSwift
 
 class TimetableServiceMock: TimetablesService {
-    func loadChanges(evaNo: String) -> Observable<ApiChanges> {
+    func loadChanges(evaNo: Int) -> Observable<ApiChanges> {
         invocations.onNext(#function)
         return expectedChanges
     }
 
-    func loadTimetable(evaNo: String, date: String, hour: String) -> Observable<ApiTimetable> {
+    func loadTimetable(evaNo: Int, date: String, hour: String) -> Observable<ApiTimetable> {
         invocations.onNext(#function)
         return expectedTimetable
     }
