@@ -6,6 +6,11 @@
 import RxSwift
 
 class TimetableServiceMock: TimetablesService {
+    func station(evaNo: Int) -> Observable<[ApiStationInfo]> {
+        invocations.onNext(#function)
+        return expectedStationInfo
+    }
+
     func loadChanges(evaNo: Int) -> Observable<ApiChanges> {
         invocations.onNext(#function)
         return expectedChanges
@@ -19,4 +24,5 @@ class TimetableServiceMock: TimetablesService {
     let invocations = PublishSubject<String>()
     var expectedTimetable = Observable.just(ApiTimetableBuilder().build())
     var expectedChanges = Observable.just(ApiChanges(stops: []))
+    var expectedStationInfo = Observable.just([ApiStationInfo]())
 }

@@ -47,10 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                              dateFormatter: dateFormatter)
         let stationFinder = ApiStationFinder(fahrplanService: fahrplanService,
                                              stationConverter: ApiStationConverter())
+        let stationInfoLoader = ApiStationInfoLoader(timetableService: timetableService,
+                                                     stationInfoConverter: ApiStationInfoConverter())
         let sideEffects = AppSideEffects(coordinator: coordinator,
                                          stationFinder: stationFinder,
                                          timetableLoader: timetableLoader,
-                                         changesLoader: changesLoader)
+                                         changesLoader: changesLoader,
+                                         stationInfoLoader: stationInfoLoader)
         appStateStore = AppStateStore(sideEffects: sideEffects)
         vcFactory.setUp(appStateStore: appStateStore)
         coordinator.setRoot(scene: .mainScreen)

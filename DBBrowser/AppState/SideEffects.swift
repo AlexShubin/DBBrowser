@@ -34,9 +34,12 @@ struct AppSideEffects: SideEffects {
     init(coordinator: SceneCoordinatorType,
          stationFinder: StationFinder,
          timetableLoader: TimetableLoader,
-         changesLoader: ChangesLoader) {
+         changesLoader: ChangesLoader,
+         stationInfoLoader: StationInfoLoader) {
         stationSearch = StationSearchSideEffects(stationFinder: stationFinder)
-        timetable = TimetableSideEffects(timetableLoader: timetableLoader, changesLoader: changesLoader)
+        timetable = TimetableSideEffects(timetableLoader: timetableLoader,
+                                         changesLoader: changesLoader,
+                                         stationInfoLoader: stationInfoLoader)
         sceneCoordinator = SceneCoordinatorSideEffects(coordinator: coordinator)
     }
 }

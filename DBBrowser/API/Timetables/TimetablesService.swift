@@ -8,6 +8,7 @@ import os.log
 protocol TimetablesService {
     func loadTimetable(evaNo: Int, date: String, hour: String) -> Observable<ApiTimetable>
     func loadChanges(evaNo: Int) -> Observable<ApiChanges>
+    func station(evaNo: Int) -> Observable<[ApiStationInfo]>
 }
 
 /// Service duplicates API Timetables service. Returns plain models.

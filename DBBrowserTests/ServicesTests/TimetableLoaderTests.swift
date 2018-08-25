@@ -24,23 +24,6 @@ class TimetableLoaderTests: XCTestCase {
                                              dateFormatter: dateFormatterMock)
     }
 
-    func testTimetableLoadingSucceededOnApiSuccess() {
-        // Prepare
-        timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
-        timetableServiceMock.expectedChanges = .just(ApiChangesBuilder().build())
-        // Run
-        let testObserver = testScheduler.start {
-            self.timetableLoader.load(evaId: TestData.stationId1,
-                                      date: TestData.date1,
-                                      corrStation: nil)
-        }
-        // Test
-        guard case .success? = testObserver.firstElement else {
-            XCTFail("Unexpected result")
-            return
-        }
-    }
-
     func testTimetableLoadingFailsOnApiError() {
         // Prepare
         timetableServiceMock.expectedTimetable = .error(RxError.unknown)
@@ -48,14 +31,12 @@ class TimetableLoaderTests: XCTestCase {
         // Run
         let testObserver = testScheduler.start {
             self.timetableLoader.load(evaId: TestData.stationId1,
+                                      metaEvaIds: [],
                                       date: TestData.date1,
                                       corrStation: nil)
         }
         // Test
-        guard case .error? = testObserver.firstElement else {
-            XCTFail("Unexpected result")
-            return
-        }
+        XCTAssertNotNil(testObserver.events.first?.value.error)
     }
 
     func testDeparturesSortedByTime() {
@@ -68,15 +49,12 @@ class TimetableLoaderTests: XCTestCase {
         // Run
         let testObserver = testScheduler.start {
             self.timetableLoader.load(evaId: TestData.stationId1,
+                                      metaEvaIds: [],
                                       date: Date(timeIntervalSince1970: 1000000),
                                       corrStation: nil)
         }
         // Test
-        guard case .success(let timetable)? = testObserver.firstElement else {
-            XCTFail("Unexpected result")
-            return
-        }
-        XCTAssertEqual(timetable.departures, [earlierTrain, laterTrain])
+        XCTAssertEqual(testObserver.firstElement?.departures, [earlierTrain, laterTrain])
     }
 
     func testArrivalsSortedByTime() {
@@ -89,15 +67,12 @@ class TimetableLoaderTests: XCTestCase {
         // Run
         let testObserver = testScheduler.start {
             self.timetableLoader.load(evaId: TestData.stationId1,
+                                      metaEvaIds: [],
                                       date: Date(timeIntervalSince1970: 1000000),
                                       corrStation: nil)
         }
         // Test
-        guard case .success(let timetable)? = testObserver.firstElement else {
-            XCTFail("Unexpected result")
-            return
-        }
-        XCTAssertEqual(timetable.arrivals, [earlierTrain, laterTrain])
+        XCTAssertEqual(testObserver.firstElement?.arrivals, [earlierTrain, laterTrain])
     }
 
     func testTrimsOutdatedDepartures() {
@@ -110,15 +85,12 @@ class TimetableLoaderTests: XCTestCase {
         // Run
         let testObserver = testScheduler.start {
             self.timetableLoader.load(evaId: TestData.stationId1,
+                                      metaEvaIds: [],
                                       date: Date.testSample(from: "02-12-1987 12:25"),
                                       corrStation: nil)
         }
         // Test
-        guard case .success(let timetable)? = testObserver.firstElement else {
-            XCTFail("Unexpected result")
-            return
-        }
-        XCTAssertEqual(timetable.departures, [laterTrain])
+        XCTAssertEqual(testObserver.firstElement?.departures, [laterTrain])
     }
 
     func testTrimsOutdatedArrivals() {
@@ -131,15 +103,12 @@ class TimetableLoaderTests: XCTestCase {
         // Run
         let testObserver = testScheduler.start {
             self.timetableLoader.load(evaId: TestData.stationId1,
+                                      metaEvaIds: [],
                                       date: Date.testSample(from: "02-12-1987 12:25"),
                                       corrStation: nil)
         }
         // Test
-        guard case .success(let timetable)? = testObserver.firstElement else {
-            XCTFail("Unexpected result")
-            return
-        }
-        XCTAssertEqual(timetable.arrivals, [laterTrain])
+        XCTAssertEqual(testObserver.firstElement?.arrivals, [laterTrain])
     }
 
     func testFiltersDeparturesByCorrStation() {
@@ -153,15 +122,12 @@ class TimetableLoaderTests: XCTestCase {
         // Run
         let testObserver = testScheduler.start {
             self.timetableLoader.load(evaId: TestData.stationId1,
+                                      metaEvaIds: [],
                                       date: TestData.date1,
                                       corrStation: StationBuilder { $0.name = "456" }.build())
         }
         // Test
-        guard case .success(let timetable)? = testObserver.firstElement else {
-            XCTFail("Unexpected result")
-            return
-        }
-        XCTAssertEqual(timetable.departures, [withCorrStation])
+        XCTAssertEqual(testObserver.firstElement?.departures, [withCorrStation])
     }
 
     func testFiltersArrivalsByCorrStation() {
@@ -175,15 +141,12 @@ class TimetableLoaderTests: XCTestCase {
         // Run
         let testObserver = testScheduler.start {
             self.timetableLoader.load(evaId: TestData.stationId1,
+                                      metaEvaIds: [],
                                       date: TestData.date1,
                                       corrStation: StationBuilder { $0.name = "141" }.build())
         }
         // Test
-        guard case .success(let timetable)? = testObserver.firstElement else {
-            XCTFail("Unexpected result")
-            return
-        }
-        XCTAssertEqual(timetable.arrivals, [withCorrStation])
+        XCTAssertEqual(testObserver.firstElement?.arrivals, [withCorrStation])
     }
 }
 

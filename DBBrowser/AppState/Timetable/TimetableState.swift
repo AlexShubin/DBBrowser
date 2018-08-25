@@ -25,6 +25,7 @@ struct TimetableState: State, Equatable {
     var currentTable = Table.departures
 
     var station: Station?
+    var stationInfo: StationInfo?
     var corrStation: Station?
     var date = Date()
     var dateToLoad = Date()
@@ -52,24 +53,37 @@ enum TimetableEvent: Equatable {
     case date(Date)
     /// Sets loaded changes.
     case changesLoaded(Changes)
+    /// Sets station info.
+    case stationInfoLoaded(StationInfo)
 }
 
 // MARK: - Queries
 extension TimetableState {
     var queryLoadTimetable: TimetableLoadParams? {
         guard case .loading = loadingState,
-            let station = station else {
-            return nil
+            let station = station,
+            let stationInfo = stationInfo else {
+                return nil
         }
         return TimetableLoadParams(station: station,
+                                   stationInfo: stationInfo,
                                    date: dateToLoad,
                                    corrStation: corrStation,
                                    shouldLoadChanges: changes == nil)
+    }
+    var queryLoadStationInfo: Station? {
+        guard case .loading = loadingState,
+            let station = station,
+            stationInfo == nil else {
+                return nil
+        }
+        return station
     }
 }
 
 // MARK: - Reducer
 extension TimetableState {
+    //swiftlint:disable cyclomatic_complexity
     static func reduce(state: TimetableState, event: TimetableEvent) -> TimetableState {
         var result = state
         switch event {
@@ -96,9 +110,12 @@ extension TimetableState {
             result.date = date
         case .changesLoaded(let changes):
             result.changes = changes
+        case .stationInfoLoaded(let stationInfo):
+            result.stationInfo = stationInfo
         }
         return result
     }
+    //swiftlint:enable cyclomatic_complexity
 }
 
 // MARK: - Helpers

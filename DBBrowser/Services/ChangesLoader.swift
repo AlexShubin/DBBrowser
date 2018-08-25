@@ -8,14 +8,8 @@
 
 import RxSwift
 
-typealias ChangesLoaderResult = Result<Changes, ChangesLoaderError>
-
 protocol ChangesLoader {
-    func load(evaId: Int) -> Observable<ChangesLoaderResult>
-}
-
-enum ChangesLoaderError: String, Error, Equatable {
-    case unknown
+    func load(evaId: Int, metaEvaIds: Set<Int>) -> Observable<Changes>
 }
 
 struct ApiChangesLoader: ChangesLoader {
@@ -31,12 +25,17 @@ struct ApiChangesLoader: ChangesLoader {
         _dateFormatter = dateFormatter
     }
 
-    func load(evaId: Int) -> Observable<ChangesLoaderResult> {
-        return _timetableService.loadChanges(evaNo: evaId).map {
-            .success(self._changesConverter.convert(from: $0))
-            }
-            .catchError { _ in
-                .just(.error(.unknown))
+    func load(evaId: Int, metaEvaIds: Set<Int>) -> Observable<Changes> {
+        var allIds = metaEvaIds
+        allIds.insert(evaId)
+        return  _apiLoadChanges(evaIds: allIds).map {
+            self._changesConverter.convert(from: $0)
         }
+    }
+
+    private func _apiLoadChanges(evaIds: Set<Int>) -> Observable<ApiChanges> {
+        return Observable.combineLatest(evaIds.map {
+            self._timetableService.loadChanges(evaNo: $0)
+        }) { $0.reduce(ApiChanges(stops: []), { $0 + $1 }) }
     }
 }

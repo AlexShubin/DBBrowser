@@ -34,10 +34,10 @@ class ChangesLoaderTests: XCTestCase {
         changesConverterMock.expected = ChangesBuilder().build()
         // Run
         let testObserver = testScheduler.start {
-            self.changesLoader.load(evaId: TestData.stationId1)
+            self.changesLoader.load(evaId: TestData.stationId1, metaEvaIds: [])
         }
         // Test
-        XCTAssertEqual(testObserver.firstElement, .success(changesConverterMock.expected))
+        XCTAssertEqual(testObserver.firstElement, changesConverterMock.expected)
     }
 
     func testChangesLoadingFailsOnApiError() {
@@ -45,12 +45,9 @@ class ChangesLoaderTests: XCTestCase {
         timetableServiceMock.expectedChanges = .error(RxError.unknown)
         // Run
         let testObserver = testScheduler.start {
-            self.changesLoader.load(evaId: TestData.stationId1)
+            self.changesLoader.load(evaId: TestData.stationId1, metaEvaIds: [])
         }
         // Test
-        guard case .error? = testObserver.firstElement else {
-            XCTFail("Unexpected result")
-            return
-        }
+        XCTAssertNotNil(testObserver.events.first?.value.error)
     }
 }

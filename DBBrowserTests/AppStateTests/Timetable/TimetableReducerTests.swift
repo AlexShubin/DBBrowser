@@ -133,4 +133,12 @@ class TimetableReducerTests: XCTestCase {
             ])
         XCTAssertEqual(state.date, TestData.date1)
     }
+
+    func testStationInfoEventSetsEvent() {
+        let info = StationInfoBuilder().build()
+        let state = TimetableState.applyEvents(initial: .initial, events: [
+            .stationInfoLoaded(info)
+            ])
+        XCTAssertEqual(state.stationInfo, info)
+    }
 }

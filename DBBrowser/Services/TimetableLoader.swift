@@ -4,14 +4,8 @@
 
 import RxSwift
 
-typealias TimetableLoaderResult = Result<Timetable, TimetableLoaderError>
-
 protocol TimetableLoader {
-    func load(evaId: Int, date: Date, corrStation: Station?) -> Observable<TimetableLoaderResult>
-}
-
-enum TimetableLoaderError: String, Error, Equatable {
-    case unknown
+    func load(evaId: Int, metaEvaIds: Set<Int>, date: Date, corrStation: Station?) -> Observable<Timetable>
 }
 
 struct ApiTimetableLoader: TimetableLoader {
@@ -28,10 +22,12 @@ struct ApiTimetableLoader: TimetableLoader {
         _dateFormatter = dateFormatter
     }
 
-    func load(evaId: Int, date: Date, corrStation: Station?) -> Observable<TimetableLoaderResult> {
+    func load(evaId: Int, metaEvaIds: Set<Int>, date: Date, corrStation: Station?) -> Observable<Timetable> {
         let day = _dateFormatter.string(from: date, style: .apiTimetablesDate)
         let time = _dateFormatter.string(from: date, style: .apiTimetablesTime)
-        return _timetableService.loadTimetable(evaNo: evaId, date: day, hour: time).map {
+        var allIds = metaEvaIds
+        allIds.insert(evaId)
+        return _apiLoadTimetable(evaIds: allIds, date: day, hour: time).map {
             var timetable = self._timetableConverter.convert(from: $0)
             timetable.arrivals = self._applyFiltersAndSort(to: timetable.arrivals,
                                                            date: date,
@@ -39,11 +35,14 @@ struct ApiTimetableLoader: TimetableLoader {
             timetable.departures = self._applyFiltersAndSort(to: timetable.departures,
                                                              date: date,
                                                              corrStation: corrStation)
-            return .success(timetable)
-            }
-            .catchError { _ in
-                .just(.error(.unknown))
+            return timetable
         }
+    }
+
+    private func _apiLoadTimetable(evaIds: Set<Int>, date: String, hour: String) -> Observable<ApiTimetable> {
+        return Observable.combineLatest(evaIds.map {
+            self._timetableService.loadTimetable(evaNo: $0, date: date, hour: hour)
+        }) { $0.reduce(ApiTimetable(stops: []), { $0 + $1 }) }
     }
 
     private func _applyFiltersAndSort(to events: [Timetable.Event],

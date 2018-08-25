@@ -6,6 +6,7 @@ import Foundation
 
 struct TimetableLoadParams: Equatable {
     var station: Station
+    var stationInfo: StationInfo
     var date: Date
     var corrStation: Station?
     var shouldLoadChanges: Bool

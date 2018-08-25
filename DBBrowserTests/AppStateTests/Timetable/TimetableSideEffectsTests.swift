@@ -25,51 +25,63 @@ class TimetableSideEffectsTests: XCTestCase {
     override func setUp() {
         super.setUp()
         timetableSideEffects = TimetableSideEffects(timetableLoader: timetableLoaderMock,
-                                                    changesLoader: changesLoaderMock)
+                                                    changesLoader: changesLoaderMock,
+                                                    stationInfoLoader: StationInfoLoaderMock())
     }
 
     func testTimetableLoaderInvokedWhenDontNeedToLoadChanges() {
         // Prepare
-        let station = StationBuilder().build()
+        let station = StationBuilder { $0.evaId = TestData.stationId2 }.build()
+        let stationInfo = StationInfoBuilder { $0.metaStationsIds = [TestData.stationId1] }.build()
         // Run
         _ = testScheduler.start { [unowned self] in
             self.timetableSideEffects.loadTimetable(TimetableLoadParams(station: station,
+                                                                        stationInfo: stationInfo,
                                                                         date: TestData.date1,
                                                                         corrStation: nil,
                                                                         shouldLoadChanges: false))
         }
         // Test
         XCTAssertEqual(timetableLoaderMock.invocations,
-                       [.load(evaId: station.evaId, date: TestData.date1, corrStation: nil)])
+                       [.load(evaId: TestData.stationId2,
+                              metaEvaIds: stationInfo.metaStationsIds,
+                              date: TestData.date1,
+                              corrStation: nil)])
         XCTAssertTrue(changesLoaderMock.invocations.isEmpty)
     }
 
     func testTimetableLoaderAndChangesLoaderInvokedWhenShoudLoadChanges() {
         // Prepare
-        let station = StationBuilder().build()
+        let station = StationBuilder { $0.evaId = TestData.stationId2 }.build()
+        let stationInfo = StationInfoBuilder { $0.metaStationsIds = [TestData.stationId1] }.build()
         // Run
         _ = testScheduler.start { [unowned self] in
             self.timetableSideEffects.loadTimetable(TimetableLoadParams(station: station,
+                                                                        stationInfo: stationInfo,
                                                                         date: TestData.date1,
                                                                         corrStation: nil,
                                                                         shouldLoadChanges: true))
         }
         // Test
         XCTAssertEqual(timetableLoaderMock.invocations,
-                       [.load(evaId: station.evaId, date: TestData.date1, corrStation: nil)])
+                       [.load(evaId: TestData.stationId2,
+                              metaEvaIds: stationInfo.metaStationsIds,
+                              date: TestData.date1,
+                              corrStation: nil)])
         XCTAssertEqual(changesLoaderMock.invocations,
-                       [.load(evaId: station.evaId)])
+                       [.load(evaId: TestData.stationId2, metaEvaIds: [TestData.stationId1])])
     }
 
     func testTimetableAndChangesReceivedOnSuccess() {
         // Prepare
         let changes = ChangesBuilder().build()
         let timetable = TimetableBuilder().build()
-        timetableLoaderMock.expected = .just(.success(TimetableBuilder().build()))
-        changesLoaderMock.expected = .just(.success(changes))
+        timetableLoaderMock.expected = .just(TimetableBuilder().build())
+        changesLoaderMock.expected = .just(changes)
         // Run
         let observer = testScheduler.start { [unowned self] in
             self.timetableSideEffects.loadTimetable(TimetableLoadParams(station: StationBuilder().build(),
+                                                                        stationInfo: StationInfoBuilder().build(),
                                                                         date: TestData.date1,
                                                                         corrStation: nil,
                                                                         shouldLoadChanges: true))
@@ -84,11 +96,12 @@ class TimetableSideEffectsTests: XCTestCase {
     func testErrorReceivedOnTimetableLoaderError() {
         // Prepare
         let changes = ChangesBuilder().build()
-        timetableLoaderMock.expected = .just(.error(.unknown))
-        changesLoaderMock.expected = .just(.success(changes))
+        timetableLoaderMock.expected = .error(RxError.unknown)
+        changesLoaderMock.expected = .just(changes)
         // Run
         let observer = testScheduler.start { [unowned self] in
             self.timetableSideEffects.loadTimetable(TimetableLoadParams(station: StationBuilder().build(),
+                                                                        stationInfo: StationInfoBuilder().build(),
                                                                         date: TestData.date1,
                                                                         corrStation: nil,
                                                                         shouldLoadChanges: true))
@@ -102,11 +115,12 @@ class TimetableSideEffectsTests: XCTestCase {
     func testErrorReceivedOnChangesLoaderError() {
         // Prepare
         let timetable = TimetableBuilder().build()
-        timetableLoaderMock.expected = .just(.success(timetable))
-        changesLoaderMock.expected = .just(.error(.unknown))
+        timetableLoaderMock.expected = .just(timetable)
+        changesLoaderMock.expected = .error(RxError.unknown)
         // Run
         let observer = testScheduler.start { [unowned self] in
             self.timetableSideEffects.loadTimetable(TimetableLoadParams(station: StationBuilder().build(),
+                                                                        stationInfo: StationInfoBuilder().build(),
                                                                         date: TestData.date1,
                                                                         corrStation: nil,
                                                                         shouldLoadChanges: true))
@@ -120,10 +134,11 @@ class TimetableSideEffectsTests: XCTestCase {
     func testTimetableReceivedOnSuccessWhenShouldntLoadChanges() {
         // Prepare
         let timetable = TimetableBuilder().build()
-        timetableLoaderMock.expected = .just(.success(timetable))
+        timetableLoaderMock.expected = .just(timetable)
         // Run
         let observer = testScheduler.start { [unowned self] in
             self.timetableSideEffects.loadTimetable(TimetableLoadParams(station: StationBuilder().build(),
+                                                                        stationInfo: StationInfoBuilder().build(),
                                                                         date: TestData.date1,
                                                                         corrStation: nil,
                                                                         shouldLoadChanges: false))
@@ -136,10 +151,11 @@ class TimetableSideEffectsTests: XCTestCase {
 
     func testErrorReceivedOnTimetableErrorWhenShouldntLoadChanges() {
         // Prepare
-        timetableLoaderMock.expected = .just(.error(.unknown))
+        timetableLoaderMock.expected = .error(RxError.unknown)
         // Run
         let observer = testScheduler.start { [unowned self] in
             self.timetableSideEffects.loadTimetable(TimetableLoadParams(station: StationBuilder().build(),
+                                                                        stationInfo: StationInfoBuilder().build(),
                                                                         date: TestData.date1,
                                                                         corrStation: nil,
                                                                         shouldLoadChanges: false))

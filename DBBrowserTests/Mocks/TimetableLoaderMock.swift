@@ -11,15 +11,15 @@ import Foundation
 import RxSwift
 
 class TimetableLoaderMock: TimetableLoader {
-    func load(evaId: Int, date: Date, corrStation: Station?) -> Observable<TimetableLoaderResult> {
-        invocations.append(.load(evaId: evaId, date: date, corrStation: corrStation))
+    func load(evaId: Int, metaEvaIds: Set<Int>, date: Date, corrStation: Station?) -> Observable<Timetable> {
+        invocations.append(.load(evaId: evaId, metaEvaIds: metaEvaIds, date: date, corrStation: corrStation))
         return expected
     }
 
     enum Invocation: Equatable {
-        case load(evaId: Int, date: Date, corrStation: Station?)
+        case load(evaId: Int, metaEvaIds: Set<Int>, date: Date, corrStation: Station?)
     }
 
     var invocations = [Invocation]()
-    var expected = Observable.just(TimetableLoaderResult.success(TimetableBuilder().build()))
+    var expected = Observable.just(TimetableBuilder().build())
 }

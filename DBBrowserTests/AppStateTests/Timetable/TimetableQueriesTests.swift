@@ -8,6 +8,9 @@ import XCTest
 class TimetableQueriesTests: XCTestCase {
 
     func testQueryLoadTimetable_returnsSearchParamsWhenShouldLoadAndAllInfoProvided() {
+        let info = StationInfoBuilder {
+            $0.metaStationsIds = [TestData.stationId3]
+        }.build()
         let station = StationBuilder {
             $0.evaId = TestData.stationId1
             }.build()
@@ -15,6 +18,7 @@ class TimetableQueriesTests: XCTestCase {
             $0.evaId = TestData.stationId2
             }.build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
+            .stationInfoLoaded(info),
             .station(station),
             .corrStation(corrStation),
             .date(TestData.date1),
@@ -22,6 +26,7 @@ class TimetableQueriesTests: XCTestCase {
             .loadTimetable
             ])
         XCTAssertEqual(state.queryLoadTimetable, TimetableLoadParams(station: station,
+                                                                     stationInfo: info,
                                                                      date: TestData.date1,
                                                                      corrStation: corrStation,
                                                                      shouldLoadChanges: true))

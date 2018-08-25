@@ -18,6 +18,4 @@ struct Changes: Equatable {
     }
     var arrivals: [Event]
     var departures: [Event]
-
-    static let empty = Changes(arrivals: [], departures: [])
 }
