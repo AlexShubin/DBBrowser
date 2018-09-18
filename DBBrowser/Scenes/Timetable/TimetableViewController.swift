@@ -104,7 +104,7 @@ extension TimetableViewController: StateStoreBindable {
                     .map {
                         switch $0 {
                         case .retryTap:
-                            return .stationSearch(.startSearch)
+                            return .timetable(.loadTimetable)
                         }
                     }
                     .bind(to: eventBus)
