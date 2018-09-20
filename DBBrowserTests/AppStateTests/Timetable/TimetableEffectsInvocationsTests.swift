@@ -27,8 +27,8 @@ class TimetableEffectsInvocationsTests: XCTestCase {
 
         let station = StationBuilder().build()
         testScheduler.createColdObservable([
-            Recorded.next(210, .timetable(.stationInfoLoaded(StationInfoBuilder().build()))),
-            Recorded.next(220, .timetable(.station(station))),
+            Recorded.next(210, .timetable(.station(station))),
+            Recorded.next(220, .timetable(.stationInfoLoaded(StationInfoBuilder().build()))),
             Recorded.next(230, .timetable(.loadTimetable))
             ])
             .bind(to: stateStore.eventBus)

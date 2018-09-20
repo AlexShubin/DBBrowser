@@ -89,6 +89,7 @@ extension TimetableState {
         switch event {
         case .station(let station):
             result.station = station
+            result.stationInfo = nil
         case .loadTimetable:
             result.loadingState = .loading
         case .timetableLoaded(let timetable):
@@ -102,6 +103,7 @@ extension TimetableState {
         case .reset:
             result.timetable = Timetable.empty
             result.dateToLoad = state.date
+            result.changes = nil
         case .corrStation(let station):
             result.corrStation = station
         case .clearCorrStation:

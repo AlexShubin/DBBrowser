@@ -18,8 +18,8 @@ class TimetableQueriesTests: XCTestCase {
             $0.evaId = TestData.stationId2
             }.build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
-            .stationInfoLoaded(info),
             .station(station),
+            .stationInfoLoaded(info),
             .corrStation(corrStation),
             .date(TestData.date1),
             .reset,

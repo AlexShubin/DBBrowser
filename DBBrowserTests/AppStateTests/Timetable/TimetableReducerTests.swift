@@ -16,12 +16,14 @@ class TimetableReducerTests: XCTestCase {
         XCTAssertEqual(state.currentTable, .departures)
     }
 
-    func testStationEventSetsStation() {
+    func testStationEventSetsStationAndNilsStationInfo() {
         let station = StationBuilder().build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
+            .stationInfoLoaded(StationInfoBuilder().build()),
             .station(station)
             ])
         XCTAssertEqual(state.station, station)
+        XCTAssertNil(state.stationInfo)
     }
 
     func testCorrStationEventSetsCorrStation() {
@@ -120,11 +122,13 @@ class TimetableReducerTests: XCTestCase {
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .station(StationBuilder().build()),
             .loadTimetable,
+            .changesLoaded(ChangesBuilder().build()),
             .timetableLoaded(TimetableBuilder().build()),
             .reset
             ])
         XCTAssertEqual(state.timetable, Timetable.empty)
         XCTAssertEqual(state.date, state.dateToLoad)
+        XCTAssertNil(state.changes)
     }
 
     func testDateEventSetsTheDate() {
