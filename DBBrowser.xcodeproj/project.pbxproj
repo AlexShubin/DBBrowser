@@ -552,7 +552,6 @@
 		B89C080E210C9BD000A6EE9E /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
-				B870CE4E215380910022158D /* ToastManager */,
 				B8224EF420BAF07100F9132A /* RoundedView.swift */,
 				B8FCC48C20CD7DAB007314ED /* ErrorCell.swift */,
 				B892CFBC20BABD8600176A15 /* LoadingCell.swift */,
@@ -719,6 +718,7 @@
 		B8F437C820A8301F00977CE3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B870CE4E215380910022158D /* ToastManager */,
 				B8F437CC20A8335C00977CE3 /* StationFinder.swift */,
 				B82B967D20F476B80018E1F3 /* TimetableLoader.swift */,
 				B83BBCAC212C55E600259114 /* ChangesLoader.swift */,

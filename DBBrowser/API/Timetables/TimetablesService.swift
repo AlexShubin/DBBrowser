@@ -3,12 +3,19 @@
 //
 
 import RxSwift
+import RxCocoa
 import os.log
 
 protocol TimetablesService {
     func loadTimetable(evaNo: Int, date: String, hour: String) -> Observable<ApiTimetable>
     func loadChanges(evaNo: Int) -> Observable<ApiChanges>
     func station(evaNo: Int) -> Observable<[ApiStationInfo]>
+}
+
+enum TimetablesServiceError: Error {
+    case unknown
+    /// Api throttling threshold crossed.
+    case overwhelmed
 }
 
 /// Service duplicates API Timetables service. Returns plain models.
@@ -26,12 +33,7 @@ struct ApiTimetablesService: TimetablesService {
 
     /// This public interface allows access to information about a station.
     func station(evaNo: Int) -> Observable<[ApiStationInfo]> {
-        let request = URLRequest(url: _baseUrl.appendingPathComponent("station/\(evaNo)"))
-        return _urlSession.rx.data(request: request)
-            .map {
-                os_log("Response: %@", String(data: $0, encoding: .utf8) ?? "")
-                return self._decoder.decodeStationInfo($0)
-        }
+        return _makeRequest(with: "station/\(evaNo)", decoder: _decoder.decodeStationInfo)
     }
 
     /// Returns a Timetable object (see Timetable) that contains planned data
@@ -45,12 +47,7 @@ struct ApiTimetablesService: TimetablesService {
     /// Planned data is generated many hours in advance and is static, i.e. it does never change.
     /// It should be cached by web caches.public interface allows access to information about a station.
     func loadTimetable(evaNo: Int, date: String, hour: String) -> Observable<ApiTimetable> {
-        let request = URLRequest(url: _baseUrl.appendingPathComponent("/plan/\(evaNo)/\(date)/\(hour)"))
-        return _urlSession.rx.data(request: request)
-            .map {
-                os_log("Response: %@", String(data: $0, encoding: .utf8) ?? "")
-                return try self._decoder.decodeTimetable($0)
-        }
+        return _makeRequest(with: "/plan/\(evaNo)/\(date)/\(hour)", decoder: _decoder.decodeTimetable)
     }
 
     /// Returns a Timetable object (see Timetable) that contains all known changes for the station
@@ -65,11 +62,23 @@ struct ApiTimetablesService: TimetablesService {
     /// associated planned data for the change (e.g. an unplanned stop or trip).
     /// Full changes are updated every 30s and should be cached for that period by web caches.
     func loadChanges(evaNo: Int) -> Observable<ApiChanges> {
-        let request = URLRequest(url: _baseUrl.appendingPathComponent("fchg/\(evaNo)"))
-        return _urlSession.rx.data(request: request)
+        return _makeRequest(with: "fchg/\(evaNo)", decoder: _decoder.decodeChanges)
+    }
+
+    private func _makeRequest<Decoded>(with pathComponent: String,
+                                       decoder: @escaping (Data) throws -> Decoded) -> Observable<Decoded> {
+
+        return _urlSession.rx.data(request: URLRequest(url: _baseUrl.appendingPathComponent(pathComponent)))
             .map {
                 os_log("Response: %@", String(data: $0, encoding: .utf8) ?? "")
-                return try self._decoder.decodeChanges($0)
+                return try decoder($0)
+            }
+            .catchError {
+                if case .httpRequestFailed(let response, _)? = $0 as? RxCocoaURLError,
+                    response.statusCode == 500 {
+                    return .error(TimetablesServiceError.overwhelmed)
+                }
+                return .error(TimetablesServiceError.unknown)
         }
     }
 }

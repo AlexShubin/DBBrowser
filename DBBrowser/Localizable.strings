@@ -20,7 +20,8 @@
 "timetable.segmented_control.arrivals" = "Arrivals";
 "timetable.load_more" = "Load more";
 
-"loading_error" = "Something went wrong...";
+"loading_error" = "Sorry, something went wrong...";
 "retry_button_text" = "Try again";
 "cancel_button_text" = "Cancel";
+"try_later_error" = "Please try again a little bit later";
 

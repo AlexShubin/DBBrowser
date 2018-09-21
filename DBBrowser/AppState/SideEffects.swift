@@ -30,16 +30,20 @@ struct AppSideEffects: SideEffects {
     let stationSearch: StationSearchSideEffectsType
     let timetable: TimetableSideEffectsType
     let sceneCoordinator: SceneCoordinatorSideEffectsType
+    let toastManager: ToastManagerType
 
     init(coordinator: SceneCoordinatorType,
          stationFinder: StationFinder,
          timetableLoader: TimetableLoader,
          changesLoader: ChangesLoader,
-         stationInfoLoader: StationInfoLoader) {
+         stationInfoLoader: StationInfoLoader,
+         toastManager: ToastManagerType) {
         stationSearch = StationSearchSideEffects(stationFinder: stationFinder)
         timetable = TimetableSideEffects(timetableLoader: timetableLoader,
                                          changesLoader: changesLoader,
-                                         stationInfoLoader: stationInfoLoader)
+                                         stationInfoLoader: stationInfoLoader,
+                                         toastManager: toastManager)
         sceneCoordinator = SceneCoordinatorSideEffects(coordinator: coordinator)
+        self.toastManager = toastManager
     }
 }

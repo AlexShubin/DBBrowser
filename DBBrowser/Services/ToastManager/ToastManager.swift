@@ -9,17 +9,17 @@ public protocol ToastManagerType {
 }
 
 public enum ToastType {
-    case noInternetConnection
-    case tryLater
+    case unknownError
+    case tryLaterError
 
     var toastViewState: ToastView.State {
         switch self {
-        case .noInternetConnection:
+        case .unknownError:
             return ToastView.State(color: UIColor(asset: Asset.Colors.warningRed),
-                                   text: "")
-        case .tryLater:
+                                   text: L10n.loadingError)
+        case .tryLaterError:
             return ToastView.State(color: UIColor(asset: Asset.Colors.warningBlue),
-                                   text: "")
+                                   text: L10n.tryLaterError)
         }
     }
 }
@@ -27,52 +27,62 @@ public enum ToastType {
 public struct ToastManager: ToastManagerType {
 
     private enum Constants {
-        static let toastHeight: CGFloat = 44
+        static let toastHeight: CGFloat = 43
         enum Animation {
             static let duration = 0.25
             static let delay = 2.0
         }
     }
 
-    private let _window: UIWindow
+    private let _application: UIApplication
 
-    public init(window: UIWindow) {
-        _window = window
+    public init(application: UIApplication) {
+        _application = application
     }
 
     public func show(_ toastType: ToastType) {
+        DispatchQueue.main.async {
+            guard let window = self._application.keyWindow else { return }
+            self._show(toastType, in: window)
+        }
+    }
+
+    private func _show(_ toastType: ToastType, in window: UIWindow) {
         let toastView = ToastView()
         toastView.render(state: toastType.toastViewState)
 
         // Calcualte toast height
         var height = Constants.toastHeight
-        if _window.safeAreaInsets.top > 0 {
-            height += _window.safeAreaInsets.top
+        if window.safeAreaInsets.top > 0 {
+            height += window.safeAreaInsets.top
+        } else {
+            height += _application.statusBarFrame.size.height
         }
 
         // Add starting constraints and layout
-        _window.addSubview(toastView)
+        window.addSubview(toastView)
+        toastView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            toastView.leadingAnchor.constraint(equalTo: _window.leadingAnchor),
-            toastView.trailingAnchor.constraint(equalTo: _window.trailingAnchor),
+            toastView.leadingAnchor.constraint(equalTo: window.leadingAnchor),
+            toastView.trailingAnchor.constraint(equalTo: window.trailingAnchor),
             toastView.heightAnchor.constraint(equalToConstant: height)
             ])
 
-        let bottomAnchor = toastView.bottomAnchor.constraint(equalTo: _window.topAnchor)
+        let bottomAnchor = toastView.bottomAnchor.constraint(equalTo: window.topAnchor)
         bottomAnchor.isActive = true
-        _window.layoutIfNeeded()
+        window.layoutIfNeeded()
 
         // Animate and remove
         UIView.animate(withDuration: Constants.Animation.duration, animations: {
             bottomAnchor.constant = height
-            self._window.layoutIfNeeded()
+            window.layoutIfNeeded()
         }, completion: { _ in
             UIView.animate(withDuration: Constants.Animation.duration,
                            delay: Constants.Animation.delay,
                            options: [],
                            animations: {
                             bottomAnchor.constant = 0
-                            self._window.layoutIfNeeded()
+                            window.layoutIfNeeded()
             },
                            completion: { _ in
                             toastView.removeFromSuperview()

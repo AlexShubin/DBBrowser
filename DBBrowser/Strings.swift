@@ -9,10 +9,12 @@ import Foundation
 internal enum L10n {
   /// Cancel
   internal static let cancelButtonText = L10n.tr("Localizable", "cancel_button_text")
-  /// Something went wrong...
+  /// Sorry, something went wrong...
   internal static let loadingError = L10n.tr("Localizable", "loading_error")
   /// Try again
   internal static let retryButtonText = L10n.tr("Localizable", "retry_button_text")
+  /// Please try again a little bit later
+  internal static let tryLaterError = L10n.tr("Localizable", "try_later_error")
 
   internal enum DatePicker {
     /// Timetable is available only for the next %d hours

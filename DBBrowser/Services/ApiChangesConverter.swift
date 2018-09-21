@@ -37,8 +37,11 @@ struct ApiChangesConverter: ChangesConverter {
         let time = changedEvent.time.map {
             _dateFormatter.date(from: $0, style: .apiTimetablesDateTime)
         }
+        let stations = changedEvent.path.flatMap {
+            $0.count > 0 ? $0.components(separatedBy: "|") : nil
+        }
         return Changes.Event(id: id,
-                             stations: changedEvent.path?.components(separatedBy: "|"),
+                             stations: stations,
                              time: time,
                              platform: changedEvent.platform,
                              isCanceled: changedEvent.status == "c")

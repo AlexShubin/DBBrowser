@@ -141,7 +141,7 @@ extension TimetableEventCell {
         enum StationStack {
             static let leadingOffset: CGFloat = 16
             static let topOffset: CGFloat = 8
-            static let bottomOffset: CGFloat = -8
+            static let bottomOffset: CGFloat = -10
             static let trailingOffset: CGFloat = -16
             static let spacing: CGFloat = 4
         }

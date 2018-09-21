@@ -21,8 +21,7 @@ enum DateTimeFormatterStyle: String {
 struct AppDateTimeFormatter: DateTimeFormatter {
     private let _timeZone = TimeZone.CEST
     private let _formatter: DateFormatter
-    private let _dateLock = NSLock()
-    private let _stringLock = NSLock()
+    private let _lock = NSLock()
 
     public init() {
         _formatter = DateFormatter()
@@ -30,15 +29,15 @@ struct AppDateTimeFormatter: DateTimeFormatter {
     }
 
     func date(from string: String, style: DateTimeFormatterStyle) -> Date {
-        defer { _dateLock.unlock() }
-        _dateLock.lock()
+        defer { _lock.unlock() }
+        _lock.lock()
         _formatter.dateFormat = style.rawValue
         return _formatter.date(from: string)!
     }
 
     func string(from date: Date, style: DateTimeFormatterStyle) -> String {
-        defer { _stringLock.unlock() }
-        _stringLock.lock()
+        defer { _lock.unlock() }
+        _lock.lock()
         _formatter.dateFormat = style.rawValue
         return _formatter.string(from: date)
     }

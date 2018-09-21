@@ -53,7 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                          stationFinder: stationFinder,
                                          timetableLoader: timetableLoader,
                                          changesLoader: changesLoader,
-                                         stationInfoLoader: stationInfoLoader)
+                                         stationInfoLoader: stationInfoLoader,
+                                         toastManager: ToastManager(application: application))
         appStateStore = AppStateStore(sideEffects: sideEffects)
         vcFactory.setUp(appStateStore: appStateStore)
         coordinator.setRoot(scene: .mainScreen)

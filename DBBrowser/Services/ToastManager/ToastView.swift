@@ -10,6 +10,7 @@ class ToastView: UIView {
     init() {
         super.init(frame: .zero)
         addSubview(_label)
+        _label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             _label.centerXAnchor.constraint(equalTo: centerXAnchor),
             _label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12)
