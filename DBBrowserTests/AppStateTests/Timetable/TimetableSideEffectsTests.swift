@@ -26,7 +26,8 @@ class TimetableSideEffectsTests: XCTestCase {
         super.setUp()
         timetableSideEffects = TimetableSideEffects(timetableLoader: timetableLoaderMock,
                                                     changesLoader: changesLoaderMock,
-                                                    stationInfoLoader: StationInfoLoaderMock())
+                                                    stationInfoLoader: StationInfoLoaderMock(),
+                                                    toastManager: ToastManagerMock())
     }
 
     func testTimetableLoaderInvokedWhenDontNeedToLoadChanges() {

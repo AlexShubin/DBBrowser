@@ -1,3 +1,4 @@
+// swiftlint:disable all
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 import Foundation
@@ -5,7 +6,10 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// MARK: - Strings
+
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
   /// Cancel
   internal static let cancelButtonText = L10n.tr("Localizable", "cancel_button_text")
@@ -58,7 +62,6 @@ internal enum L10n {
     internal static let through = L10n.tr("Localizable", "timetable.through")
     /// towards:
     internal static let towards = L10n.tr("Localizable", "timetable.towards")
-
     internal enum SegmentedControl {
       /// Arrivals
       internal static let arrivals = L10n.tr("Localizable", "timetable.segmented_control.arrivals")
@@ -67,7 +70,10 @@ internal enum L10n {
     }
   }
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name
+
+// MARK: - Implementation Details
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {

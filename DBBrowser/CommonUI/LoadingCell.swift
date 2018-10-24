@@ -6,9 +6,9 @@ import UIKit
 
 class LoadingCell: UITableViewCell {
 
-    private let _spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    private let _spinner = UIActivityIndicatorView(style: .gray)
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         _setupLayout()
 

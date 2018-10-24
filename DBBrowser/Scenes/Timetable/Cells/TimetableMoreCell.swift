@@ -13,12 +13,12 @@ class TimetableMoreCell: UITableViewCell, Emitable {
     }
 
     private let _button = UIButton(type: .system)
-    private let _spinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    private let _spinner = UIActivityIndicatorView(style: .white)
     let events: ControlEvent<Event>
 
     private(set) var bag = DisposeBag()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         events = ControlEvent(events: _button.rx.tap.map { .moreTap })
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         _setupLayout()

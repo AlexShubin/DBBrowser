@@ -37,7 +37,7 @@ class TimetableViewController: UIViewController {
 
         _tableView.separatorStyle = .none
         _tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 10))
-        _segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)],
+        _segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)],
                                                  for: .normal)
 
         _tableView.registerCell(ofType: TimetableEventCell.self)

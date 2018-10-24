@@ -19,7 +19,7 @@ class ErrorCell: UITableViewCell, Emitable {
     private(set) var bag = DisposeBag()
     let events: ControlEvent<Event>
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         events = ControlEvent(events: _retryButton.rx.tap.map { .retryTap })
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         _setupLayout()
