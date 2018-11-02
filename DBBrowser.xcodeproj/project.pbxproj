@@ -17,7 +17,6 @@
 		B807037221158D5F0079570C /* ApiChangesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B807037121158D5F0079570C /* ApiChangesBuilder.swift */; };
 		B807037421158DA10079570C /* ApiChangedStopBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B807037321158DA10079570C /* ApiChangedStopBuilder.swift */; };
 		B807037621158DAC0079570C /* ApiChangedEventBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B807037521158DAB0079570C /* ApiChangedEventBuilder.swift */; };
-		B807E14E2115A2C400328A6F /* Recorded+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B807E14D2115A2C400328A6F /* Recorded+Equatable.swift */; };
 		B80877A320F7BDB000025B18 /* TimetableQueriesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80877A220F7BDAF00025B18 /* TimetableQueriesTests.swift */; };
 		B80877A520F7BF3500025B18 /* TimetableSideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80877A420F7BF3500025B18 /* TimetableSideEffects.swift */; };
 		B80877A720F7C1EE00025B18 /* TimetableEffectsInvocationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80877A620F7C1EE00025B18 /* TimetableEffectsInvocationsTests.swift */; };
@@ -166,7 +165,6 @@
 		B807037121158D5F0079570C /* ApiChangesBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiChangesBuilder.swift; sourceTree = "<group>"; };
 		B807037321158DA10079570C /* ApiChangedStopBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiChangedStopBuilder.swift; sourceTree = "<group>"; };
 		B807037521158DAB0079570C /* ApiChangedEventBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiChangedEventBuilder.swift; sourceTree = "<group>"; };
-		B807E14D2115A2C400328A6F /* Recorded+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recorded+Equatable.swift"; sourceTree = "<group>"; };
 		B80877A220F7BDAF00025B18 /* TimetableQueriesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableQueriesTests.swift; sourceTree = "<group>"; };
 		B80877A420F7BF3500025B18 /* TimetableSideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableSideEffects.swift; sourceTree = "<group>"; };
 		B80877A620F7C1EE00025B18 /* TimetableEffectsInvocationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableEffectsInvocationsTests.swift; sourceTree = "<group>"; };
@@ -673,7 +671,6 @@
 				B8F437D420A8392100977CE3 /* TestData.swift */,
 				B8D22601210F31CA0071B994 /* TestableObserver+.swift */,
 				B8F1E51620CFE600000F1606 /* State+ApplyEvents.swift */,
-				B807E14D2115A2C400328A6F /* Recorded+Equatable.swift */,
 				B8B401D520A5DEF500D25B2C /* Info.plist */,
 			);
 			path = DBBrowserTests;
@@ -934,6 +931,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DBBrowser/Pods-DBBrowser-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxFeedback/RxFeedback.framework",
@@ -947,6 +945,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxFeedback.framework",
@@ -1020,6 +1019,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DBBrowserTests/Pods-DBBrowserTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -1030,6 +1030,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -1202,7 +1203,6 @@
 				B89DCF3120F7F06300DF30C2 /* SceneCoordinatorSideEffectsMock.swift in Sources */,
 				B8004D1F20F67D7B006A1A83 /* TimetableBuilder.swift in Sources */,
 				B8F1E51720CFE600000F1606 /* State+ApplyEvents.swift in Sources */,
-				B807E14E2115A2C400328A6F /* Recorded+Equatable.swift in Sources */,
 				B8F437D520A8392100977CE3 /* TestData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
