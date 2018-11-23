@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import DBAPI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

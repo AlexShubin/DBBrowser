@@ -3,6 +3,7 @@
 //
 
 @testable import DBBrowser
+@testable import DBAPI
 
 final class FahrplanStationBuilder {
     var name = TestData.stationName1

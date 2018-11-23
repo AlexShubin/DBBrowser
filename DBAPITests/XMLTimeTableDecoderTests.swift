@@ -2,7 +2,7 @@
 //  Copyright © 2018 AlexShubin. All rights reserved.
 //
 
-@testable import DBBrowser
+@testable import DBAPI
 import XCTest
 
 //swiftlint:disable line_length

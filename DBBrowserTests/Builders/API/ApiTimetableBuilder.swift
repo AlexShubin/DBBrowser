@@ -3,6 +3,8 @@
 //
 
 @testable import DBBrowser
+@testable import DBAPI
+import DBAPI
 
 final class ApiTimetableBuilder {
     private var _stops = [ApiStopBuilder().build()]

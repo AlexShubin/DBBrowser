@@ -4,15 +4,15 @@
 
 import SWXMLHash
 
-enum TimetablesDecoderError: Error {
+public enum TimetablesDecoderError: Error {
     case decodingError
 }
 
-struct XMLTimetablesDecoder {
+public struct XMLTimetablesDecoder {
 
     // MARK: - Timetable decoder
 
-    func decodeTimetable(_ data: Data) throws -> ApiTimetable {
+    public func decodeTimetable(_ data: Data) throws -> ApiTimetable {
         let xml = SWXMLHash.parse(data)
         let stops: [ApiStop] = try xml["timetable"]["s"].all.map {
             guard let id = $0.element?.attribute(by: "id")?.text,
@@ -44,7 +44,7 @@ struct XMLTimetablesDecoder {
 
     // MARK: - Changes decoder
 
-    func decodeChanges(_ data: Data) throws -> ApiChanges {
+    public func decodeChanges(_ data: Data) throws -> ApiChanges {
         let xml = SWXMLHash.parse(data)
         let stops: [ApiChangedStop] = try xml["timetable"]["s"].all.map {
             guard let id = $0.element?.attribute(by: "id")?.text else {
@@ -67,7 +67,7 @@ struct XMLTimetablesDecoder {
 
     // MARK: - Station info decoder
 
-    func decodeStationInfo(_ data: Data) -> [ApiStationInfo] {
+    public func decodeStationInfo(_ data: Data) -> [ApiStationInfo] {
         let xml = SWXMLHash.parse(data)
         return xml["stations"]["station"].all.map {
             return ApiStationInfo(meta: $0.element?.attribute(by: "meta")?.text)

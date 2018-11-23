@@ -3,14 +3,14 @@
 //
 
 /// Timetable event: arrival or departure.
-struct ApiChangedEvent {
+public struct ApiChangedEvent {
     /// Changed platform.
-    let platform: String?
+    public let platform: String?
     /// Changed time. New estimated or actual departure or arrival time.
     /// The time, in ten digit 'YYMMddHHmm' format, e.g. '1404011437' for 14:37 on April the 1st of 2014.
-    let time: String?
+    public let time: String?
     /// Changed path.
-    let path: String?
+    public let path: String?
     /// Changed status. The status of this event, a one-character indicator that is one of:
     ///     'a' = this event was added
     ///     'c' = this event was cancelled
@@ -21,5 +21,5 @@ struct ApiChangedEvent {
     ///             For example, removing the last stop of a trip will result in arrival cancellation
     ///             for the last stop and of departure cancellation for the stop before the last.
     ///             So asymmetric cancellations of just arrival or departure for a stop can occur.
-    let status: String?
+    public let status: String?
 }

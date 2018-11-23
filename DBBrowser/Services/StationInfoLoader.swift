@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import DBAPI
 
 protocol StationInfoLoader {
     func load(evaId: Int) -> Observable<StationInfo>

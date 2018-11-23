@@ -3,6 +3,7 @@
 //
 
 @testable import DBBrowser
+@testable import DBAPI
 
 final class ApiChangesBuilder {
     private var _stops = [ApiChangedStop]()

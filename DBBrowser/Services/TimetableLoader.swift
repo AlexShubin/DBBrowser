@@ -3,6 +3,7 @@
 //
 
 import RxSwift
+import DBAPI
 
 protocol TimetableLoader {
     func load(evaId: Int, metaEvaIds: Set<Int>, date: Date, corrStation: Station?) -> Observable<Timetable>
@@ -42,7 +43,7 @@ struct ApiTimetableLoader: TimetableLoader {
     private func _apiLoadTimetable(evaIds: Set<Int>, date: String, hour: String) -> Observable<ApiTimetable> {
         return Observable.combineLatest(evaIds.map {
             self._timetableService.loadTimetable(evaNo: $0, date: date, hour: hour)
-        }) { $0.reduce(ApiTimetable(stops: []), { $0 + $1 }) }
+        }) { $0.reduce(ApiTimetable.empty, { $0 + $1 }) }
     }
 
     private func _applyFiltersAndSort(to events: [Timetable.Event],

@@ -3,6 +3,7 @@
 //
 
 @testable import DBBrowser
+@testable import DBAPI
 
 final class ApiEventBuilder {
     private var _platform = TestData.Timetable.platform1

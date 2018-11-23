@@ -3,6 +3,7 @@
 //
 
 import RxSwift
+import DBAPI
 
 typealias StationFinderResult = Result<[Station], StationFinderError>
 

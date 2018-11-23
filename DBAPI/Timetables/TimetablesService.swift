@@ -6,33 +6,33 @@ import RxSwift
 import RxCocoa
 import os.log
 
-protocol TimetablesService {
+public protocol TimetablesService {
     func loadTimetable(evaNo: Int, date: String, hour: String) -> Observable<ApiTimetable>
     func loadChanges(evaNo: Int) -> Observable<ApiChanges>
     func station(evaNo: Int) -> Observable<[ApiStationInfo]>
 }
 
-enum TimetablesServiceError: Error {
+public enum TimetablesServiceError: Error {
     case unknown
     /// Api throttling threshold crossed.
     case overwhelmed
 }
 
 /// Service duplicates API Timetables service. Returns plain models.
-struct ApiTimetablesService: TimetablesService {
+public struct ApiTimetablesService: TimetablesService {
 
     private let _baseUrl: URL
     private let _urlSession: URLSession
 
     private let _decoder = XMLTimetablesDecoder()
 
-    init(baseUrl: URL, configuration: URLSessionConfiguration) {
+    public init(baseUrl: URL, configuration: URLSessionConfiguration) {
         _urlSession = URLSession(configuration: configuration)
         _baseUrl = baseUrl
     }
 
     /// This public interface allows access to information about a station.
-    func station(evaNo: Int) -> Observable<[ApiStationInfo]> {
+    public func station(evaNo: Int) -> Observable<[ApiStationInfo]> {
         return _makeRequest(with: "station/\(evaNo)", decoder: _decoder.decodeStationInfo)
     }
 
@@ -46,7 +46,7 @@ struct ApiTimetablesService: TimetablesService {
     ///
     /// Planned data is generated many hours in advance and is static, i.e. it does never change.
     /// It should be cached by web caches.public interface allows access to information about a station.
-    func loadTimetable(evaNo: Int, date: String, hour: String) -> Observable<ApiTimetable> {
+    public func loadTimetable(evaNo: Int, date: String, hour: String) -> Observable<ApiTimetable> {
         return _makeRequest(with: "/plan/\(evaNo)/\(date)/\(hour)", decoder: _decoder.decodeTimetable)
     }
 
@@ -61,13 +61,12 @@ struct ApiTimetablesService: TimetablesService {
     /// attributes ct, cp, cs or cpth. Changes may also include 'planned' attributes if there is no
     /// associated planned data for the change (e.g. an unplanned stop or trip).
     /// Full changes are updated every 30s and should be cached for that period by web caches.
-    func loadChanges(evaNo: Int) -> Observable<ApiChanges> {
+    public func loadChanges(evaNo: Int) -> Observable<ApiChanges> {
         return _makeRequest(with: "fchg/\(evaNo)", decoder: _decoder.decodeChanges)
     }
 
     private func _makeRequest<Decoded>(with pathComponent: String,
                                        decoder: @escaping (Data) throws -> Decoded) -> Observable<Decoded> {
-
         return _urlSession.rx.data(request: URLRequest(url: _baseUrl.appendingPathComponent(pathComponent)))
             .map {
                 os_log("Response: %@", String(data: $0, encoding: .utf8) ?? "")

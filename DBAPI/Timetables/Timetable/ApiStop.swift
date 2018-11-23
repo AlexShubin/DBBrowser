@@ -3,7 +3,7 @@
 //
 
 /// Timetable stop.
-struct ApiStop: Equatable {
+public struct ApiStop: Equatable {
     /// An id that uniquely identifies the stop.
     /// It consists of the following three elements separated by dashes.
     ///     - a 'daily trip id' that uniquely identifies a trip within one day.
@@ -15,11 +15,11 @@ struct ApiStop: Equatable {
     ///             Added trips get indices above 100. Example '-7874571842864554321-1403311221-11'
     ///             would be used for a trip with daily trip id '-7874571842864554321' that starts
     ///             on march the 31th 2014 and where the current station is the 11th stop.
-    let id: String
+    public let id: String
     /// Trip label.
-    let tripLabel: ApiTripLabel
+    public let tripLabel: ApiTripLabel
     /// Arrival element.
-    let arrival: ApiEvent?
+    public let arrival: ApiEvent?
     /// Departure element.
-    let departure: ApiEvent?
+    public let departure: ApiEvent?
 }

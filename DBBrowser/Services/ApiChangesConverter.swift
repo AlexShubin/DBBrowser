@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import DBAPI
 
 protocol ChangesConverter {
     func convert(from apiChanges: ApiChanges) -> Changes

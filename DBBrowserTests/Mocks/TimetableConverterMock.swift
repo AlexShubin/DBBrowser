@@ -3,6 +3,7 @@
 //
 
 @testable import DBBrowser
+@testable import DBAPI
 
 class TimetableConverterMock: TimetableConverter {
     func convert(from apiTimetable: ApiTimetable) -> Timetable {

@@ -3,6 +3,7 @@
 //
 
 @testable import DBBrowser
+@testable import DBAPI
 
 final class ApiTripLabelBuilder {
     private var _category = TestData.Timetable.category1

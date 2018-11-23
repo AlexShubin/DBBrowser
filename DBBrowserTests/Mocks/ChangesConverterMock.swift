@@ -7,6 +7,7 @@
 //
 
 @testable import DBBrowser
+@testable import DBAPI
 
 class ChangesConverterMock: ChangesConverter {
     func convert(from apiChanges: ApiChanges) -> Changes {

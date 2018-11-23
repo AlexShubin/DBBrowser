@@ -3,23 +3,28 @@ platform :ios, '11.0'
 use_frameworks!
 inhibit_all_warnings!
 
-def shared_pods
+target 'DBBrowser' do
   pod 'RxDataSources'
   pod 'RxSwift'
-end
-
-target 'DBBrowser' do
-  shared_pods
   pod 'SwiftLint'
   pod 'SwiftGen'
   pod 'RxCocoa'
   pod 'RxFeedback'
   pod 'RxOptional'
-  pod 'SWXMLHash', '~> 4.0.0'
   pod 'RxKeyboard'
 end
 
 target 'DBBrowserTests' do
-  shared_pods
+  pod 'RxDataSources'
+  pod 'RxSwift'
   pod 'RxTest'
+end
+
+target 'DBAPI' do
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'SWXMLHash', '~> 4.0.0'
+end
+
+target 'DBAPITests' do
 end

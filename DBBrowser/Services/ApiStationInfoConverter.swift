@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import DBAPI
 
 protocol StationInfoConverter {
     func convert(from apiStationInfo: ApiStationInfo) throws -> StationInfo

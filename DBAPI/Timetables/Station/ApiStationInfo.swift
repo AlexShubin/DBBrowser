@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct ApiStationInfo: Equatable {
-    let meta: String?
+public struct ApiStationInfo: Equatable {
+    public let meta: String?
 }

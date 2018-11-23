@@ -3,6 +3,7 @@
 //
 
 @testable import DBBrowser
+@testable import DBAPI
 
 final class ApiStopBuilder {
     private var _id = TestData.Timetable.id1

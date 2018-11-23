@@ -6,24 +6,24 @@ import RxSwift
 import os.log
 
 /// Service duplicates API Fahrplan service. Returns plain models.
-protocol FahrplanService {
+public protocol FahrplanService {
     func searchStation(namePart: String) -> Observable<[FahrplanStation]>
 }
 
-struct ApiFahrplanService: FahrplanService {
+public struct ApiFahrplanService: FahrplanService {
 
     private let _baseUrl: URL
     private let _urlSession: URLSession
 
     private let _decoder = JSONDecoder()
 
-    init(baseUrl: URL, configuration: URLSessionConfiguration) {
+    public init(baseUrl: URL, configuration: URLSessionConfiguration) {
         _urlSession = URLSession(configuration: configuration)
         _baseUrl = baseUrl
     }
 
     /// Get information about locations matching the given name or name fragment.
-    func searchStation(namePart: String) -> Observable<[FahrplanStation]> {
+    public func searchStation(namePart: String) -> Observable<[FahrplanStation]> {
         let request = URLRequest(url: _baseUrl.appendingPathComponent("/location/\(namePart)"))
         return _urlSession.rx.data(request: request)
             .map {

@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import DBAPI
 
 protocol ChangesLoader {
     func load(evaId: Int, metaEvaIds: Set<Int>) -> Observable<Changes>
@@ -36,6 +37,6 @@ struct ApiChangesLoader: ChangesLoader {
     private func _apiLoadChanges(evaIds: Set<Int>) -> Observable<ApiChanges> {
         return Observable.combineLatest(evaIds.map {
             self._timetableService.loadChanges(evaNo: $0)
-        }) { $0.reduce(ApiChanges(stops: []), { $0 + $1 }) }
+        }) { $0.reduce(ApiChanges.empty, { $0 + $1 }) }
     }
 }

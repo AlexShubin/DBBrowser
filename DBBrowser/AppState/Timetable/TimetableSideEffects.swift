@@ -5,6 +5,7 @@
 import RxSwift
 import RxFeedback
 import Foundation
+import enum DBAPI.TimetablesServiceError
 
 protocol TimetableSideEffectsType: FeedbackLoopsHolder {
     var loadTimetable: (TimetableLoadParams) -> Observable<AppEvent> { get }

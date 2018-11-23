@@ -3,6 +3,7 @@
 //
 
 @testable import DBBrowser
+@testable import DBAPI
 
 final class ApiChangedEventBuilder {
     private var _platform: String?

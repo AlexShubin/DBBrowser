@@ -3,6 +3,7 @@
 //
 
 @testable import DBBrowser
+@testable import DBAPI
 import RxSwift
 
 final class FahrplanServiceMock: FahrplanService {

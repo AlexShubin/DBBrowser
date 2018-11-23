@@ -3,6 +3,7 @@
 //
 
 @testable import DBBrowser
+import DBAPI
 import RxSwift
 
 class TimetableServiceMock: TimetablesService {
@@ -23,6 +24,6 @@ class TimetableServiceMock: TimetablesService {
 
     let invocations = PublishSubject<String>()
     var expectedTimetable = Observable.just(ApiTimetableBuilder().build())
-    var expectedChanges = Observable.just(ApiChanges(stops: []))
+    var expectedChanges = Observable.just(ApiChanges.empty)
     var expectedStationInfo = Observable.just([ApiStationInfo]())
 }
