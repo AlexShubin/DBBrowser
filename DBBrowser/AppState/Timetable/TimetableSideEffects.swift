@@ -48,6 +48,7 @@ struct TimetableSideEffects: TimetableSideEffectsType {
 
     var loadTimetable: (TimetableLoadParams) -> Observable<AppEvent> {
         return { params in
+            // TODO: Move combining logic to separate dependency, remove API layer
             let appEvents: Observable<AppEvent> = params.shouldLoadChanges
                 ? Observable.combineLatest(
                     self._changesLoader.load(evaId: params.station.evaId,
