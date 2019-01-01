@@ -21,7 +21,7 @@ class XMLTimetableDecoderTests: XCTestCase {
         }
 
         XCTAssertEqual(result.stops[0],
-                       ApiStop(id: "4471729078023853954-1807071328-1",
+                       ApiStop(id: "4471729078023853954-1807071328-14",
                                tripLabel: ApiTripLabel(category: "ICE", number: "691"),
                                arrival: ApiEvent(platform: "18", time: "1807072130", path: "Berlin Hbf (tief)|Berlin Südkreuz|Lutherstadt Wittenberg Hbf|Leipzig Hbf|Erfurt Hbf|Eisenach|Fulda|Frankfurt(Main)Hbf|Mannheim Hbf|Stuttgart Hbf|Ulm Hbf|Augsburg Hbf|München-Pasing"),
                                departure: nil))
