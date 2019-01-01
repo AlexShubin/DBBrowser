@@ -47,10 +47,7 @@ class TimetableViewStateConverterTests: XCTestCase {
     func testEventCellStatePassedFromEventCellConverterToResultingState() {
         // Prepare
         timetableEventCellConverterMock.expected = TimetableEventCellStateBuilder().build()
-        let timetableWithDepartures = TimetableBuilder()
-            .with(departures: [TimetableEventBuilder().build()])
-            .with(arrivals: [])
-            .build()
+        let timetableWithDepartures = Timetable(departures: [TimetableEventBuilder().build()])
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .corrStation(StationBuilder {
                 $0.name = TestData.stationName1
@@ -71,10 +68,7 @@ class TimetableViewStateConverterTests: XCTestCase {
         let event1 = TimetableEventBuilder().with(number: TestData.Timetable.number1).build()
         let event2 = TimetableEventBuilder().with(number: TestData.Timetable.number2).build()
         let event3 = TimetableEventBuilder().with(number: TestData.Timetable.number3).build()
-        let timetableWithDepartures = TimetableBuilder()
-            .with(departures: [event1, event2])
-            .with(arrivals: [event3])
-            .build()
+        let timetableWithDepartures = Timetable(arrivals: [event3], departures: [event1, event2])
         let corrStation = StationBuilder {
             $0.evaId = TestData.stationId1
             }.build()
@@ -96,10 +90,7 @@ class TimetableViewStateConverterTests: XCTestCase {
         let event1 = TimetableEventBuilder().with(number: TestData.Timetable.number1).build()
         let event2 = TimetableEventBuilder().with(number: TestData.Timetable.number2).build()
         let event3 = TimetableEventBuilder().with(number: TestData.Timetable.number3).build()
-        let timetableWithDepartures = TimetableBuilder()
-            .with(departures: [event1, event2])
-            .with(arrivals: [event3])
-            .build()
+        let timetableWithDepartures = Timetable(arrivals: [event3], departures: [event1, event2])
         let corrStation = StationBuilder {
             $0.name = TestData.stationName2
             }.build()
@@ -129,7 +120,7 @@ class TimetableViewStateConverterTests: XCTestCase {
             $0.stations = TestData.Timetable.stationsArray2
             $0.time = TestData.Timetable.time2
         }.build()
-        let timetable = TimetableBuilder().with(departures: [event]).build()
+        let timetable = Timetable(departures: [event])
         let changes = ChangesBuilder { $0.departures = [changedEvent] }.build()
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .timetableLoaded(timetable),
@@ -151,10 +142,8 @@ class TimetableViewStateConverterTests: XCTestCase {
 
     func testTimetableWithDeparturesInArrivalsModeConvertedToLoadMoreButton() {
         // Prepare
-        let timetableWithDepartures = TimetableBuilder()
-            .with(departures: [TimetableEventBuilder().build()])
-            .with(arrivals: [])
-            .build()
+        let timetableWithDepartures = Timetable(arrivals: [],
+                                                departures: [TimetableEventBuilder().build()])
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .timetableLoaded(timetableWithDepartures),
             .changeTable(1)
@@ -171,10 +160,8 @@ class TimetableViewStateConverterTests: XCTestCase {
 
     func testTimetableWithArrivalsInDeparturessModeConvertedToLoadMoreButton() {
         // Prepare
-        let timetableWithDepartures = TimetableBuilder()
-            .with(departures: [])
-            .with(arrivals: [TimetableEventBuilder().build()])
-            .build()
+        let timetableWithDepartures = Timetable(arrivals: [TimetableEventBuilder().build()],
+                                                departures: [])
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .timetableLoaded(timetableWithDepartures),
             .changeTable(0)
@@ -217,10 +204,7 @@ class TimetableViewStateConverterTests: XCTestCase {
             .with(platform: TestData.Timetable.platform1)
             .with(stations: [TestData.stationName1, TestData.stationName2])
             .build()
-        let timetableWithDepartures = TimetableBuilder()
-            .with(departures: [event])
-            .with(arrivals: [])
-            .build()
+        let timetableWithDepartures = Timetable(arrivals: [], departures: [event])
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .timetableLoaded(timetableWithDepartures),
             .changeTable(0),
@@ -245,10 +229,7 @@ class TimetableViewStateConverterTests: XCTestCase {
             .with(platform: TestData.Timetable.platform1)
             .with(stations: [TestData.stationName1, TestData.stationName2])
             .build()
-        let timetableWithDepartures = TimetableBuilder()
-            .with(departures: [event])
-            .with(arrivals: [])
-            .build()
+        let timetableWithDepartures = Timetable(arrivals: [], departures: [event])
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .timetableLoaded(timetableWithDepartures),
             .changeTable(0),

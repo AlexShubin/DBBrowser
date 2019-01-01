@@ -44,7 +44,7 @@ class TimetableLoaderTests: XCTestCase {
         let earlierTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:20")).build()
         let laterTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:30")).build()
         let departures = [laterTrain, earlierTrain]
-        timetableConverterMock.expected = TimetableBuilder().with(departures: departures).build()
+        timetableConverterMock.expected = Timetable(departures: departures)
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
@@ -62,7 +62,7 @@ class TimetableLoaderTests: XCTestCase {
         let earlierTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:20")).build()
         let laterTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:30")).build()
         let arrivals = [laterTrain, earlierTrain]
-        timetableConverterMock.expected = TimetableBuilder().with(arrivals: arrivals).build()
+        timetableConverterMock.expected = Timetable(arrivals: arrivals)
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
@@ -80,7 +80,7 @@ class TimetableLoaderTests: XCTestCase {
         let earlierTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:20")).build()
         let laterTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:30")).build()
         let departures = [laterTrain, earlierTrain]
-        timetableConverterMock.expected = TimetableBuilder().with(departures: departures).build()
+        timetableConverterMock.expected = Timetable(departures: departures)
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
@@ -98,7 +98,7 @@ class TimetableLoaderTests: XCTestCase {
         let earlierTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:20")).build()
         let laterTrain = TimetableEventBuilder().with(time: Date.testSample(from: "02-12-1987 12:30")).build()
         let arrivals = [laterTrain, earlierTrain]
-        timetableConverterMock.expected = TimetableBuilder().with(arrivals: arrivals).build()
+        timetableConverterMock.expected = Timetable(arrivals: arrivals)
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
@@ -115,9 +115,7 @@ class TimetableLoaderTests: XCTestCase {
         // Prepare
         let withCorrStation = TimetableEventBuilder().with(stations: ["123", "45", "789"]).build()
         let withoutCorrStation = TimetableEventBuilder().with(stations: ["1011", "1213", "1415"]).build()
-        timetableConverterMock.expected = TimetableBuilder()
-            .with(departures: [withCorrStation, withoutCorrStation])
-            .build()
+        timetableConverterMock.expected = Timetable(departures: [withCorrStation, withoutCorrStation])
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
@@ -134,9 +132,7 @@ class TimetableLoaderTests: XCTestCase {
         // Prepare
         let withCorrStation = TimetableEventBuilder().with(stations: ["1011", "1213", "1415"]).build()
         let withoutCorrStation = TimetableEventBuilder().with(stations: ["123", "456", "789"]).build()
-        timetableConverterMock.expected = TimetableBuilder()
-            .with(arrivals: [withCorrStation, withoutCorrStation])
-            .build()
+        timetableConverterMock.expected = Timetable(arrivals: [withCorrStation, withoutCorrStation])
         timetableServiceMock.expectedTimetable = .just(ApiTimetableBuilder().build())
         // Run
         let testObserver = testScheduler.start {
