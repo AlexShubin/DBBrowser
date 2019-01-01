@@ -24,13 +24,15 @@ struct Timetable: Equatable {
     static let empty = Timetable()
 }
 
-func + (lhs: Timetable, rhs: Timetable) -> Timetable {
-    return Timetable(arrivals: lhs.arrivals + rhs.arrivals,
-                     departures: lhs.departures + rhs.departures)
-}
+extension Timetable {
+    static func + (lhs: Timetable, rhs: Timetable) -> Timetable {
+        return Timetable(arrivals: lhs.arrivals + rhs.arrivals,
+                         departures: lhs.departures + rhs.departures)
+    }
 
-//swiftlint:disable shorthand_operator
-func += (lhs: inout Timetable, rhs: Timetable) {
-    lhs = lhs + rhs
+    //swiftlint:disable shorthand_operator
+    static func += (lhs: inout Timetable, rhs: Timetable) {
+        lhs = lhs + rhs
+    }
+    //swiftlint:enable shorthand_operator
 }
-//swiftlint:enable shorthand_operator

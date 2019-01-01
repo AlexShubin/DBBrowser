@@ -8,12 +8,14 @@ public struct ApiTimetable {
     public let stops: [ApiStop]
 }
 
-public func + (lhs: ApiTimetable, rhs: ApiTimetable) -> ApiTimetable {
-    return ApiTimetable(stops: lhs.stops + rhs.stops)
-}
+extension ApiTimetable {
+    static public func + (lhs: ApiTimetable, rhs: ApiTimetable) -> ApiTimetable {
+        return ApiTimetable(stops: lhs.stops + rhs.stops)
+    }
 
-//swiftlint:disable shorthand_operator
-public func += (lhs: inout ApiTimetable, rhs: ApiTimetable) {
-    lhs = lhs + rhs
+    //swiftlint:disable shorthand_operator
+    static public func += (lhs: inout ApiTimetable, rhs: ApiTimetable) {
+        lhs = lhs + rhs
+    }
+    //swiftlint:enable shorthand_operator
 }
-//swiftlint:enable shorthand_operator
