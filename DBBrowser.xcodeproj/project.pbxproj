@@ -1222,7 +1222,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint autocorrect\n${PODS_ROOT}/SwiftLint/swiftlint\n";
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint autocorrect --path \"DBBrowser/\" --config \"../.swiftlint.yml\"\n${PODS_ROOT}/SwiftLint/swiftlint autocorrect --path \"DBBrowserTests/\" --config \"../.swiftlint.yml\"\n${PODS_ROOT}/SwiftLint/swiftlint lint --path \"DBBrowser/\" --config \"../.swiftlint.yml\"\n${PODS_ROOT}/SwiftLint/swiftlint lint --path \"DBBrowserTests/\" --config \"../.swiftlint.yml\"\n";
 		};
 		B8602DF620A99DB0001BEDC2 /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1254,7 +1254,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "{PODS_ROOT}/SwiftLint/swiftlint autocorrect\n${PODS_ROOT}/SwiftLint/swiftlint\n";
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint autocorrect --path \"DBAPI/\" --config \"../.swiftlint.yml\"\n${PODS_ROOT}/SwiftLint/swiftlint autocorrect --path \"DBAPITests/\" --config \"../.swiftlint.yml\"\n${PODS_ROOT}/SwiftLint/swiftlint lint --path \"DBAPI/\" --config \"../.swiftlint.yml\"\n${PODS_ROOT}/SwiftLint/swiftlint lint --path \"DBAPITests/\" --config \"../.swiftlint.yml\"\n";
 		};
 		F755E47B7747A14500DC7D89 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

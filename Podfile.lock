@@ -7,13 +7,13 @@ PODS:
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxFeedback (1.1.0):
+  - RxFeedback (1.1.1):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - RxKeyboard (0.9.0):
     - RxCocoa (>= 4.3.1)
     - RxSwift (>= 4.3.1)
-  - RxOptional (3.5.0):
+  - RxOptional (3.6.2):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
@@ -22,7 +22,7 @@ PODS:
     - RxAtomic (~> 4.4)
     - RxSwift (~> 4.0)
   - SwiftGen (6.0.2)
-  - SwiftLint (0.27.0)
+  - SwiftLint (0.29.2)
   - SWXMLHash (4.0.0)
 
 DEPENDENCIES:
@@ -57,13 +57,13 @@ SPEC CHECKSUMS:
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
-  RxFeedback: 88c15e9733bdb72d1dfa8222e82fc2f8f6bdc598
+  RxFeedback: 640e317bc7f6c4914c39a2063c6d5c0e6c1aa65d
   RxKeyboard: 4f782303f499f41577b41c96c6a9a5d7acd51a47
-  RxOptional: bd32ff8ca9df4177683d56ffeb618a9d4d5d5cad
+  RxOptional: 80426a0ddbd092573e4c482d8cc13302078c4d5e
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   RxTest: 19d03286bdc0a3aaea5d61d4cde31fdf4bb8a5ba
   SwiftGen: e5b047067aa84082826a0c4f1c4c2ddc95bcf74c
-  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
+  SwiftLint: 47df60bdea6e7e902b193b6596db8683aafd86a3
   SWXMLHash: 6bbc0bf72975a18ceda469fb7d6a886a26d81694
 
 PODFILE CHECKSUM: 3fe762808c13aec2ef239f6773f3bc00bb0b2a57
