@@ -16,7 +16,12 @@ struct Timetable: Equatable {
     var arrivals: [Event]
     var departures: [Event]
 
-    static let empty = Timetable(arrivals: [], departures: [])
+    init(arrivals: [Event] = [], departures: [Event] = []) {
+        self.arrivals = arrivals
+        self.departures = departures
+    }
+
+    static let empty = Timetable()
 }
 
 func + (lhs: Timetable, rhs: Timetable) -> Timetable {

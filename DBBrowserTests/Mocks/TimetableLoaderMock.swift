@@ -21,5 +21,5 @@ class TimetableLoaderMock: TimetableLoader {
     }
 
     var invocations = [Invocation]()
-    var expected = Observable.just(TimetableBuilder().build())
+    var expected = Observable.just(Timetable.empty)
 }

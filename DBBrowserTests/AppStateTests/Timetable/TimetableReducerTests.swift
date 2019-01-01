@@ -52,7 +52,7 @@ class TimetableReducerTests: XCTestCase {
 
     func testTimetableLoadingErrorEventShoudSetErrorInLoadingStateAndDontAffectTimetable() {
         // Prepare
-        let timetable = TimetableBuilder().build()
+        let timetable = Timetable.empty
         // Run
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .station(StationBuilder().build()),
@@ -68,8 +68,8 @@ class TimetableReducerTests: XCTestCase {
 
     func testTimetableLoadedEventShoudSetTimetableInStateAndNextSetsShouldAddTimetableEvents() {
         // Prepare
-        let timetable1 = TimetableBuilder().build()
-        let timetable2 = TimetableBuilder().build()
+        let timetable1 = Timetable.empty
+        let timetable2 = Timetable.empty
         // Run
         let state = TimetableState.applyEvents(initial: .initial, events: [
             .station(StationBuilder().build()),
@@ -79,17 +79,15 @@ class TimetableReducerTests: XCTestCase {
             .timetableLoaded(timetable2)
             ])
         // Test
-        let timetableSum = TimetableBuilder()
-            .with(arrivals: timetable1.arrivals + timetable2.arrivals)
-            .with(departures: timetable1.departures + timetable2.departures)
-            .build()
+        let timetableSum = Timetable(arrivals: timetable1.arrivals + timetable2.arrivals,
+                                     departures: timetable1.departures + timetable2.departures)
         XCTAssertEqual(state.timetable, timetableSum)
         XCTAssertEqual(state.loadingState, .success)
     }
 
     func testTimetableLoadedWithChangesEventShoudSetTimetableAndChanges() {
         // Prepare
-        let timetable1 = TimetableBuilder().build()
+        let timetable1 = Timetable.empty
         let changes1 = ChangesBuilder().build()
         // Run
         let state = TimetableState.applyEvents(initial: .initial, events: [
@@ -123,7 +121,7 @@ class TimetableReducerTests: XCTestCase {
             .station(StationBuilder().build()),
             .loadTimetable,
             .changesLoaded(ChangesBuilder().build()),
-            .timetableLoaded(TimetableBuilder().build()),
+            .timetableLoaded(Timetable.empty),
             .reset
             ])
         XCTAssertEqual(state.timetable, Timetable.empty)

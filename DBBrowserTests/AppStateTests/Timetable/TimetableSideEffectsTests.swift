@@ -76,8 +76,8 @@ class TimetableSideEffectsTests: XCTestCase {
     func testTimetableAndChangesReceivedOnSuccess() {
         // Prepare
         let changes = ChangesBuilder().build()
-        let timetable = TimetableBuilder().build()
-        timetableLoaderMock.expected = .just(TimetableBuilder().build())
+        let timetable = Timetable.empty
+        timetableLoaderMock.expected = .just(Timetable.empty)
         changesLoaderMock.expected = .just(changes)
         // Run
         let observer = testScheduler.start { [unowned self] in
@@ -115,7 +115,7 @@ class TimetableSideEffectsTests: XCTestCase {
 
     func testErrorReceivedOnChangesLoaderError() {
         // Prepare
-        let timetable = TimetableBuilder().build()
+        let timetable = Timetable.empty
         timetableLoaderMock.expected = .just(timetable)
         changesLoaderMock.expected = .error(RxError.unknown)
         // Run
@@ -134,7 +134,7 @@ class TimetableSideEffectsTests: XCTestCase {
 
     func testTimetableReceivedOnSuccessWhenShouldntLoadChanges() {
         // Prepare
-        let timetable = TimetableBuilder().build()
+        let timetable = Timetable.empty
         timetableLoaderMock.expected = .just(timetable)
         // Run
         let observer = testScheduler.start { [unowned self] in

@@ -10,5 +10,5 @@ class TimetableConverterMock: TimetableConverter {
         return expected
     }
 
-    var expected = TimetableBuilder().build()
+    var expected = Timetable.empty
 }
