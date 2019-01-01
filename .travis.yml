@@ -9,4 +9,4 @@ before_install:
 matrix:
   include:
     - xcode_scheme: DBBrowser
-    - xcode_scheme: DBBAPI
+    - xcode_scheme: DBAPI
