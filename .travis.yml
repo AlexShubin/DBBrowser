@@ -8,5 +8,5 @@ before_install:
 
 matrix:
   include:
-    - xcode_scheme: DBBrowser
-    - xcode_scheme: DBAPI
+    - xcode_scheme: DBBrowserTests
+    - xcode_scheme: DBAPITests
