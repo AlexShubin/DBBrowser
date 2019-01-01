@@ -1,6 +1,6 @@
 language: objective-c
 osx_image: xcode10.1
-xcode_project: DBBrowser.xcworkspace
+xcode_workspace: DBBrowser.xcworkspace
 xcode_scheme: DBBrowser
 xcode_sdk: iphonesimulator12.1
 
